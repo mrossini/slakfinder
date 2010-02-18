@@ -15,9 +15,11 @@ class pkgsdb {
 		if(!$this->db->query('CREATE TABLE #__repository (
 					id INT AUTO_INCREMENT ,
 					url VARCHAR( 255 ) NOT NULL ,
-					official INT NOT NULL ,
+					official INT ,
 					manifest VARCHAR( 20 ) NOT NULL ,
 					packages VARCHAR( 20 ) NOT NULL ,
+					checksums VARCHAR( 20 ) NOT NULL ,
+					sum TEXT ,
 					path VARCHAR( 255 ) NOT NULL ,
 					alias VARCHAR( 30 ) NOT NULL ,
 					description VARCHAR( 255 ) ,

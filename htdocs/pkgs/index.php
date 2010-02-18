@@ -6,21 +6,12 @@ include 'inc/includes.inc.php';
 
 $db=new pkgsdb();
 $out=$db->createdb();
-var_dump($out);
-if(!$out){var_dump($db);die();}
-$out=$db->addrepository(
-  array(
-    'url' => 'ftp://ftp.osuosl.org/pub/slackware/slackware64-13.0/slackware64/',
-    'official' => 1,
-    'manifest' => 'MANIFEST',
-    'packages' => 'PACKAGES.TXT',
-    'alias' => 'slackware64-13.0',
-    'description' => '',
-    'path' => 'data/slackware64-13.0/slackware64/'
-  )
-);
-var_dump($out);
-if(!$out)var_dump($db);
+if(!$out){var_dump($db);die("collegamento fallito");}
+foreach($defrepo as $repo){
+  $rep=new repository();
+  $out=$rep->add($repo);
+  if(!$out){var_dump($db);die("creazione repo fallita");}
+}
 
 
 //echo "</body></html>\n";
