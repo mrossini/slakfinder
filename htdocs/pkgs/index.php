@@ -1,10 +1,12 @@
 <?php
 include 'inc/includes.inc.php';
+include 'inc/defrepo.inc.php';
+
 
 //echo "<html><head><title>test</title></head><body>\n";
 
 
-$db=new pkgsdb();
+$db=new database();
 $out=$db->createdb();
 if(!$out){var_dump($db);die("collegamento fallito");}
 foreach($defrepo as $repo){

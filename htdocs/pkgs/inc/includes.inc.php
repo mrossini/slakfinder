@@ -1,10 +1,13 @@
 <?php
 
 
+# configurazione
 include 'config.inc.php';
+
+# librerie
 include 'libs/database.inc.php';
-include 'libs/pkgsdb.inc.php';
-include 'inc/defrepo.inc.php';
+include 'libs/mysql.inc.php';
 include 'libs/repository.inc.php';
+
 
 ?>

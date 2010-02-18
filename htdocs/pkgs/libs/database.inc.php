@@ -1,81 +1,123 @@
 <?php
 
-class mysql {
-	private $db;
-	public $started=false;
-	public $connected=false;
-	public function __construct() {
-		global $dbhost,$dbuser,$dbpass,$dbdata;
-		$this->db=mysql_connect($dbhost,$dbuser,$dbpass);
+class database {
 
-		if(!$this->db) return;
-		$this->connected=true;
-		if(!mysql_select_db($dbdata))return;
-		$this->started=true;
-	}
-	public function __destruct(){
-		if($this->db) mysql_close($this->db);
-	}
-
-	public $lastquery, $results, $errno, $error, $datas, $nrows;
-	public function query($sql){
-		global $dbpref;
-		$this->datas=null;
-		$this->nrows=null;
-		$this->newid=null;
-		$sql=str_replace('#__',$dbpref,$sql);
-		$this->results=mysql_query($sql);
-
-		$this->lastquery=$sql;
-		if(!$this->results){
-			$this->errno=mysql_errno();
-			$this->error=mysql_error();
-			return false;
+	public $db;
+	public $ok=false;
+	public function __construct(){
+		$this->db=new mysql();
+		if($this->db->query('select * from #__repository')){
+			$this->ok=true;
 		}
-		if($this->results==true){
-			$this->nrows=mysql_affected_rows();
-			$this->newid=mysql_insert_id();
-		}else{
-			$this->nrows=mysql_num_rows($this->results);
-			$this->datas=array();
-		}
+	}
+	public function createdb(){
+		if(!$this->db->query('drop table if exists #__repository'))return false;
+		if(!$this->db->query('CREATE TABLE #__repository (
+					id INT AUTO_INCREMENT ,
+					url VARCHAR( 255 ) NOT NULL ,
+					official INT ,
+					manifest VARCHAR( 20 ) NOT NULL ,
+					packages VARCHAR( 20 ) NOT NULL ,
+					checksums VARCHAR( 20 ) NOT NULL ,
+					sum TEXT ,
+					path VARCHAR( 255 ) NOT NULL ,
+					alias VARCHAR( 30 ) NOT NULL ,
+					description VARCHAR( 255 ) ,
+					PRIMARY KEY ( id )
+				      ) ENGINE = MYISAM ;'))return false;
+		if(!$this->db->query('drop table if exists #__filelist'))return false;
+		if(!$this->db->query('CREATE TABLE #__filelist (
+					id 		INT 		AUTO_INCREMENT ,
+			        	pkg_id 		INT 		NOT NULL ,
+				        fullpath 	VARCHAR( 511 ) 	NOT NULL ,
+					filename 	VARCHAR( 255 ) 	NOT NULL ,
+					filedate 	DATETIME 	NOT NULL ,
+					filesize 	INT 		NOT NULL ,
+					PRIMARY KEY ( id )
+				      ) ENGINE = MYISAM ;'))return false;
+		if(!$this->db->query('DROP TABLE IF EXISTS #__packages'))return false;
+		if(!$this->db->query('CREATE TABLE #__packages (
+					id INT AUTO_INCREMENT NOT NULL ,
+					repository INT NOT NULL ,
+					filename VARCHAR( 64 ) NOT NULL , 
+					name VARCHAR( 32 ) NOT NULL ,
+					version VARCHAR( 16 ) NOT NULL ,
+					arch VARCHAR( 16 ) NOT NULL ,
+					build VARCHAR( 16 ) NOT NULL ,
+					compression VARCHAR( 4 ) NOT NULL ,
+					description TEXT NOT NULL ,
+					location VARCHAR( 128 ) NOT NULL ,
+					comprsize INT NOT NULL ,
+					uncomprsize INT NOT NULL ,
+					PRIMARY KEY ( id )
+				      ) ENGINE = MYISAM ;'))return false;
 		return true;
 	}
+	public function addrepository($repo){
+	  if(!$this->db->query("insert into #__repository (url,official,manifest,packages,alias,description,path) value
+	    			('{$repo['url']}',
+				 '{$repo['official']}',
+				 '{$repo['manifest']}',
+				 '{$repo['packages']}',
+				 '{$repo['alias']}',
+				 '{$repo['description']}',
+				 '{$repo['path']}');"))return false;
+	  $repoid=$this->db->newid;
+	  $packages=fopen($repo['path'].$repo['packages'],'r');
+	  if(!$packages)return false;
+	  $manifest=fopen($repo['path'].$repo['manifest'],'r');
+	  if(!$manifest)return false;
+	  $pkg=array();
+	  while (!feof($packages)){
+	    $line=trim(fgets($packages,4096));
+	    $tmp=explode(':',$line,2);
+	    $left=$tmp[0];
+	    $right=(isset($tmp[1]))?trim($tmp[1]):"";
+	    if($left == "PACKAGE NAME"){
+	      $pkg['repository']=$repoid;
+	      $pkg['filename']=$right;
 
-	public function fetchtable(){
-	  while($this->fetch());
-	}
-	public function fetch(){
-	  if($tmp=mysql_fetch_assoc($this->results)){
-	    $this->datas[]=$tmp;
-	    return count($this->datas);
-	  }
-	  return false;
-	}
-	public function insert($table,$data){
-	  if (!is_array($data))return false;
-	  $sql="insert into #__$table (";
-	  $sep="";
-	  if(isset($data[0])){
-	    foreach($data[0] as $key => $value){ $sql.=$sep.$key; $sep=","; } 
-	    $sql.=")values";
-	  }else{
-	    foreach($data as $key => $value){ $sql.=$sep.$key; $sep=","; } 
-	    $sql.=")value";
-	  }
-	  if (isset($data[0])){
-	  }else{
-	    $gsep="";
-	    foreach($data as $k => $v){
-	      $sql.=$gsep."(";
-	      $sep=""; 
-	      foreach($data[$k] as $key => $value){ $sql.=$sep."'".addcslashes($value,"'")."'"; $sep=","; } 
-	      $sql.=")";
-	      $gsep=",";
+	      $tmp=preg_split("/^(.*)-([^\-]*)-([^\-]*)-([^\.]*)\.(t.z)$/",$pkg['filename'],0,PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+	      $pkg['name']=$tmp[0];
+	      $pkg['version']=$tmp[1];
+	      $pkg['arch']=$tmp[2];
+	      $pkg['build']=$tmp[3];
+	      $pkg['compression']=$tmp[4];
+	      $pkg['description']="";
+	    }elseif($pkg){
+	      if($left == "PACKAGE LOCATION") $pkg['location']=$right;
+	      if($left == "PACKAGE SIZE (compressed)") $pkg['comprsize']=$right;
+	      if($left == "PACKAGE SIZE (uncompressed)") $pkg['uncomprsize']=$right;
+	      if($left == $pkg['name']) $pkg['description'].=addcslashes($right,"'")."\n";
+	      if(!$left){ // INSERIMENTO E GENERAZIONE FILELIST
+		$sql ="insert into #__packages (";
+		$values="(";$sep="";
+		foreach($pkg as $key => $value){
+		  $sql.=$sep;
+		  $values.=$sep;
+		  $sep=",";
+		  $sql.=$key;
+		  $values.="'".$value."'";
+		}
+		$sql.=") value $values)";
+		echo "\n==================\n$sql\n=======================\n";
+		if($this->db->query($sql)){
+
+		  
+		}else{
+		  //INSERIMENTO PACCHETTO FALLITO
+		  return false;
+		}
+		$pkg="";
+	      }
 	    }
 	  }
-	  return $this->query($sql);
+	  return true;
 	}
+	
+
+
+
 }
 
 

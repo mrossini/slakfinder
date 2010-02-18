@@ -5,8 +5,7 @@ class repository {
   private $db;
   
   public function __construct($id=0){
-    global $db;
-    $this->db=$db;
+    $this->db=new mysql();
     if($id)$this->select($id);
   }
   public function add($repo){
