@@ -45,9 +45,14 @@ class mysql {
 	public function fetch(){
 	  if($tmp=mysql_fetch_assoc($this->results)){
 	    $this->datas[]=$tmp;
-	    return count($this->datas);
+	    return count($this->datas)-1;
 	  }
 	  return false;
+	}
+	public function get(){
+	  $tmp=$this->fetch();
+	  if($tmp===false)return false;
+	  return $this->datas[$tmp];
 	}
 	public function insert($table,$data){
 	  if (!is_array($data))return false;

@@ -61,7 +61,7 @@ class internet {
     }
     $this->contents="";
     $nl=($this->mode=='b')?"":"\n";
-    while (!is_null($tmp=$this->get($lenght))) if($tmp===false) { return false; } else {$this->contents.=$tmp.$nl; var_dump( $tmp); }
+    while (!is_null($tmp=$this->get($lenght))) if($tmp===false) { return false; } else {$this->contents.=$tmp.$nl; }
     return true;
 
   }
@@ -82,6 +82,9 @@ class internet {
   }
   public function close(){
     return fclose($this->fd);
+  }
+  public function __destruct(){
+    $this->close();
   }
 }
 

@@ -10,30 +10,35 @@ class database {
 			$this->ok=true;
 		}
 	}
-	public function createdb(){
-		if(!$this->db->query('drop table if exists #__repository'))return false;
-		if(!$this->db->query(repository::sql()))return false;
+	public function dropdb(){
 		if(!$this->db->query('drop table if exists #__filelist'))return false;
+		if(!$this->db->query('DROP TABLE IF EXISTS #__packages'))return false;
+		if(!$this->db->query('drop table if exists #__repository'))return false;
+		return true;
+	}
+	public function createdb(){
+	  	if(!$this->dropdb())return false;
+		if(!$this->db->query(repository::sql()))return false;
 		if(!$this->db->query('CREATE TABLE #__filelist (
 					id 		INT 		AUTO_INCREMENT ,
-			        	pkg_id 		INT 		NOT NULL ,
+			        	package		INT 		NOT NULL ,
 				        fullpath 	VARCHAR( 511 ) 	NOT NULL ,
 					filename 	VARCHAR( 255 ) 	NOT NULL ,
 					filedate 	DATETIME 	NOT NULL ,
 					filesize 	INT 		NOT NULL ,
-					PRIMARY KEY ( id )
-				      ) ENGINE = MYISAM ;'))return false;
-		if(!$this->db->query('DROP TABLE IF EXISTS #__packages'))return false;
+					PRIMARY KEY ( id ) ,
+					FOREIGN KEY ( package ) REFERENCES #__packages ( id ) ON DELETE CASCADE
+				      ) ENGINE = INNODB ;'))return false;
 		if(!$this->db->query(package::sql()))return false;
 		return true;
 	}
 	public function addrepository($repo){
-	  if(!$this->db->query("insert into #__repository (url,official,manifest,packages,alias,description,path) value
+	  if(!$this->db->query("insert into #__repository (url,official,manifest,packages,name,description,path) value
 	    			('{$repo['url']}',
 				 '{$repo['official']}',
 				 '{$repo['manifest']}',
 				 '{$repo['packages']}',
-				 '{$repo['alias']}',
+				 '{$repo['name']}',
 				 '{$repo['description']}',
 				 '{$repo['path']}');"))return false;
 	  $repoid=$this->db->newid;

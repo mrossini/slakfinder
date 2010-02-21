@@ -9,12 +9,33 @@ include 'inc/defrepo.inc.php';
 
 $db=new database();
 $out=$db->createdb();
-if(!$out){die("collegamento fallito");}
-foreach($defrepo as $repo){
-  $rep=new repository();
-  $out=$rep->add($repo);
-  if(!$out){var_dump($db);die("creazione repo fallita");}
-  $out=$rep->popolate();
+var_dump($out);
+
+
+foreach($defrepo as $name => $repo){
+  echo "\n\nrepository: $name\n";
+  $rep=new repository($name);
+  if($rep->exists()){
+    echo "già esiste\n";
+    if($rep->needupdate()){
+      echo "richiede aggiornamento\n";
+      if(!$rep->truncate())die("errore svuotando il repository\n");
+      echo "svuotato\n";
+      if(!$rep->update())die("aggiornamento fallito\n");
+      echo "aggiornato\n";
+      if(!$rep->popolate())die("errore nel popolamento\n");
+      echo "Popolamento rieffettuato\n";
+      
+    }else{
+      echo "già aggiornato\n";
+    }
+  }else{
+    echo "creazione in corso\n";
+    if(!$rep->add($repo))die("creazione repo fallita\n");
+    echo "Creazione effettuata\n";
+    if(!$rep->popolate())die("errore nel popolamento\n");
+    echo "Popolamento effettuato\n";
+  }
 }
 
 
