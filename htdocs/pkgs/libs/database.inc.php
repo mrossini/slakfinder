@@ -12,19 +12,7 @@ class database {
 	}
 	public function createdb(){
 		if(!$this->db->query('drop table if exists #__repository'))return false;
-		if(!$this->db->query('CREATE TABLE #__repository (
-					id INT AUTO_INCREMENT ,
-					url VARCHAR( 255 ) NOT NULL ,
-					official INT ,
-					manifest VARCHAR( 20 ) NOT NULL ,
-					packages VARCHAR( 20 ) NOT NULL ,
-					checksums VARCHAR( 20 ) NOT NULL ,
-					sum TEXT ,
-					path VARCHAR( 255 ) NOT NULL ,
-					alias VARCHAR( 30 ) NOT NULL ,
-					description VARCHAR( 255 ) ,
-					PRIMARY KEY ( id )
-				      ) ENGINE = MYISAM ;'))return false;
+		if(!$this->db->query(repository::sql()))return false;
 		if(!$this->db->query('drop table if exists #__filelist'))return false;
 		if(!$this->db->query('CREATE TABLE #__filelist (
 					id 		INT 		AUTO_INCREMENT ,
@@ -36,21 +24,7 @@ class database {
 					PRIMARY KEY ( id )
 				      ) ENGINE = MYISAM ;'))return false;
 		if(!$this->db->query('DROP TABLE IF EXISTS #__packages'))return false;
-		if(!$this->db->query('CREATE TABLE #__packages (
-					id INT AUTO_INCREMENT NOT NULL ,
-					repository INT NOT NULL ,
-					filename VARCHAR( 64 ) NOT NULL , 
-					name VARCHAR( 32 ) NOT NULL ,
-					version VARCHAR( 16 ) NOT NULL ,
-					arch VARCHAR( 16 ) NOT NULL ,
-					build VARCHAR( 16 ) NOT NULL ,
-					compression VARCHAR( 4 ) NOT NULL ,
-					description TEXT NOT NULL ,
-					location VARCHAR( 128 ) NOT NULL ,
-					comprsize INT NOT NULL ,
-					uncomprsize INT NOT NULL ,
-					PRIMARY KEY ( id )
-				      ) ENGINE = MYISAM ;'))return false;
+		if(!$this->db->query(package::sql()))return false;
 		return true;
 	}
 	public function addrepository($repo){

@@ -1,4 +1,5 @@
 <?php
+
 include 'inc/includes.inc.php';
 include 'inc/defrepo.inc.php';
 
@@ -8,11 +9,12 @@ include 'inc/defrepo.inc.php';
 
 $db=new database();
 $out=$db->createdb();
-if(!$out){var_dump($db);die("collegamento fallito");}
+if(!$out){die("collegamento fallito");}
 foreach($defrepo as $repo){
   $rep=new repository();
   $out=$rep->add($repo);
   if(!$out){var_dump($db);die("creazione repo fallita");}
+  $out=$rep->popolate();
 }
 
 

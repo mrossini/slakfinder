@@ -76,7 +76,7 @@ class internet {
       if($this->mode=='b'){
 	return fread($this->fd,$lenght);
       }else{
-	return trim(fgets($this->fd,$lenght),"\n\r");
+	return trim(fgets($this->fd,$lenght),"\n");
       }
     }
   }

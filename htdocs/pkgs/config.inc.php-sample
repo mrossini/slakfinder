@@ -6,4 +6,7 @@ $dbpass='slakpass';
 $dbdata='slakdb';
 $dbpref='slak_';
 
+$repodir="../repositories/";
+
+
 ?>

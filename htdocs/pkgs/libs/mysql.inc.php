@@ -56,20 +56,19 @@ class mysql {
 	  if(isset($data[0])){
 	    foreach($data[0] as $key => $value){ $sql.=$sep.$key; $sep=","; } 
 	    $sql.=")values";
+	    $values=$data;
 	  }else{
 	    foreach($data as $key => $value){ $sql.=$sep.$key; $sep=","; } 
 	    $sql.=")value";
+	    $values=array(0 => $data);
 	  }
-	  if (isset($data[0])){
-	  }else{
-	    $gsep="";
-	    foreach($data as $k => $v){
-	      $sql.=$gsep."(";
-	      $sep=""; 
-	      foreach($data[$k] as $key => $value){ $sql.=$sep."'".addcslashes($value,"'")."'"; $sep=","; } 
-	      $sql.=")";
-	      $gsep=",";
-	    }
+	  $gsep="";
+	  foreach($values as $k => $v){
+	    $sql.=$gsep."(";
+	    $sep=""; 
+	    foreach($v as $key => $value){ $sql.=$sep."'".addcslashes($value,"'")."'"; $sep=","; } 
+	    $sql.=")";
+	    $gsep=",";
 	  }
 	  return $this->query($sql);
 	}
