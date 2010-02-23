@@ -4,16 +4,36 @@ include 'inc/includes.inc.php';
 include 'inc/defrepo.inc.php';
 
 
-//echo "<html><head><title>test</title></head><body>\n";
 
 
 $db=new database();
+
+
+echo "eliminazione database... ";
+$out=$db->dropdb();
+if(!$out){
+  echo "errore!\n\n";
+  echo "dettagli:\n";
+  var_dump($db);
+  die();
+}else{
+  echo "fatto\n";
+}
+
+echo "creazione database... ";
 $out=$db->createdb();
-var_dump($out);
+if(!$out){
+  echo "errore!\n\n";
+  echo "dettagli:\n";
+  var_dump($db);
+  die();
+}else{
+  echo "fatto\n";
+}
 
 
 foreach($defrepo as $name => $repo){
-  echo "\n\nrepository: $name\n";
+  echo "\n\nREPOSITORY: $name\n";
   $rep=new repository($name);
   if($rep->exists()){
     echo "già esiste\n";
@@ -30,16 +50,31 @@ foreach($defrepo as $name => $repo){
       echo "già aggiornato\n";
     }
   }else{
-    echo "creazione in corso\n";
-    if(!$rep->add($repo))die("creazione repo fallita\n");
+    echo "creazione repository:";
+    if(!$out=$rep->add($repo)){
+      echo "errore!\n";
+      echo "dettagli errore:\n";
+      var_dump($out);
+      var_dump($rep);
+      die();
+    }else{
+      echo "fatto.\n";
+    }
     echo "Creazione effettuata\n";
-    if(!$rep->popolate())die("errore nel popolamento\n");
+    echo "popolamento in corso...";
+    if(!$rep->popolate()){
+      echo "errore!\n";
+      echo "dettagli errore:\n";
+      var_dump($rep);
+      die();
+    }else{
+      echo "fatto!\n";
+    }
     echo "Popolamento effettuato\n";
   }
 }
 
 
-//echo "</body></html>\n";
 
 
 echo "\n";

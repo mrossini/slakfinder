@@ -34,6 +34,7 @@ class repository {
     $pack=new package();
     $packages=new internet($this->url.$this->packages);
     $pkg="";
+    $i=0;
     while(!is_null($pkln=$packages->get())){
       if($pkln===false)die('errore su packages');
       if($pkln!=""){
@@ -41,15 +42,18 @@ class repository {
       }else{
 	$pkg=$pack->parse($pkg);
 	if($pkg){
+    echo "==========".$i++." =================\n";
 	  $id=$pack->add($pkg,array('repository'=>$this->id),$more);
+	var_dump($pack);
 	  if(!$id){ return false; }
+	  echo $id." -> ".$pack->filename."\n";
 	  $allpackage[$pack->filename]=$id;
 	}
 	$pkg="";
       }
     }
     $list=new filelist();
-    if(!$list->add(&$allpackage))return false;
+    if(!$list->add($allpackage,$this))return false;
     return true;
   }
   public function needupdate(){

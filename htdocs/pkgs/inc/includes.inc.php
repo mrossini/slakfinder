@@ -10,6 +10,7 @@ include 'libs/mysql.inc.php';
 include 'libs/internet.inc.php';
 include 'libs/repository.inc.php';
 include 'libs/package.inc.php';
+include 'libs/filelist.inc.php';
 
 
 ?>

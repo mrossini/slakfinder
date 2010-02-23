@@ -77,6 +77,9 @@ class mysql {
 	  }
 	  return $this->query($sql);
 	}
+	public function close(){
+	  return mysql_close($this->db);
+	}
 }
 
 

@@ -46,13 +46,30 @@ class internet {
   
   var $fd;
   public function open(){
+
+    $this->fifofile="/tmp/tmpdownload.".getmypid().rand().".fifo";
+
+    posix_mkfifo($this->fifofile,0600);
+    if (pcntl_fork() == 0) {
+      $this->master=false;
+      $fifo=fopen($this->fifofile,"w");
+      $fd=fopen($this->url,'r');
+      while(!feof($fd))fwrite($fifo,fread($fd,4096));
+      fclose($fd);
+      fclose($fifo);
+      exit;
+    }else{
+      $this->master=true;
+    }
+
     switch(strtolower($this->mode)){
       case 't':
-      case 'b': $this->fd=fopen($this->url,'r'); break;
-      case 'g': $this->fd=gzopen($this->url,'r'); break;
-      case 'j': $this->fd=bzopen($this->url,'r'); break;
+      case 'b': $this->fd=fopen($this->fifofile,'r'); break;
+      case 'g': $this->fd=gzopen($this->fifofile,'r'); break;
+      case 'j': $this->fd=bzopen($this->fifofile,'r'); break;
     }
     if(!$this->fd){return false;}else{return true;}
+
   }
 
   public function download($lenght=4096){
@@ -81,10 +98,11 @@ class internet {
     }
   }
   public function close(){
-    return fclose($this->fd);
+    fclose($this->fd);
+    unlink($this->fifofile);
   }
   public function __destruct(){
-    $this->close();
+    if($this->master)$this->close();
   }
 }
 
