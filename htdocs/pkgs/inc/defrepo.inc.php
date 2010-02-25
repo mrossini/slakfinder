@@ -22,7 +22,16 @@ $defrepo['slacky-13.0']=array(
     'description' => 'repository ufficiale di slacky-13.0'
   );
  */
-$defrepo['slackware64-13.0-local']=array(
+$defrepo['slackware64-13.0-localhost']=array(
+    'url' => 'http://localhost/slak/htdocs/data/slackware64-13.0/',
+    'official' => 0,
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'local64-13.0',
+    'description' => 'localhost del repository ufficiale di slackware64 13.0'
+  )
+/*$defrepo['slackware64-13.0-local']=array(
     'url' => 'file:///var/www/htdocs/slak/htdocs/data/slackware64-13.0/',
     'official' => 0,
     'manifest' => 'MANIFEST.bz2',
@@ -31,5 +40,6 @@ $defrepo['slackware64-13.0-local']=array(
     'name' => 'local64-13.0',
     'description' => 'copia locale del repository ufficiale di slackware64 13.0'
   );
+ */
 
 ?>

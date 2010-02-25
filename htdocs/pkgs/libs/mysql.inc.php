@@ -22,6 +22,7 @@ class mysql {
 		$this->newid=null;
 		$sql=str_replace('#__',$dbpref,$sql);
 		$this->results=mysql_query($sql);
+		echo "\n\n$sql\n\n";
 
 		$this->lastquery=$sql;
 		if(!$this->results){
@@ -78,7 +79,7 @@ class mysql {
 	  return $this->query($sql);
 	}
 	public function close(){
-	  return mysql_close($this->db);
+	  #return mysql_close($this->db);
 	}
 }
 

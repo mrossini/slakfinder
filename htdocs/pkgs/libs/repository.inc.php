@@ -44,6 +44,7 @@ class repository {
 	if($pkg){
     echo "==========".$i++." =================\n";
 	  $id=$pack->add($pkg,array('repository'=>$this->id),$more);
+    echo "PACK:---------------------------";
 	var_dump($pack);
 	  if(!$id){ return false; }
 	  echo $id." -> ".$pack->filename."\n";

@@ -50,13 +50,15 @@ class internet {
     $this->fifofile="/tmp/tmpdownload.".getmypid().rand().".fifo";
 
     posix_mkfifo($this->fifofile,0600);
-    if (pcntl_fork() == 0) {
+    $pid=pcntl_fork();
+    if ($pid != 0) {
       $this->master=false;
       $fifo=fopen($this->fifofile,"w");
       $fd=fopen($this->url,'r');
       while(!feof($fd))fwrite($fifo,fread($fd,4096));
       fclose($fd);
       fclose($fifo);
+      pcntl_waitpid($pid,$status);
       exit;
     }else{
       $this->master=true;
