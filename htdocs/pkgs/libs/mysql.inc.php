@@ -22,7 +22,7 @@ class mysql {
 		$this->newid=null;
 		$sql=str_replace('#__',$dbpref,$sql);
 		$this->results=mysql_query($sql);
-		echo "\n\n$sql\n\n";
+		#echo "\n\n$sql\n\n";
 
 		$this->lastquery=$sql;
 		if(!$this->results){

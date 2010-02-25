@@ -73,7 +73,7 @@ class database {
 		  $values.="'".$value."'";
 		}
 		$sql.=") value $values)";
-		echo "\n==================\n$sql\n=======================\n";
+		//echo "\n==================\n$sql\n=======================\n";
 		if($this->db->query($sql)){
 
 		  

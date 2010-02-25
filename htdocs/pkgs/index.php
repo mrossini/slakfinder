@@ -62,10 +62,10 @@ foreach($defrepo as $name => $repo){
     }
     echo "Creazione effettuata\n";
     echo "popolamento in corso...";
-    if(!$rep->popolate()){
-      echo "errore!\n";
+    if(!$err=$rep->popolate()){
+      echo "errore popolamento!\n";
       echo "dettagli errore:\n";
-      var_dump($rep);
+      var_dump($rep,$err);
       die();
     }else{
       echo "fatto!\n";

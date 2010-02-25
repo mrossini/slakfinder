@@ -76,6 +76,7 @@ class package {
   public function add($pkg,$more=array()){
     $pkg=array_merge($pkg,$more);
     if(!$this->db->insert("packages",$pkg))return false;
+    foreach($pkg as $key => $value) $this->$key = $value;
     return $this->db->newid;
   }
 

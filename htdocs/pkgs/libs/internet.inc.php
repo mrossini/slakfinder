@@ -59,6 +59,7 @@ class internet {
       fclose($fd);
       fclose($fifo);
       pcntl_waitpid($pid,$status);
+      unlink($this->fifofile);
       exit;
     }else{
       $this->master=true;
@@ -101,11 +102,10 @@ class internet {
   }
   public function close(){
     fclose($this->fd);
-    unlink($this->fifofile);
   }
-  public function __destruct(){
-    if($this->master)$this->close();
-  }
+#  public function __destruct(){
+#    if($this->fd)$this->close();
+#  }
 }
 
 
