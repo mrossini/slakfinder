@@ -32,7 +32,8 @@ if(!$out){
 }
 
 
-foreach($defrepo as $name => $repo){
+foreach($defrepo as $name => $repo)if($repo['create']){
+  unset ($repo['create']);
   echo "\n\nREPOSITORY: $name\n";
   $rep=new repository($name);
   if($rep->exists()){
@@ -65,7 +66,7 @@ foreach($defrepo as $name => $repo){
     if(!$err=$rep->popolate()){
       echo "errore popolamento!\n";
       echo "dettagli errore:\n";
-      var_dump($rep,$err);
+//      var_dump($rep,$err);
       die();
     }else{
       echo "fatto!\n";

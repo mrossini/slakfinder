@@ -1,5 +1,6 @@
 <?php
 
+function quote_data($k,&$v) { $v=addcslashes($v,"'"); }
 class mysql {
 	private $db;
 	public $started=false;
@@ -55,28 +56,60 @@ class mysql {
 	  if($tmp===false)return false;
 	  return $this->datas[$tmp];
 	}
-	public function insert($table,$data){
-	  if (!is_array($data))return false;
-	  $sql="insert into #__$table (";
-	  $sep="";
-	  if(isset($data[0])){
-	    foreach($data[0] as $key => $value){ $sql.=$sep.$key; $sep=","; } 
-	    $sql.=")values";
-	    $values=$data;
-	  }else{
-	    foreach($data as $key => $value){ $sql.=$sep.$key; $sep=","; } 
-	    $sql.=")value";
-	    $values=array(0 => $data);
+	private $insertdata=false;
+	private $insertstart=false;
+	public $maxdata=100000;
+	public function insert($first=false,$second=false,$large=false){
+	  /*
+	   * se large=false, $first la tabella e $second sono i dati (in array
+	   * associativo) viene fatta una query standard. Eventuali buffer
+	   * vengono flushati e chiusi.
+	   *
+	   * se large=true, allora si sta inizializzando una query multipla in cui
+	   * $first è la tabella è $second è un array dei campi
+	   *
+	   * le richieste successive avranno $large=false.
+	   * Se in queste $first=false (cioè lanciato senza parametri) si forza un
+	   * flush dei dati.
+	   * Se in queste $first è un array allora rappresenta i dati e vengono
+	   * accodati al buffer; se il buffer è pieno questo viene prima flushato.
+	   */
+	  if($first===false){ // richiesta di flush
+	    if(!$this->insertstart)return false; // se non c'è un buffer allora fallisce
+	    if(!$this->insertdata)return true; // l'inserimento di un buffer vuoto va a buon fine
+	    $out=$this->query($this->insertstart.$this->insertdata); // inserisci e
+	    $this->insertdata=false;             // svuota il buffer
+	    return $out;
 	  }
-	  $gsep="";
-	  foreach($values as $k => $v){
-	    $sql.=$gsep."(";
-	    $sep=""; 
-	    foreach($v as $key => $value){ $sql.=$sep."'".addcslashes($value,"'")."'"; $sep=","; } 
-	    $sql.=")";
-	    $gsep=",";
+	  if(is_array($second) and !$large){
+	    if($this->insertstart)$this->insert(); $this->insertstart=false; // flusha eventuali buffer
+	    // effettua query standard
+	    if(isset($second[0])){
+	      $sql="insert into #__$first (".implode(",",array_keys($second[0])).") values ";
+	      $values=$second;
+	    }else{
+	      $sql="insert into #__$first (".implode(",",array_keys($second)).") value ";
+	      $values=array(0 => $second);
+	    }
+	    array_walk_recursive($values,'quote_data');
+	    foreach ($values as $key => $val)$values[$key]="'".implode("','",$val)."'";
+	    $sql.="(".implode("),(",$values).")";
+	    return $this->query($sql);
 	  }
-	  return $this->query($sql);
+	  if(is_array($second) and $large){ // inizializza il buffer
+	    if($this->insertdata)$this->insert();
+	    $this->insertstart="insert into #__$first (".implode(",",$second).") values ";
+	    return;
+	  }
+	  if(is_array($first)){
+	    array_walk_recursive($first,'quote_data');
+	    $data="('".implode("','",$first)."')";
+	    if(!$this->insertdata)$this->insertdata="";
+	    if(strlen($this->insertdata)+strlen($data) > $this->maxdata)$this->insert();
+	    if($this->insertdata)$this->insertdata.=",";
+	    $this->insertdata.=$data;
+	    return;
+	  }
 	}
 	public function close(){
 	  #return mysql_close($this->db);

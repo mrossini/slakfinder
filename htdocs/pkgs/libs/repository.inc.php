@@ -32,26 +32,20 @@ class repository {
   public function popolate($more=array()){
     $allpackage=array();
     $pack=new package();
-    $packages=new internet($this->url.$this->packages);
-    $pkg="";
+    $this->pkgsfile=new internet($this->url.$this->packages);
     $i=0;
-    while(!is_null($pkln=$packages->get())){
-      if($pkln===false)die('errore su packages');
-      if($pkln!=""){
-	$pkg.=$pkln."\n";
-      }else{
-	$pkg=$pack->parse($pkg);
-	if($pkg){
-	  $id=$pack->add($pkg,array('repository'=>$this->id),$more);
-	  if(!$id){ return false; }
-	  echo $id." -> ".$pack->filename."\n";
-	  $allpackage[$pack->filename]=$id;
-	}
-	$pkg="";
+    while(!is_null($pkg=$pack->fetch($this->pkgsfile))){
+      if($pkg){
+	$id=$pack->add($pkg,array('repository'=>$this->id),$more);
+	if(!$id){ return false; }
+	echo $id." -> ".$pack->filename."               \r";
+	$allpackage[$pack->filename]=$id;
       }
     }
+    echo "$id packages                                                        \n";
     $list=new filelist();
-    if(!$list->add($allpackage,$this))return false;
+    $this->manifile=new internet($this->url.$this->manifest);
+    if(!$list->addall($allpackage,$this))return false;
     return true;
   }
   public function needupdate(){
