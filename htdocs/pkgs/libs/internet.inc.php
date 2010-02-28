@@ -1,8 +1,8 @@
 <?php
 
+class internet extends internet_fifo {}
 
-
-class internet {
+class internet_proxy {
   /**
    * $mode indica il tipo di file; in base a questo parametro open() e gli altri tratteranno il file:
    *
@@ -128,7 +128,7 @@ class internet {
 
 
 
-class internet_old {
+class internet_fifo {
   /**
    * $mode indica il tipo di file; in base a questo parametro open() e gli altri tratteranno il file:
    *

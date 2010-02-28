@@ -40,9 +40,10 @@ class repository {
 	if(!$id){ return false; }
 	echo $id." -> ".$pack->filename."               \r";
 	$allpackage[$pack->filename]=$id;
+	$i++;
       }
     }
-    echo "$id packages                                                        \n";
+    echo "$i packages                                                        \n";
     $list=new filelist();
     $this->manifile=new internet($this->url.$this->manifest);
     if(!$list->addall($allpackage,$this))return false;

@@ -79,6 +79,11 @@ class mysql {
 	    if(!$this->insertdata)return true; // l'inserimento di un buffer vuoto va a buon fine
 	    $out=$this->query($this->insertstart.$this->insertdata); // inserisci e
 	    $this->insertdata=false;             // svuota il buffer
+	    if(!$out){
+	      echo "\n\n";
+	      var_dump($this);
+	      die( "\n\nERRORE!!\n");
+	    }
 	    return $out;
 	  }
 	  if(is_array($second) and !$large){
