@@ -1,6 +1,6 @@
 <?php
 
-function quote_data($k,&$v) { $v=addcslashes($v,"'"); }
+function quote_data(&$v,$k) { $v=addcslashes($v,"'"); }
 class mysql {
 	private $db;
 	public $started=false;
@@ -92,6 +92,8 @@ class mysql {
 	      $values=array(0 => $second);
 	    }
 	    array_walk_recursive($values,'quote_data');
+
+
 	    foreach ($values as $key => $val)$values[$key]="'".implode("','",$val)."'";
 	    $sql.="(".implode("),(",$values).")";
 	    return $this->query($sql);
