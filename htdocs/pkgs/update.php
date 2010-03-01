@@ -18,6 +18,7 @@ include 'inc/defrepo.inc.php';
 
 $db=new database();
 
+/*
 echo "eliminazione database... ";
 $out=$db->dropdb();
 if(!$out){
@@ -39,6 +40,7 @@ if(!$out){
 }else{
   echo "fatto\n";
 }
+ */
 
 foreach($defrepo as $name => $repo)if($repo['create']){
   $create=$repo['create'];
@@ -57,13 +59,8 @@ foreach($defrepo as $name => $repo)if($repo['create']){
     if($rep->exists()){
       if($rep->needupdate()){
 	echo "richiede aggiornamento\n";
-	if(!$rep->truncate())die("errore svuotando il repository\n");
-	echo "svuotato\n";
-	if(!$rep->update())die("aggiornamento fallito\n");
-	echo "aggiornato\n";
-	if(!$rep->popolate())die("errore nel popolamento\n");
-	echo "Popolamento rieffettuato\n";
-	
+	echo "eliminazione in corso";
+	if(!$rep->drop())die("errore svuotando il repository\n");
       }else{
 	echo "già aggiornato\n";
       }
