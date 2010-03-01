@@ -1,5 +1,15 @@
 <?php
 
+/*function shutterm(){ 
+  echo "\n\n\npippo\n\n\n";
+  die("\n\nreceived SIGTERM\n\n"); 
+}*/
+//pcntl_signal(SIGINT,"shutterm");
+function shutdown() { 
+  echo "\n\nScript executed with success\n\n", PHP_EOL; 
+}
+register_shutdown_function('shutdown');
+
 include 'inc/includes.inc.php';
 include 'inc/defrepo.inc.php';
 
@@ -8,8 +18,6 @@ include 'inc/defrepo.inc.php';
 
 $db=new database();
 
-
-/*
 echo "eliminazione database... ";
 $out=$db->dropdb();
 if(!$out){
@@ -31,7 +39,7 @@ if(!$out){
 }else{
   echo "fatto\n";
 }
- */
+
 foreach($defrepo as $name => $repo)if($repo['create']){
   $create=$repo['create'];
   unset ($repo['create']);
@@ -62,12 +70,14 @@ foreach($defrepo as $name => $repo)if($repo['create']){
     }
   }
   if(!$rep->exists()){
+    $db->db->transact();
     echo "creazione repository:";
     if(!$out=$rep->add($repo)){
       echo "errore!\n";
       echo "dettagli errore:\n";
       var_dump($out);
       var_dump($rep);
+      $db->db->rollback();
       die();
     }else{
       echo "fatto.\n";
@@ -78,11 +88,13 @@ foreach($defrepo as $name => $repo)if($repo['create']){
       echo "errore popolamento!\n";
       echo "dettagli errore:\n";
 //      var_dump($rep,$err);
+      $db->db->rollback();
       die();
     }else{
       echo "fatto!                                                           \n";
     }
     echo "Popolamento effettuato\n";
+    $db->db->commit();
   }
 }
 

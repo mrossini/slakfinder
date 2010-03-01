@@ -12,7 +12,9 @@ class filelist {
     $this->db->insert('filelist',array('package','fullpath','filename','filedate','filesize'),true);
     $step=0; //clean
     $p=0;
+//	var_dump($repo->manifile);
     while(!is_null($line=$repo->manifile->get())){
+//      var_dump($line);
       if($step==0){ 
 	if(!$line)continue;
 	if($line!="++========================================")return false;

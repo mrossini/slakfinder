@@ -118,8 +118,23 @@ class mysql {
 	    return;
 	  }
 	}
+	var $transacts=false;
+	public function transact(){
+	  $this->query('START TRANSACTION');
+	  $this->transacts=true;
+	}
+	public function commit(){
+	  $this->query('COMMIT');
+	  $this->transacts=false;
+	}
+	public function rollback(){
+	  $this->query('ROLLBACK');
+	  $this->transacts=false;
+	}
+	
 	public function close(){
-	  #return mysql_close($this->db);
+	  if($this->transacts)$this->rollback();
+	  return mysql_close($this->db);
 	}
 }
 

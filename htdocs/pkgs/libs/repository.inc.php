@@ -43,6 +43,7 @@ class repository {
 	$i++;
       }
     }
+    $this->pkgsfile->close();
     echo "$i packages                                                        \n";
     $list=new filelist();
     $this->manifile=new internet($this->url.$this->manifest);
