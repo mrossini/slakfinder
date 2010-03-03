@@ -109,6 +109,23 @@ class package {
     foreach($repo as $key => $value) $this->$key = $value;
   }
 
+  public function find($pkg=null,$desc=null,$repo=null){
+    $sql="select * from #__packages";
+    if($repo)$sql.=",#__repository";
+    if($repo or $desc or $repo)$sql.="where ";
+      if($pkg)$sql.=" id='$pkg' or name like'%$repo%'";
+      if($
+        $this->db->query($sql);
+          return $this->db->nrows;
+  }
+  public function fetch(){
+    $this->id=0;
+    if(!$out=$this->db->get())return false;
+    foreach($out as $key => $value) $this->$key = $value;
+    return $this->id;
+  }
+
+
 
   static public function sql(){
     return "

@@ -75,6 +75,18 @@ class repository {
     if(!$repo=$this->db->get())return false;
     foreach($repo as $key => $value) $this->$key = $value;
   }
+  public function find($repo=null){
+    $sql="select * from #__repository ";
+    if($repo)$sql.="where id='$repo' or name='$repo'";
+    $this->db->query($sql);
+    return $this->db->nrows;
+  }
+  public function fetch(){
+    $this->id=0;
+    if(!$out=$this->db->get())return false;
+    foreach($out as $key => $value) $this->$key = $value;
+    return $this->id;
+  }
   public function exists(){
     return $this->id != 0;
   }
@@ -86,17 +98,18 @@ class repository {
 	id INT AUTO_INCREMENT ,
 	url VARCHAR( 255 ) NOT NULL ,
 	official INT ,
-	manifest VARCHAR( 20 ) NOT NULL ,
-	packages VARCHAR( 20 ) NOT NULL ,
-	hashfile VARCHAR( 20 ) NOT NULL ,
+	manifest VARCHAR( 30 ) NOT NULL ,
+	packages VARCHAR( 30 ) NOT NULL ,
+	hashfile VARCHAR( 30 ) NOT NULL ,
 	hash TEXT ,
-	name VARCHAR( 30 ) NOT NULL ,
+	name VARCHAR( 40 ) NOT NULL ,
 	description VARCHAR( 255 ) ,
 	PRIMARY KEY ( id ) ,
 	UNIQUE ( name )
       ) ENGINE = INNODB ;
     ";
   }
+
 
 }
 
