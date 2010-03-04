@@ -18,29 +18,30 @@ include 'inc/defrepo.inc.php';
 
 $db=new database();
 
-/*
-echo "eliminazione database... ";
-$out=$db->dropdb();
-if(!$out){
-  echo "errore!\n\n";
-  echo "dettagli:\n";
-  var_dump($db);
-  die();
-}else{
-  echo "fatto\n";
+if(isset($_SERVER['DROPDB'])){
+  echo "eliminazione database... ";
+  $out=$db->dropdb();
+  if(!$out){
+    echo "errore!\n\n";
+    echo "dettagli:\n";
+    var_dump($db);
+    die();
+  }else{
+    echo "fatto\n";
+  }
+
+  echo "creazione database... ";
+  $out=$db->createdb();
+  if(!$out){
+    echo "errore!\n\n";
+    echo "dettagli:\n";
+    var_dump($db);
+    die();
+  }else{
+    echo "fatto\n";
+  }
 }
 
-echo "creazione database... ";
-$out=$db->createdb();
-if(!$out){
-  echo "errore!\n\n";
-  echo "dettagli:\n";
-  var_dump($db);
-  die();
-}else{
-  echo "fatto\n";
-}
- */
 foreach($defrepo as $name => $repo)if($repo['create']){
   $create=$repo['create'];
   unset ($repo['create']);
@@ -59,7 +60,7 @@ foreach($defrepo as $name => $repo)if($repo['create']){
       if($rep->needupdate()){
 	echo "richiede aggiornamento\n";
 	echo "eliminazione in corso";
-	if(!$rep->drop())die("errore svuotando il repository\n");
+	if(!$rep->drop()){var_dump($rep);die("errore svuotando il repository\n");}
       }else{
 	echo "già aggiornato\n";
       }

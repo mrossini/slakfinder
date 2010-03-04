@@ -19,7 +19,7 @@ class filelist {
 	if($line!="++========================================")return false;
 	if(($line=$repo->manifile->get())!="||")return false;
 	$line=$repo->manifile->get();
-	$tmp=preg_split("/^\|\|.*[\/\s]([^\/]*\.t.z)$/",$line,0,PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+	$tmp=preg_split("/^\|\|.*[\/\s]([^\/]*\.t.z).*$/",$line,0,PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 	if(!$tmp)return false;
 	$pkg=$tmp[0];
 	$pkgid=$allpackages[$tmp[0]];
@@ -90,8 +90,7 @@ class filelist {
 	  filedate DATETIME NOT NULL ,
 	  filesize INT NOT NULL ,
 	PRIMARY KEY ( id ) ,
-	FOREIGN KEY ( package ) REFERENCES #__packages ( id ) ON DELETE CASCADE,
-	FOREIGN KEY ( repository ) REFERENCES #__packages ( repository ) ON UPDATE CASCADE
+	FOREIGN KEY ( package ) REFERENCES #__packages ( id ) ON DELETE CASCADE
       ) ENGINE = INNODB ;
     ";
   }

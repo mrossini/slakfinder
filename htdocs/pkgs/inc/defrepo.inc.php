@@ -57,7 +57,7 @@ $defrepo['slacky-13.0']=array(
   );
 
 $defrepo['slackware64-13.0-localhost']=array(
-    'create' => 1,
+    'create' => 0,
     'url' => 'http://localhost/slak/htdocs/data/slackware64-13.0/',
     'official' => 1,
     'manifest' => 'MANIFEST.bz2',
@@ -68,7 +68,7 @@ $defrepo['slackware64-13.0-localhost']=array(
   );
 
 $defrepo['slackware64-13.0-local']=array(
-    'create' => 1,
+    'create' => 0,
     'url' => 'file:///var/www/htdocs/slak/htdocs/data/slackware64-13.0/',
     'official' => 1,
     'manifest' => 'MANIFEST.bz2',
@@ -78,5 +78,15 @@ $defrepo['slackware64-13.0-local']=array(
     'description' => 'copia locale del repository ufficiale di slackware64 13.0'
   );
 
+$defrepo['slackers.it']=array(
+    'create' => 1,
+    'url' => 'http://www.slackers.it/repository/',
+    'official' => 0,
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5',
+    'name' => 'slackers.it',
+    'description' => 'repository di pacchetti non ufficiali'
+  );
 
 ?>
