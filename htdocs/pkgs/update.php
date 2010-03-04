@@ -41,7 +41,6 @@ if(!$out){
   echo "fatto\n";
 }
  */
-
 foreach($defrepo as $name => $repo)if($repo['create']){
   $create=$repo['create'];
   unset ($repo['create']);

@@ -71,7 +71,6 @@ $defrepo['slackware64-13.0-local']=array(
     'create' => 1,
     'url' => 'file:///var/www/htdocs/slak/htdocs/data/slackware64-13.0/',
     'official' => 1,
-//    'manifest' => 'MANIFEST',
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.bz2',
     'hashfile' => 'CHECKSUMS.md5.asc',

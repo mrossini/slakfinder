@@ -2,7 +2,7 @@
 
 class package {
 
-  private $db;
+  public $db;
   
   public function __construct($id=0){
     $this->db=new mysql();
@@ -109,23 +109,28 @@ class package {
     foreach($repo as $key => $value) $this->$key = $value;
   }
 
-  public function find($pkg=null,$desc=null,$repo=null){
-    $sql="select * from #__packages";
-    if($repo)$sql.=",#__repository";
-    if($repo or $desc or $repo)$sql.="where ";
-      if($pkg)$sql.=" id='$pkg' or name like'%$repo%'";
-      if($
-        $this->db->query($sql);
-          return $this->db->nrows;
+  public function find($pkg=null,$desc=null,$repo=null,$start=null,$max=null){ //$repo == id only
+    if(!is_null($pkg)){
+      $sql="SELECT P.*, R.name AS reponame       FROM #__packages as P       LEFT JOIN #__repository as R       ON (P.repository=R.id) ";
+      $next="";
+      if($pkg or $desc or $repo){
+	$sql.="WHERE ";
+	if($pkg){$sql.=" ( P.id='$pkg' or P.name LIKE '%$pkg%' ) ";$next=" AND ";}
+	if($desc){$sql.=$next." P.description LIKE '%$desc%' ";$next=" AND ";}
+	if($repo){$sql.=$next." repository='$repo'";}
+      }
+      if(is_numeric($start) and is_numeric($max)){
+	$sql.=" limit $start,$max";
+      }
+      $this->db->query($sql);
+    }else{
+      $this->id=0;
+      if(!$out=$this->db->get())return false;
+      foreach($out as $key => $value) $this->$key = $value;
+      return $this->id;
+    }
+    return $this->db->nrows;
   }
-  public function fetch(){
-    $this->id=0;
-    if(!$out=$this->db->get())return false;
-    foreach($out as $key => $value) $this->$key = $value;
-    return $this->id;
-  }
-
-
 
   static public function sql(){
     return "
