@@ -36,7 +36,7 @@ class package {
       $data=(isset($pkexp[1]))?trim($pkexp[1]):"";
       switch($field){
 	case "PACKAGE NAME": 
-	  $tmp=preg_split("/^(.*)-([^\-]*)-([^\-]*)-([^\.]*)\.(t.z)$/",$data,0,PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+	  $tmp=preg_split("/^(.*)-([^\-]*)-([^\-]*)-([^\-]*)\.(t.z)$/",$data,0,PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 	  $pack['filename']=$data;
 	  $pack['name']=$name=$tmp[0];
 	  $pack['version']=$tmp[1];
@@ -111,7 +111,7 @@ class package {
 
   public function find($pkg=null,$desc=null,$repo=null,$start=null,$max=null){ //$repo == id only
     if(!is_null($pkg)){
-      $sql="SELECT P.*, R.name AS reponame       FROM #__packages as P       LEFT JOIN #__repository as R       ON (P.repository=R.id) ";
+      $sql="SELECT P.*, R.name AS reponame, R.url AS url     FROM #__packages as P       LEFT JOIN #__repository as R       ON (P.repository=R.id) ";
       $next="";
       if($pkg or $desc or $repo){
 	$sql.="WHERE ";

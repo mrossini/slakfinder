@@ -1,6 +1,6 @@
 <?php
 
-function quote_data(&$v,$k) { $v=addcslashes($v,"'"); }
+function quote_data(&$v,$k) { $v=addcslashes($v,"'\\"); }
 class mysql {
 	private $db;
 	public $started=false;

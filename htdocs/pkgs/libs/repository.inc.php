@@ -46,8 +46,10 @@ class repository {
     $this->pkgsfile->close();
     echo "$i packages                                                        \n";
     $list=new filelist();
-    $this->manifile=new internet($this->url.$this->manifest);
-    if(!$list->addall($allpackage,$this))return false;
+    if($this->manifest){
+      $this->manifile=new internet($this->url.$this->manifest);
+      if(!$list->addall($allpackage,$this))return false;
+    }
     return true;
   }
   public function needupdate(){
