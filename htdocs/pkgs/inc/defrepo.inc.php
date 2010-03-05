@@ -90,7 +90,7 @@ $defrepo['slackers.it']=array(
   );
 
 $defrepo['alien']=array(
-    'create' => 0,
+    'create' => 1,
     'url' => 'http://connie.slackware.com/~alien/slackbuilds/',
     'official' => 0,
     'manifest' => '',
@@ -100,5 +100,48 @@ $defrepo['alien']=array(
     'description' => 'repository di pacchetti semiufficiali'
   );
 
+$defrepo['salix-13.0']=array(
+    'create' => 1,
+    'url' => 'http://download.salixos.org/i486/13.0/',
+    'official' => 0,
+    'manifest' => '',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.gz.asc',
+    'name' => 'salix-13.0',
+    'description' => 'repository di pacchetti di salix-13.0'
+  );
+
+$defrepo['salix-current']=array(
+    'create' => 1,
+    'url' => 'http://download.salixos.org/i486/current/',
+    'official' => 0,
+    'manifest' => '',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.gz.asc',
+    'name' => 'sali-current',
+    'description' => 'repository di pacchetti di salix-current'
+  );
+
+$defrepo['salix64-13.0']=array(
+    'create' => 1,
+    'url' => 'http://download.salixos.org/x86_64/13.0/',
+    'official' => 0,
+    'manifest' => '',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.gz.asc',
+    'name' => 'salix64-13.0',
+    'description' => 'repository di pacchetti di salix64-13.0'
+  );
+
+$defrepo['salix64-current']=array(
+    'create' => 1,
+    'url' => 'http://download.salixos.org/x86_64/current/',
+    'official' => 0,
+    'manifest' => '',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.gz.asc',
+    'name' => 'salix64-current',
+    'description' => 'repository di pacchetti di salix64-current'
+  );
 
 ?>
