@@ -21,8 +21,12 @@
   }
 
   $maxresult=80;
+  $db=new database();
   echo "<html><head><title>Ricerca</title></head><body>";
   echo "<pre>";
+  echo "Tu sei il ".$db->counter_get('visits')."° visitatore<br>";
+  echo "Sono state fatte finora ".$db->counter_get('searches')." ricerche<br><br>";
+  $db->counter_inc('visits');
   $name=$desc=$file=$repo=null;
   foreach($_GET as $key => $value)$$key=$value;
 
@@ -49,6 +53,7 @@
   echo "</form>";
 
   if ($name or $desc or $file){
+    $db->counter_inc('searches');
     if(!$file){
       $pkg=new package();
       $out=$pkg->find($name,$desc,$repo,0,$maxresult+1);
