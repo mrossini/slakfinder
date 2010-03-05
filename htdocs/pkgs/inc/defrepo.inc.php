@@ -89,4 +89,16 @@ $defrepo['slackers.it']=array(
     'description' => 'repository di pacchetti non ufficiali'
   );
 
+$defrepo['alien']=array(
+    'create' => 0,
+    'url' => 'http://connie.slackware.com/~alien/slackbuilds/',
+    'official' => 0,
+    'manifest' => '',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'alien',
+    'description' => 'repository di pacchetti semiufficiali'
+  );
+
+
 ?>
