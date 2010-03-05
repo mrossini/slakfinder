@@ -22,6 +22,7 @@
 
   $maxresult=80;
   echo "<html><head><title>Ricerca</title></head><body>";
+  echo "<pre>";
   $name=$desc=$file=$repo=null;
   foreach($_GET as $key => $value)$$key=$value;
 
@@ -33,13 +34,15 @@
   $select="<select name='repo'>\n";
   $select.="  <option value='0'".((!$repo)?" selected":"").">---  Tutti i repository ---</option>\n";
   while ($repof->fetch()){ 
-    $select.="  <option value='{$repof->id}'".(($repo==$repof->id)?" selected":"").">{$repof->name}</option>\n"; 
+    $select.="  <option value='{$repof->id}'".(($repo==$repof->id)?" selected":"").">{$repof->name}";
+    if(!$repof->manifest)$select.=" (no filelist)";
+    $select.="</option>\n"; 
   } 
   $select.="</select>";
   tables(array("Cerca su: ",$select));
   tables(array("Nome pacchetto: ","<input name=name value='$name'>"));
   tables(array("Descrizione: ","<input name=desc value='$desc'><br>"));
-  tables(array("Lista file: ","<input name=file value='$file'><br>"));
+  tables(array("Lista file: ","<input name=file value='$file'>(accetta regexp)<br>"));
   tables();
   echo "<input type=submit value='vai'>";
 
@@ -62,11 +65,11 @@
 	  $pkg->find();
 	  if($repos != $pkg->reponame){
 	    if($repos) tables();
-	    echo "<br>Repository: ".$pkg->reponame;
+	    echo "<br>Repository: {$pkg->reponame} - url: <a href={$pkg->url}>{$pkg->url}</a>";
 	    $repos=$pkg->reponame;
-	    tables(array("pacchetto","versione","posizione"),1);
+	    tables(array("pacchetto","versione","arch","posizione"),1);
 	  }
-	  tables(array($pkg->name,$pkg->version,$pkg->location));
+	  tables(array("<a href={$pkg->url}{$pkg->location}{$pkg->filename}>{$pkg->name}</a>",$pkg->version,$pkg->arch,"<a href={$pkg->url}{$pkg->location}>{$pkg->location}</a>"));
 	}
 	tables();
       }
@@ -92,15 +95,16 @@
 //	    echo "<br>Pacchetto: {$fl->pkgname} - Versione: {$fl->version} - Posizione: {$fl->pkgloc}";
 	    $repos=$fl->reponame;
 //	    $pack=$fl->pkgname;
-	    tables(array("package","file","path"),1);
+	    tables(array("package","version","file","path"),1);
 	  }
-	  tables(array($fl->pkgname,$fl->filename,$fl->fullpath));
+	  tables(array($fl->pkgname,$fl->version."-".$fl->arch,$fl->filename,$fl->fullpath));
 	}
 	tables();
       }
       echo "<br><br><br>";
     }
   }
+  echo "</pre>";
   echo "</body></html>";
 
 ?>

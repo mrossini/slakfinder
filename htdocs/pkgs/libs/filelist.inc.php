@@ -51,7 +51,7 @@ class filelist {
 
   public function find($file=null,$pkg=null,$desc=null,$repo=null,$start=null,$max=null){ //$repo == id only
     if(!is_null($file)){
-      $sql="SELECT F.*, P.name as pkgname, R.name AS reponame, P.version as version, P.location AS pkgloc 
+      $sql="SELECT F.*, P.name as pkgname, R.name AS reponame, P.version as version, P.location AS pkgloc, P.arch AS arch 
 	FROM #__filelist as F 
 	LEFT JOIN  #__packages as P 
 	  ON (F.package=P.id)
