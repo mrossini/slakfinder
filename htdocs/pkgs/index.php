@@ -91,13 +91,13 @@
 	  $fl->find();
 	  if($repos != $fl->reponame){
 	    if($repos) tables();
-	    echo "<br>Repository: ".$fl->reponame;
+	    echo "<br>Repository: {$fl->reponame} - url: <a href={$fl->url}>{$fl->url}</a>";
 //	    echo "<br>Pacchetto: {$fl->pkgname} - Versione: {$fl->version} - Posizione: {$fl->pkgloc}";
 	    $repos=$fl->reponame;
 //	    $pack=$fl->pkgname;
-	    tables(array("package","version","file","path"),1);
+	    tables(array("package","version","file","path","location"),1);
 	  }
-	  tables(array($fl->pkgname,$fl->version."-".$fl->arch,$fl->filename,$fl->fullpath));
+	  tables(array("<a href={$fl->url}{$fl->pkgloc}{$fl->pkgfile}>{$fl->pkgname}</a>",$fl->version."-".$fl->arch,$fl->filename,$fl->fullpath,"<a href={$fl->url}{$fl->pkgloc}>{$fl->pkgloc}</a>"));
 	}
 	tables();
       }
