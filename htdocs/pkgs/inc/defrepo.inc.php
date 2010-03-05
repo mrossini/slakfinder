@@ -23,6 +23,17 @@ $defrepo['slackware-current']=array(
     'description' => 'repository ufficiale di slackware current'
   );
 
+$defrepo['slackware-12.2']=array(
+    'create' => 1,
+    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-12.2/',
+    'official' => 1,
+    'manifest' => 'slackware/MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'slackware-12.2',
+    'description' => 'repository ufficiale di slackware 12.2'
+  );
+
 $defrepo['slackware64-13.0']=array(
     'create' => 1,
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/',
