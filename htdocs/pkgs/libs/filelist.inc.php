@@ -30,8 +30,13 @@ class filelist {
 	$num=0;
       }elseif($step==1){
 	if($line){
-	  $tmp=preg_split("/^(.)([^ ]+) +([^\/]+)\/([^ ]+)[^\d]+([\,\d]+) +(\d+-\d+-\d+ \d+:\d+) +([^ ]*\/)*([^\/]*)(| .*)$/",$line,0, PREG_SPLIT_DELIM_CAPTURE);
-	  $type=$tmp[1]; $perm=$tmp[2]; $user=$tmp[3]; $group=$tmp[4]; $size=$tmp[5]; $date=$tmp[6]; $path=$tmp[7]; $file=$tmp[8];
+	  $tmp=preg_split("/^(.)([^ ]+) +([^\/]+)\/([^ ]+)[^\d]+([\,\d]+) +(\d+-\d+-\d+ \d+:\d+)(|:\d+) +([^ ]*\/)*([^\/]*)(| .*)$/",$line,0, PREG_SPLIT_DELIM_CAPTURE);
+	  $type=$tmp[1]; $perm=$tmp[2]; $user=$tmp[3]; $group=$tmp[4]; $size=$tmp[5]; $date=$tmp[6]; $path=$tmp[8]; $file=$tmp[9];
+	  if(!$tmp[1]){
+	    var_dump($tmp,$line);
+	    var_dump(preg_split("/^(.)([^ ]+) +([^\/]+)\/([^ ]+)[^\d]+([\,\d]+) +(\d+-\d+-\d+ \d+:\d+)(|:\d+) /",$line,0, PREG_SPLIT_DELIM_CAPTURE));
+	    die();
+	  }
 	  if($type!="d"){
 	    if($type=="c" or $type=="b") $size=0;
 	    $this->db->insert(array($pkgid, $repoid, "$path", $file, "$date:00", $size)); 
