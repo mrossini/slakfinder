@@ -67,6 +67,28 @@ $defrepo['slacky-13.0']=array(
     'description' => 'repository ufficiale di slacky-13.0'
   );
 
+$defrepo['slacky-12.2']=array(
+    'create' => 1,
+    'url' => 'http://repository.slacky.eu/slackware-12.2/',
+    'official' => 0,
+    'manifest' => 'MANIFEST.bz2',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'packages' => 'PACKAGES.TXT',
+    'name' => 'slacky-12.2',
+    'description' => 'repository ufficiale di slacky-12.2'
+  );
+
+$defrepo['gnome-slacky-12.2']=array(
+    'create' => 1,
+    'url' => 'http://repository.slacky.eu/gnome-slacky-12.2/',
+    'official' => 0,
+    'manifest' => 'MANIFEST.bz2',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'packages' => 'PACKAGES.TXT',
+    'name' => 'gnome-slacky-12.2',
+    'description' => 'repository ufficiale di gnome slacky 12.2'
+  );
+
 $defrepo['slackware64-13.0-localhost']=array(
     'create' => 0,
     'url' => 'http://localhost/slak/htdocs/data/slackware64-13.0/',
