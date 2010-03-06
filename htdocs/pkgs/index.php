@@ -24,11 +24,16 @@
   $db=new database();
   echo "<html><head><title>Ricerca</title></head><body>";
   echo "<pre>";
-  echo "Tu sei il ".$db->counter_get('visits')."° visitatore<br>";
-  echo "Sono state fatte finora ".$db->counter_get('searches')." ricerche<br><br>";
-  $db->counter_inc('visits');
-  $name=$desc=$file=$repo=null;
+  session_start();
+  if(!isset($_SESSION['searcher_visitor'])){
+    $db->counter_inc('visits');
+    $_SESSION['searcher_visitor']=$db->counter_get('visits');
+  }
+  echo "Tu sei il ".$_SESSION['searcher_visitor']."° visitatore<br>";
+  $regexp=$name=$desc=$file=$repo=null;
   foreach($_GET as $key => $value)$$key=$value;
+  if ($name or $desc or $file) $db->counter_inc('searches');
+  echo "Sono state fatte finora ".$db->counter_get('searches')." ricerche<br><br>";
 
   $repof=new repository();
   $repof->find();
@@ -46,14 +51,14 @@
   tables(array("Cerca su: ",$select));
   tables(array("Nome pacchetto: ","<input name=name value='$name'>"));
   tables(array("Descrizione: ","<input name=desc value='$desc'><br>"));
-  tables(array("Lista file: ","<input name=file value='$file'>(accetta regexp)<br>"));
+  tables(array("Lista file: ","<input name=file value='$file'><br>"));
+  tables(array("Usa regexp: ","<input name=regexp type=checkbox ".(($regexp)?"checked":"").">"));
   tables();
   echo "<input type=submit value='vai'>";
 
   echo "</form>";
 
   if ($name or $desc or $file){
-    $db->counter_inc('searches');
     if(!$file){
       $pkg=new package();
       $out=$pkg->find($name,$desc,$repo,0,$maxresult+1);
@@ -81,8 +86,8 @@
       echo "<br><br><br>";
     }else{
       $fl=new filelist();
-      $out=$fl->find($file,$name,$desc,$repo,0,$maxresult+1);
-//      echo "<pre>";var_dump($fl);echo "</pre>";
+      $out=$fl->find($file,$name,$desc,$repo,0,$maxresult+1,$regexp);
+      echo "Tempo: ".(round($fl->db->msec,3))." millisecondi<br>";
       if($out>$maxresult){
 	echo "La ricerca nella lista file ha generato più di $maxresult risultati. restringere i criteri di ricerca<br><br>";
 	$out=$maxresult;
@@ -97,9 +102,7 @@
 	  if($repos != $fl->reponame){
 	    if($repos) tables();
 	    echo "<br>Repository: {$fl->reponame} - url: <a href={$fl->url}>{$fl->url}</a>";
-//	    echo "<br>Pacchetto: {$fl->pkgname} - Versione: {$fl->version} - Posizione: {$fl->pkgloc}";
 	    $repos=$fl->reponame;
-//	    $pack=$fl->pkgname;
 	    tables(array("package","version","file","path","location"),1);
 	  }
 	  tables(array("<a href={$fl->url}{$fl->pkgloc}{$fl->pkgfile}>{$fl->pkgname}</a>",$fl->version."-".$fl->arch,$fl->filename,$fl->fullpath,"<a href={$fl->url}{$fl->pkgloc}>{$fl->pkgloc}</a>"));

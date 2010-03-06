@@ -14,9 +14,10 @@ class database {
 	  	$this->db->close();
 	}
 	public function dropdb(){
-		if(!$this->db->query('drop table if exists #__filelist'))return false;
+		if(!$this->db->query('DROP TABLE IF EXISTS #__filelist'))return false;
 		if(!$this->db->query('DROP TABLE IF EXISTS #__packages'))return false;
-		if(!$this->db->query('drop table if exists #__repository'))return false;
+		if(!$this->db->query('DROP TABLE IF EXISTS #__repository'))return false;
+		if(!$this->db->query('DROP TABLE IF EXISTS #__mixed'))return false;
 
 		return true;
 	}
@@ -32,8 +33,8 @@ class database {
                     value VARCHAR( 255 ) NULL ,
                     PRIMARY KEY ( id )
 		  ) ENGINE = InnoDB;
-		  INSERT INTO #__mixed (field,value) values ('count_visits','1'),('count_searches','1');
 		"))return false;
+		if(!$this->db->query("INSERT INTO #__mixed (field,value) values ('count_visits','1'),('count_searches','1');"))return false;
 		return true;
 	}
 	public function counter_get($counter){

@@ -22,8 +22,10 @@ class mysql {
 		$this->nrows=null;
 		$this->newid=null;
 		$sql=str_replace('#__',$dbpref,$sql);
+		$start_time=microtime(true);
+		$this->msec=0;
 		$this->results=mysql_query($sql);
-		#echo "\n\n$sql\n\n";
+		$this->msec=(microtime(true)-$start_time)*1000;
 
 		$this->lastquery=$sql;
 		if(!$this->results){

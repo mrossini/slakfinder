@@ -3,7 +3,7 @@
 
 class filelist {
 
-  private $db;
+  public $db;
 
   public function __construct(){
     $this->db=new mysql();
@@ -54,7 +54,7 @@ class filelist {
     return true;
   }
 
-  public function find($file=null,$pkg=null,$desc=null,$repo=null,$start=null,$max=null){ //$repo == id only
+  public function find($file=null,$pkg=null,$desc=null,$repo=null,$start=null,$max=null,$regexp=false){ //$repo == id only
     if(!is_null($file)){
       $sql="SELECT F.*, 
 	           P.name as pkgname, P.arch AS arch, P.version as version, P.location AS pkgloc, P.filename AS pkgfile,
@@ -67,7 +67,8 @@ class filelist {
       $next="";
       if($pkg or $desc or $repo or $file){
         $sql.="WHERE ";
-	if($file){$sql.=" F.filename REGEXP \"$file\" ";$next=" AND ";}
+	if($file and $regexp){$sql.=" F.filename REGEXP \"$file\" ";$next=" AND ";}
+	if($file and !$regexp){$sql.=" F.filename LIKE '%$file%' ";$next=" AND ";}
         if($pkg){$sql.=" ( P.id='$pkg' or P.name LIKE '%$pkg%' ) ";$next=" AND ";}
         if($desc){$sql.=$next." P.description LIKE '%$desc%' ";$next=" AND ";}
         if($repo){$sql.=$next." R.id='$repo'";}
@@ -97,6 +98,7 @@ class filelist {
 	  filedate DATETIME NOT NULL ,
 	  filesize INT NOT NULL ,
 	PRIMARY KEY ( id ) ,
+	INDEX ( filename ),
 	FOREIGN KEY ( package ) REFERENCES #__packages ( id ) ON DELETE CASCADE
       ) ENGINE = INNODB ;
     ";
