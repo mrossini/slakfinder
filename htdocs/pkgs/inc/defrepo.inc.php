@@ -145,9 +145,9 @@ $defrepo['salix-13.0']=array(
   );
 
 $defrepo['salix-current']=array(
-    'create' => 1,
+    'create' => 0,
     'url' => 'http://download.salixos.org/i486/current/',
-    'official' => 0,
+    'official' => 1,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz.asc',
@@ -175,6 +175,19 @@ $defrepo['salix64-current']=array(
     'hashfile' => 'CHECKSUMS.md5.gz.asc',
     'name' => 'salix64-current',
     'description' => 'repository di pacchetti di salix64-current'
+  );
+
+#CHECKSUMS.md5  FILELIST.TXT  MANIFEST  MANIFEST.bz2  PACKAGES.TXT
+
+$defrepo['slackyd-slacky']=array(
+    'create' => 0,
+    'url' => 'file:///var/slackyd/slacky/',
+    'official' => 0,
+    'manifest' => 'MANIFEST',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5',
+    'name' => 'slackyd-slacky',
+    'description' => 'test'
   );
 
 ?>
