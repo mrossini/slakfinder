@@ -67,11 +67,11 @@ class filelist {
       $next="";
       if($pkg or $desc or $repo or $file){
         $sql.="WHERE ";
-	if($file and $regexp){$sql.=" F.filename REGEXP \"$file\" ";$next=" AND ";}
-	if($file and !$regexp){$sql.=" F.filename LIKE '%$file%' ";$next=" AND ";}
-        if($pkg){$sql.=" ( P.id='$pkg' or P.name LIKE '%$pkg%' ) ";$next=" AND ";}
+        if($repo){$sql.=$next." R.id='$repo'";$next=" AND ";}
         if($desc){$sql.=$next." P.description LIKE '%$desc%' ";$next=" AND ";}
-        if($repo){$sql.=$next." R.id='$repo'";}
+        if($pkg){$sql.="$next ( P.id='$pkg' or P.name LIKE '%$pkg%' ) ";$next=" AND ";}
+	if($file and $regexp){$sql.="$next F.filename REGEXP \"$file\" ";$next=" AND ";}
+	if($file and !$regexp){$sql.="$next F.filename LIKE '%$file%' ";$next=" AND ";}
       }
       if(is_numeric($start) and is_numeric($max)){
         $sql.=" limit $start,$max";
