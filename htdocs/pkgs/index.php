@@ -79,7 +79,7 @@
 	    $repos=$pkg->reponame;
 	    tables(array("pacchetto","versione","arch","posizione"),1);
 	  }
-	  tables(array("<a href={$pkg->url}{$pkg->location}{$pkg->filename}>{$pkg->name}</a>",$pkg->version,$pkg->arch,"<a href={$pkg->url}{$pkg->location}>{$pkg->location}</a>"));
+	  tables(array("<a href={$pkg->url}{$pkg->location}/{$pkg->filename}>{$pkg->name}</a>",$pkg->version,$pkg->arch,"<a href={$pkg->url}{$pkg->location}/>{$pkg->location}/</a>"));
 	}
 	tables();
       }
@@ -105,7 +105,7 @@
 	    $repos=$fl->reponame;
 	    tables(array("package","version","file","path","location"),1);
 	  }
-	  tables(array("<a href={$fl->url}{$fl->pkgloc}{$fl->pkgfile}>{$fl->pkgname}</a>",$fl->version."-".$fl->arch,$fl->filename,$fl->fullpath,"<a href={$fl->url}{$fl->pkgloc}>{$fl->pkgloc}</a>"));
+	  tables(array("<a href={$fl->url}{$fl->pkgloc}/{$fl->pkgfile}>{$fl->pkgname}</a>",$fl->version."-".$fl->arch,$fl->filename,$fl->fullpath,"<a href={$fl->url}{$fl->pkgloc}/>{$fl->pkgloc}/</a>"));
 	}
 	tables();
       }
