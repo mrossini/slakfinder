@@ -56,6 +56,28 @@ $defrepo['slackware-13.0']=array(
     'description' => 'repository ufficiale di slackware 13.0'
   );
 
+$defrepo['slackware-13.0-patches']=array(
+    'create' => 1,
+    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/patches/',
+    'official' => 1,
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'slackware-13.0-patches',
+    'description' => 'repository ufficiale di slackware 13.0, patch'
+  );
+
+$defrepo['slackware64-13.0-patches']=array(
+    'create' => 1,
+    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/patches/',
+    'official' => 1,
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'slackware-13.0-patches',
+    'description' => 'repository ufficiale di slackware64 13.0, patch'
+  );
+
 $defrepo['slacky-13.0']=array(
     'create' => 1,
     'url' => 'http://repository.slacky.eu/slackware-13.0/',
@@ -145,7 +167,7 @@ $defrepo['salix-13.0']=array(
   );
 
 $defrepo['salix-current']=array(
-    'create' => 0,
+    'create' => 1,
     'url' => 'http://download.salixos.org/i486/current/',
     'official' => 1,
     'manifest' => '',
@@ -180,7 +202,7 @@ $defrepo['salix64-current']=array(
 #CHECKSUMS.md5  FILELIST.TXT  MANIFEST  MANIFEST.bz2  PACKAGES.TXT
 
 $defrepo['slackyd-slacky']=array(
-    'create' => 0,
+    'create' => 1,
     'url' => 'file:///var/slackyd/slacky/',
     'official' => 0,
     'manifest' => 'MANIFEST',
@@ -188,6 +210,61 @@ $defrepo['slackyd-slacky']=array(
     'hashfile' => 'CHECKSUMS.md5',
     'name' => 'slackyd-slacky',
     'description' => 'test'
+  );
+
+$defrepo['daniele50.it']=array(
+    'create' => 0,
+    'url' => 'file:///var/www/htdocs/slak/htdocs/data/daniele50/',
+    'official' => 0,
+    'manifest' => '',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5',
+    'name' => 'daniele50.it',
+    'description' => 'daniele50'
+  );
+
+$defrepo['linuxpackages-12.2-i386']=array(
+    'create' => 1,
+    'url' => 'http://linuxpackages.inode.at/Slackware/Slackware-12.2-i386/',
+    'official' => 0,
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.gz',
+    'name' => 'linuxpackages-12.2-i386',
+    'description' => 'linuxpackages.net ver.12.2 per i386'
+  );
+
+$defrepo['linuxpackages-13.0-i386-sotirov']=array(
+    'create' => 1,
+    'url' => 'http://linuxpackages.inode.at/Slackware/Slackware-13.0-i386/sotirov/',
+    'official' => 0,
+    'manifest' => '',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.gz',
+    'name' => 'linuxpackages-13.0-i386-sotirov',
+    'description' => 'linuxpackages.net ver.13.0 per i386 di sotirov'
+  );
+
+$defrepo['linuxpackages-13.0-i386-frias']=array(
+    'create' => 0,
+    'url' => 'file:///var/www/htdocs/slak/htdocs/data/linuxpackages-13.0-i386/',
+    'official' => 0,
+    'manifest' => '',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5',
+    'name' => 'linuxpackages-13.0-i386-frias',
+    'description' => 'linuxpackages.net ver.13.0 per i386 di frias'
+  );
+
+$defrepo['stabellini']=array(
+    'create' => 1,
+    'url' => 'http://www.stabellini.net/filesystem/repository/Stefano_Stabellini/',
+    'official' => 0,
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5',
+    'name' => 'stabellini',
+    'description' => 'repo di stabellini'
   );
 
 ?>
