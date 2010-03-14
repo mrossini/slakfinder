@@ -5,6 +5,7 @@
   echo '<html xmlns="http://www.w3.org/1999/xhtml">';
   echo '<head><title>Package Finder</title></head><body><pre>';
   include 'inc/includes.inc.php';
+  include 'inc/defrepo.inc.php';
 
   $maxresult=80;
   $db=new database();
@@ -18,25 +19,16 @@
   if ($name or $desc or $file) $db->counter_inc('searches');
   echo "Searched ".$db->counter_get('searches')." packages from 6 March 2010<br /><br />";
 
-  $repof=new repository();
-  $repof->find();
   echo "<form action='?' >";
   echo "<input type='hidden' name='act' value='search' />\n";
-  tables(array(),1,0);
-  $select="<select name='repo'>\n";
-  $select.="  <option value='0'".((!$repo)?" selected='selected'":"").">---  All repositories ---</option>\n";
-  while ($repof->fetch()){ 
-    $select.="  <option value='{$repof->id}'".(($repo==$repof->id)?" selected='selected'":"").">{$repof->name}";
-    if(!$repof->manifest)$select.=" (no file search)";
-    $select.="</option>\n"; 
-  } 
-  $select.="</select>";
-  tables(array("Search from: ",$select));
-  tables(array("Package name: ","<input name='name' value='$name' />"));
-  tables(array("Description: ","<input name='desc' value='$desc' /><br />"));
-  tables(array("Filename: ","<input name='file' value='$file' /><br />"));
-  tables(array("Use regexp: ","<input name='regexp' type='checkbox' ".(($regexp)?"checked='checked'":"")." />"));
-  tables();
+  echo tables(array(),1,0);
+  $from=writerepos($repo);
+  echo tables(array("Search from: ",$from));
+  echo tables(array("Package name: ","<input name='name' value='$name' />"));
+  echo tables(array("Description: ","<input name='desc' value='$desc' /><br />"));
+  echo tables(array("Filename: ","<input name='file' value='$file' /><br />"));
+  echo tables(array("Use regexp: ","<input name='regexp' type='checkbox' ".(($regexp)?"checked='checked'":"")." />"));
+  echo tables();
   echo "<input type='submit' value='go' />";
 
   echo "</form>";
@@ -57,14 +49,14 @@
 	for ( $i=0 ; $i < $out ; $i++ ){
 	  $pkg->find();
 	  if($repos != $pkg->reponame){
-	    if($repos) tables();
+	    if($repos) echo tables();
 	    echo "<br />Repository: {$pkg->reponame} - url: <a href={$pkg->url}>{$pkg->url}</a>";
 	    $repos=$pkg->reponame;
-	    tables(array("package","version","arch","location",'&npsp;'),1);
+	    echo tables(array("package","version","arch","location",'&npsp;'),1);
 	  }
-	  tables(array("<a href='show.php?pkg={$pkg->id}'>{$pkg->name}</a>",$pkg->version,$pkg->arch,"<a href='{$pkg->url}{$pkg->location}/'>{$pkg->location}/</a>","<a href='{$pkg->url}{$pkg->location}/{$pkg->filename}'>download</a>"));
+	  echo tables(array("<a href='show.php?pkg={$pkg->id}'>{$pkg->name}</a>",$pkg->version,$pkg->arch,"<a href='{$pkg->url}{$pkg->location}/'>{$pkg->location}/</a>","<a href='{$pkg->url}{$pkg->location}/{$pkg->filename}'>download</a>"));
 	}
-	tables();
+	echo tables();
       }
       echo "<br /><br /><br />";
     }else{
@@ -83,14 +75,14 @@
 	for ( $i=0 ; $i < $out ; $i++ ){
 	  $fl->find();
 	  if($repos != $fl->reponame){
-	    if($repos) tables();
+	    if($repos) echo tables();
 	    echo "<br />Repository: {$fl->reponame} - url: <a href='{$fl->url}'>{$fl->url}</a>";
 	    $repos=$fl->reponame;
-	    tables(array("package","version","file","path","location"),1);
+	    echo tables(array("package","version","file","path","location"),1);
 	  }
-	  tables(array("<a href='{$fl->url}{$fl->pkgloc}/{$fl->pkgfile}'>{$fl->pkgname}</a>",$fl->version."-".$fl->arch,$fl->filename,$fl->fullpath,"<a href='{$fl->url}{$fl->pkgloc}/'>{$fl->pkgloc}/</a>"));
+	  echo tables(array("<a href='{$fl->url}{$fl->pkgloc}/{$fl->pkgfile}'>{$fl->pkgname}</a>",$fl->version."-".$fl->arch,$fl->filename,$fl->fullpath,"<a href='{$fl->url}{$fl->pkgloc}/'>{$fl->pkgloc}/</a>"));
 	}
-	tables();
+	echo tables();
       }
       echo "<br /><br /><br />";
     }

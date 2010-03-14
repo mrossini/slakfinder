@@ -43,12 +43,14 @@ if(isset($_SERVER['DROPDB'])){
   }
 }
 
-foreach($defrepo as $name => $repo)if($repo['create']){
+foreach($defrepo as $id => $repo)if($repo['info']['create']){
   $db->db->transact();
-  $create=$repo['create'];
-  unset ($repo['create']);
+  $info=$repo['info'];
+  $create=$info['create'];
+  $repo['id']=$id;
+  unset ($repo['info']);
   echo "\n\nREPOSITORY: {$repo['name']}\n";
-  $rep=new repository($repo['name']);
+  $rep=new repository($id);
   if($rep->exists()){
     echo "già esiste\n";
     if($create==2){
@@ -56,6 +58,7 @@ foreach($defrepo as $name => $repo)if($repo['create']){
       if(!$out=$rep->drop()){
 	echo "errore nella distruzione\n";
 	var_dump($rep);
+	die();
       };
     }
     if($rep->exists()){
@@ -68,7 +71,7 @@ foreach($defrepo as $name => $repo)if($repo['create']){
       }
     }
   }
-  $rep=new repository($repo['name']);
+  $rep=new repository($id);
   if(!$rep->exists()){
     echo "creazione repository:";
     if(!$out=$rep->add($repo)){

@@ -22,8 +22,7 @@ class repository {
     $this->hash=$hashfile->contents;
     $repo['hash']=$this->hash;
     if(!$this->db->insert('repository',$repo))return false;
-    $this->id=$this->db->newid;
-    return $this->id;
+    return $repo['id'];
   }
   public function update(){
     global $repodir;
@@ -118,7 +117,7 @@ class repository {
   static public function sql(){
     return "
       CREATE TABLE #__repository (
-	id INT AUTO_INCREMENT ,
+	id INT ,
 	url VARCHAR( 255 ) NOT NULL ,
 	official INT ,
 	manifest VARCHAR( 30 ) NOT NULL ,
