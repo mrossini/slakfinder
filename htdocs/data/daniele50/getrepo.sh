@@ -14,8 +14,8 @@ mkdir -p $TMP
 
 cd $TMP
 
-
-wget -nv $SITE/$BASE -r -np -A index.html -nH --max-redirect=1 --tries=1
+echo "download daniele"
+wget -q -nv $SITE/$BASE -r -np -A index.html -nH --max-redirect=1 --tries=1
 
 cd $BASE
 
