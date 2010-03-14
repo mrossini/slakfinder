@@ -74,7 +74,7 @@ $defrepo['slackware64-13.0-patches']=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
-    'name' => 'slackware-13.0-patches',
+    'name' => 'slackware64-13.0-patches',
     'description' => 'repository ufficiale di slackware64 13.0, patch'
   );
 
@@ -151,7 +151,7 @@ $defrepo['salix-current']=array(
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz.asc',
-    'name' => 'sali-current',
+    'name' => 'salix-current',
     'description' => 'repository di pacchetti di salix-current'
   );
 
@@ -229,7 +229,75 @@ $defrepo['stabellini']=array(
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5',
     'name' => 'stabellini',
-    'description' => 'repo di stabellini'
+    'description' => 'repo of stabellini'
   );
 
+$defrepo['rworkman-for-12.2']=array(
+    'create' => 1,
+    'url' => 'http://rlworkman.net/pkgs/12.2/',
+    'official' => 0,
+    'manifest' => '',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'rlworkman-for-12.2',
+    'description' => 'Robby Workman Repository'
+  );
+
+$defrepo['rworkman-for-current']=array(
+    'create' => 1,
+    'url' => 'http://rlworkman.net/pkgs/current/',
+    'official' => 0,
+    'manifest' => '',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'rlworkman-for-current',
+    'description' => 'Robby Workman Repository'
+  );
+
+$defrepo['rworkman-for-13.0']=array(
+    'create' => 1,
+    'url' => 'http://rlworkman.net/pkgs/13.0/',
+    'official' => 0,
+    'manifest' => '',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'rlworkman-for-13.0',
+    'description' => 'Robby Workman Repository'
+  );
+
+$defrepo['dia-tech-slack-13.0']=array(
+    'create' => 1,
+    'url' => 'http://www.dia-tech.net/linux/Slackware-13.0/',
+    'official' => 0,
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'ChangeLog.txt.gz',
+    'name' => 'dia-tech-slack-13.0',
+    'description' => 'Unknown'
+  );
+
+$defrepo['dia-tech-slack-12.2']=array(
+    'create' => 1,
+    'url' => 'http://www.dia-tech.net/linux/Slackware-12.2/',
+    'official' => 0,
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'ChangeLog.txt.gz',
+    'name' => 'dia-tech-slack-12.2',
+    'description' => 'Unknown'
+  );
+
+$defrepo['dia-tech-curr-kde4.4']=array(
+    'create' => 1,
+    'url' => 'http://www.dia-tech.net/linux/Slackware-current-kde4.4/',
+    'official' => 0,
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'ChangeLog.txt.gz',
+    'name' => 'dia-tech-curr-kde4.4',
+    'description' => 'Unknown'
+  );
+
+
 ?>
+
