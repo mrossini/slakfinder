@@ -8,7 +8,7 @@
 function shutdown() { 
   echo "\n\nScript executed with success\n\n", PHP_EOL; 
 }
-register_shutdown_function('shutdown');
+#register_shutdown_function('shutdown');
 
 include 'inc/includes.inc.php';
 include 'inc/defrepo.inc.php';
@@ -82,13 +82,14 @@ foreach($defrepo as $name => $repo)if($repo['create']){
     echo "Creazione effettuata\n";
     echo "popolamento in corso...";
     if(!$err=$rep->popolate()){
+      echo "\n";
       echo "errore popolamento!\n";
       echo "dettagli errore:\n";
 //      var_dump($rep,$err);
       $db->db->rollback();
       die();
     }else{
-      echo "fatto!                                                           \n";
+      echo "\nfatto!                                                           \n";
     }
     echo "Popolamento effettuato\n";
     $db->db->commit();

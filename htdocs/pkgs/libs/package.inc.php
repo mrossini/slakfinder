@@ -104,8 +104,8 @@ class package {
 
   }
   public function select($id){
-    if(!$this->db->query("select * from #__repository where id=$id")) return false;
-    if(!$repo=$this->db->fetch())return false;
+    if(!$this->db->query("select * from #__packages where id=$id")) return false;
+    if(!$repo=$this->db->get())return false;
     foreach($repo as $key => $value) $this->$key = $value;
   }
 

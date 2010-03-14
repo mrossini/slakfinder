@@ -22,8 +22,13 @@ class filelist {
 	$tmp=preg_split("/^\|\|.*[\/\s]([^\/]*\.t.z).*$/",$line,0,PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 	if(!$tmp)return false;
 	$pkg=$tmp[0];
-	$pkgid=$allpackages[$tmp[0]];
-	echo "      - ".$p++."  - $pkgid - {$tmp[0]}                                    ";
+	if(isset($allpackages[$tmp[0]])){
+	  $pkgid=$allpackages[$tmp[0]];
+	}else{
+	  $pkgid==false;
+	}
+	//echo "      - ".$p++."  - $pkgid - {$tmp[0]}                                    \n";
+	echo ".";
 	if(($line=$repo->manifile->get())!="||")return false;
 	if(($line=$repo->manifile->get())!="++========================================")return false;
 	$step=1;
@@ -33,18 +38,18 @@ class filelist {
 	  $tmp=preg_split("/^(.)([^ ]+) +([^\/]+)\/([^ ]+)[^\d]+([\,\d]+) +(\d+-\d+-\d+ \d+:\d+)(|:\d+) +([^ ]*\/)*([^\/]*)(| .*)$/",$line,0, PREG_SPLIT_DELIM_CAPTURE);
 	  $type=$tmp[1]; $perm=$tmp[2]; $user=$tmp[3]; $group=$tmp[4]; $size=$tmp[5]; $date=$tmp[6]; $path=$tmp[8]; $file=$tmp[9];
 	  if(!$tmp[1]){
-	    var_dump($tmp,$line);
-	    var_dump(preg_split("/^(.)([^ ]+) +([^\/]+)\/([^ ]+)[^\d]+([\,\d]+) +(\d+-\d+-\d+ \d+:\d+)(|:\d+) /",$line,0, PREG_SPLIT_DELIM_CAPTURE));
+//	    var_dump($tmp,$line);
+//	    var_dump(preg_split("/^(.)([^ ]+) +([^\/]+)\/([^ ]+)[^\d]+([\,\d]+) +(\d+-\d+-\d+ \d+:\d+)(|:\d+) /",$line,0, PREG_SPLIT_DELIM_CAPTURE));
 	    die();
 	  }
 	  if($type!="d"){
 	    if($type=="c" or $type=="b") $size=0;
-	    $this->db->insert(array($pkgid, $repoid, "$path", $file, "$date:00", $size)); 
-	    echo "\r".$num++;
+	    if($pkgid!==false)$this->db->insert(array($pkgid, $repoid, "$path", $file, "$date:00", $size)); 
+	    //echo "\r".$num++;
 	  }
 	}else{
 	  $this->db->insert();
-	  echo "\r";
+	  //echo "\r";
 	  $step=0;
 	}
       }
@@ -52,6 +57,11 @@ class filelist {
     $this->db->insert();
 
     return true;
+  }
+  public function get(){
+    if(($line=$this->db->get())==false)return false;
+    return $line;
+
   }
 
   public function find($file=null,$pkg=null,$desc=null,$repo=null,$start=null,$max=null,$regexp=false){ //$repo == id only
@@ -69,7 +79,13 @@ class filelist {
         $sql.="WHERE ";
         if($repo){$sql.=$next." R.id='$repo'";$next=" AND ";}
         if($desc){$sql.=$next." P.description LIKE '%$desc%' ";$next=" AND ";}
-        if($pkg){$sql.="$next ( P.id='$pkg' or P.name LIKE '%$pkg%' ) ";$next=" AND ";}
+	if($pkg){
+	  if(is_numeric($pkg)){
+	    $sql.="$next ( P.id='$pkg' ) ";$next=" AND ";
+	  }else{
+	    $sql.="$next ( P.name LIKE '%$pkg%' ) ";$next=" AND ";
+	  }
+	}
 	if($file and $regexp){$sql.="$next F.filename REGEXP \"$file\" ";$next=" AND ";}
 	if($file and !$regexp){$sql.="$next F.filename LIKE '%$file%' ";$next=" AND ";}
       }

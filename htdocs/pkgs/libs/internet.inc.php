@@ -49,7 +49,7 @@ class internet {
   var $fifopid=0;
   var $master=true;
   public function close(){
-    fclose($this->fd);
+    if($this->fd)fclose($this->fd);
     $this->fd=null;
     if($this->master){
       posix_kill($this->fifopid,SIGTERM);
@@ -78,11 +78,11 @@ class internet {
 	$context=null; 
       }
       if($context){ 
-	$this->fd=fopen($this->url,'r',false,$context); 
+	$this->fd=@fopen($this->url,'r',false,$context); 
       }else{ 
-	$this->fd=fopen($this->url,'r'); 
+	$this->fd=@fopen($this->url,'r');
       }
-      while(!feof($this->fd))fwrite($fifo,fread($this->fd,4096));
+      if($this->fd)while(!feof($this->fd))fwrite($fifo,fread($this->fd,4096));
       $this->close();
       exit();
     }elseif($this->fifopid == -1){

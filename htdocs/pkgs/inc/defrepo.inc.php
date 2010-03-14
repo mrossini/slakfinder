@@ -58,11 +58,11 @@ $defrepo['slackware-13.0']=array(
 
 $defrepo['slackware-13.0-patches']=array(
     'create' => 1,
-    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/patches/',
+    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/',
     'official' => 1,
-    'manifest' => 'MANIFEST.bz2',
-    'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
+    'manifest' => 'patches/MANIFEST.bz2',
+    'packages' => 'patches/PACKAGES.TXT',
+    'hashfile' => 'patches/CHECKSUMS.md5.asc',
     'name' => 'slackware-13.0-patches',
     'description' => 'repository ufficiale di slackware 13.0, patch'
   );
@@ -109,28 +109,6 @@ $defrepo['gnome-slacky-12.2']=array(
     'packages' => 'PACKAGES.TXT',
     'name' => 'gnome-slacky-12.2',
     'description' => 'repository ufficiale di gnome slacky 12.2'
-  );
-
-$defrepo['slackware64-13.0-localhost']=array(
-    'create' => 0,
-    'url' => 'http://localhost/slak/htdocs/data/slackware64-13.0/',
-    'official' => 1,
-    'manifest' => 'MANIFEST.bz2',
-    'packages' => 'PACKAGES.TXT.bz2',
-    'hashfile' => 'CHECKSUMS.md5.asc',
-    'name' => 'slackware64-13.0-localhost',
-    'description' => 'localhost del repository ufficiale di slackware64 13.0'
-  );
-
-$defrepo['slackware64-13.0-local']=array(
-    'create' => 0,
-    'url' => 'file:///var/www/htdocs/slak/htdocs/data/slackware64-13.0/',
-    'official' => 1,
-    'manifest' => 'MANIFEST.bz2',
-    'packages' => 'PACKAGES.TXT.bz2',
-    'hashfile' => 'CHECKSUMS.md5.asc',
-    'name' => 'slackware64-13.0-local',
-    'description' => 'copia locale del repository ufficiale di slackware64 13.0'
   );
 
 $defrepo['slackers.it']=array(
@@ -199,22 +177,9 @@ $defrepo['salix64-current']=array(
     'description' => 'repository di pacchetti di salix64-current'
   );
 
-#CHECKSUMS.md5  FILELIST.TXT  MANIFEST  MANIFEST.bz2  PACKAGES.TXT
-
-$defrepo['slackyd-slacky']=array(
-    'create' => 1,
-    'url' => 'file:///var/slackyd/slacky/',
-    'official' => 0,
-    'manifest' => 'MANIFEST',
-    'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5',
-    'name' => 'slackyd-slacky',
-    'description' => 'test'
-  );
-
 $defrepo['daniele50.it']=array(
-    'create' => 0,
-    'url' => 'file:///var/www/htdocs/slak/htdocs/data/daniele50/',
+    'create' => 1,
+    'url' => 'http://www.daniele50.it/listing',
     'official' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT',
@@ -246,8 +211,8 @@ $defrepo['linuxpackages-13.0-i386-sotirov']=array(
   );
 
 $defrepo['linuxpackages-13.0-i386-frias']=array(
-    'create' => 0,
-    'url' => 'file:///var/www/htdocs/slak/htdocs/data/linuxpackages-13.0-i386/',
+    'create' => 1,
+    'url' => 'http://ftp.naist.jp/pub/Linux/linuxpackages/Slackware/',
     'official' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT',

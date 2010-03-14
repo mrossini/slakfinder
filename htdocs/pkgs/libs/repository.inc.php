@@ -21,7 +21,12 @@ class repository {
     return $this->id;
   }
   public function update(){
-    $hashfile=new internet($this->url.$this->hashfile);
+    global $repodir;
+    if(file_exists("$repodir/{$this->name}/{$this->hashfile}")){
+      $hashfile=new internet("$repodir/{$this->name}/{$this->hashfile}");
+    }else{
+      $hashfile=new internet($this->url.$this->hashfile);
+    }
     $this->hash=$hashfile->download();
     if(!$this->hash)return false;
     $this->hash=$hashfile->contents;
@@ -30,21 +35,27 @@ class repository {
   }
 
   public function popolate($more=array()){
+    global $repodir;
     $allpackage=array();
     $pack=new package();
-    $this->pkgsfile=new internet($this->url.$this->packages);
+    if(file_exists("$repodir/{$this->name}/{$this->packages}")){
+      $this->pkgsfile=new internet("$repodir/{$this->name}/{$this->packages}");
+    }else{
+      $this->pkgsfile=new internet($this->url.$this->packages);
+    }
     $i=0;
     while(!is_null($pkg=$pack->fetch($this->pkgsfile))){
       if($pkg){
 	$id=$pack->add($pkg,array('repository'=>$this->id),$more);
 	if(!$id){ return false; }
-	echo $id." -> ".$pack->filename."               \r";
+	//echo $id." -> ".$pack->filename."               \r";
+	echo ".";
 	$allpackage[$pack->filename]=$id;
 	$i++;
       }
     }
     $this->pkgsfile->close();
-    echo "$i packages                                                        \n";
+    echo "\n$i packages\n";
     $list=new filelist();
     if($this->manifest){
       $this->manifile=new internet($this->url.$this->manifest);
@@ -53,7 +64,12 @@ class repository {
     return true;
   }
   public function needupdate(){
-    $hashfile=new internet($this->url.$this->hashfile);
+    global $repodir;
+    if(file_exists("$repodir/{$this->name}/{$this->hashfile}")){
+      $hashfile=new internet("$repodir/{$this->name}/{$this->hashfile}");
+    }else{
+      $hashfile=new internet($this->url.$this->hashfile);
+    }
     $hashfile->download();
     return ($hashfile->contents != $this->hash);
   }
