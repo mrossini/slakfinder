@@ -66,6 +66,7 @@ foreach($defrepo as $name => $repo)if($repo['create']){
       }
     }
   }
+  $rep=new repository($repo['name']);
   if(!$rep->exists()){
     $db->db->transact();
     echo "creazione repository:";

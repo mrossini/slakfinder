@@ -1,18 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head><title>Package Finder</title></head>
-<?php 
-//<html xmlns="http://www.w3.org/1999/xhtml" dir="{%lang_direction%}" lang="en" xml:lang="en">
-?>
-<body>
-<pre>
 <?php
+  session_start();
+  echo '<?xml version="1.0" encoding="UTF-8"?>';
+  echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
+  echo '<html xmlns="http://www.w3.org/1999/xhtml">';
+  echo '<head><title>Package Finder</title></head><body><pre>';
   include 'inc/includes.inc.php';
 
   $maxresult=80;
   $db=new database();
-  session_start();
   if(!isset($_SESSION['searcher_visitor'])){
     $db->counter_inc('visits');
     $_SESSION['searcher_visitor']=$db->counter_get('visits');
@@ -100,8 +95,7 @@
       echo "<br /><br /><br />";
     }
   }
+echo '</pre>';
+echo "<p>To report a bug mail to <a href='mailto:zerouno@slacky.eu'>zerouno@slacky.eu</a>. Thanks.</p>";
+echo "</body></html>";
 ?>
-</pre>
-<p>To report a bug mail to <a href='mailto:zerouno@slacky.eu'>zerouno@slacky.eu</a>. Thanks.</p>
-</body></html>
-
