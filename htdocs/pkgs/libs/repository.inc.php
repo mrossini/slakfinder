@@ -10,8 +10,13 @@ class repository {
     if($repo)$this->select($repo);
   }
   public function add($repo){
+    global $repodir;
     foreach($repo as $key => $value) $this->$key = $value;
-    $hashfile=new internet($this->url.$this->hashfile);
+    if(file_exists("$repodir/{$this->name}/{$this->hashfile}")){
+      $hashfile=new internet("file://$repodir/{$this->name}/{$this->hashfile}");
+    }else{
+      $hashfile=new internet($this->url.$this->hashfile);
+    }
     $this->hash=$hashfile->download();
     if(!$this->hash)return false;
     $this->hash=$hashfile->contents;
@@ -23,7 +28,7 @@ class repository {
   public function update(){
     global $repodir;
     if(file_exists("$repodir/{$this->name}/{$this->hashfile}")){
-      $hashfile=new internet("$repodir/{$this->name}/{$this->hashfile}");
+      $hashfile=new internet("file://$repodir/{$this->name}/{$this->hashfile}");
     }else{
       $hashfile=new internet($this->url.$this->hashfile);
     }
@@ -39,7 +44,7 @@ class repository {
     $allpackage=array();
     $pack=new package();
     if(file_exists("$repodir/{$this->name}/{$this->packages}")){
-      $this->pkgsfile=new internet("$repodir/{$this->name}/{$this->packages}");
+      $this->pkgsfile=new internet("file://$repodir/{$this->name}/{$this->packages}");
     }else{
       $this->pkgsfile=new internet($this->url.$this->packages);
     }
@@ -48,7 +53,7 @@ class repository {
       if($pkg){
 	$id=$pack->add($pkg,array('repository'=>$this->id),$more);
 	if(!$id){ return false; }
-	//echo $id." -> ".$pack->filename."               \r";
+//	echo $id." -> ".$pack->filename."               \n";
 	echo ".";
 	$allpackage[$pack->filename]=$id;
 	$i++;
@@ -66,7 +71,7 @@ class repository {
   public function needupdate(){
     global $repodir;
     if(file_exists("$repodir/{$this->name}/{$this->hashfile}")){
-      $hashfile=new internet("$repodir/{$this->name}/{$this->hashfile}");
+      $hashfile=new internet("file://$repodir/{$this->name}/{$this->hashfile}");
     }else{
       $hashfile=new internet($this->url.$this->hashfile);
     }
@@ -96,7 +101,7 @@ class repository {
   public function find($repo=null){
     $sql="select * from #__repository ";
     if($repo)$sql.="where id='$repo' or name='$repo'";
-    $this->db->query($sql);
+    $this->db->query("$sql order by name");
     return $this->db->nrows;
   }
   public function fetch(){

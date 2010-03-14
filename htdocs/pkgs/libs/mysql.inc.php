@@ -1,5 +1,5 @@
 <?php
-
+$transact=false;
 function quote_data(&$v,$k) { $v=addcslashes($v,"'\\"); }
 class mysql {
 	private $db;
@@ -120,22 +120,25 @@ class mysql {
 	    return;
 	  }
 	}
-	var $transacts=false;
 	public function transact(){
+	  global $transact;
 	  $this->query('START TRANSACTION');
-	  $this->transacts=true;
+	  $transact=true;
 	}
 	public function commit(){
+	  global $transact;
 	  $this->query('COMMIT');
-	  $this->transacts=false;
+	  $transact=true;
 	}
 	public function rollback(){
+	  global $transact;
 	  $this->query('ROLLBACK');
-	  $this->transacts=false;
+	  $transact=true;
 	}
 	
 	public function close(){
-	  if($this->transacts)$this->rollback();
+	  global $transact;
+	  if($transact)$this->rollback();
 	  return mysql_close($this->db);
 	}
 }

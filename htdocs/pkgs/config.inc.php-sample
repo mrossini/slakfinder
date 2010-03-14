@@ -1,12 +1,13 @@
 <?php
 
 $dbhost='127.0.0.1';
+//$dbhost=':/var/run/mysql/mysql.sock';
 $dbuser='slakuser';
 $dbpass='slakpass';
 $dbdata='slakdb';
 $dbpref='slak_';
 
-$repodir="../repositories/";
+$repodir="/var/www/data";
 
 
 ?>

@@ -6,9 +6,10 @@
 }*/
 //pcntl_signal(SIGINT,"shutterm");
 function shutdown() { 
-  echo "\n\nScript executed with success\n\n", PHP_EOL; 
+  global $transact,$db;
+  if($transact)$db->db->rollback();
 }
-#register_shutdown_function('shutdown');
+register_shutdown_function('shutdown');
 
 include 'inc/includes.inc.php';
 include 'inc/defrepo.inc.php';
@@ -43,6 +44,7 @@ if(isset($_SERVER['DROPDB'])){
 }
 
 foreach($defrepo as $name => $repo)if($repo['create']){
+  $db->db->transact();
   $create=$repo['create'];
   unset ($repo['create']);
   echo "\n\nREPOSITORY: {$repo['name']}\n";
@@ -68,14 +70,13 @@ foreach($defrepo as $name => $repo)if($repo['create']){
   }
   $rep=new repository($repo['name']);
   if(!$rep->exists()){
-    $db->db->transact();
     echo "creazione repository:";
     if(!$out=$rep->add($repo)){
       echo "errore!\n";
       echo "dettagli errore:\n";
       var_dump($out);
       var_dump($rep);
-      $db->db->rollback();
+   //   $db->db->rollback();
       die();
     }else{
       echo "fatto.\n";
@@ -87,14 +88,14 @@ foreach($defrepo as $name => $repo)if($repo['create']){
       echo "errore popolamento!\n";
       echo "dettagli errore:\n";
 //      var_dump($rep,$err);
-      $db->db->rollback();
+  //    $db->db->rollback();
       die();
     }else{
       echo "\nfatto!                                                           \n";
     }
     echo "Popolamento effettuato\n";
-    $db->db->commit();
   }
+  $db->db->commit();
 }
 
 
