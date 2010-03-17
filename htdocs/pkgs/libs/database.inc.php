@@ -17,7 +17,7 @@ class database {
 		if(!$this->db->query('DROP TABLE IF EXISTS #__filelist'))return false;
 		if(!$this->db->query('DROP TABLE IF EXISTS #__packages'))return false;
 		if(!$this->db->query('DROP TABLE IF EXISTS #__repository'))return false;
-		if(!$this->db->query('DROP TABLE IF EXISTS #__mixed'))return false;
+		#if(!$this->db->query('DROP TABLE IF EXISTS #__mixed'))return false;
 
 		return true;
 	}
@@ -27,7 +27,7 @@ class database {
 		if(!$this->db->query(package::sql()))return false;
 		if(!$this->db->query(filelist::sql()))return false;
 		if(!$this->db->query("
-		  CREATE TABLE #__mixed (
+		  CREATE TABLE IF NOT EXISTS #__mixed (
 		    id INT AUTO_INCREMENT ,
 		    field VARCHAR( 255 ) NOT NULL ,
                     value VARCHAR( 255 ) NULL ,
