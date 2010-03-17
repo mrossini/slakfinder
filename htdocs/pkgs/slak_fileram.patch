@@ -1,0 +1,84 @@
+diff --git a/htdocs/pkgs/libs/database.inc.php b/htdocs/pkgs/libs/database.inc.php
+index 7a4b23d..e199d1c 100644
+--- a/htdocs/pkgs/libs/database.inc.php
++++ b/htdocs/pkgs/libs/database.inc.php
+@@ -37,6 +37,11 @@ class database {
+ 		if(!$this->db->query("INSERT INTO #__mixed (field,value) values ('count_visits','1'),('count_searches','1');"))return false;
+ 		return true;
+ 	}
++	public function clonedb(){
++	  if(!$this->db->query("DROP TABLE IF EXISTS #__fileram"))return false;
++	  if(!$this->db->query("CREATE TABLE #__fileram ENGINE = MEMORY SELECT id,repository,package,fullpath,filename FROM #__filelist"))return false;
++	  return true;
++	}
+ 	public function counter_get($counter){
+ 	  $this->db->query("select value from #__mixed where field='count_$counter';");
+ 	  $val=$this->db->get();
+diff --git a/htdocs/pkgs/libs/filelist.inc.php b/htdocs/pkgs/libs/filelist.inc.php
+index 7c92649..b1f1893 100644
+--- a/htdocs/pkgs/libs/filelist.inc.php
++++ b/htdocs/pkgs/libs/filelist.inc.php
+@@ -66,10 +66,11 @@ class filelist {
+ 
+   public function find($file=null,$pkg=null,$desc=null,$repo=null,$start=null,$max=null,$regexp=false){ //$repo == id only
+     if(!is_null($file)){
++      /* -- FROM #__filelist as F */
+       $sql="SELECT F.*, 
+ 	           P.name as pkgname, P.arch AS arch, P.version as version, P.location AS pkgloc, P.filename AS pkgfile,
+ 		   R.name AS reponame, R.url AS url
+-	FROM #__filelist as F 
++	FROM #__fileram as F 
+ 	LEFT JOIN  #__packages as P 
+ 	  ON (F.package=P.id)
+ 	LEFT JOIN #__repository as R 
+@@ -114,7 +115,7 @@ class filelist {
+ 	  filedate DATETIME NOT NULL ,
+ 	  filesize INT NOT NULL ,
+ 	PRIMARY KEY ( id ) ,
+-	INDEX ( filename ),
++	-- INDEX ( filename ),
+ 	FOREIGN KEY ( package ) REFERENCES #__packages ( id ) ON DELETE CASCADE
+       ) ENGINE = INNODB ;
+     ";
+diff --git a/htdocs/pkgs/update.php b/htdocs/pkgs/update.php
+index a7fe1f0..823f910 100644
+--- a/htdocs/pkgs/update.php
++++ b/htdocs/pkgs/update.php
+@@ -19,6 +19,9 @@ include 'inc/defrepo.inc.php';
+ 
+ $db=new database();
+ 
++
++
++
+ if(isset($_SERVER['DROPDB'])){
+   echo "eliminazione database... ";
+   $out=$db->dropdb();
+@@ -43,6 +46,11 @@ if(isset($_SERVER['DROPDB'])){
+   }
+ }
+ 
++
++if(!isset($_SERVER['CLONEDB'])){
++
++
++
+ foreach($defrepo as $id => $repo)if($repo['info']['create']){
+   $db->db->transact();
+   $info=$repo['info'];
+@@ -101,6 +109,15 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
+   $db->db->commit();
+ }
+ 
++}
++echo "Copying db on ram... ";
++if ($db->clonedb()){
++  echo "ok\n";
++}else{
++  echo "failed!!!\n";
++  var_dump($db);
++}
++
+ 
+ 
+ 
