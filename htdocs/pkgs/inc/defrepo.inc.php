@@ -22,16 +22,16 @@ function writerepos($repo){
   $out=tables(array(),1,0);
   $out.= tables(array("All Repositories","<input type='radio' name='repo' value=0 checked='checked'>"));
 
-  $out.= tables(array("Slackware Official 32bit:",
+  $out.= tables(array("Slackware Official 32bit<sup>(*)</sup>:",
     "<input type='radio' name='repo' value=2><a href='{$defrepo[2]['url']}'>current</a> | ".
     "<input type='radio' name='repo' value=5><a href='{$defrepo[5]['url']}'>13.0</a> | ".
     "<input type='radio' name='repo' value=6><a href='{$defrepo[6]['url']}'>patch</a> | ".
     "<input type='radio' name='repo' value=3><a href='{$defrepo[3]['url']}'>12.2</a>"));
-  $out.= tables(array("Slackware Official 64bit:",
+  $out.= tables(array("Slackware Official 64bit<sup>(*)</sup>:",
     "<input type='radio' name='repo' value=1><a href='{$defrepo[1]['url']}'>current</a> | ".
     "<input type='radio' name='repo' value=4><a href='{$defrepo[4]['url']}'>13.0</a> | ".
     "<input type='radio' name='repo' value=6><a href='{$defrepo[6]['url']}'>patch</a>"));
-  $out.= tables(array("Slacky 32bit: ",
+  $out.= tables(array("Slacky 32bit<sup>(*)</sup>: ",
     "<input type='radio' name='repo' value=11><a href='{$defrepo[11]['url']}'>13.0</a> | ".
     "<input type='radio' name='repo' value=12><a href='{$defrepo[12]['url']}'>12.2</a> | ".
     "<input type='radio' name='repo' value=13><a href='{$defrepo[13]['url']}'>gnome for 12.2</a>"));
@@ -40,7 +40,7 @@ function writerepos($repo){
     "<input type='radio' name='repo' value=22><a href='{$defrepo[22]['url']}'>current</a> ;    ".
     " 64bit: <input type='radio' name='repo' value=23><a href='{$defrepo[23]['url']}'>13.0</a> | ".
     "<input type='radio' name='repo' value=24><a href='{$defrepo[24]['url']}'>current</a>"));
-  $out.= tables(array("Dia Tech 32bit: ",
+  $out.= tables(array("Dia Tech 32bit<sup>(*)</sup>: ",
     "<input type='radio' name='repo' value=51><a href='{$defrepo[51]['url']}'>13.0</a> | ".
     "<input type='radio' name='repo' value=52><a href='{$defrepo[52]['url']}'>12.2</a> | ".
     "<input type='radio' name='repo' value=53><a href='{$defrepo[53]['url']}'>kde4.4 for current</a> "));
@@ -49,20 +49,21 @@ function writerepos($repo){
     "<input type='radio' name='repo' value=41><a href='{$defrepo[41]['url']}'>12.2</a> | ".
     "<input type='radio' name='repo' value=42><a href='{$defrepo[42]['url']}'>current</a>"));
   $out.= tables(array("Mixed 32&64 bit : ",
-    "<input type='radio' name='repo' value='31'><a href='{$defrepo[31]['url']}'>Slackers.it</a> | ".
+    "<input type='radio' name='repo' value='31'><a href='{$defrepo[31]['url']}'>Slackers.it</a><sup>(*)</sup> | ".
     "<input type='radio' name='repo' value='32'><a href='{$defrepo[32]['url']}'>Alien</a>"));
   $out.= tables(array("Other 32 bit :",
-    "linuxpackages <input type='radio' name='repo' value='33'><a href='{$defrepo[33]['url']}'>12.2</a> | ".
+    "linuxpackages <input type='radio' name='repo' value='33'><a href='{$defrepo[33]['url']}'>12.2</a><sup>(*)</sup> | ".
     "<input type='radio' name='repo' value='34'><a href='{$defrepo[34]['url']}'>13.0-a</a> | ".
     "<input type='radio' name='repo' value='82'><a href='{$defrepo[82]['url']}'>13.0-b</a>  ;  ".
-    "<input type='radio' name='repo' value='35'><a href='{$defrepo[35]['url']}'>Stabellini</a>"));
+    "<input type='radio' name='repo' value='35'><a href='{$defrepo[35]['url']}'>Stabellini</a><sup>(*)</sup>"));
   $out.= tables(array("Other 64 bit : ",
-    "<input type='radio' name='repo' value='81'><a href='{$defrepo[81]['url']}'>Daniele50</a>"));
+    "<input type='radio' name='repo' value='81'><a href='{$defrepo[81]['url']}'>Daniele50</a>  | ".
+    "<input type='radio' name='repo' value='36'><a href='{$defrepo[36]['url']}'>Jimmy Mixed</a><sup>(*)</sup>"));
 
   $out.=tables();
 
 
-  return $out."\n";
+  return $out."(*) Supportano il file search\n\n";
 }
 
 
@@ -332,6 +333,17 @@ $defrepo[35]=array(
     'description' => 'repo of stabellini'
   );
 
+$defrepo[36]=array(
+    'info' => array('create' => 1),
+    'url' => 'http://c4dwbspace.altervista.org/',
+    'official' => 0,
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5',
+    'name' => 'c4dwbspace-jimmy_page_89-x86_64',
+    'description' => 'repo of c4dwbspace'
+  );
+
 
 
 
@@ -443,7 +455,7 @@ $defrepo[82]=array(
     'info' => array('create' => 1),
     'url' => 'http://ftp.naist.jp/pub/Linux/linuxpackages/Slackware/',
     'official' => 0,
-    'manifest' => '',
+    'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5',
     'name' => 'linuxpackages-13.0-i386-frias',
