@@ -17,7 +17,7 @@ for dir in $(ls);do
   fi
 done
 echo "-------------"
-cd $CWD/htdocs/pkgs
+cd $CWD/htdocs/
 time php update.php
 date
 echo
