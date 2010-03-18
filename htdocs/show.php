@@ -17,21 +17,21 @@
       echo "<b>Invalid package</b>\n";
     }else{
       $repo=new repository($pk->repository);
-      tables(array('',''),1,"0 cellpadding=0");
-      tables(array("Repository:", "{$repo->name}"));
-      tables(array("Repository description:", "{$repo->description}"));
-      tables(array("Repository url:", "<a href={$repo->url}>{$repo->url}</a>"));
-      tables(array("File list: ", ($repo->manifest)?("<a href={$repo->url}{$repo->manifest}>{$repo->manifest}</a>"):"None"));
-      tables();
-      tables(array('',''),1, "0 cellpadding=0");
-      tables(array("Package name:",$pk->name));
-      tables(array("Package version:",$pk->version));
-      tables(array("Package arch:",$pk->arch));
-      tables(array("Package build:",$pk->build));
-      tables(array("Package compression:",$pk->compression));
-      tables(array("Package location:", "<a href={$repo->url}{$pk->location}>{$pk->location}</a>"));
-      tables(array("Package filename:", "<a href={$repo->url}{$pk->location}/{$pk->filename}>{$pk->filename}</a>"));
-      tables();
+      echo tables(array('',''),1,"0 cellpadding=0");
+      echo tables(array("Repository:", "{$repo->name}"));
+      echo tables(array("Repository description:", "{$repo->description}"));
+      echo tables(array("Repository url:", "<a href={$repo->url}>{$repo->url}</a>"));
+      echo tables(array("File list: ", ($repo->manifest)?("<a href={$repo->url}{$repo->manifest}>{$repo->manifest}</a>"):"None"));
+      echo tables();
+      echo tables(array('',''),1, "0 cellpadding=0");
+      echo tables(array("Package name:",$pk->name));
+      echo tables(array("Package version:",$pk->version));
+      echo tables(array("Package arch:",$pk->arch));
+      echo tables(array("Package build:",$pk->build));
+      echo tables(array("Package compression:",$pk->compression));
+      echo tables(array("Package location:", "<a href={$repo->url}{$pk->location}>{$pk->location}</a>"));
+      echo tables(array("Package filename:", "<a href={$repo->url}{$pk->location}/{$pk->filename}>{$pk->filename}</a>"));
+      echo tables();
       if($pk->description){
 	echo "Description:\n";
 	echo str_replace("\n","\n| ","\n".$pk->description);

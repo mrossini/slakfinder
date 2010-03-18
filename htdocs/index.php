@@ -52,7 +52,7 @@
 	    if($repos) echo tables();
 	    echo "<br />Repository: {$pkg->reponame} - url: <a href={$pkg->url}>{$pkg->url}</a>";
 	    $repos=$pkg->reponame;
-	    echo tables(array("package","version","arch","location",'&npsp;'),1);
+	    echo tables(array("package","version","arch","location",'&nbsp;'),1);
 	  }
 	  echo tables(array("<a href='show.php?pkg={$pkg->id}'>{$pkg->name}</a>",$pkg->version,$pkg->arch,"<a href='{$pkg->url}{$pkg->location}/'>{$pkg->location}/</a>","<a href='{$pkg->url}{$pkg->location}/{$pkg->filename}'>download</a>"));
 	}
@@ -78,9 +78,9 @@
 	    if($repos) echo tables();
 	    echo "<br />Repository: {$fl->reponame} - url: <a href='{$fl->url}'>{$fl->url}</a>";
 	    $repos=$fl->reponame;
-	    echo tables(array("package","version","file","path","location"),1);
+	    echo tables(array("package","version","file","path","location",'&nbsp;'),1);
 	  }
-	  echo tables(array("<a href='{$fl->url}{$fl->pkgloc}/{$fl->pkgfile}'>{$fl->pkgname}</a>",$fl->version."-".$fl->arch,$fl->filename,$fl->fullpath,"<a href='{$fl->url}{$fl->pkgloc}/'>{$fl->pkgloc}/</a>"));
+	  echo tables(array("<a href='show.php?pkg={$fl->pkgid}'>{$fl->pkgname}</a>",$fl->version."-".$fl->arch,$fl->filename,$fl->fullpath,"<a href='{$fl->url}{$fl->pkgloc}/'>{$fl->pkgloc}/</a>","<a href='{$fl->url}{$fl->pkgloc}/{$fl->pkgfile}'>download</a>"));
 	}
 	echo tables();
       }

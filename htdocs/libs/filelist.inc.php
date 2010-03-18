@@ -68,7 +68,7 @@ class filelist {
     if(!is_null($file)){
       $sql="SELECT F.*, 
 	           P.name as pkgname, P.arch AS arch, P.version as version, P.location AS pkgloc, P.filename AS pkgfile,
-		   R.name AS reponame, R.url AS url
+		   R.name AS reponame, R.url AS url, P.id AS pkgid
 	FROM #__filelist as F 
 	LEFT JOIN  #__packages as P 
 	  ON (F.package=P.id)
