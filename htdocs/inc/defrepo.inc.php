@@ -58,6 +58,7 @@ function writerepos($repo){
     "<input type='radio' name='repo' value='35'><a href='{$defrepo[35]['url']}'>Stabellini</a><sup>(*)</sup>"));
   $out.= tables(array("Other 64 bit : ",
     "<input type='radio' name='repo' value='81'><a href='{$defrepo[81]['url']}'>Daniele50</a>  | ".
+    "<input type='radio' name='repo' value='54'><a href='{$defrepo[53]['url']}'>Danix</a>  | ".
     "<input type='radio' name='repo' value='36'><a href='{$defrepo[36]['url']}'>Jimmy Mixed</a><sup>(*)</sup>"));
 
   $out.=tables();
@@ -65,7 +66,6 @@ function writerepos($repo){
 
   return $out."(*) Supportano il file search\n\n";
 }
-
 
 
 # Official repositories
@@ -426,6 +426,17 @@ $defrepo[53]=array(
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'ChangeLog.txt.gz',
     'name' => 'dia-tech-curr-kde4.4',
+    'description' => 'Unknown'
+  );
+
+$defrepo[54]=array(
+    'info' => array('create' => 1),
+    'url' => 'http://danixland.net/packages/',
+    'official' => 0,
+    'manifest' => '',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'danix-current64',
     'description' => 'Unknown'
   );
 
