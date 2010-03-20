@@ -58,7 +58,7 @@ function writerepos($repo){
     "<input type='radio' name='repo' value='35'><a href='{$defrepo[35]['url']}'>Stabellini</a><sup>(*)</sup>"));
   $out.= tables(array("Other 64 bit : ",
     "<input type='radio' name='repo' value='81'><a href='{$defrepo[81]['url']}'>Daniele50</a>  | ".
-    "<input type='radio' name='repo' value='54'><a href='{$defrepo[53]['url']}'>Danix</a>  | ".
+    "<input type='radio' name='repo' value='54'><a href='{$defrepo[54]['url']}'>Danix</a>  | ".
     "<input type='radio' name='repo' value='36'><a href='{$defrepo[36]['url']}'>Jimmy Mixed</a><sup>(*)</sup>"));
 
   $out.=tables();
@@ -464,9 +464,9 @@ $defrepo[81]=array(
 
 $defrepo[82]=array(
     'info' => array('create' => 1),
-    'url' => 'http://ftp.naist.jp/pub/Linux/linuxpackages/Slackware/',
+    'url' => 'http://ftp.naist.jp/pub/Linux/linuxpackages/Slackware/Slackware-13.0-i386/frias/',
     'official' => 0,
-    'manifest' => 'MANIFEST.bz2',
+    'manifest' => '',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5',
     'name' => 'linuxpackages-13.0-i386-frias',
