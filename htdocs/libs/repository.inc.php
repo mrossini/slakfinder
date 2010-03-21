@@ -123,6 +123,8 @@ class repository {
 	manifest VARCHAR( 30 ) NOT NULL ,
 	packages VARCHAR( 30 ) NOT NULL ,
 	hashfile VARCHAR( 30 ) NOT NULL ,
+	version VARCHAR( 10 ) NOT NULL ,
+	arch VARCHAR( 10 ) NOT NULL ,
 	hash TEXT ,
 	name VARCHAR( 40 ) NOT NULL ,
 	description VARCHAR( 255 ) ,

@@ -5,7 +5,6 @@
 $defrepo=array();
 
 
-
 function writerepos($repo){
   global $defrepo;
   /*
@@ -19,8 +18,45 @@ function writerepos($repo){
   $select.="</select>";
   return $select;
    */        
+  $cells=array("x86_64" => array(),"i386" => array(),"mixed" => array());
+  foreach($defrepo as $key => $repo){
+    if(!isset($cell[$repo["arch"]][$repo["version"]]))$cell[$repo["arch"]][$repo["version"]]="";
+    $cell[$repo["arch"]][$repo["version"]].="<code><nobr><input type='radio' name='repo' value=$key><a href='{$repo['url']}'>{$repo['description']}</a>".($repo['manifest']?"<sup>(*)</sup>":"")."</nobr></code> | ";
+  }
+  $out=tables(array("arch","distro","Repository"),1,0);
+  $out.=tables(array("<code>all</code>",	"<code>all</code>",	
+    		     "<input type='radio' name='repo' value=0 checked='checked'>All repositories"));
+  $out.=tables(array("<code>mixed</code>",	"<code>mixed</code>",	$cell['mixed']['mixed']));
+  $out.=tables(array("<code>i386</code>",	"<code>current</code>",	$cell['i386']['current']));
+  $out.=tables(array("<code>x86_64</code>",	"<code>current</code>",	$cell['x86_64']['current']));
+  $out.=tables(array("<code>mixed</code>",	"<code>current</code>",	$cell['mixed']['current']));
+  $out.=tables(array("<code>i386</code>",	"<code>13.0</code>",	$cell['i386']['13.0']));
+  $out.=tables(array("<code>x86_64</code>",	"<code>13.0</code>",    $cell['x86_64']['13.0']));
+  $out.=tables(array("<code>mixed</code>",	"<code>13.0</code>",	$cell['mixed']['13.0']));
+  $out.=tables(array("<code>i386</code>",	"<code>12.2</code>",	$cell['i386']['12.2']));
+  $out.=tables(array("<code>i386</code>",	"<code>12.1</code>",	$cell['i386']['12.1']));
+
+  $out.=tables();
+
+
+  return $out."<sup>(*)</sup> File search support enabled<br><br>";
+}
+
+function writerepos_old($repo){
+  global $defrepo;
+  /*
+  $select="<select name='repo'>\n";
+  $select.="  <option value='0'".((!$repo)?" selected='selected'":"").">---  All repositories ---</option>\n";
+  foreach($defrepo as $id => $repof){
+    $select.="  <option value='$id'".(($repo==$id)?" selected='selected'":"").">{$repof['name']}";
+    if(!$repo['manifest'])$select.=" (no file search)";
+    $select.="</option>\n";
+  }
+  $select.="</select>";
+  return $select;
+   */        
   $out=tables(array(),1,0);
-  $out.= tables(array("All Repositories","<input type='radio' name='repo' value=0 checked='checked'>"));
+  $out.=tables(array("All Repositories","<input type='radio' name='repo' value=0 checked='checked'>"));
 
   $out.= tables(array("Slackware Official 32bit<sup>(*)</sup>:",
     "<input type='radio' name='repo' value=2><a href='{$defrepo[2]['url']}'>current</a> | ".
@@ -68,86 +104,152 @@ function writerepos($repo){
 }
 
 
+
 # Official repositories
-# id 1-7
+# id 1-7,61-64
 
 $defrepo[1]=array(
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-current/',
     'official' => 1,
+    'version' => 'current', #OK
+    'arch' => 'x86_64',
     'manifest' => 'slackware64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware64-current',
-    'description' => 'repository ufficiale di slackware64 current'
+    'description' => 'Official'
   );
 
 $defrepo[2]=array(
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-current/',
     'official' => 1,
+    'version' => 'current', #OK
+    'arch' => 'i386',
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware-current',
-    'description' => 'repository ufficiale di slackware current'
+    'description' => 'Official'
   );
 
 $defrepo[3]=array(
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-12.2/',
     'official' => 1,
+    'version' => '12.2', #OK
+    'arch' => 'i386',
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware-12.2',
-    'description' => 'repository ufficiale di slackware 12.2'
+    'description' => 'Official'
   );
 
 $defrepo[4]=array(
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/',
     'official' => 1,
+    'version' => '13.0', #OK
+    'arch' => 'x86_64',
     'manifest' => 'slackware64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware64-13.0',
-    'description' => 'repository ufficiale di slackware64 13.0'
+    'description' => 'Official'
   );
 
 $defrepo[5]=array(
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/',
     'official' => 1,
+    'version' => '13.0', #OK
+    'arch' => 'i386',
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware-13.0',
-    'description' => 'repository ufficiale di slackware 13.0'
+    'description' => 'Official'
   );
 
 $defrepo[6]=array(
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/',
     'official' => 1,
+    'version' => '13.0', #OK
+    'arch' => 'i386',
     'manifest' => 'patches/MANIFEST.bz2',
     'packages' => 'patches/PACKAGES.TXT',
     'hashfile' => 'patches/CHECKSUMS.md5.asc',
     'name' => 'slackware-13.0-patches',
-    'description' => 'repository ufficiale di slackware 13.0, patch'
+    'description' => 'Patches'
   );
 
 $defrepo[7]=array( 
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/patches/',
     'official' => 1,
+    'version' => '13.0', #OK
+    'arch' => 'x86_64',
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware64-13.0-patches',
-    'description' => 'repository ufficiale di slackware64 13.0, patch'
+    'description' => 'Patches'
   );
 
+$defrepo[61]=array( 
+    'info' => array('create' => 1),
+    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/extra/',
+    'official' => 1,
+    'version' => '13.0', #OK
+    'arch' => 'x86_64',
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'slackware64-13.0-extra',
+    'description' => 'Extra'
+  );
+
+$defrepo[62]=array( 
+    'info' => array('create' => 1),
+    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-current/extra/',
+    'official' => 1,
+    'version' => 'current', #OK
+    'arch' => 'x86_64',
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'slackware64-current-extra',
+    'description' => 'Extra'
+  );
+
+$defrepo[63]=array( 
+    'info' => array('create' => 1),
+    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/extra/',
+    'official' => 1,
+    'version' => '13.0', #OK
+    'arch' => 'i386',
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'slackware-13.0-extra',
+    'description' => 'Extra'
+  );
+
+$defrepo[64]=array( 
+    'info' => array('create' => 1),
+    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-current/extra/',
+    'official' => 1,
+    'version' => 'current', #OK
+    'arch' => 'i386',
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'slackware-current-extra',
+    'description' => 'Extra'
+  );
 
 
 
@@ -164,33 +266,39 @@ $defrepo[11]=array(
     'info' => array('create' => 1),
     'url' => 'http://repository.slacky.eu/slackware-13.0/',
     'official' => 0,
+    'version' => '13.0', #OK
+    'arch' => 'i386',
     'manifest' => 'MANIFEST.bz2',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'packages' => 'PACKAGES.TXT',
     'name' => 'slacky-13.0',
-    'description' => 'repository ufficiale di slacky-13.0'
+    'description' => 'Slacky'
   );
 
 $defrepo[12]=array(
     'info' => array('create' => 1),
     'url' => 'http://repository.slacky.eu/slackware-12.2/',
     'official' => 0,
+    'version' => '12.2', #OK
+    'arch' => 'i386',
     'manifest' => 'MANIFEST.bz2',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'packages' => 'PACKAGES.TXT',
     'name' => 'slacky-12.2',
-    'description' => 'repository ufficiale di slacky-12.2'
+    'description' => 'Slacky'
   );
 
 $defrepo[13]=array(
     'info' => array('create' => 1),
     'url' => 'http://repository.slacky.eu/gnome-slacky-12.2/',
     'official' => 0,
+    'version' => '12.2', #OK
+    'arch' => 'i386',
     'manifest' => 'MANIFEST.bz2',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'packages' => 'PACKAGES.TXT',
     'name' => 'gnome-slacky-12.2',
-    'description' => 'repository ufficiale di gnome slacky 12.2'
+    'description' => 'Gnome Slacky'
   );
 
 
@@ -223,44 +331,52 @@ $defrepo[21]=array(
     'info' => array('create' => 1),
     'url' => 'http://download.salixos.org/i486/13.0/',
     'official' => 0,
+    'version' => '13.0', #OK
+    'arch' => 'i386',
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz.asc',
     'name' => 'salix-13.0',
-    'description' => 'repository di pacchetti di salix-13.0'
+    'description' => 'Salix'
   );
 
 $defrepo[22]=array(
     'info' => array('create' => 1),
     'url' => 'http://download.salixos.org/i486/current/',
     'official' => 1,
+    'version' => 'current', #OK
+    'arch' => 'i386',
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz.asc',
     'name' => 'salix-current',
-    'description' => 'repository di pacchetti di salix-current'
+    'description' => 'Salix'
   );
 
 $defrepo[23]=array(
     'info' => array('create' => 1),
     'url' => 'http://download.salixos.org/x86_64/13.0/',
     'official' => 0,
+    'version' => '13.0', #OK
+    'arch' => 'x86_64',
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz.asc',
     'name' => 'salix64-13.0',
-    'description' => 'repository di pacchetti di salix64-13.0'
+    'description' => 'Salix64'
   );
 
 $defrepo[24]=array(
     'info' => array('create' => 1),
     'url' => 'http://download.salixos.org/x86_64/current/',
     'official' => 0,
+    'version' => 'current', #OK
+    'arch' => 'x86_64',
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz.asc',
     'name' => 'salix64-current',
-    'description' => 'repository di pacchetti di salix64-current'
+    'description' => 'Salix64'
   );
 
 
@@ -282,68 +398,93 @@ $defrepo[31]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.slackers.it/repository/',
     'official' => 0,
+    'version' => 'current', #OK
+    'arch' => 'mixed',
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5',
     'name' => 'slackers.it',
-    'description' => 'repository di pacchetti non ufficiali'
+    'description' => 'Slackers'
   );
 
 $defrepo[32]=array(
     'info' => array('create' => 1),
     'url' => 'http://connie.slackware.com/~alien/slackbuilds/',
     'official' => 0,
+    'version' => 'mixed', # MIXED
+    'arch' => 'mixed',
     'manifest' => '',
+    //'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'alien',
-    'description' => 'repository di pacchetti semiufficiali'
+    'description' => 'Alien Bob'
   );
 
 $defrepo[33]=array(
     'info' => array('create' => 1),
     'url' => 'http://linuxpackages.inode.at/Slackware/Slackware-12.2-i386/',
     'official' => 0,
+    'version' => '12.2', # OK
+    'arch' => 'i386',
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz',
     'name' => 'linuxpackages-12.2-i386',
-    'description' => 'linuxpackages.net ver.12.2 per i386'
+    'description' => 'LinuxPackages'
   );
 
 $defrepo[34]=array(
     'info' => array('create' => 1),
     'url' => 'http://linuxpackages.inode.at/Slackware/Slackware-13.0-i386/sotirov/',
     'official' => 0,
+    'version' => '13.0', # OK
+    'arch' => 'i386',
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz',
     'name' => 'linuxpackages-13.0-i386-sotirov',
-    'description' => 'linuxpackages.net ver.13.0 per i386 di sotirov'
+    'description' => 'LP Sotirov'
   );
 
 $defrepo[35]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.stabellini.net/filesystem/repository/Stefano_Stabellini/',
     'official' => 0,
+    'version' => '12.1', 
+    'arch' => 'i386',
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5',
     'name' => 'stabellini',
-    'description' => 'repo of stabellini'
+    'description' => 'Stabellini'
   );
 
 $defrepo[36]=array(
     'info' => array('create' => 1),
     'url' => 'http://c4dwbspace.altervista.org/',
     'official' => 0,
+    'version' => '13.0', #OK
+    'arch' => 'x86_64',
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5',
     'name' => 'c4dwbspace-jimmy_page_89-x86_64',
-    'description' => 'repo of c4dwbspace'
+    'description' => 'Jimmy_page_89'
   );
 
+$defrepo[37]=array(
+    'info' => array('create' => 1),
+    'url' => 'ftp://ftp.slackware.org.uk/people/alien/restricted_slackbuilds/',
+    'official' => 0,
+    'version' => 'mixed', # MIXED
+    'arch' => 'mixed',
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'alien-restricted',
+    'description' => 'Alien Restricted'
+  );
 
 
 
@@ -360,33 +501,39 @@ $defrepo[41]=array(
     'info' => array('create' => 1),
     'url' => 'http://rlworkman.net/pkgs/12.2/',
     'official' => 0,
+    'version' => '12.2', #OK
+    'arch' => 'i386',
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'rlworkman-for-12.2',
-    'description' => 'Robby Workman Repository'
+    'description' => 'Robby Workman'
   );
 
 $defrepo[42]=array(
-    'info' => array('create' => 1),
+    'info' => array('create' => 0),
     'url' => 'http://rlworkman.net/pkgs/current/',
     'official' => 0,
+    'version' => 'current', # OK
+    'arch' => 'mixed',
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'rlworkman-for-current',
-    'description' => 'Robby Workman Repository'
+    'description' => 'Robby Workman'
   );
 
 $defrepo[43]=array(
     'info' => array('create' => 1),
     'url' => 'http://rlworkman.net/pkgs/13.0/',
     'official' => 0,
+    'version' => '13.0', # OK
+    'arch' => 'mixed',
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'rlworkman-for-13.0',
-    'description' => 'Robby Workman Repository'
+    'description' => 'Robby Workman'
   );
 
 
@@ -400,44 +547,66 @@ $defrepo[51]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.dia-tech.net/linux/Slackware-13.0/',
     'official' => 0,
+    'version' => '13.0', # OK
+    'arch' => 'i386',
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'ChangeLog.txt.gz',
     'name' => 'dia-tech-slack-13.0',
-    'description' => 'Unknown'
+    'description' => 'Aszabo'
   );
 
 $defrepo[52]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.dia-tech.net/linux/Slackware-12.2/',
     'official' => 0,
+    'version' => '12.2', # OK
+    'arch' => 'i386',
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'ChangeLog.txt.gz',
     'name' => 'dia-tech-slack-12.2',
-    'description' => 'Unknown'
+    'description' => 'Aszabo'
   );
 
 $defrepo[53]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.dia-tech.net/linux/Slackware-current-kde4.4/',
     'official' => 0,
+    'version' => 'current', # OK
+    'arch' => 'i386',
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'ChangeLog.txt.gz',
     'name' => 'dia-tech-curr-kde4.4',
-    'description' => 'Unknown'
+    'description' => 'Aszabo for kde 4.4'
   );
 
 $defrepo[54]=array(
     'info' => array('create' => 1),
     'url' => 'http://danixland.net/packages/',
     'official' => 0,
+    'version' => 'current', # OK
+    'arch' => 'x86_64',
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'danix-current64',
-    'description' => 'Unknown'
+    'description' => 'Danix'
+  );
+
+$defrepo[55]=array(
+    'info' => array('create' => 1),
+    'url' => 'http://scxd.info/pub/',
+    'official' => 0,
+    'version' => 'current', # OK
+    'arch' => 'i386',
+    'manifest' => '',
+    #'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT.gz',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'scxd-current',
+    'description' => 'Scxd'
   );
 
 
@@ -455,22 +624,26 @@ $defrepo[81]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.daniele50.it/listing',
     'official' => 0,
+    'version' => '12.2',
+    'arch' => 'x86_64',
     'manifest' => '',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5',
     'name' => 'daniele50.it',
-    'description' => 'daniele50'
+    'description' => 'Daniele50'
   );
 
-$defrepo[82]=array(
+$defrepo[82]=array( ###### BUGGATO #######
     'info' => array('create' => 1),
-    'url' => 'http://ftp.naist.jp/pub/Linux/linuxpackages/Slackware/Slackware-13.0-i386/frias/',
+    'url' => 'http://ftp.naist.jp/pub/Linux/linuxpackages/Slackware/',
     'official' => 0,
+    'version' => '13.0',
+    'arch' => 'i386',
     'manifest' => '',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5',
     'name' => 'linuxpackages-13.0-i386-frias',
-    'description' => 'linuxpackages.net ver.13.0 per i386 di frias'
+    'description' => 'LP frias'
   );
 
 
@@ -479,4 +652,3 @@ $defrepo[82]=array(
 
 
 ?>
-

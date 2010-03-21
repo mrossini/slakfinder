@@ -1,9 +1,13 @@
+<?php session_start(); ?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Package Finder</title>
+  </head>
+<body>
+<!--<pre>-->
 <?php
-  session_start();
-  echo '<?xml version="1.0" encoding="UTF-8"?>';
-  echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-  echo '<html xmlns="http://www.w3.org/1999/xhtml">';
-  echo '<head><title>Package Finder</title></head><body><pre>';
   include 'inc/includes.inc.php';
   include 'inc/defrepo.inc.php';
 
@@ -32,6 +36,7 @@
   echo "<input type='submit' value='go' />";
 
   echo "</form>";
+  echo "<pre>";
 
   if ($name or $desc or $file){
     if(!$file){
@@ -39,10 +44,10 @@
       $out=$pkg->find($name,$desc,$repo,0,$maxresult+1);
 //      echo "<pre>";var_dump($pkg);echo "</pre>";
       if($out>$maxresult){
-	echo "Founded more than $maxresult results.<br /><br />";
+	echo "Found more than $maxresult results.<br /><br />";
 	$out=$maxresult;
       }else{
-	echo "Founded $out results:<br />";
+	echo "Found $out results:<br />";
       }
       if($out){
 	$repos=null;
@@ -67,7 +72,7 @@
 	echo "Founded more than $maxresult results<br /><br />";
 	$out=$maxresult;
       }else{
-	echo "Founded $out results:<br /><br />";
+	echo "Found $out results:<br /><br />";
       }
       if($out){
 	$repos="";
@@ -87,7 +92,7 @@
       echo "<br /><br /><br />";
     }
   }
-echo '</pre>';
-echo "<p>To report a bug mail to <a href='mailto:zerouno@slacky.eu'>zerouno@slacky.eu</a>. Thanks.</p>";
-echo "</body></html>";
 ?>
+</pre>
+<p>To report a bug, mail to <a href='mailto:zerouno@slacky.eu'>zerouno@slacky.eu</a>. Thanks.</p>
+</body></html>
