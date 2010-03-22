@@ -5,7 +5,7 @@
 $defrepo=array();
 
 
-function writerepos($repo){
+function writerepos($reposelected){
   global $defrepo;
   /*
   $select="<select name='repo'>\n";
@@ -21,11 +21,17 @@ function writerepos($repo){
   $cells=array("x86_64" => array(),"i386" => array(),"mixed" => array());
   foreach($defrepo as $key => $repo){
     if(!isset($cell[$repo["arch"]][$repo["version"]]))$cell[$repo["arch"]][$repo["version"]]="";
-    $cell[$repo["arch"]][$repo["version"]].="<code><nobr><input type='radio' name='repo' value=$key><a href='{$repo['url']}'>{$repo['description']}</a>".($repo['manifest']?"<sup>(*)</sup>":"")."</nobr></code> | ";
+    $cell[$repo["arch"]][$repo["version"]].=
+      "<code><nobr>
+         <input type='radio' name='repo' value=$key".(($key==$reposelected)?" checked='checked'":"").">
+	 <a href='{$repo['url']}'>{$repo['description']}</a>".
+	 ($repo['manifest']?"<sup>(*)</sup>":"")."
+       </nobr></code> | 
+      ";
   }
   $out=tables(array("arch","distro","Repository"),1,0);
   $out.=tables(array("<code>all</code>",	"<code>all</code>",	
-    		     "<input type='radio' name='repo' value=0 checked='checked'>All repositories"));
+    		     "<input type='radio' name='repo' value=0".((!$reposelected)?" checked='checked'":"").">All repositories"));
   $out.=tables(array("<code>mixed</code>",	"<code>mixed</code>",	$cell['mixed']['mixed']));
   $out.=tables(array("<code>i386</code>",	"<code>current</code>",	$cell['i386']['current']));
   $out.=tables(array("<code>x86_64</code>",	"<code>current</code>",	$cell['x86_64']['current']));
