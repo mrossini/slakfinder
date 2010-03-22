@@ -102,7 +102,7 @@ function writereposfile($reposelected){
 # id 1-7,61-64
 
 $defrepo[1]=array(
-    'info' => array('create' => 0),
+    'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-current/',
     'rank' => 1,
     'version' => 'current', #OK
@@ -118,7 +118,7 @@ $defrepo[1]=array(
   );
 
 $defrepo[2]=array(
-    'info' => array('create' => 0),
+    'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-current/',
     'rank' => 1,
     'version' => 'current', #OK
