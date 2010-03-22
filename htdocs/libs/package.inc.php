@@ -117,7 +117,7 @@ class package {
 	$sql.="WHERE ";
 	if($pkg){$sql.=" ( P.id='$pkg' or P.name LIKE '%$pkg%' ) ";$next=" AND ";}
 	if($desc){$sql.=$next." P.description LIKE '%$desc%' ";$next=" AND ";}
-	if($repo){$sql.=$next." repository='$repo'";}
+	if($repo){$sql.=$next." (R.id='$repo' OR R.class='$repo') ";}
       }
       if(is_numeric($start) and is_numeric($max)){
 	$sql.=" limit $start,$max";

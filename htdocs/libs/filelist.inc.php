@@ -78,7 +78,7 @@ class filelist {
       $next="";
       if($pkg or $desc or $repo or $file){
         $sql.="WHERE ";
-        if($repo){$sql.=$next." R.id='$repo'";$next=" AND ";}
+        if($repo){$sql.=$next." (R.id='$repo' OR R.class='$repo')";$next=" AND ";}
         if($desc){$sql.=$next." P.description LIKE '%$desc%' ";$next=" AND ";}
 	if($pkg){
 	  if(is_numeric($pkg)){

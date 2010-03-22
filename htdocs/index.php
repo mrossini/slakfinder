@@ -5,6 +5,19 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   <head>
     <title>Package Finder</title>
   </head>
+  <style type="text/css">
+  <!--
+    a:link    {text-decoration: none; color: blue;}
+    a:visited {text-decoration: none; color: blue;}
+    a:hover   {text-decoration: underline; color: red;}
+  .repository {border:1px solid #000000;}
+  .repository td { border-top:1px solid #000000; border-right:1px dotted; }
+  .repository th { border-right:1px dotted; }
+  .results {border:1px solid #000000;}
+  .results td { border-top:1px solid #000000; border-right:1px dotted; }
+  .results th { border-right:1px dotted; }
+  -->
+  </style>
 <body>
 <!--<pre>-->
 <?php
@@ -57,7 +70,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	    if($repos) echo tables();
 	    echo "<br />Repository: {$pkg->reponame} - url: <a href={$pkg->url}>{$pkg->url}</a>";
 	    $repos=$pkg->reponame;
-	    echo tables(array("package","version","arch","location",'&nbsp;'),1);
+	    echo tables(array("package","version","arch","location",'&nbsp;'),1,"class='results'");
 	  }
 	  echo tables(array("<a href='show.php?pkg={$pkg->id}'>{$pkg->name}</a>",$pkg->version,$pkg->arch,"<a href='{$pkg->url}{$pkg->location}/'>{$pkg->location}/</a>","<a href='{$pkg->url}{$pkg->location}/{$pkg->filename}'>download</a>"));
 	}
@@ -83,7 +96,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	    if($repos) echo tables();
 	    echo "<br />Repository: {$fl->reponame} - url: <a href='{$fl->url}'>{$fl->url}</a>";
 	    $repos=$fl->reponame;
-	    echo tables(array("package","version","file","path","location",'&nbsp;'),1);
+	    echo tables(array("package","version","file","path","location",'&nbsp;'),1,"class='results'");
 	  }
 	  echo tables(array("<a href='show.php?pkg={$fl->pkgid}'>{$fl->pkgname}</a>",$fl->version."-".$fl->arch,$fl->filename,$fl->fullpath,"<a href='{$fl->url}{$fl->pkgloc}/'>{$fl->pkgloc}/</a>","<a href='{$fl->url}{$fl->pkgloc}/{$fl->pkgfile}'>download</a>"));
 	}

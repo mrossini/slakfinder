@@ -3,21 +3,70 @@
 
 
 $defrepo=array();
+$classes=array();
+$npackages=0;
 
+
+function redefrepo($reposelected=0){
+  global $defrepo,$classes,$npackages;
+//  unset($defrepo);
+  $defrepo=array();
+  $classes=array();
+
+  $repo=new repository();
+  $nrepos=$repo->find();
+  while ($repo->fetch()){
+    $id=$repo->id;
+    $defrepo[$id]=(array)$repo;
+    unset($defrepo[$id]["db"]);
+    $defrepo[$id]['selected']=($id==$reposelected);
+    $classes[$repo->class]['class']=$repo->class;
+    $classes[$repo->class]['arch']=$repo->arch;
+    $classes[$repo->class]['version']=$repo->version;
+    $classes[$repo->class]['selected']=($repo->class==$reposelected);
+    $classes[$repo->class]['repo'][]=$repo->id;
+    $npackages+=$repo->npkgs;
+  //  return;
+  }
+  echo "<code>$nrepos repositories ($npackages packages)</code><br><br>\n";
+
+}
 
 function writerepos($reposelected){
+  global $classes;
   global $defrepo;
-  /*
-  $select="<select name='repo'>\n";
-  $select.="  <option value='0'".((!$repo)?" selected='selected'":"").">---  All repositories ---</option>\n";
-  foreach($defrepo as $id => $repof){
-    $select.="  <option value='$id'".(($repo==$id)?" selected='selected'":"").">{$repof['name']}";
-    if(!$repo['manifest'])$select.=" (no file search)";
-    $select.="</option>\n";
+  redefrepo($reposelected);
+//  echo "<pre>";var_dump($defrepo);echo "</pre>";
+  $cells=array();
+  foreach($classes as $class){
+    $cell=array();
+    $cell['arch']="<code>{$class['arch']}</code>";
+    $cell['version']="<code>{$class['version']}</code>";
+    $cell['use']="<input type='radio' name='repo' value={$class['class']} ".($class['selected']?"checked='checked'":"").">";
+    $cell['content']="";
+    foreach($class['repo'] as $repoid){
+      $repo=$defrepo[$repoid];
+      if($cell['content'])$cell['content'].=" - ";
+      $cell['content'].="<code><nobr>
+	<input type='radio' name='repo' value={$repo['id']} ".($repo['selected']?"checked='checked'":"").">
+	<a href='{$repo['url']}'>{$repo['description']}</a><sup>({$repo['npkgs']}".
+	($repo['manifest']?"*":"").")</sup>
+      </nobr></code>";
+    }
+    $cells[$class['class']]=$cell;
   }
-  $select.="</select>";
-  return $select;
-   */        
+  $out=tables(array("use","arch","distro","Repository"),1," class='repository'  ");
+  $out.=tables(array("&nbsp;","all","all",	
+    		     "<input type='radio' name='repo' value=0".((!$reposelected)?" checked='checked'":"").">All repositories"));
+  foreach($cells as $cell){
+    $out.=tables(array($cell['use'],$cell['arch'],$cell['version'],$cell['content']));
+  }
+  $out.=tables();
+  $out.="<code>(*) File search support enabled</code><br><br>";
+  return $out;
+}
+function writereposfile($reposelected){
+  global $defrepo;
   $cells=array("x86_64" => array(),"i386" => array(),"mixed" => array());
   foreach($defrepo as $key => $repo){
     if(!isset($cell[$repo["arch"]][$repo["version"]]))$cell[$repo["arch"]][$repo["version"]]="";
@@ -26,21 +75,21 @@ function writerepos($reposelected){
          <input type='radio' name='repo' value=$key".(($key==$reposelected)?" checked='checked'":"").">
 	 <a href='{$repo['url']}'>{$repo['description']}</a>".
 	 ($repo['manifest']?"<sup>(*)</sup>":"")."
-       </nobr></code> | 
+       </nobr></code>  
       ";
   }
-  $out=tables(array("arch","distro","Repository"),1,0);
-  $out.=tables(array("<code>all</code>",	"<code>all</code>",	
-    		     "<input type='radio' name='repo' value=0".((!$reposelected)?" checked='checked'":"").">All repositories"));
-  $out.=tables(array("<code>mixed</code>",	"<code>mixed</code>",	$cell['mixed']['mixed']));
-  $out.=tables(array("<code>i386</code>",	"<code>current</code>",	$cell['i386']['current']));
-  $out.=tables(array("<code>x86_64</code>",	"<code>current</code>",	$cell['x86_64']['current']));
-  $out.=tables(array("<code>mixed</code>",	"<code>current</code>",	$cell['mixed']['current']));
-  $out.=tables(array("<code>i386</code>",	"<code>13.0</code>",	$cell['i386']['13.0']));
-  $out.=tables(array("<code>x86_64</code>",	"<code>13.0</code>",    $cell['x86_64']['13.0']));
-  $out.=tables(array("<code>mixed</code>",	"<code>13.0</code>",	$cell['mixed']['13.0']));
-  $out.=tables(array("<code>i386</code>",	"<code>12.2</code>",	$cell['i386']['12.2']));
-  $out.=tables(array("<code>i386</code>",	"<code>12.1</code>",	$cell['i386']['12.1']));
+  $out=tables(array("arch","distro","Repository"),1);
+  $out.=tables(array("<code>all</code>",	"<code>&nbsp;&nbsp;&nbsp;all</code>",	
+    		     "<input type='radio' name='repo' value=0".((!$reposelected)?" checked='checked'":"").">All repositories"),2,'style="border-top:1px solid #000000; border-bottom:1px solid #000000;"');
+  $out.=tables(array("<code>mixed</code>",	"<nobr><input type='radio' name='repo' value='1011'".((1011==$reposelected)?" checked='checked'":"")."><code>mixed</code></nobr>",	$cell['mixed']['mixed']),2,'style="border-bottom:1px solid #000000;"');
+  $out.=tables(array("<code>i386</code>",	"<nobr><input type='radio' name='repo' value='1022'".((1022==$reposelected)?" checked='checked'":"")."><code>current</code></nobr>",	$cell['i386']['current']),2,'style="border-bottom:1px solid #000000;"');
+  $out.=tables(array("<code>x86_64</code>",	"<nobr><input type='radio' name='repo' value='1032'".((1032==$reposelected)?" checked='checked'":"")."><code>current</code></nobr>",	$cell['x86_64']['current']),2,'style="border-bottom:1px solid #000000;"');
+  $out.=tables(array("<code>mixed</code>",	"<nobr><input type='radio' name='repo' value='1012'".((1012==$reposelected)?" checked='checked'":"")."><code>current</code></nobr>",	$cell['mixed']['current']),2,'style="border-bottom:1px solid #000000;"');
+  $out.=tables(array("<code>i386</code>",	"<nobr><input type='radio' name='repo' value='1023'".((1023==$reposelected)?" checked='checked'":"")."><code>13.0</code></nobr>",	$cell['i386']['13.0']),2,'style="border-bottom:1px solid #000000;"');
+  $out.=tables(array("<code>x86_64</code>",	"<nobr><input type='radio' name='repo' value='1033'".((1033==$reposelected)?" checked='checked'":"")."><code>13.0</code></nobr>",    $cell['x86_64']['13.0']),2,'style="border-bottom:1px solid #000000;"');
+  $out.=tables(array("<code>mixed</code>",	"<nobr><input type='radio' name='repo' value='1013'".((1013==$reposelected)?" checked='checked'":"")."><code>13.0</code></nobr>",	$cell['mixed']['13.0']),2,'style="border-bottom:1px solid #000000;"');
+  $out.=tables(array("<code>i386</code>",	"<nobr><input type='radio' name='repo' value='1024'".((1024==$reposelected)?" checked='checked'":"")."><code>12.2</code></nobr>",	$cell['i386']['12.2']),2,'style="border-bottom:1px solid #000000;"');
+  $out.=tables(array("<code>i386</code>",	"<nobr><input type='radio' name='repo' value='1025'".((1025==$reposelected)?" checked='checked'":"")."><code>12.1</code></nobr>",	$cell['i386']['12.1']),2,'style="border-bottom:1px solid #000000;"');
 
   $out.=tables();
 
@@ -48,78 +97,19 @@ function writerepos($reposelected){
   return $out."<sup>(*)</sup> File search support enabled<br><br>";
 }
 
-function writerepos_old($repo){
-  global $defrepo;
-  /*
-  $select="<select name='repo'>\n";
-  $select.="  <option value='0'".((!$repo)?" selected='selected'":"").">---  All repositories ---</option>\n";
-  foreach($defrepo as $id => $repof){
-    $select.="  <option value='$id'".(($repo==$id)?" selected='selected'":"").">{$repof['name']}";
-    if(!$repo['manifest'])$select.=" (no file search)";
-    $select.="</option>\n";
-  }
-  $select.="</select>";
-  return $select;
-   */        
-  $out=tables(array(),1,0);
-  $out.=tables(array("All Repositories","<input type='radio' name='repo' value=0 checked='checked'>"));
-
-  $out.= tables(array("Slackware Official 32bit<sup>(*)</sup>:",
-    "<input type='radio' name='repo' value=2><a href='{$defrepo[2]['url']}'>current</a> | ".
-    "<input type='radio' name='repo' value=5><a href='{$defrepo[5]['url']}'>13.0</a> | ".
-    "<input type='radio' name='repo' value=6><a href='{$defrepo[6]['url']}'>patch</a> | ".
-    "<input type='radio' name='repo' value=3><a href='{$defrepo[3]['url']}'>12.2</a>"));
-  $out.= tables(array("Slackware Official 64bit<sup>(*)</sup>:",
-    "<input type='radio' name='repo' value=1><a href='{$defrepo[1]['url']}'>current</a> | ".
-    "<input type='radio' name='repo' value=4><a href='{$defrepo[4]['url']}'>13.0</a> | ".
-    "<input type='radio' name='repo' value=6><a href='{$defrepo[6]['url']}'>patch</a>"));
-  $out.= tables(array("Slacky 32bit<sup>(*)</sup>: ",
-    "<input type='radio' name='repo' value=11><a href='{$defrepo[11]['url']}'>13.0</a> | ".
-    "<input type='radio' name='repo' value=12><a href='{$defrepo[12]['url']}'>12.2</a> | ".
-    "<input type='radio' name='repo' value=13><a href='{$defrepo[13]['url']}'>gnome for 12.2</a>"));
-  $out.= tables(array("Salix: ",
-    " 32bit:   <input type='radio' name='repo' value=21><a href='{$defrepo[21]['url']}'>13.0</a> | ".
-    "<input type='radio' name='repo' value=22><a href='{$defrepo[22]['url']}'>current</a> ;    ".
-    " 64bit: <input type='radio' name='repo' value=23><a href='{$defrepo[23]['url']}'>13.0</a> | ".
-    "<input type='radio' name='repo' value=24><a href='{$defrepo[24]['url']}'>current</a>"));
-  $out.= tables(array("Dia Tech 32bit<sup>(*)</sup>: ",
-    "<input type='radio' name='repo' value=51><a href='{$defrepo[51]['url']}'>13.0</a> | ".
-    "<input type='radio' name='repo' value=52><a href='{$defrepo[52]['url']}'>12.2</a> | ".
-    "<input type='radio' name='repo' value=53><a href='{$defrepo[53]['url']}'>kde4.4 for current</a> "));
-  $out.= tables(array("Robby Workman 32&64 bit: ",
-    "<input type='radio' name='repo' value=43><a href='{$defrepo[43]['url']}'>13.0</a> | ".
-    "<input type='radio' name='repo' value=41><a href='{$defrepo[41]['url']}'>12.2</a> | ".
-    "<input type='radio' name='repo' value=42><a href='{$defrepo[42]['url']}'>current</a>"));
-  $out.= tables(array("Mixed 32&64 bit : ",
-    "<input type='radio' name='repo' value='31'><a href='{$defrepo[31]['url']}'>Slackers.it</a><sup>(*)</sup> | ".
-    "<input type='radio' name='repo' value='32'><a href='{$defrepo[32]['url']}'>Alien</a>"));
-  $out.= tables(array("Other 32 bit :",
-    "linuxpackages <input type='radio' name='repo' value='33'><a href='{$defrepo[33]['url']}'>12.2</a><sup>(*)</sup> | ".
-    "<input type='radio' name='repo' value='34'><a href='{$defrepo[34]['url']}'>13.0-a</a> | ".
-    "<input type='radio' name='repo' value='82'><a href='{$defrepo[82]['url']}'>13.0-b</a>  ;  ".
-    "<input type='radio' name='repo' value='35'><a href='{$defrepo[35]['url']}'>Stabellini</a><sup>(*)</sup>"));
-  $out.= tables(array("Other 64 bit : ",
-    "<input type='radio' name='repo' value='81'><a href='{$defrepo[81]['url']}'>Daniele50</a>  | ".
-    "<input type='radio' name='repo' value='54'><a href='{$defrepo[54]['url']}'>Danix</a>  | ".
-    "<input type='radio' name='repo' value='36'><a href='{$defrepo[36]['url']}'>Jimmy Mixed</a><sup>(*)</sup>"));
-
-  $out.=tables();
-
-
-  return $out."(*) Supportano il file search\n\n";
-}
-
-
 
 # Official repositories
 # id 1-7,61-64
 
 $defrepo[1]=array(
-    'info' => array('create' => 1),
+    'info' => array('create' => 0),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-current/',
-    'official' => 1,
+    'rank' => 1,
     'version' => 'current', #OK
     'arch' => 'x86_64',
+    'class' => '64cur',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'slackware64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -128,11 +118,14 @@ $defrepo[1]=array(
   );
 
 $defrepo[2]=array(
-    'info' => array('create' => 1),
+    'info' => array('create' => 0),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-current/',
-    'official' => 1,
+    'rank' => 1,
     'version' => 'current', #OK
     'arch' => 'i386',
+    'class' => '32cur',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -143,9 +136,12 @@ $defrepo[2]=array(
 $defrepo[3]=array(
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-12.2/',
-    'official' => 1,
+    'rank' => 1,
     'version' => '12.2', #OK
     'arch' => 'i386',
+    'class' => '32122',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -156,9 +152,12 @@ $defrepo[3]=array(
 $defrepo[4]=array(
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/',
-    'official' => 1,
+    'rank' => 1,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
+    'class' => '64130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'slackware64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -169,9 +168,12 @@ $defrepo[4]=array(
 $defrepo[5]=array(
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/',
-    'official' => 1,
+    'rank' => 1,
     'version' => '13.0', #OK
     'arch' => 'i386',
+    'class' => '32130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -182,9 +184,12 @@ $defrepo[5]=array(
 $defrepo[6]=array(
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/',
-    'official' => 1,
+    'rank' => 1,
     'version' => '13.0', #OK
     'arch' => 'i386',
+    'class' => '32130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'patches/MANIFEST.bz2',
     'packages' => 'patches/PACKAGES.TXT',
     'hashfile' => 'patches/CHECKSUMS.md5.asc',
@@ -195,9 +200,12 @@ $defrepo[6]=array(
 $defrepo[7]=array( 
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/patches/',
-    'official' => 1,
+    'rank' => 1,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
+    'class' => '64130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -208,9 +216,12 @@ $defrepo[7]=array(
 $defrepo[61]=array( 
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/extra/',
-    'official' => 1,
+    'rank' => 1,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
+    'class' => '64130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -221,9 +232,12 @@ $defrepo[61]=array(
 $defrepo[62]=array( 
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-current/extra/',
-    'official' => 1,
+    'rank' => 1,
     'version' => 'current', #OK
     'arch' => 'x86_64',
+    'class' => '64cur',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -234,9 +248,12 @@ $defrepo[62]=array(
 $defrepo[63]=array( 
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/extra/',
-    'official' => 1,
+    'rank' => 1,
     'version' => '13.0', #OK
     'arch' => 'i386',
+    'class' => '32130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -247,9 +264,12 @@ $defrepo[63]=array(
 $defrepo[64]=array( 
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-current/extra/',
-    'official' => 1,
+    'rank' => 1,
     'version' => 'current', #OK
     'arch' => 'i386',
+    'class' => '32cur',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -271,9 +291,12 @@ $defrepo[64]=array(
 $defrepo[11]=array(
     'info' => array('create' => 1),
     'url' => 'http://repository.slacky.eu/slackware-13.0/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '13.0', #OK
     'arch' => 'i386',
+    'class' => '32130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'packages' => 'PACKAGES.TXT',
@@ -284,9 +307,12 @@ $defrepo[11]=array(
 $defrepo[12]=array(
     'info' => array('create' => 1),
     'url' => 'http://repository.slacky.eu/slackware-12.2/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '12.2', #OK
     'arch' => 'i386',
+    'class' => '32122',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'packages' => 'PACKAGES.TXT',
@@ -297,9 +323,12 @@ $defrepo[12]=array(
 $defrepo[13]=array(
     'info' => array('create' => 1),
     'url' => 'http://repository.slacky.eu/gnome-slacky-12.2/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '12.2', #OK
     'arch' => 'i386',
+    'class' => '32122',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'hashfile' => 'CHECKSUMS.md5.asc',
     'packages' => 'PACKAGES.TXT',
@@ -336,9 +365,12 @@ $defrepo[13]=array(
 $defrepo[21]=array(
     'info' => array('create' => 1),
     'url' => 'http://download.salixos.org/i486/13.0/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '13.0', #OK
     'arch' => 'i386',
+    'class' => '32130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz.asc',
@@ -349,9 +381,12 @@ $defrepo[21]=array(
 $defrepo[22]=array(
     'info' => array('create' => 1),
     'url' => 'http://download.salixos.org/i486/current/',
-    'official' => 1,
+    'rank' => 1,
     'version' => 'current', #OK
     'arch' => 'i386',
+    'class' => '32cur',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz.asc',
@@ -362,9 +397,12 @@ $defrepo[22]=array(
 $defrepo[23]=array(
     'info' => array('create' => 1),
     'url' => 'http://download.salixos.org/x86_64/13.0/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
+    'class' => '64130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz.asc',
@@ -375,9 +413,12 @@ $defrepo[23]=array(
 $defrepo[24]=array(
     'info' => array('create' => 1),
     'url' => 'http://download.salixos.org/x86_64/current/',
-    'official' => 0,
+    'rank' => 0,
     'version' => 'current', #OK
     'arch' => 'x86_64',
+    'class' => '64cur',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz.asc',
@@ -403,9 +444,12 @@ $defrepo[24]=array(
 $defrepo[31]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.slackers.it/repository/',
-    'official' => 0,
+    'rank' => 0,
     'version' => 'current', #OK
     'arch' => 'mixed',
+    'class' => 'micur',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5',
@@ -416,9 +460,12 @@ $defrepo[31]=array(
 $defrepo[32]=array(
     'info' => array('create' => 1),
     'url' => 'http://connie.slackware.com/~alien/slackbuilds/',
-    'official' => 0,
+    'rank' => 0,
     'version' => 'mixed', # MIXED
     'arch' => 'mixed',
+    'class' => 'mimix',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     //'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
@@ -430,9 +477,12 @@ $defrepo[32]=array(
 $defrepo[33]=array(
     'info' => array('create' => 1),
     'url' => 'http://linuxpackages.inode.at/Slackware/Slackware-12.2-i386/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '12.2', # OK
     'arch' => 'i386',
+    'class' => '32122',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz',
@@ -443,9 +493,12 @@ $defrepo[33]=array(
 $defrepo[34]=array(
     'info' => array('create' => 1),
     'url' => 'http://linuxpackages.inode.at/Slackware/Slackware-13.0-i386/sotirov/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '13.0', # OK
     'arch' => 'i386',
+    'class' => '32130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.gz',
@@ -456,9 +509,12 @@ $defrepo[34]=array(
 $defrepo[35]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.stabellini.net/filesystem/repository/Stefano_Stabellini/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '12.1', 
     'arch' => 'i386',
+    'class' => '32121',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5',
@@ -469,9 +525,12 @@ $defrepo[35]=array(
 $defrepo[36]=array(
     'info' => array('create' => 1),
     'url' => 'http://c4dwbspace.altervista.org/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
+    'class' => '64130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5',
@@ -480,11 +539,14 @@ $defrepo[36]=array(
   );
 
 $defrepo[37]=array(
-    'info' => array('create' => 1),
+    'info' => array('create' => 0),
     'url' => 'ftp://ftp.slackware.org.uk/people/alien/restricted_slackbuilds/',
-    'official' => 0,
+    'rank' => 0,
     'version' => 'mixed', # MIXED
     'arch' => 'mixed',
+    'class' => 'mimix',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -506,9 +568,12 @@ $defrepo[37]=array(
 $defrepo[41]=array(
     'info' => array('create' => 1),
     'url' => 'http://rlworkman.net/pkgs/12.2/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '12.2', #OK
     'arch' => 'i386',
+    'class' => '32122',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -517,11 +582,14 @@ $defrepo[41]=array(
   );
 
 $defrepo[42]=array(
-    'info' => array('create' => 0),
+    'info' => array('create' => 1),
     'url' => 'http://rlworkman.net/pkgs/current/',
-    'official' => 0,
+    'rank' => 0,
     'version' => 'current', # OK
     'arch' => 'mixed',
+    'class' => 'micur',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -532,9 +600,12 @@ $defrepo[42]=array(
 $defrepo[43]=array(
     'info' => array('create' => 1),
     'url' => 'http://rlworkman.net/pkgs/13.0/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '13.0', # OK
     'arch' => 'mixed',
+    'class' => 'mi130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -552,9 +623,12 @@ $defrepo[43]=array(
 $defrepo[51]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.dia-tech.net/linux/Slackware-13.0/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '13.0', # OK
     'arch' => 'i386',
+    'class' => '32130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'ChangeLog.txt.gz',
@@ -565,9 +639,12 @@ $defrepo[51]=array(
 $defrepo[52]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.dia-tech.net/linux/Slackware-12.2/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '12.2', # OK
     'arch' => 'i386',
+    'class' => '32122',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'ChangeLog.txt.gz',
@@ -578,9 +655,12 @@ $defrepo[52]=array(
 $defrepo[53]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.dia-tech.net/linux/Slackware-current-kde4.4/',
-    'official' => 0,
+    'rank' => 0,
     'version' => 'current', # OK
     'arch' => 'i386',
+    'class' => '32cur',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'ChangeLog.txt.gz',
@@ -591,9 +671,12 @@ $defrepo[53]=array(
 $defrepo[54]=array(
     'info' => array('create' => 1),
     'url' => 'http://danixland.net/packages/',
-    'official' => 0,
+    'rank' => 0,
     'version' => 'current', # OK
     'arch' => 'x86_64',
+    'class' => '64cur',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -604,9 +687,12 @@ $defrepo[54]=array(
 $defrepo[55]=array(
     'info' => array('create' => 1),
     'url' => 'http://scxd.info/pub/',
-    'official' => 0,
+    'rank' => 0,
     'version' => 'current', # OK
     'arch' => 'i386',
+    'class' => '32cur',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     #'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
@@ -618,9 +704,12 @@ $defrepo[55]=array(
 $defrepo[56]=array(
     'info' => array('create' => 1),
     'url' => 'http://repository.elettrolinux.com/Slackware-13.0/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '13.0', # OK
     'arch' => 'i386',
+    'class' => '32130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'hashfile' => 'CHECKSUMS.md5.asc',
@@ -641,9 +730,12 @@ $defrepo[56]=array(
 $defrepo[81]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.daniele50.it/listing',
-    'official' => 0,
+    'rank' => 0,
     'version' => '12.2',
     'arch' => 'x86_64',
+    'class' => '64122',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5',
@@ -654,9 +746,12 @@ $defrepo[81]=array(
 $defrepo[82]=array( ###### BUGGATO #######
     'info' => array('create' => 1),
     'url' => 'http://ftp.naist.jp/pub/Linux/linuxpackages/Slackware/',
-    'official' => 0,
+    'rank' => 0,
     'version' => '13.0',
     'arch' => 'i386',
+    'class' => '32130',
+    'npkgs' => 0,
+    'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT',
     'hashfile' => 'CHECKSUMS.md5',

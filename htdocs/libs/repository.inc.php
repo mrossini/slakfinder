@@ -2,7 +2,7 @@
 
 class repository {
 
-  private $db;
+  public $db;
   
   public function __construct($repo=0){
     $this->id=0;
@@ -59,6 +59,7 @@ class repository {
       }
     }
     $this->pkgsfile->close();
+    if(!$this->db->query("update #__repository set npkgs='$i' where id='{$this->id}'"))var_dump($this->db);
     echo "\n$i packages\n";
     $list=new filelist();
     if($this->manifest){
@@ -119,14 +120,17 @@ class repository {
       CREATE TABLE #__repository (
 	id INT ,
 	url VARCHAR( 255 ) NOT NULL ,
-	official INT ,
+	rank INT ,
 	manifest VARCHAR( 30 ) NOT NULL ,
 	packages VARCHAR( 30 ) NOT NULL ,
 	hashfile VARCHAR( 30 ) NOT NULL ,
 	version VARCHAR( 10 ) NOT NULL ,
 	arch VARCHAR( 10 ) NOT NULL ,
-	hash TEXT ,
+	class VARCHAR( 10 ) NOT NULL ,
+	hash TEXT,
 	name VARCHAR( 40 ) NOT NULL ,
+	npkgs INT ,
+	nfiles INT ,
 	description VARCHAR( 255 ) ,
 	PRIMARY KEY ( id ) ,
 	UNIQUE ( name )
