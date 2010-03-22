@@ -27,11 +27,11 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   echo "<input type='hidden' name='act' value='search' />\n";
   echo tables(array(),1,0);
   $from=writerepos($repo);
-  echo tables(array("Search from: ",$from));
-  echo tables(array("Package name: ","<input name='name' value='$name' />"));
-  echo tables(array("Description: ","<input name='desc' value='$desc' /><br />"));
-  echo tables(array("Filename: ","<input name='file' value='$file' /><br />"));
-  echo tables(array("Use regexp: ","<input name='regexp' type='checkbox' ".(($regexp)?"checked='checked'":"")." />"));
+  echo tables(array("<nobr>Search from:</nobr> ",$from));
+  echo tables(array("<nobr>Package name:</nobr> ","<input name='name' value='$name' />"));
+  echo tables(array("<nobr>Description:</nobr> ","<input name='desc' value='$desc' /><br />"));
+  echo tables(array("<nobr>Filename:</nobr> ","<input name='file' value='$file' /><br />"));
+  echo tables(array("<nobr>Use regexp:</nobr> ","<input name='regexp' type='checkbox' ".(($regexp)?"checked='checked'":"")." />"));
   echo tables();
   echo "<input type='submit' value='go' />";
 

@@ -14,6 +14,7 @@ class filelist {
     $p=0;
     $repoid=$repo->id;
     while(!is_null($line=$repo->manifile->get())){
+      if(isset($_SERVER['DEBUG']))echo "$line\n";
       if($step==0){ 
 	if(!$line)continue;
 	if($line!="++========================================")return false;
