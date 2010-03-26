@@ -615,7 +615,56 @@ $defrepo[43]=array(
 
 
 
+# Johannes Schöpfer 
+# id 45-47
 
+$defrepo[45]=array(
+    'info' => array('create' => 1),
+    'url' => 'http://slackware.schoepfer.info/13.0_64/',
+    'rank' => 99,
+    'version' => '13.0', # OK
+    'arch' => 'x86_64',
+    'class' => '64130',
+    'npkgs' => 0,
+    'nfiles' => 0,
+    'manifest' => 'slackware64/MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'schoepfer.info-x86_64-13.0',
+    'description' => 'Johannes Schöpfer'
+  );
+
+$defrepo[46]=array(
+    'info' => array('create' => 1),
+    'url' => 'http://slackware.schoepfer.info/13.0/',
+    'rank' => 99,
+    'version' => '13.0', # OK
+    'arch' => 'i386',
+    'class' => '32130',
+    'npkgs' => 0,
+    'nfiles' => 0,
+    'manifest' => 'slackware/MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'schoepfer.info-i386-13.0',
+    'description' => 'Johannes Schöpfer'
+  );
+
+$defrepo[47]=array(
+    'info' => array('create' => 1),
+    'url' => 'http://slackware.schoepfer.info/12.2/',
+    'rank' => 99,
+    'version' => '12.2', # OK
+    'arch' => 'x86_64',
+    'class' => '64122',
+    'npkgs' => 0,
+    'nfiles' => 0,
+    'manifest' => 'slackware/MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'hashfile' => 'CHECKSUMS.md5.asc',
+    'name' => 'schoepfer.info-i386-12.2',
+    'description' => 'Johannes Schöpfer'
+  );
 
 # Dia Tech Repository
 # id 51-53
@@ -696,7 +745,7 @@ $defrepo[55]=array(
     'manifest' => '',
     #'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.asc',
+    'hashfile' => 'ChangeLog.txt',
     'name' => 'scxd-current',
     'description' => 'Scxd'
   );
@@ -712,7 +761,7 @@ $defrepo[56]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.asc',
+    'hashfile' => 'ChangeLog.txt',
     'name' => 'elettrolinux-for-13.0',
     'description' => 'Michele.P'
   );
@@ -722,42 +771,6 @@ $defrepo[56]=array(
 
 
 
-
-
-# Amatorial repository (does not have PACKAGES.TXT)
-# id 81-82
-
-$defrepo[81]=array(
-    'info' => array('create' => 1),
-    'url' => 'http://www.daniele50.it/listing',
-    'rank' => 0,
-    'version' => '12.2',
-    'arch' => 'x86_64',
-    'class' => '64122',
-    'npkgs' => 0,
-    'nfiles' => 0,
-    'manifest' => '',
-    'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5',
-    'name' => 'daniele50.it',
-    'description' => 'Daniele50'
-  );
-
-$defrepo[82]=array( ###### BUGGATO #######
-    'info' => array('create' => 1),
-    'url' => 'http://ftp.naist.jp/pub/Linux/linuxpackages/Slackware/',
-    'rank' => 0,
-    'version' => '13.0',
-    'arch' => 'i386',
-    'class' => '32130',
-    'npkgs' => 0,
-    'nfiles' => 0,
-    'manifest' => '',
-    'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5',
-    'name' => 'linuxpackages-13.0-i386-frias',
-    'description' => 'LP frias'
-  );
 
 
 

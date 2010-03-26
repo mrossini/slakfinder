@@ -49,7 +49,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
   $create=$info['create'];
   $repo['id']=$id;
   unset ($repo['info']);
-  echo "\n\nREPOSITORY: {$repo['name']}\n";
+  echo "\n\nREPOSITORY: $id => {$repo['name']}\n";
   $rep=new repository($id);
   if($rep->exists()){
     echo "già esiste\n";
