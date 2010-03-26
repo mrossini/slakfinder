@@ -107,5 +107,5 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   }
 ?>
 </pre>
-<p>To report a bug, mail to <a href='mailto:zerouno@slacky.eu'>zerouno@slacky.eu</a>. Thanks.</p>
+<p>To report a bug, mail to <a href='mailto:zerouno@slacky.it'>zerouno@slacky.it</a>. Thanks.</p>
 </body></html>

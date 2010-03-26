@@ -48,7 +48,7 @@
     }
   }
   echo "</pre>";
-  echo "To report a bug, send a mail to <a href='mailto:zerouno@slacky.eu'>zerouno@slacky.eu</a>. Thanks.";
+  echo "To report a bug, send a mail to <a href='mailto:zerouno@slacky.it'>zerouno@slacky.it</a>. Thanks.";
   echo "</body></html>";
 
 
