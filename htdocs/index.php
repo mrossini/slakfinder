@@ -39,7 +39,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <form action='index.php?#results'
   <input type='hidden' name='act' value='search' />
   <?php echo writerepos($repo); ?>
-  <a name='results'>
+  <a name='results'></a>
   <nobr>Search: <input name='name' value='<?php echo $name; ?>' /> 
         <input type='submit' value='go' /> - 
 	Description: <input name='desc' value='<?php echo $desc; ?>' /> - 
