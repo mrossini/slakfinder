@@ -110,7 +110,7 @@ class package {
     foreach($repo as $key => $value) $this->$key = $value;
   }
 
-  public function find($pkg=null,$desc=null,$repo=null,$start=null,$max=null){ //$repo == id only
+  public function find($pkg=null,$desc=null,$repo=null,$order=""){ //$repo == id only
     if(!is_null($pkg)){
       $next="";
       $where="";
@@ -139,7 +139,6 @@ class package {
       }
 
       $sql="SELECT P.*, R.name AS reponame, R.description AS repodesc, R.version AS repover, R.url AS url  $rank   FROM #__packages as P       LEFT JOIN #__repository as R       ON (P.repository=R.id) $where ";
-      $order="";
       if($rank){
 	if($order)$order.=" , ";$order.=" rank desc ";
       }
@@ -150,7 +149,6 @@ class package {
       if($order)$sql.=" order by $order ";
 
 
-      if(is_numeric($start) and is_numeric($max)) $sql.=" limit $start,$max";
       $this->db->query($sql);
     }else{
       if(is_numeric($desc))return $this->db->seek($desc);
