@@ -27,6 +27,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   $maxresult=30;
   $start=0;
   $db=new database();
+  if(!isset($_SESSION['last_search']))$_SESSION['last_search']="";
   if(!isset($_SESSION['searcher_visitor'])){
     $db->counter_inc('visits');
     $_SESSION['searcher_visitor']=$db->counter_get('visits');
@@ -34,7 +35,12 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   echo "You are the ".$_SESSION['searcher_visitor']."st visitor<br />";
   $regexp=$name=$desc=$file=$repo=null;
   foreach($_GET as $key => $value)$$key=$value;
-  if ($name or $desc or $file) $db->counter_inc('searches');
+  if ($name or $desc or $file) {
+    if(($start==0)and($_SESSION['last_search']!="name=$name&desc=$desc&file=$file")){
+      $_SESSION['last_search']="name=$name&desc=$desc&file=$file";
+      $db->counter_inc('searches');
+    }
+  }
   echo "Searched ".$db->counter_get('searches')." packages from 6 March 2010<br /><br />";
 ?>
 
