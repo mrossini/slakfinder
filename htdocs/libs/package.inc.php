@@ -112,19 +112,48 @@ class package {
 
   public function find($pkg=null,$desc=null,$repo=null,$start=null,$max=null){ //$repo == id only
     if(!is_null($pkg)){
-      $sql="SELECT P.*, R.name AS reponame, R.url AS url     FROM #__packages as P       LEFT JOIN #__repository as R       ON (P.repository=R.id) ";
       $next="";
+      $where="";
+      $rank="";
       if($pkg or $desc or $repo){
-	$sql.="WHERE ";
-	if($pkg){$sql.=" ( P.id='$pkg' or P.name LIKE '%$pkg%' ) ";$next=" AND ";}
-	if($desc){$sql.=$next." P.description LIKE '%$desc%' ";$next=" AND ";}
-	if($repo){$sql.=$next." (R.id='$repo' OR R.class='$repo') ";}
+	$where.="WHERE ";
+	if($pkg){
+	  $where.=" ( P.id='$pkg' or P.name LIKE '%$pkg%' ) ";$next=" AND ";
+	  $rank=" (
+	    (P.name like '$pkg')*10+
+	    (P.name like '$pkg-%')*5+
+	    (P.name like '$pkg%' and P.name not like '$pkg-%')*3+
+	    (P.name like '%-$pkg-%')*2+
+	    (P.name like '%-$pkg%' and P.name not like '%-$pkg-%')*2+
+	    (P.name like '%-$pkg')*1+
+	    (P.name like '%$pkg%$pkg%')*1+
+	    (LENGTH('$pkg')/LENGTH(P.name))
+	  ) ";
+	}else{$rank.=" ( 0 ) ";}
+	if($desc){
+	  $where.=$next." P.description LIKE '%$desc%' ";$next=" AND ";
+	  $rank.="+ ((P.description like '% $desc %')*8+(P.description like '% $desc%')*4+(P.description like '%$desc %')*2+(P.description like '%$desc%')*1) ";
+	}
+	if($rank)$rank=", ( $rank ) as rank ";
+	if($repo){$where.=$next." (R.id='$repo' OR R.class='$repo') ";}
       }
-      if(is_numeric($start) and is_numeric($max)){
-	$sql.=" limit $start,$max";
+
+      $sql="SELECT P.*, R.name AS reponame, R.description AS repodesc, R.version AS repover, R.url AS url  $rank   FROM #__packages as P       LEFT JOIN #__repository as R       ON (P.repository=R.id) $where ";
+      $order="";
+      if($rank){
+	if($order)$order.=" , ";$order.=" rank desc ";
       }
+      if($order)$order.=" , ";$order.=" R.rank ";
+      if($order)$order.=" , ";$order.=" R.version desc ";
+      if($order)$order.=" , ";$order.=" P.name ";
+      if($order)$order.=" , ";$order.=" P.version desc ";
+      if($order)$sql.=" order by $order ";
+
+
+      if(is_numeric($start) and is_numeric($max)) $sql.=" limit $start,$max";
       $this->db->query($sql);
     }else{
+      if(is_numeric($desc))return $this->db->seek($desc);
       $this->id=0;
       if(!$out=$this->db->get())return false;
       foreach($out as $key => $value) $this->$key = $value;

@@ -46,6 +46,9 @@ class mysql {
 	public function fetchtable(){
 	  while($this->fetch());
 	}
+	public function seek($seek){
+	  return mysql_data_seek($this->results,$seek);
+	}
 	public function fetch(){
 	  if($tmp=mysql_fetch_assoc($this->results)){
 	    $this->datas[]=$tmp;

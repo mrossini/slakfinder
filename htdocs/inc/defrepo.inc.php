@@ -179,7 +179,7 @@ $defrepo[5]=array(
 $defrepo[6]=array(
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/',
-    'rank' => 1,
+    'rank' => 2,
     'version' => '13.0', #OK
     'arch' => 'i386',
     'class' => '32130',
@@ -194,7 +194,7 @@ $defrepo[6]=array(
 $defrepo[7]=array( 
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/patches/',
-    'rank' => 1,
+    'rank' => 2,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
     'class' => '64130',
@@ -209,7 +209,7 @@ $defrepo[7]=array(
 $defrepo[61]=array( 
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/extra/',
-    'rank' => 1,
+    'rank' => 3,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
     'class' => '64130',
@@ -224,7 +224,7 @@ $defrepo[61]=array(
 $defrepo[62]=array( 
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-current/extra/',
-    'rank' => 1,
+    'rank' => 3,
     'version' => 'current', #OK
     'arch' => 'x86_64',
     'class' => '64cur',
@@ -239,7 +239,7 @@ $defrepo[62]=array(
 $defrepo[63]=array( 
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/extra/',
-    'rank' => 1,
+    'rank' => 3,
     'version' => '13.0', #OK
     'arch' => 'i386',
     'class' => '32130',
@@ -254,7 +254,7 @@ $defrepo[63]=array(
 $defrepo[64]=array( 
     'info' => array('create' => 1),
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-current/extra/',
-    'rank' => 1,
+    'rank' => 3,
     'version' => 'current', #OK
     'arch' => 'i386',
     'class' => '32cur',
@@ -280,7 +280,7 @@ $defrepo[64]=array(
 $defrepo[11]=array(
     'info' => array('create' => 1),
     'url' => 'http://repository.slacky.eu/slackware-13.0/',
-    'rank' => 0,
+    'rank' => 10,
     'version' => '13.0', #OK
     'arch' => 'i386',
     'class' => '32130',
@@ -295,7 +295,7 @@ $defrepo[11]=array(
 $defrepo[12]=array(
     'info' => array('create' => 1),
     'url' => 'http://repository.slacky.eu/slackware-12.2/',
-    'rank' => 0,
+    'rank' => 10,
     'version' => '12.2', #OK
     'arch' => 'i386',
     'class' => '32122',
@@ -310,7 +310,7 @@ $defrepo[12]=array(
 $defrepo[13]=array(
     'info' => array('create' => 1),
     'url' => 'http://repository.slacky.eu/gnome-slacky-12.2/',
-    'rank' => 0,
+    'rank' => 11,
     'version' => '12.2', #OK
     'arch' => 'i386',
     'class' => '32122',
@@ -351,7 +351,7 @@ $defrepo[13]=array(
 $defrepo[21]=array(
     'info' => array('create' => 1),
     'url' => 'http://download.salixos.org/i486/13.0/',
-    'rank' => 0,
+    'rank' => 20,
     'version' => '13.0', #OK
     'arch' => 'i386',
     'class' => '32130',
@@ -366,7 +366,7 @@ $defrepo[21]=array(
 $defrepo[22]=array(
     'info' => array('create' => 1),
     'url' => 'http://download.salixos.org/i486/current/',
-    'rank' => 1,
+    'rank' => 20,
     'version' => 'current', #OK
     'arch' => 'i386',
     'class' => '32cur',
@@ -381,7 +381,7 @@ $defrepo[22]=array(
 $defrepo[23]=array(
     'info' => array('create' => 1),
     'url' => 'http://download.salixos.org/x86_64/13.0/',
-    'rank' => 0,
+    'rank' => 20,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
     'class' => '64130',
@@ -396,7 +396,7 @@ $defrepo[23]=array(
 $defrepo[24]=array(
     'info' => array('create' => 1),
     'url' => 'http://download.salixos.org/x86_64/current/',
-    'rank' => 0,
+    'rank' => 20,
     'version' => 'current', #OK
     'arch' => 'x86_64',
     'class' => '64cur',
@@ -415,7 +415,7 @@ $defrepo[24]=array(
 $defrepo[25]=array(
     'info' => array('create' => 1),
     'url' => 'http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/slackware-unsupported/gsb/gsb64-2.26_slackware64-13.0/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
     'class' => '64130',
@@ -430,7 +430,7 @@ $defrepo[25]=array(
 $defrepo[26]=array(
     'info' => array('create' => 1),
     'url' => 'http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/slackware-unsupported/gsb/gsb64-current/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
     'class' => '64130',
@@ -445,7 +445,7 @@ $defrepo[26]=array(
 $defrepo[27]=array(
     'info' => array('create' => 1),
     'url' => 'http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/slackware-unsupported/gsb/gsb-2.26_slackware-13.0/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '13.0', #OK
     'arch' => 'i386',
     'class' => '32130',
@@ -460,7 +460,7 @@ $defrepo[27]=array(
 $defrepo[28]=array(
     'info' => array('create' => 1),
     'url' => 'http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/slackware-unsupported/gsb/gsb-current/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '13.0', #OK
     'arch' => 'i386',
     'class' => '32130',
@@ -486,7 +486,7 @@ $defrepo[28]=array(
 $defrepo[31]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.slackers.it/repository/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => 'current', #OK
     'arch' => 'mixed',
     'class' => 'micur',
@@ -501,7 +501,7 @@ $defrepo[31]=array(
 $defrepo[32]=array(
     'info' => array('create' => 1),
     'url' => 'http://connie.slackware.com/~alien/slackbuilds/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => 'mixed', # MIXED
     'arch' => 'mixed',
     'class' => 'mimix',
@@ -517,7 +517,7 @@ $defrepo[32]=array(
 $defrepo[33]=array(
     'info' => array('create' => 1),
     'url' => 'http://linuxpackages.inode.at/Slackware/Slackware-12.2-i386/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '12.2', # OK
     'arch' => 'i386',
     'class' => '32122',
@@ -532,7 +532,7 @@ $defrepo[33]=array(
 $defrepo[34]=array(
     'info' => array('create' => 1),
     'url' => 'http://linuxpackages.inode.at/Slackware/Slackware-13.0-i386/sotirov/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '13.0', # OK
     'arch' => 'i386',
     'class' => '32130',
@@ -547,7 +547,7 @@ $defrepo[34]=array(
 $defrepo[35]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.stabellini.net/filesystem/repository/Stefano_Stabellini/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '12.1', 
     'arch' => 'i386',
     'class' => '32121',
@@ -562,7 +562,7 @@ $defrepo[35]=array(
 $defrepo[36]=array(
     'info' => array('create' => 1),
     'url' => 'http://c4dwbspace.altervista.org/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
     'class' => '64130',
@@ -577,7 +577,7 @@ $defrepo[36]=array(
 $defrepo[37]=array(
     'info' => array('create' => 0),
     'url' => 'ftp://ftp.slackware.org.uk/people/alien/restricted_slackbuilds/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => 'mixed', # MIXED
     'arch' => 'mixed',
     'class' => 'mimix',
@@ -603,7 +603,7 @@ $defrepo[37]=array(
 $defrepo[41]=array(
     'info' => array('create' => 1),
     'url' => 'http://rlworkman.net/pkgs/12.2/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '12.2', #OK
     'arch' => 'i386',
     'class' => '32122',
@@ -618,7 +618,7 @@ $defrepo[41]=array(
 $defrepo[42]=array(
     'info' => array('create' => 0),
     'url' => 'http://rlworkman.net/pkgs/current/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => 'current', # OK
     'arch' => 'mixed',
     'class' => 'micur',
@@ -633,7 +633,7 @@ $defrepo[42]=array(
 $defrepo[43]=array(
     'info' => array('create' => 1),
     'url' => 'http://rlworkman.net/pkgs/13.0/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '13.0', # OK
     'arch' => 'mixed',
     'class' => 'mi130',
@@ -662,7 +662,7 @@ $defrepo[45]=array(
     'manifest' => 'slackware64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'schoepfer.info-x86_64-13.0',
-    'description' => 'Johannes Schöpfer'
+    'description' => 'Johannes Sch&#246;pfer'
   );
 
 $defrepo[46]=array(
@@ -677,7 +677,7 @@ $defrepo[46]=array(
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'schoepfer.info-i386-13.0',
-    'description' => 'Johannes Schöpfer'
+    'description' => 'Johannes Sch&#246;pfer'
   );
 
 $defrepo[47]=array(
@@ -692,7 +692,7 @@ $defrepo[47]=array(
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'schoepfer.info-i386-12.2',
-    'description' => 'Johannes Schöpfer'
+    'description' => 'Johannes Sch&#246;pfer'
   );
 
 # Dia Tech Repository
@@ -701,7 +701,7 @@ $defrepo[47]=array(
 $defrepo[51]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.dia-tech.net/linux/Slackware-13.0/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '13.0', # OK
     'arch' => 'i386',
     'class' => '32130',
@@ -716,7 +716,7 @@ $defrepo[51]=array(
 $defrepo[52]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.dia-tech.net/linux/Slackware-12.2/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '12.2', # OK
     'arch' => 'i386',
     'class' => '32122',
@@ -731,7 +731,7 @@ $defrepo[52]=array(
 $defrepo[53]=array(
     'info' => array('create' => 1),
     'url' => 'http://www.dia-tech.net/linux/Slackware-current-kde4.4/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => 'current', # OK
     'arch' => 'i386',
     'class' => '32cur',
@@ -746,7 +746,7 @@ $defrepo[53]=array(
 $defrepo[54]=array(
     'info' => array('create' => 1),
     'url' => 'http://danixland.net/packages/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => 'current', # OK
     'arch' => 'x86_64',
     'class' => '64cur',
@@ -761,7 +761,7 @@ $defrepo[54]=array(
 $defrepo[55]=array(
     'info' => array('create' => 1),
     'url' => 'http://scxd.info/pub/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => 'current', # OK
     'arch' => 'i386',
     'class' => '32cur',
@@ -777,7 +777,7 @@ $defrepo[55]=array(
 $defrepo[56]=array(
     'info' => array('create' => 1),
     'url' => 'http://repository.elettrolinux.com/Slackware-13.0/',
-    'rank' => 0,
+    'rank' => 99,
     'version' => '13.0', # OK
     'arch' => 'i386',
     'class' => '32130',

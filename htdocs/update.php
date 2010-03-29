@@ -7,7 +7,12 @@
 //pcntl_signal(SIGINT,"shutterm");
 function shutdown() { 
   global $transact,$db;
-  if($transact)$db->db->rollback();
+  if($transact){
+    echo "operazione annullata... rollback in corso!";
+    $db->db->rollback();
+    echo "fatto.";
+  }
+
 }
 register_shutdown_function('shutdown');
 
@@ -49,54 +54,57 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
   $create=$info['create'];
   $repo['id']=$id;
   unset ($repo['info']);
-  echo "\n\nREPOSITORY: $id => {$repo['name']}\n";
+  echo "REPOSITORY: $id => {$repo['name']}... ";
   $rep=new repository($id);
   if($rep->exists()){
-    echo "già esiste\n";
+    echo "già esiste... ";
     if($create==2){
-      echo "distruzione forzata\n";
+      echo "distruzione forzata... ";
       if(!$out=$rep->drop()){
-	echo "errore nella distruzione\n";
-	var_dump($rep);
-	die();
+	echo "ERRORE NELLA DISTRUZIONE!!! ";
+	echo "annullamento in corso... ";
+	$db->db->rollback();
+	echo "annullamento effettuato.. salto al prossimo repository.\n";
+	continue;
       };
     }
     if($rep->exists()){
       if($rep->needupdate()){
-	echo "richiede aggiornamento\n";
-	echo "eliminazione in corso";
-	if(!$rep->drop()){var_dump($rep);die("errore svuotando il repository\n");}
+	echo "richiede aggiornamento... ";
+	echo "eliminazione in corso... ";
+	if(!$rep->drop()){
+	  echo "ERRORE SVUOTANDO IL REPOSITORY!!! ";
+	  echo "annullamento in corso... ";
+	  $db->db->rollback();
+	  echo "annullamento effettuato.. salto al prossimo repository.\n";
+	  continue;
+	}
       }else{
-	echo "già aggiornato\n";
+	echo "già aggiornato!\n";
       }
     }
   }
   $rep=new repository($id);
   if(!$rep->exists()){
-    echo "creazione repository:";
+    echo "creazione repository... ";
     if(!$out=$rep->add($repo)){
-      echo "errore!\n";
-      echo "dettagli errore:\n";
-      var_dump($out);
-      var_dump($rep);
-   //   $db->db->rollback();
-      die();
-    }else{
-      echo "fatto.\n";
+      echo "ERRORE!!! ";
+      echo "annullamento in corso... ";
+      $db->db->rollback();
+      echo "annullamento effettuato.. salto al prossimo repository.\n";
+      continue;
     }
-    echo "Creazione effettuata\n";
-    echo "popolamento in corso...";
+    echo "Creazione effettuata... ";
+    echo "popolamento in corso...\n";
     if(!$err=$rep->popolate()){
-      echo "\n";
-      echo "errore popolamento!\n";
-      echo "dettagli errore:\n";
-//      var_dump($rep,$err);
-  //    $db->db->rollback();
+      echo "\nERRORE!!! ";
+      echo "annullamento in corso... ";
+      $db->db->rollback();
+      echo "annullamento effettuato.. salto al prossimo repository.\n";
+      continue;
       die();
-    }else{
-      echo "\nfatto!                                                           \n";
     }
-    echo "Popolamento effettuato\n";
+    echo "Repository creato\n";
   }
   $db->db->commit();
 }
