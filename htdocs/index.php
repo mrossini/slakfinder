@@ -44,7 +44,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
         <input type='submit' value='go' /> - 
 	Description: <input name='desc' value='<?php echo $desc; ?>' /> - 
         Filename: <input name='file' value='<?php echo $file; ?>' /> - 
-	<input name='regexp' type='checkbox' <?php echo(($regexp)?"checked='checked'":""); ?> /> Use regexp</nobr>";
+	<input name='regexp' type='checkbox' <?php echo(($regexp)?"checked='checked'":""); ?> /> Use regexp</nobr>
   </form>
   <pre>
 <?php
