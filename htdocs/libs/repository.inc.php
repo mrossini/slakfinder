@@ -3,6 +3,7 @@
 class repository {
 
   public $db;
+  public $pkgsfile=null;
   
   public function __construct($repo=0){
     $this->id=0;
@@ -10,49 +11,35 @@ class repository {
     if($repo)$this->select($repo);
   }
   public function add($repo){
-    global $repodir;
     foreach($repo as $key => $value) $this->$key = $value;
-    if(file_exists("$repodir/{$this->name}/{$this->hashfile}")){
-      $hashfile=new internet("file://$repodir/{$this->name}/{$this->hashfile}");
-    }else{
-      $hashfile=new internet($this->url.$this->hashfile);
-    }
-    $this->hash=$hashfile->download();
-    if(!$this->hash)return false;
-    $this->hash=$hashfile->contents;
-    $repo['hash']=$this->hash;
+    if(!$this->pkgsfile)$this->pkgsfile=new internet($this->url.$this->packages);
+    if(!$this->pkgsfile->exists())return false;
+    $this->mtime=$this->pkgsfile->head['Last-Modified'];
+    $repo['mtime']=$this->mtime;
     if(!$this->db->insert('repository',$repo))return false;
     return $repo['id'];
   }
-  public function update(){
-    global $repodir;
-    if(file_exists("$repodir/{$this->name}/{$this->hashfile}")){
-      $hashfile=new internet("file://$repodir/{$this->name}/{$this->hashfile}");
-    }else{
-      $hashfile=new internet($this->url.$this->hashfile);
-    }
+  public function update(){	# DA SISTEMARE
+    $this->pkgfile=new internet($this->url.$this->packages);
     $this->hash=$hashfile->download();
-    if(!$this->hash)return false;
-    $this->hash=$hashfile->contents;
-    if(!$this->db->query("update #__repository set hash='".$this->hash."' where id=".$this->id))return false;
+    if(!$this->pkgsfile->exists())return false;
+    $this->mtime=$this->pkgsfile->head['Last-Modified'];
+    $repo['mtime']=$this->mtime;
+    if(!$this->db->query("update #__repository set mtime='".$this->mtime."' where id=".$this->id))return false;
     return true;
   }
 
   public function popolate($more=array()){
-    global $repodir;
     $allpackage=array();
     $pack=new package();
-    if(file_exists("$repodir/{$this->name}/{$this->packages}")){
-      $this->pkgsfile=new internet("file://$repodir/{$this->name}/{$this->packages}");
-    }else{
-      $this->pkgsfile=new internet($this->url.$this->packages);
-    }
+    if(!$this->pkgsfile)$this->pkgsfile=new internet($this->url.$this->packages);
+    if(!$this->pkgsfile->exists())return false;
     $i=0;
     while(!is_null($pkg=$pack->fetch($this->pkgsfile))){
       if($pkg){
 	$id=$pack->add($pkg,array('repository'=>$this->id),$more);
 	if(!$id){ return false; }
-//	echo $id." -> ".$pack->filename."               \n";
+	if(isset($_SERVER['DEBUG']))echo $id." -> ".$pack->filename."               \n";
 	echo ".";
 	$allpackage[$pack->filename]=$id;
 	$i++;
@@ -69,14 +56,10 @@ class repository {
     return true;
   }
   public function needupdate(){
-    global $repodir;
-    if(file_exists("$repodir/{$this->name}/{$this->hashfile}")){
-      $hashfile=new internet("file://$repodir/{$this->name}/{$this->hashfile}");
-    }else{
-      $hashfile=new internet($this->url.$this->hashfile);
-    }
-    $hashfile->download();
-    return ($hashfile->contents != $this->hash);
+    if(!$this->pkgsfile)$this->pkgsfile=new internet($this->url.$this->packages);
+    if(!$this->pkgsfile->exists())return false;
+    $mtime=$this->pkgsfile->head['Last-Modified'];
+    return $mtime != $this->mtime;
   }
 
 
@@ -123,11 +106,10 @@ class repository {
 	rank INT ,
 	manifest VARCHAR( 30 ) NOT NULL ,
 	packages VARCHAR( 30 ) NOT NULL ,
-	hashfile VARCHAR( 30 ) NOT NULL ,
 	version VARCHAR( 10 ) NOT NULL ,
 	arch VARCHAR( 10 ) NOT NULL ,
 	class VARCHAR( 10 ) NOT NULL ,
-	hash TEXT,
+	mtime VARCHAR( 40 ),
 	name VARCHAR( 40 ) NOT NULL ,
 	npkgs INT ,
 	nfiles INT ,

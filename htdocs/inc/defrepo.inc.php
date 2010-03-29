@@ -112,7 +112,6 @@ $defrepo[1]=array(
     'nfiles' => 0,
     'manifest' => 'slackware64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware64-current',
     'description' => 'Official'
   );
@@ -128,7 +127,6 @@ $defrepo[2]=array(
     'nfiles' => 0,
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware-current',
     'description' => 'Official'
   );
@@ -144,7 +142,6 @@ $defrepo[3]=array(
     'nfiles' => 0,
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware-12.2',
     'description' => 'Official'
   );
@@ -160,7 +157,6 @@ $defrepo[4]=array(
     'nfiles' => 0,
     'manifest' => 'slackware64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware64-13.0',
     'description' => 'Official'
   );
@@ -176,7 +172,6 @@ $defrepo[5]=array(
     'nfiles' => 0,
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware-13.0',
     'description' => 'Official'
   );
@@ -192,7 +187,6 @@ $defrepo[6]=array(
     'nfiles' => 0,
     'manifest' => 'patches/MANIFEST.bz2',
     'packages' => 'patches/PACKAGES.TXT',
-    'hashfile' => 'patches/CHECKSUMS.md5.asc',
     'name' => 'slackware-13.0-patches',
     'description' => 'Patches'
   );
@@ -208,7 +202,6 @@ $defrepo[7]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware64-13.0-patches',
     'description' => 'Patches'
   );
@@ -224,7 +217,6 @@ $defrepo[61]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware64-13.0-extra',
     'description' => 'Extra'
   );
@@ -240,7 +232,6 @@ $defrepo[62]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware64-current-extra',
     'description' => 'Extra'
   );
@@ -256,7 +247,6 @@ $defrepo[63]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware-13.0-extra',
     'description' => 'Extra'
   );
@@ -272,7 +262,6 @@ $defrepo[64]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'slackware-current-extra',
     'description' => 'Extra'
   );
@@ -298,7 +287,6 @@ $defrepo[11]=array(
     'npkgs' => 0,
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'packages' => 'PACKAGES.TXT',
     'name' => 'slacky-13.0',
     'description' => 'Slacky'
@@ -314,7 +302,6 @@ $defrepo[12]=array(
     'npkgs' => 0,
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'packages' => 'PACKAGES.TXT',
     'name' => 'slacky-12.2',
     'description' => 'Slacky'
@@ -330,7 +317,6 @@ $defrepo[13]=array(
     'npkgs' => 0,
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'packages' => 'PACKAGES.TXT',
     'name' => 'gnome-slacky-12.2',
     'description' => 'Gnome Slacky'
@@ -373,7 +359,6 @@ $defrepo[21]=array(
     'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.gz.asc',
     'name' => 'salix-13.0',
     'description' => 'Salix'
   );
@@ -389,7 +374,6 @@ $defrepo[22]=array(
     'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.gz.asc',
     'name' => 'salix-current',
     'description' => 'Salix'
   );
@@ -405,7 +389,6 @@ $defrepo[23]=array(
     'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.gz.asc',
     'name' => 'salix64-13.0',
     'description' => 'Salix64'
   );
@@ -421,7 +404,6 @@ $defrepo[24]=array(
     'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.gz.asc',
     'name' => 'salix64-current',
     'description' => 'Salix64'
   );
@@ -429,6 +411,66 @@ $defrepo[24]=array(
 
 
 
+
+$defrepo[25]=array(
+    'info' => array('create' => 1),
+    'url' => 'http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/slackware-unsupported/gsb/gsb64-2.26_slackware64-13.0/',
+    'rank' => 0,
+    'version' => '13.0', #OK
+    'arch' => 'x86_64',
+    'class' => '64130',
+    'npkgs' => 0,
+    'nfiles' => 0,
+    'manifest' => 'gsb64/MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'name' => 'gsb64-gnome2.26',
+    'description' => 'gnome-2.26'
+  );
+
+$defrepo[26]=array(
+    'info' => array('create' => 1),
+    'url' => 'http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/slackware-unsupported/gsb/gsb64-current/',
+    'rank' => 0,
+    'version' => '13.0', #OK
+    'arch' => 'x86_64',
+    'class' => '64130',
+    'npkgs' => 0,
+    'nfiles' => 0,
+    'manifest' => 'gsb64/MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'name' => 'gsb64-gnome-current',
+    'description' => 'gsb-gnome2.28'
+  );
+
+$defrepo[27]=array(
+    'info' => array('create' => 1),
+    'url' => 'http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/slackware-unsupported/gsb/gsb-2.26_slackware-13.0/',
+    'rank' => 0,
+    'version' => '13.0', #OK
+    'arch' => 'i386',
+    'class' => '32130',
+    'npkgs' => 0,
+    'nfiles' => 0,
+    'manifest' => 'gsb/MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'name' => 'gsb-gnome2.26',
+    'description' => 'gnome-2.26'
+  );
+
+$defrepo[28]=array(
+    'info' => array('create' => 1),
+    'url' => 'http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/slackware-unsupported/gsb/gsb-current/',
+    'rank' => 0,
+    'version' => '13.0', #OK
+    'arch' => 'i386',
+    'class' => '32130',
+    'npkgs' => 0,
+    'nfiles' => 0,
+    'manifest' => 'gsb/MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'name' => 'gsb-gnome-current',
+    'description' => 'gsb-gnome2.28'
+  );
 
 
 
@@ -452,7 +494,6 @@ $defrepo[31]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5',
     'name' => 'slackers.it',
     'description' => 'Slackers'
   );
@@ -466,10 +507,9 @@ $defrepo[32]=array(
     'class' => 'mimix',
     'npkgs' => 0,
     'nfiles' => 0,
-    'manifest' => '',
-    //'manifest' => 'MANIFEST.bz2',
+//    'manifest' => '',
+    'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'alien',
     'description' => 'Alien Bob'
   );
@@ -485,7 +525,6 @@ $defrepo[33]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.gz',
     'name' => 'linuxpackages-12.2-i386',
     'description' => 'LinuxPackages'
   );
@@ -501,7 +540,6 @@ $defrepo[34]=array(
     'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.gz',
     'name' => 'linuxpackages-13.0-i386-sotirov',
     'description' => 'LP Sotirov'
   );
@@ -517,7 +555,6 @@ $defrepo[35]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5',
     'name' => 'stabellini',
     'description' => 'Stabellini'
   );
@@ -533,7 +570,6 @@ $defrepo[36]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5',
     'name' => 'c4dwbspace-jimmy_page_89-x86_64',
     'description' => 'Jimmy_page_89'
   );
@@ -549,7 +585,6 @@ $defrepo[37]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'alien-restricted',
     'description' => 'Alien Restricted'
   );
@@ -576,13 +611,12 @@ $defrepo[41]=array(
     'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'rlworkman-for-12.2',
     'description' => 'Robby Workman'
   );
 
 $defrepo[42]=array(
-    'info' => array('create' => 1),
+    'info' => array('create' => 0),
     'url' => 'http://rlworkman.net/pkgs/current/',
     'rank' => 0,
     'version' => 'current', # OK
@@ -592,7 +626,6 @@ $defrepo[42]=array(
     'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'rlworkman-for-current',
     'description' => 'Robby Workman'
   );
@@ -608,7 +641,6 @@ $defrepo[43]=array(
     'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'rlworkman-for-13.0',
     'description' => 'Robby Workman'
   );
@@ -629,7 +661,6 @@ $defrepo[45]=array(
     'nfiles' => 0,
     'manifest' => 'slackware64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'schoepfer.info-x86_64-13.0',
     'description' => 'Johannes Schöpfer'
   );
@@ -645,7 +676,6 @@ $defrepo[46]=array(
     'nfiles' => 0,
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'schoepfer.info-i386-13.0',
     'description' => 'Johannes Schöpfer'
   );
@@ -661,7 +691,6 @@ $defrepo[47]=array(
     'nfiles' => 0,
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'schoepfer.info-i386-12.2',
     'description' => 'Johannes Schöpfer'
   );
@@ -680,7 +709,6 @@ $defrepo[51]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'ChangeLog.txt.gz',
     'name' => 'dia-tech-slack-13.0',
     'description' => 'Aszabo'
   );
@@ -696,7 +724,6 @@ $defrepo[52]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'ChangeLog.txt.gz',
     'name' => 'dia-tech-slack-12.2',
     'description' => 'Aszabo'
   );
@@ -712,7 +739,6 @@ $defrepo[53]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'ChangeLog.txt.gz',
     'name' => 'dia-tech-curr-kde4.4',
     'description' => 'Aszabo for kde 4.4'
   );
@@ -728,7 +754,6 @@ $defrepo[54]=array(
     'nfiles' => 0,
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'CHECKSUMS.md5.asc',
     'name' => 'danix-current64',
     'description' => 'Danix'
   );
@@ -745,7 +770,6 @@ $defrepo[55]=array(
     'manifest' => '',
     #'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'ChangeLog.txt',
     'name' => 'scxd-current',
     'description' => 'Scxd'
   );
@@ -761,7 +785,6 @@ $defrepo[56]=array(
     'nfiles' => 0,
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
-    'hashfile' => 'ChangeLog.txt',
     'name' => 'elettrolinux-for-13.0',
     'description' => 'Michele.P'
   );

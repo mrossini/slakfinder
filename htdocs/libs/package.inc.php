@@ -82,9 +82,10 @@ class package {
 
   public function fetch($packages){
     $pkg="";
-    while(!is_null($pkln=$packages->get())){
-      if($pkln===false)die('errore su packages');
-      if($pkln!=""){
+    while(!$packages->eof()){
+      $pkln=$packages->get();
+      //if($pkln===false)die('errore su packages');
+      if($pkln){
 	$pkg.=$pkln."\n";
       }else{
 	$pkg=$this->parse($pkg);

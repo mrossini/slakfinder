@@ -19,7 +19,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   -->
   </style>
 <body>
-<!--<pre>-->
 <?php
   include 'inc/includes.inc.php';
   include 'inc/defrepo.inc.php';
@@ -35,21 +34,20 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   foreach($_GET as $key => $value)$$key=$value;
   if ($name or $desc or $file) $db->counter_inc('searches');
   echo "Searched ".$db->counter_get('searches')." packages from 6 March 2010<br /><br />";
+?>
 
-  echo "<form action='?' >";
-  echo "<input type='hidden' name='act' value='search' />\n";
-  echo tables(array(),1,0);
-  $from=writerepos($repo);
-  echo tables(array("<nobr>Search from:</nobr> ",$from));
-  echo tables(array("<nobr>Package name:</nobr> ","<input name='name' value='$name' />"));
-  echo tables(array("<nobr>Description:</nobr> ","<input name='desc' value='$desc' /><br />"));
-  echo tables(array("<nobr>Filename:</nobr> ","<input name='file' value='$file' /><br />"));
-  echo tables(array("<nobr>Use regexp:</nobr> ","<input name='regexp' type='checkbox' ".(($regexp)?"checked='checked'":"")." />"));
-  echo tables();
-  echo "<input type='submit' value='go' />";
-
-  echo "</form>";
-  echo "<pre>";
+<form action='index.php?#results'
+  <input type='hidden' name='act' value='search' />
+  <?php echo writerepos($repo); ?>
+  <a name='results'>
+  <nobr>Search: <input name='name' value='<?php echo $name; ?>' /> 
+        <input type='submit' value='go' /> - 
+	Description: <input name='desc' value='<?php echo $desc; ?>' /> - 
+        Filename: <input name='file' value='<?php echo $file; ?>' /> - 
+	<input name='regexp' type='checkbox' <?php echo(($regexp)?"checked='checked'":""); ?> /> Use regexp</nobr>";
+  </form>
+  <pre>
+<?php
 
   if ($name or $desc or $file){
     if(!$file){

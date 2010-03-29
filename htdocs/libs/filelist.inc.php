@@ -9,12 +9,24 @@ class filelist {
     $this->db=new mysql();
   }
   public function addall(&$allpackages,$repo){
-    $this->db->insert('filelist',array('package','repository','fullpath','filename','filedate','filesize'),true);
+    $this->db->insert('filelist',array('package','repository','fullpath','filename'),true);
     $step=0;
     $p=0;
     $repoid=$repo->id;
     while(!is_null($line=$repo->manifile->get())){
       if(isset($_SERVER['DEBUG']))echo "$line\n";
+      if($line=="++========================================")$step=0;
+      if($step==1){
+	if($line){
+	  $tmp=preg_split("/^(.)([^ ]+) +([^ ]+) +([^ ]+) +([^ ]+) +([^ ]+) +([^ ]*\/)*([^\/]*)(| .*)$/",$line,0, PREG_SPLIT_DELIM_CAPTURE);
+	  $type=$tmp[1];$path=$tmp[7]; $file=$tmp[8];
+	  if($type!="d"){
+	    if($pkgid!==false)$this->db->insert(array($pkgid, $repoid, "$path", $file)); 
+	  }
+	}else{
+	  $step=0;
+	}
+      }
       if($step==0){ 
 	if(!$line)continue;
 	if($line!="++========================================")return false;
@@ -34,25 +46,6 @@ class filelist {
 	if(($line=$repo->manifile->get())!="++========================================")return false;
 	$step=1;
 	$num=0;
-      }elseif($step==1){
-	if($line){
-	  $tmp=preg_split("/^(.)([^ ]+) +([^\/]+)\/([^ ]+)[^\d]+([\,\d]+) +(\d+-\d+-\d+ \d+:\d+)(|:\d+) +([^ ]*\/)*([^\/]*)(| .*)$/",$line,0, PREG_SPLIT_DELIM_CAPTURE);
-	  $type=$tmp[1]; $perm=$tmp[2]; $user=$tmp[3]; $group=$tmp[4]; $size=$tmp[5]; $date=$tmp[6]; $path=$tmp[8]; $file=$tmp[9];
-	  if(!$tmp[1]){
-//	    var_dump($tmp,$line);
-//	    var_dump(preg_split("/^(.)([^ ]+) +([^\/]+)\/([^ ]+)[^\d]+([\,\d]+) +(\d+-\d+-\d+ \d+:\d+)(|:\d+) /",$line,0, PREG_SPLIT_DELIM_CAPTURE));
-	    die();
-	  }
-	  if($type!="d"){
-	    if($type=="c" or $type=="b") $size=0;
-	    if($pkgid!==false)$this->db->insert(array($pkgid, $repoid, "$path", $file, "$date:00", $size)); 
-	    //echo "\r".$num++;
-	  }
-	}else{
-	  $this->db->insert();
-	  //echo "\r";
-	  $step=0;
-	}
       }
     }
     $this->db->insert();
@@ -112,8 +105,6 @@ class filelist {
 	  package INT NOT NULL ,
 	  fullpath VARCHAR( 511 ) NOT NULL ,
 	  filename VARCHAR( 255 ) NOT NULL ,
-	  filedate DATETIME NOT NULL ,
-	  filesize INT NOT NULL ,
 	PRIMARY KEY ( id ) ,
 	INDEX ( filename ),
 	FOREIGN KEY ( package ) REFERENCES #__packages ( id ) ON DELETE CASCADE
