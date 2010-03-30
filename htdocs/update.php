@@ -12,6 +12,7 @@ function shutdown() {
     $db->db->rollback();
     echo "fatto.";
   }
+  flush();
 
 }
 register_shutdown_function('shutdown');
@@ -24,7 +25,7 @@ include 'inc/defrepo.inc.php';
 
 $db=new database();
 
-if(isset($_SERVER['DROPDB'])){
+if(isset($_SERVER['DROPDB'])or isset($_GET['DROPDB'])){
   echo "eliminazione database... ";
   $out=$db->dropdb();
   if(!$out){
@@ -48,13 +49,21 @@ if(isset($_SERVER['DROPDB'])){
   }
 }
 
+if(isset($_SERVER['REPO'])){
+  $defrepo=array($_SERVER['REPO'] => $defrepo[$_SERVER['REPO']]);
+}
+if(isset($_GET['REPO'])){
+  $defrepo=array($_GET['REPO'] => $defrepo[$_GET['REPO']]);
+}
 foreach($defrepo as $id => $repo)if($repo['info']['create']){
+  flush();
   $db->db->transact();
   $info=$repo['info'];
   $create=$info['create'];
   $repo['id']=$id;
   unset ($repo['info']);
   echo "REPOSITORY: $id => {$repo['name']}... ";
+  flush();
   $rep=new repository($id);
   if($rep->exists()){
     echo "già esiste... ";
@@ -72,6 +81,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
       if($rep->needupdate()){
 	echo "richiede aggiornamento... ";
 	echo "eliminazione in corso... ";
+	flush();
 	if(!$rep->drop()){
 	  echo "ERRORE SVUOTANDO IL REPOSITORY!!! ";
 	  echo "annullamento in corso... ";
@@ -84,6 +94,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
       }
     }
   }
+  flush();
   $rep=new repository($id);
   if(!$rep->exists()){
     echo "creazione repository... ";
@@ -96,6 +107,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
     }
     echo "Creazione effettuata... ";
     echo "popolamento in corso...\n";
+    flush();
     if(!$err=$rep->popolate()){
       echo "\nERRORE!!! ";
       echo "annullamento in corso... ";

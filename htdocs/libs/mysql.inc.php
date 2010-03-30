@@ -131,12 +131,12 @@ class mysql {
 	public function commit(){
 	  global $transact;
 	  $this->query('COMMIT');
-	  $transact=true;
+	  $transact=false;
 	}
 	public function rollback(){
 	  global $transact;
 	  $this->query('ROLLBACK');
-	  $transact=true;
+	  $transact=false;
 	}
 	
 	public function close(){
