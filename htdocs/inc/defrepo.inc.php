@@ -208,60 +208,60 @@ $defrepo[7]=array(
 
 $defrepo[61]=array( 
     'info' => array('create' => 1),
-    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/extra/',
+    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/',
     'rank' => 3,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
     'class' => '64130',
     'npkgs' => 0,
     'nfiles' => 0,
-    'manifest' => 'MANIFEST.bz2',
-    'packages' => 'PACKAGES.TXT',
+    'manifest' => 'extra/MANIFEST.bz2',
+    'packages' => 'extra/PACKAGES.TXT',
     'name' => 'slackware64-13.0-extra',
     'description' => 'Extra'
   );
 
 $defrepo[62]=array( 
     'info' => array('create' => 1),
-    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-current/extra/',
+    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-current/',
     'rank' => 3,
     'version' => 'current', #OK
     'arch' => 'x86_64',
     'class' => '64cur',
     'npkgs' => 0,
     'nfiles' => 0,
-    'manifest' => 'MANIFEST.bz2',
-    'packages' => 'PACKAGES.TXT',
+    'manifest' => 'extra/MANIFEST.bz2',
+    'packages' => 'extra/PACKAGES.TXT',
     'name' => 'slackware64-current-extra',
     'description' => 'Extra'
   );
 
 $defrepo[63]=array( 
     'info' => array('create' => 1),
-    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/extra/',
+    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/',
     'rank' => 3,
     'version' => '13.0', #OK
     'arch' => 'i386',
     'class' => '32130',
     'npkgs' => 0,
     'nfiles' => 0,
-    'manifest' => 'MANIFEST.bz2',
-    'packages' => 'PACKAGES.TXT',
+    'manifest' => 'extra/MANIFEST.bz2',
+    'packages' => 'extra/PACKAGES.TXT',
     'name' => 'slackware-13.0-extra',
     'description' => 'Extra'
   );
 
 $defrepo[64]=array( 
     'info' => array('create' => 1),
-    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-current/extra/',
+    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-current/',
     'rank' => 3,
     'version' => 'current', #OK
     'arch' => 'i386',
     'class' => '32cur',
     'npkgs' => 0,
     'nfiles' => 0,
-    'manifest' => 'MANIFEST.bz2',
-    'packages' => 'PACKAGES.TXT',
+    'manifest' => 'extra/MANIFEST.bz2',
+    'packages' => 'extra/PACKAGES.TXT',
     'name' => 'slackware-current-extra',
     'description' => 'Extra'
   );
