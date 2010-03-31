@@ -60,9 +60,24 @@ class filelist {
 
   public function find($file=null,$pkg=null,$desc=null,$repo=null,$start=null,$max=null,$regexp=false){ //$repo == id only
     if(!is_null($file)){
+      $rank=" (
+	(F.filename like '$file')*10+
+	(F.filename like '$file.%')*5+
+	(F.filename like '$file-%')*5+
+	(F.filename like '$file%' and F.filename not like '$file.%' and F.filename not like '$file-%')*3+
+	(F.filename like '%.$file.%')*2+
+	(F.filename like '%-$file-%')*2+
+	(F.filename like '%.$file%' and F.filename not like '%.$file.%')*2+
+	(F.filename like '%-$file%' and F.filename not like '%-$file-%')*2+
+	(F.filename like '%.$file')*1+
+	(F.filename like '%-$file')*1+
+	(F.filename like '%$file%$file%')*1+
+	(LENGTH('$file')/LENGTH(F.filename))
+      ) ";
       $sql="SELECT F.*, 
 	           P.name as pkgname, P.arch AS arch, P.version as version, P.location AS pkgloc, P.filename AS pkgfile,
-		   R.name AS reponame, R.url AS url, P.id AS pkgid
+		   R.name AS reponame, R.url AS url, P.id AS pkgid, R.version AS distro, R.description AS repodesc, 
+		   $rank AS rank
 	FROM #__filelist as F 
 	LEFT JOIN  #__packages as P 
 	  ON (F.package=P.id)
@@ -83,11 +98,11 @@ class filelist {
 	if($file and $regexp){$sql.="$next F.filename REGEXP \"$file\" ";$next=" AND ";}
 	if($file and !$regexp){$sql.="$next F.filename LIKE '%$file%' ";$next=" AND ";}
       }
-      if(is_numeric($start) and is_numeric($max)){
-        $sql.=" limit $start,$max";
-      }
+      $order="rank desc";
+      $sql.=" order by $order ";
       $this->db->query($sql);
     }else{
+      if(is_numeric($pkg))return $this->db->seek($pkg);
       $this->id=0;
       if(!$out=$this->db->get())return false;
       foreach($out as $key => $value) $this->$key = $value;

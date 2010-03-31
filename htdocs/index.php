@@ -54,13 +54,13 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
         <input type='submit' value='go' /> - 
 	Description: <input name='desc' value='<?php echo $desc; ?>' /> - 
         Filename: <input name='file' value='<?php echo $file; ?>' /> - 
-	<input name='regexp' type='checkbox' <?php echo(($regexp)?"checked='checked'":""); ?> /> Use regexp</nobr>
+	<input name='regexp' type='checkbox' <?php echo(($regexp)?"checked='checked'":""); ?> /> Use regexp (filename only)</nobr>
   </form>
   <pre>
 <?php
 
   if ($name or $desc or $file){
-    if(!$file){
+    if(!$file){ ///////////////////////////////////// PACKAGES.TXT RESULTS ////////////////////////////////////////////////
       $pkg=new package();
       $ord="";
       switch($order){
@@ -95,7 +95,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	  $from=$maxresult*$pg;
 	  echo "<a href='index.php?start=$from&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&gt;&gt;</a>  ";
 	}
-      if($nres>$start){
 	echo tables(array(
 	  "<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='ranku')?'rankd':'ranku')."#results'>rank</a>",
 	  "<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='pkgu')?'pkgd':'pkgu')."#results'>package</a>",
@@ -105,6 +104,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	  "<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='repou')?'repod':'repou')."#results'>repository</a>",
 	  "<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='locu')?'locd':'locu')."#results'>location</a>",
 	  "&nbsp;"),1,"class='results' width='100%'");
+      if($nres>$start){
 	$repos=null;
 	$pkg->find(null,$start);
 	for ( $i=$start ; $i < $to; $i++ ){
@@ -119,7 +119,31 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	    "<a href='{$pkg->url}{$pkg->location}/'>{$pkg->location}/</a>",
 	    "<a href='{$pkg->url}{$pkg->location}/{$pkg->filename}'>download</a>"));
 	}
-	echo tables();
+      }
+      echo tables();
+      if($start > 0){
+	echo "<a href='index.php?start=0&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&lt;&lt;</a>  ";
+	$from=$start-$maxresult;if($from<0)$from=0;
+	echo "<a href='index.php?start=$from&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&lt;</a>  ";
+      }
+      if($to < $nres){
+      $pg=round($nres/$maxresult-0.5,0);
+      $from=$start+$maxresult;
+      echo "<a href='index.php?start=$from&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&gt;</a>  ";
+	$from=$maxresult*$pg;
+	echo "<a href='index.php?start=$from&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&gt;&gt;</a>  ";
+      }
+      echo "<br /><br /><br />";
+    }else{ /////////////////////////////////////////////////// MANIFEST.bz2 RESULTS ///////////////////////////////////////////////////////////
+  //    $maxresult=80;
+      $fl=new filelist();
+      $nres=$fl->find($file,$name,$desc,$repo,0,$maxresult+1,$regexp);
+      if(isset($_GET['debug']))var_dump($pkg,$nres);
+      $to=$start+$maxresult; if($to > $nres)$to=$nres;
+      echo "Time: ".(round($fl->db->msec/1000,3))." msec<br />";
+
+      echo "Results ".($start+1)."-$to of $nres:                    ";
+
 	if($start > 0){
 	  echo "<a href='index.php?start=0&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&lt;&lt;</a>  ";
 	  $from=$start-$maxresult;if($from<0)$from=0;
@@ -132,34 +156,46 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	  $from=$maxresult*$pg;
 	  echo "<a href='index.php?start=$from&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&gt;&gt;</a>  ";
 	}
-      }
-      echo "<br /><br /><br />";
-    }else{
-      $maxresult=80;
-      $fl=new filelist();
-      $out=$fl->find($file,$name,$desc,$repo,0,$maxresult+1,$regexp);
-      echo "Time: ".(round($fl->db->msec,3))." msec<br />";
-      if($out>$maxresult){
-	echo "Founded more than $maxresult results<br /><br />";
-	$out=$maxresult;
-      }else{
-	echo "Found $out results:<br /><br />";
-      }
-      if($out){
-	$repos="";
-	$pack="";
-	for ( $i=0 ; $i < $out ; $i++ ){
+
+
+
+
+      echo tables(array('rank','package','version','arch','distro','file','path','repository','location','&nbsp'),1,"class='results' width='100%'");
+      if($nres>$start){
+	$fl->find(null,$start);
+	for ( $i=$start ; $i < $to ; $i++ ){
 	  $fl->find();
-	  if($repos != $fl->reponame){
-	    if($repos) echo tables();
-	    echo "<br />Repository: {$fl->reponame} - url: <a href='{$fl->url}'>{$fl->url}</a>";
-	    $repos=$fl->reponame;
-	    echo tables(array("package","version","file","path","location",'&nbsp;'),1,"class='results'");
-	  }
-	  echo tables(array("<a href='show.php?pkg={$fl->pkgid}'>{$fl->pkgname}</a>",$fl->version."-".$fl->arch,$fl->filename,$fl->fullpath,"<a href='{$fl->url}{$fl->pkgloc}/'>{$fl->pkgloc}/</a>","<a href='{$fl->url}{$fl->pkgloc}/{$fl->pkgfile}'>download</a>"));
+	  echo tables(array(
+	    $fl->rank,
+	    "<a href='show.php?pkg={$fl->pkgid}'>{$fl->pkgname}</a>",
+	    $fl->version,
+	    $fl->arch,
+	    $fl->distro,
+	    str_ireplace("$file","<b style='color:red;'>$file</b>",$fl->filename),
+	    $fl->fullpath,
+	    "<a title='{$fl->url}' href='{$fl->url}'>{$fl->repodesc}</a>",
+	    "<a href='{$fl->url}{$fl->pkgloc}/'>{$fl->pkgloc}/</a>",
+	    "<a href='{$fl->url}{$fl->pkgloc}/{$fl->pkgfile}'>download</a>"));
 	}
-	echo tables();
       }
+      echo tables();
+	if($start > 0){
+	  echo "<a href='index.php?start=0&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&lt;&lt;</a>  ";
+	  $from=$start-$maxresult;if($from<0)$from=0;
+	  echo "<a href='index.php?start=$from&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&lt;</a>  ";
+	}
+	if($to < $nres){
+	  $pg=round($nres/$maxresult-0.5,0);
+	  $from=$start+$maxresult;
+	  echo "<a href='index.php?start=$from&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&gt;</a>  ";
+	  $from=$maxresult*$pg;
+	  echo "<a href='index.php?start=$from&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&gt;&gt;</a>  ";
+	}
+
+
+
+
+
       echo "<br /><br /><br />";
     }
   }

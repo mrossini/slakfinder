@@ -28,13 +28,13 @@ class database {
 		if(!$this->db->query(filelist::sql()))return false;
 		if(!$this->db->query("
 		  CREATE TABLE IF NOT EXISTS #__mixed (
-		    id INT AUTO_INCREMENT ,
 		    field VARCHAR( 255 ) NOT NULL ,
                     value VARCHAR( 255 ) NULL ,
-                    PRIMARY KEY ( id )
+                    PRIMARY KEY ( field )
 		  ) ENGINE = InnoDB;
 		"))return false;
-		if(!$this->db->query("INSERT INTO #__mixed (field,value) values ('count_visits','1'),('count_searches','1');"))return false;
+		$this->db->query("INSERT INTO #__mixed (field,value) value ('count_visits','1');");
+		$this->db->query("INSERT INTO #__mixed (field,value) value ('count_searches','1');");
 		return true;
 	}
 	public function counter_get($counter){

@@ -31,6 +31,7 @@ class mysql {
 		if(!$this->results){
 			$this->errno=mysql_errno();
 			$this->error=mysql_error();
+			if(isset($_SERVER['SHOWQ'])or isset($_GET['debug']))var_dump($this);
 			return false;
 		}
 		if($this->results==true){
@@ -40,6 +41,7 @@ class mysql {
 			$this->nrows=mysql_num_rows($this->results);
 			$this->datas=array();
 		}
+		if(isset($_SERVER['SHOWQ'])or isset($_GET['debug']))var_dump($this);
 		return true;
 	}
 
