@@ -1,5 +1,5 @@
 <?php
-
+echo "<pre>";
 /*function shutterm(){ 
   echo "\n\n\npippo\n\n\n";
   die("\n\nreceived SIGTERM\n\n"); 
@@ -125,6 +125,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
 
 
 echo "\n";
+echo "</pre>";
 
 
 ?>
