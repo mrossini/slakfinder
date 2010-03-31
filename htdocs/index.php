@@ -135,6 +135,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
       }
       echo "<br /><br /><br />";
     }else{
+      $maxresult=80;
       $fl=new filelist();
       $out=$fl->find($file,$name,$desc,$repo,0,$maxresult+1,$regexp);
       echo "Time: ".(round($fl->db->msec,3))." msec<br />";
