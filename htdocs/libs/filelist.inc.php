@@ -58,7 +58,7 @@ class filelist {
 
   }
 
-  public function find($file=null,$pkg=null,$desc=null,$repo=null,$start=null,$max=null,$regexp=false){ //$repo == id only
+  public function find($file=null,$pkg=null,$desc=null,$repo=null,$start=null,$max=null){ //$repo == id only
     if(!is_null($file)){
       $rank=" (
 	(F.filename like '$file')*10+
@@ -95,8 +95,7 @@ class filelist {
 	    $sql.="$next ( P.name LIKE '%$pkg%' ) ";$next=" AND ";
 	  }
 	}
-	if($file and $regexp){$sql.="$next F.filename REGEXP \"$file\" ";$next=" AND ";}
-	if($file and !$regexp){$sql.="$next F.filename LIKE '%$file%' ";$next=" AND ";}
+	if($file){$sql.="$next F.filename LIKE '%$file%' ";$next=" AND ";}
       }
       $order="rank desc";
       $sql.=" order by $order ";

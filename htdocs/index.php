@@ -33,7 +33,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     $_SESSION['searcher_visitor']=$db->counter_get('visits');
   }
   echo "You are the ".$_SESSION['searcher_visitor']."st visitor<br />";
-  $regexp=$name=$desc=$file=$repo=$order=null;
+  $name=$desc=$file=$repo=$order=null;
   foreach($_GET as $key => $value)$$key=$value;
   if ($name or $desc or $file) {
     if(($start==0)and($_SESSION['last_search']!="name=$name&desc=$desc&file=$file")){
@@ -53,8 +53,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   <nobr>Search: <input name='name' value='<?php echo $name; ?>' /> 
         <input type='submit' value='go' /> - 
 	Description: <input name='desc' value='<?php echo $desc; ?>' /> - 
-        Filename: <input name='file' value='<?php echo $file; ?>' /> - 
-	<input name='regexp' type='checkbox' <?php echo(($regexp)?"checked='checked'":""); ?> /> Use regexp (filename only)</nobr>
+        Filename: <input name='file' value='<?php echo $file; ?>' /> 
   </form>
   <pre>
 <?php
@@ -137,7 +136,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     }else{ /////////////////////////////////////////////////// MANIFEST.bz2 RESULTS ///////////////////////////////////////////////////////////
   //    $maxresult=80;
       $fl=new filelist();
-      $nres=$fl->find($file,$name,$desc,$repo,0,$maxresult+1,$regexp);
+      $nres=$fl->find($file,$name,$desc,$repo,0,$maxresult+1);
       if(isset($_GET['debug']))var_dump($pkg,$nres);
       $to=$start+$maxresult; if($to > $nres)$to=$nres;
       echo "Time: ".(round($fl->db->msec/1000,3))." msec<br />";
