@@ -38,7 +38,7 @@ class filelist {
 	if(isset($allpackages[$tmp[0]])){
 	  $pkgid=$allpackages[$tmp[0]];
 	}else{
-	  $pkgid==false;
+	  $pkgid=false;
 	}
 	//echo "      - ".$p++."  - $pkgid - {$tmp[0]}                                    \n";
 	echo ".";
