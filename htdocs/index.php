@@ -57,27 +57,31 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   </form>
   <pre>
 <?php
+  $ord="";
+  switch($order){
+    case "ranku": $ord='rank desc';break;
+    case "rankd": $ord='rank';break;
+    case "pkgu": $ord='P.name';break;
+    case "pkgd": $ord='P.name desc';break;
+    case "veru": $ord='P.version desc';break;
+    case "verd": $ord='P.version';break;
+    case "archu": $ord='P.arch';break;
+    case "archd": $ord='P.arch desc';break;
+    case "distu": $ord='R.version desc';break;
+    case "distd": $ord='R.version';break;
+    case "fileu": $ord='F.filename';break;
+    case "filed": $ord='F.filename desc';break;
+    case "pathu": $ord='F.fullpath';break;
+    case "pathd": $ord='F.filename desc';break;
+    case "repou": $ord='R.description';break;
+    case "repod": $ord='R.description desc';break;
+    case "locu": $ord='P.location';break;
+    case "locd": $ord='P.location desc';break;
+  }
 
   if ($name or $desc or $file){
     if(!$file){ ///////////////////////////////////// PACKAGES.TXT RESULTS ////////////////////////////////////////////////
       $pkg=new package();
-      $ord="";
-      switch($order){
-	case "ranku": $ord='rank desc';break;
-	case "rankd": $ord='rank';break;
-	case "pkgu": $ord='P.name';break;
-	case "pkgd": $ord='P.name desc';break;
-	case "veru": $ord='P.version desc';break;
-	case "verd": $ord='P.version';break;
-	case "archu": $ord='P.arch';break;
-	case "archd": $ord='P.arch desc';break;
-	case "distu": $ord='R.version desc';break;
-	case "distd": $ord='R.version';break;
-	case "repou": $ord='R.description';break;
-	case "repod": $ord='R.description desc';break;
-	case "locu": $ord='P.location';break;
-	case "locd": $ord='P.location desc';break;
-      }
       $nres=$pkg->find($name,$desc,$repo,$ord);
       if(isset($_GET['debug']))var_dump($pkg,$nres);
       $to=$start+$maxresult; if($to > $nres)$to=$nres;
@@ -137,7 +141,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     }else{ /////////////////////////////////////////////////// MANIFEST.bz2 RESULTS ///////////////////////////////////////////////////////////
   //    $maxresult=80;
       $fl=new filelist();
-      $nres=$fl->find($file,$name,$desc,$repo,0,$maxresult+1);
+      $nres=$fl->find($file,$name,$desc,$repo,$ord);
       if(isset($_GET['debug']))var_dump($pkg,$nres);
       $to=$start+$maxresult; if($to > $nres)$to=$nres;
       echo "Time: ".(round($fl->db->msec/1000,3))." msec<br />";
@@ -160,7 +164,20 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 
 
 
-      echo tables(array('rank','package','version','arch','distro','file','path','repository','location','&nbsp'),1,"class='results' width='100%'");
+//      echo tables(array('rank','package','version','arch','distro','file','path','repository','location','&nbsp'),1,"class='results' width='100%'");
+      echo tables(array(
+	"<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='ranku')?'rankd':'ranku')."#results'>rank</a>",
+	"<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='pkgu')?'pkgd':'pkgu')."#results'>package</a>",
+	"<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='veru')?'verd':'veru')."#results'>version</a>",
+	"<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='archu')?'archd':'archu')."#results'>arch</a>",
+	"<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='distu')?'distd':'distu')."#results'>distro</a>",
+
+	"<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='fileu')?'filed':'fileu')."#results'>file</a>",
+	"<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='pathu')?'pathd':'pathu')."#results'>path</a>",
+
+	"<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='repou')?'repod':'repou')."#results'>repository</a>",
+	"<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='locu')?'locd':'locu')."#results'>location</a>",
+	"&nbsp;"),1,"class='results' width='100%'");
       if($nres>$start){
 	$fl->find(null,$start);
 	for ( $i=$start ; $i < $to ; $i++ ){

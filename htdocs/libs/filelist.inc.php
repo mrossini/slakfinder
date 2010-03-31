@@ -97,8 +97,15 @@ class filelist {
 	}
 	if($file){$sql.="$next F.filename LIKE '%$file%' ";$next=" AND ";}
       }
-      $order="rank desc";
-      $sql.=" order by $order ";
+      if($rank){
+	if($order)$order.=" , ";$order.=" rank desc ";
+      }
+      if($order)$order.=" , ";$order.=" R.rank ";
+      if($order)$order.=" , ";$order.=" R.version desc ";
+      if($order)$order.=" , ";$order.=" F.filename desc ";
+      if($order)$order.=" , ";$order.=" P.name ";
+      if($order)$order.=" , ";$order.=" P.version desc ";
+      if($order)$sql.=" order by $order ";
       $sql.=" limit 0,1000";
       $this->db->query($sql);
     }else{
