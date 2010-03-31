@@ -81,6 +81,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
       $nres=$pkg->find($name,$desc,$repo,$ord);
       if(isset($_GET['debug']))var_dump($pkg,$nres);
       $to=$start+$maxresult; if($to > $nres)$to=$nres;
+      echo "Time: ".(round($pkg->db->msec/1000,3))." msec<br />";
       echo "Results ".($start+1)."-$to of $nres:                    ";
 	if($start > 0){
 	  echo "<a href='index.php?start=0&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&lt;&lt;</a>  ";

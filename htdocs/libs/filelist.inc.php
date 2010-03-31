@@ -58,7 +58,7 @@ class filelist {
 
   }
 
-  public function find($file=null,$pkg=null,$desc=null,$repo=null,$start=null,$max=null){ //$repo == id only
+  public function find($file=null,$pkg=null,$desc=null,$repo=null,$order=""){ //$repo == id only
     if(!is_null($file)){
       $rank=" (
 	(F.filename like '$file')*10+
@@ -99,6 +99,7 @@ class filelist {
       }
       $order="rank desc";
       $sql.=" order by $order ";
+      $sql.=" limit 0,1000";
       $this->db->query($sql);
     }else{
       if(is_numeric($pkg))return $this->db->seek($pkg);
