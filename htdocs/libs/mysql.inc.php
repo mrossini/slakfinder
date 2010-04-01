@@ -44,6 +44,25 @@ class mysql {
 		if(isset($_SERVER['SHOWQ'])or isset($_GET['debug']))var_dump($this);
 		return true;
 	}
+	public function search($fields,$from,$where="",$order="",$limit=""){
+	  global $dbdata;
+	  $time=0;
+	  $query="SELECT $fields \n FROM $from \n";
+	  if($where)$query.="WHERE $where ";
+	  $md5=md5($query);
+	  $memtab="#__cache_$md5";
+	  $istab=$this->query("SHOW TABLES WHERE Tables_in_$dbdata='$memtab'");
+	  if(!$this->nrows) {
+	    $this->query("CREATE TABLE $memtab ENGINE=MyISAM $query ORDER BY rank DESC LIMIT 0,3000;");
+	    $time=$this->msec;
+	  }
+	  $sql="SELECT * FROM $memtab ";
+	  if($order)$sql.=" ORDER BY $order ";
+	  if($limit)$sql.=" LIMIT $limit ";
+	  $q=$this->query($sql);
+	  if($time)$this->msec=$time;
+	  return $q;
+	}
 
 	public function fetchtable(){
 	  while($this->fetch());

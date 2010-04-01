@@ -58,29 +58,29 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   <pre>
 <?php
   $ord="";
-  switch($order){
-    case "ranku": $ord='rank desc';break;
-    case "rankd": $ord='rank';break;
-    case "pkgu": $ord='P.name';break;
-    case "pkgd": $ord='P.name desc';break;
-    case "veru": $ord='P.version desc';break;
-    case "verd": $ord='P.version';break;
-    case "archu": $ord='P.arch';break;
-    case "archd": $ord='P.arch desc';break;
-    case "distu": $ord='R.version desc';break;
-    case "distd": $ord='R.version';break;
-    case "fileu": $ord='F.filename';break;
-    case "filed": $ord='F.filename desc';break;
-    case "pathu": $ord='F.fullpath';break;
-    case "pathd": $ord='F.filename desc';break;
-    case "repou": $ord='R.description';break;
-    case "repod": $ord='R.description desc';break;
-    case "locu": $ord='P.location';break;
-    case "locd": $ord='P.location desc';break;
-  }
 
   if ($name or $desc or $file){
     if(!$file){ ///////////////////////////////////// PACKAGES.TXT RESULTS ////////////////////////////////////////////////
+      switch($order){
+	case "ranku": $ord='rank desc';break;
+	case "rankd": $ord='rank';break;
+	case "pkgu": $ord='P.name';break;
+	case "pkgd": $ord='P.name desc';break;
+	case "veru": $ord='P.version desc';break;
+	case "verd": $ord='P.version';break;
+	case "archu": $ord='P.arch';break;
+	case "archd": $ord='P.arch desc';break;
+	case "distu": $ord='R.version desc';break;
+	case "distd": $ord='R.version';break;
+	case "fileu": $ord='F.filename';break;
+	case "filed": $ord='F.filename desc';break;
+	case "pathu": $ord='F.fullpath';break;
+	case "pathd": $ord='F.filename desc';break;
+	case "repou": $ord='R.description';break;
+	case "repod": $ord='R.description desc';break;
+	case "locu": $ord='P.location';break;
+	case "locd": $ord='P.location desc';break;
+      }
       $pkg=new package();
       $nres=$pkg->find($name,$desc,$repo,$ord);
       if(isset($_GET['debug']))var_dump($pkg,$nres);
@@ -140,9 +140,29 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
       echo "<br /><br /><br />";
     }else{ /////////////////////////////////////////////////// MANIFEST.bz2 RESULTS ///////////////////////////////////////////////////////////
   //    $maxresult=80;
+      switch($order){
+	case "ranku": $ord='rank desc';break;
+	case "rankd": $ord='rank';break;
+	case "pkgu": $ord='pkgname';break;
+	case "pkgd": $ord='pkgname desc';break;
+	case "veru": $ord='version desc';break;
+	case "verd": $ord='version';break;
+	case "archu": $ord='arch';break;
+	case "archd": $ord='arch desc';break;
+	case "distu": $ord='distro desc';break;
+	case "distd": $ord='distro';break;
+	case "fileu": $ord='filename';break;
+	case "filed": $ord='filename desc';break;
+	case "pathu": $ord='fullpath';break;
+	case "pathd": $ord='fullpath desc';break;
+	case "repou": $ord='repodesc';break;
+	case "repod": $ord='repodesc desc';break;
+	case "locu": $ord='pkgloc';break;
+	case "locd": $ord='pkgloc desc';break;
+      }
       $fl=new filelist();
       $nres=$fl->find($file,$name,$desc,$repo,$ord);
-      if(isset($_GET['debug']))var_dump($pkg,$nres);
+      if(isset($_GET['debug']))var_dump($fl,$nres);
       $to=$start+$maxresult; if($to > $nres)$to=$nres;
       echo "Time: ".(round($fl->db->msec/1000,3))." msec<br />";
 
