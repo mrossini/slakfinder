@@ -1,8 +1,21 @@
+<html><head>
+  <title>Package viewer</title>
+  <style type="text/css">
+  <!--
+    a:link    {text-decoration: none; color: blue;}
+    a:visited {text-decoration: none; color: blue;}
+    a:hover   {text-decoration: underline; color: red;}                                                                                                                                                           
+    input {border:1px solid #000000;}                                                                                                                                                                             
+  .tab {border:1px solid #000000;}                                                                                                                                                                         
+  .tab td { border-top:1px solid #000000; border-right:1px dotted; }                                                                                                                                       
+  .tab th { border-right:1px dotted; }                                                                                                                                                                     
+  -->                                                                                                                                                                                                             
+  </style>    
+</head><body>
 <?php
   include 'inc/includes.inc.php';
 
   $db=new database();
-  echo "<html><head><title>Package viewer</title></head><body>";
   echo "<pre>";
   $pkg=null;
   foreach($_GET as $key => $value)$$key=$value;
@@ -12,23 +25,34 @@
     echo "<b>No package selected</b>\n";
   }else{
     $pk=new package($pkg);
-//    var_dump($pk);
     if(!$pk->id) {
       echo "<b>Invalid package</b>\n";
     }else{
       $repo=new repository($pk->repository);
-      echo tables(array('',''),1,"0 cellpadding=0");
+      echo tables(array('',''),1,"class='tab'");
       echo tables(array("Repository:", "{$repo->name}"));
       echo tables(array("Repository description:", "{$repo->description}"));
       echo tables(array("Repository url:", "<a href={$repo->url}>{$repo->url}</a>"));
       echo tables(array("File list: ", ($repo->manifest)?("<a href={$repo->url}{$repo->manifest}>{$repo->manifest}</a>"):"None"));
       echo tables();
-      echo tables(array('',''),1, "0 cellpadding=0");
+      echo tables(array('',''),1, "class='tab'");
       echo tables(array("Package name:",$pk->name));
       echo tables(array("Package version:",$pk->version));
       echo tables(array("Package arch:",$pk->arch));
       echo tables(array("Package build:",$pk->build));
       echo tables(array("Package compression:",$pk->compression));
+      $reqs=explode(",",$pk->required);
+      foreach($reqs as $key => $req){
+	$areq=explode("|",$req);
+	foreach($areq as $akey => $rr){
+	  $rm=preg_replace("/ .*/","",$rr);
+	  $areq[$akey]="<a href='index.php?name=$rm#results'>".htmlentities($rr)."</a>";
+	}
+	$reqs[$key]=implode("|",$areq);
+      }
+      $r=implode("<br>",$reqs);
+      echo tables(array("<nobr>Package required</nobr>:",$r));
+
       echo tables(array("Package location:", "<a href={$repo->url}{$pk->location}>{$pk->location}</a>"));
       echo tables(array("Package filename:", "<a href={$repo->url}{$pk->location}/{$pk->filename}>{$pk->filename}</a>"));
       echo tables();
