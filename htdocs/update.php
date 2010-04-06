@@ -1,5 +1,4 @@
 <?php
-echo "<pre>";
 /*function shutterm(){ 
   echo "\n\n\npippo\n\n\n";
   die("\n\nreceived SIGTERM\n\n"); 
@@ -66,6 +65,12 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
   flush();
   $rep=new repository($id);
   if($rep->exists()){
+    if(isset($_SERVER['REDEFINE'])or isset($_GET['REDEFINE'])){
+      $rep->redefine($repo);
+      $db->db->commit();
+      echo "aggiornato\n";
+      continue;
+    }
     echo "già esiste... ";
     if($create==2){
       echo "distruzione forzata... ";
@@ -125,7 +130,6 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
 
 
 echo "\n";
-echo "</pre>";
 
 
 ?>

@@ -28,6 +28,16 @@ class repository {
     if(!$this->db->query("update #__repository set mtime='".$this->mtime."' where id=".$this->id))return false;
     return true;
   }
+  public function redefine($repo){
+    $this->db->query("select count(*) as npkgs from #__packages where repository='{$repo['id']}'");
+    $this->db->fetch();
+    $repo['npkgs']=$this->db->datas[0]['npkgs'];
+    $this->db->query("select count(*) as nfiles from #__filelist where repository='{$repo['id']}'");
+    $this->db->fetch();
+    $repo['nfiles']=$this->db->datas[0]['nfiles'];
+    $out=$this->db->update("#__repository",$repo,array("id" => "{$repo['id']}"));
+    return ! ! $out;
+  }
 
   public function popolate($more=array()){
     $allpackage=array();
@@ -51,7 +61,8 @@ class repository {
     $list=new filelist();
     if($this->manifest){
       $this->manifile=new internet($this->url.$this->manifest);
-      if(!$list->addall($allpackage,$this))return false;
+      if(!$i=$list->addall($allpackage,$this))return false;
+      if(!$this->db->query("update #__repository set nfiles='$i' where id='{$this->id}'"))var_dump($this->db);
     }
     return true;
   }
@@ -103,16 +114,17 @@ class repository {
       CREATE TABLE #__repository (
 	id INT ,
 	url VARCHAR( 255 ) NOT NULL ,
-	rank INT ,
-	manifest VARCHAR( 30 ) NOT NULL ,
-	packages VARCHAR( 30 ) NOT NULL ,
-	version VARCHAR( 10 ) NOT NULL ,
-	arch VARCHAR( 10 ) NOT NULL ,
-	class VARCHAR( 10 ) NOT NULL ,
+	rank INT DEFAULT '99',
+	manifest VARCHAR( 30 ) ,
+	packages VARCHAR( 30 ) ,
+	version VARCHAR( 10 ) ,
+	arch VARCHAR( 10 ) ,
+	class VARCHAR( 10 ) ,
 	mtime VARCHAR( 40 ),
-	name VARCHAR( 40 ) NOT NULL ,
-	npkgs INT ,
-	nfiles INT ,
+	name VARCHAR( 40 ) ,
+	npkgs INT DEFAULT '0',
+	nfiles INT DEFAULT '0' ,
+	deps INT DEFAULT '0' ,
 	description VARCHAR( 255 ) ,
 	PRIMARY KEY ( id ) ,
 	UNIQUE ( name )

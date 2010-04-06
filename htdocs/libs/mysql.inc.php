@@ -82,6 +82,20 @@ class mysql {
 	  if($tmp===false)return false;
 	  return $this->datas[$tmp];
 	}
+	public function update($table,$data,$cond){
+	  $sql="UPDATE $table ";
+	  $sep="SET ";
+	  foreach($data as $key => $value){
+	    $sql.=$sep."$key = '$value' ";
+	    $sep=", ";
+	  }
+	  $sep="WHERE ";
+	  foreach($cond as $key => $value){
+	    $sql.=$sep."$key = '$value' ";
+	    $sep.="AND ";
+	  }
+	  return $this->query($sql);
+	}
 	private $insertdata=false;
 	private $insertstart=false;
 	public $maxdata=100000;

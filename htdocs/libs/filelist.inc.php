@@ -9,6 +9,7 @@ class filelist {
     $this->db=new mysql();
   }
   public function addall(&$allpackages,$repo){
+    $i=0;
     $this->db->insert('filelist',array('package','repository','fullpath','filename'),true);
     $step=0;
     $p=0;
@@ -21,7 +22,10 @@ class filelist {
 	  $tmp=preg_split("/^(.)([^ ]+) +([^ ]+) +([^ ]+) +([^ ]+) +([^ ]+) +([^ ]*\/)*([^\/]*)(| .*)$/",$line,0, PREG_SPLIT_DELIM_CAPTURE);
 	  $type=$tmp[1];$path=$tmp[7]; $file=$tmp[8];
 	  if($type!="d"){
-	    if($pkgid!==false)$this->db->insert(array($pkgid, $repoid, "$path", $file)); 
+	    if($pkgid!==false){
+	      $this->db->insert(array($pkgid, $repoid, "$path", $file)); 
+	      $i++;
+	    }
 	  }
 	}else{
 	  $step=0;
@@ -50,7 +54,7 @@ class filelist {
     }
     $this->db->insert();
 
-    return true;
+    return $i;
   }
   public function get(){
     if(($line=$this->db->get())==false)return false;
