@@ -79,8 +79,8 @@ class filelist {
 	(LENGTH('$file')/LENGTH(F.filename))
       ) ";
       $fields="F.*, 
-               P.name as pkgname, P.arch AS arch, P.version as version, P.location AS pkgloc, P.filename AS pkgfile,
-               R.name AS reponame, R.url AS url, P.id AS pkgid, R.version AS distro, R.description AS repodesc, R.rank AS reporank,
+               P.name as pkgname, P.arch AS arch, P.version as version, P.location AS pkgloc, P.filename AS pkgfile, P.description AS pkgdesc,
+               R.name AS reponame, R.url AS url, P.id AS pkgid, R.version AS distro, R.description AS repodesc, R.brief AS repobrief, R.rank AS reporank,
 	       $rank AS rank";
       $from="#__filelist as F LEFT JOIN  #__packages as P ON (F.package=P.id) LEFT JOIN #__repository as R ON (P.repository=R.id) ";
       $where="";

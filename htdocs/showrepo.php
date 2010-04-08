@@ -19,54 +19,52 @@
   echo "<pre>";
   $repo=0;
   foreach($_GET as $key => $value)$$key=$value;
+  $id=$repo;
+  unset($repo);
 
 
+  if($id){
+    $repo=new repository($id);
+    if($repo->id){
+      echo "Repository Info:";
+      echo tables(array(),1,"class='tab'");
+      echo tables(array("ID",$repo->id));
+      echo tables(array("URL","<a href='{$repo->url}'>{$repo->url}</a>"));
+      echo tables(array("Rank",$repo->rank));
+      echo tables(array("File list",(($repo->manifest)?"<a href='{$repo->url}{$repo->manifest}'>{$repo->manifest}</a>":"unsupported")));
+      echo tables(array("Packages","<a href='{$repo->url}{$repo->packages}'>{$repo->packages}</a>"));
+      echo tables(array("Slackware Version",$repo->version));
+      echo tables(array("Arch",$repo->arch));
+      echo tables(array("Class",$repo->class));
+      echo tables(array("Last update",$repo->mtime));
+      echo tables(array("Name",$repo->name));
+      echo tables(array("N. packages",$repo->npkgs));
+      echo tables(array("N. files",$repo->nfiles));
+      echo tables(array("Dependencies",(($repo->deps)?"supported":"unsupported")));
+      echo tables(array("Description",$repo->description."<br>"));
+      echo tables(array("Brief Descr.",$repo->brief));
+      echo tables();
+    }else{
+      $id=0;
+    }
+  }
 
-  if(!$repo){
-      echo tables(array('id','url','rank','manifest','packages','version','arch','class','mtime','name','npkgs','nfiles','deps','description'),1,"class='tab'");
+  if(!$id){
+      echo tables(array('id','brief','arch','version','description'),1,"class='tab'");
       $repo=new repository();
       $repo->find();
       while($r=$repo->fetch()){
 	echo tables(array(
-	  "<a href='showrepo.php?repo={$repo->id}'>{$repo->id}</a>",
-	  $repo->url,
-	  $repo->rank,
-	  $repo->manifest."<br>",
-	  $repo->packages,
-	  $repo->version,
+	  $repo->id,
+	  "<a href='showrepo.php?repo={$repo->id}'>{$repo->brief}</a>",
 	  $repo->arch,
-	  $repo->class,
-	  $repo->mtime,
-	  $repo->name,
-	  $repo->npkgs,
-	  $repo->nfiles,
-	  $repo->deps,
-	  $repo->description
+	  $repo->version,
+	  $repo->description."<br>"
 	  ));
       }
       echo tables();
 
-  }else{
-    $repo=new repository($repo);
-    echo "Repository Info:";
-    echo tables(array(),1,"class='tab'");
-    echo tables(array("ID",$repo->id));
-    echo tables(array("URL","<a href='{$repo->url}'>{$repo->url}</a>"));
-    echo tables(array("Rank",$repo->rank));
-    echo tables(array("File list",(($repo->manifest)?"<a href='{$repo->url}{$repo->manifest}'>{$repo->manifest}</a>":"unsupported")));
-    echo tables(array("Packages","<a href='{$repo->url}{$repo->packages}'>{$repo->packages}</a>"));
-    echo tables(array("Slackware Version",$repo->version));
-    echo tables(array("Arch",$repo->arch));
-    echo tables(array("Class",$repo->class));
-    echo tables(array("Last update",$repo->mtime));
-    echo tables(array("Name",$repo->name));
-    echo tables(array("N. packages",$repo->npkgs));
-    echo tables(array("N. files",$repo->nfiles));
-    echo tables(array("Dependencies",(($repo->deps)?"supported":"unsupported")));
-    echo tables(array("Description",$repo->description));
-    echo tables();
   }
-
   echo "</pre>";
   echo "To report a bug, send a mail to <a href='mailto:zerouno@slacky.it'>zerouno@slacky.it</a>. Thanks.";
   echo "</body></html>";

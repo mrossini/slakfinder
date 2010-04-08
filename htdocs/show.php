@@ -31,6 +31,7 @@
       $repo=new repository($pk->repository);
       echo tables(array('',''),1,"class='tab'");
       echo tables(array("Repository:", "{$repo->name}"));
+      echo tables(array("Repository brief:", "{$repo->brief}"));
       echo tables(array("Repository description:", "{$repo->description}"));
       echo tables(array("Repository url:", "<a href={$repo->url}>{$repo->url}</a>"));
       echo tables(array("File list: ", ($repo->manifest)?("<a href={$repo->url}{$repo->manifest}>{$repo->manifest}</a>"):"None"));

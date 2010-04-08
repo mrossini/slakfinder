@@ -49,8 +49,8 @@ function writerepos($reposelected){
       if($cell['content'])$cell['content'].=" - ";
       $cell['content'].="<code><nobr>
 	<input type='radio' name='repo' value={$repo['id']} ".($repo['selected']?"checked='checked'":"").">
-	<a href='showrepo.php?repo={$repo['id']}'>{$repo['description']}</a>"."
-	<sup>({$repo['npkgs']} ".($repo['manifest']?"F":"").($repo['deps']?"D":"").")</sup>".
+	<a title='".(str_replace(array("'","\n"),array(" "," "),$repo['description']))."' href='showrepo.php?repo={$repo['id']}'>{$repo['brief']}</a>".
+	"<sup>({$repo['npkgs']}".($repo['manifest']?"F":"").($repo['deps']?"D":"").")</sup>".
       "</nobr></code>";
     }
     $cells[$class['class']]=$cell;
@@ -73,7 +73,7 @@ function writereposfile($reposelected){
     $cell[$repo["arch"]][$repo["version"]].=
       "<code><nobr>
          <input type='radio' name='repo' value=$key".(($key==$reposelected)?" checked='checked'":"").">
-	 <a href='showrepo.php?id={$repo['id']}'>{$repo['description']}</a>".
+	 <a href='showrepo.php?id={$repo['id']}'>{$repo['brief']}</a>".
 	 ($repo['manifest']?"<sup>(*)</sup>":"")."
        </nobr></code>  
       ";
@@ -111,7 +111,8 @@ $defrepo[1]=array(
     'manifest' => 'slackware64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'slackware64-current',
-    'description' => 'Official'
+    'brief' => 'Official',
+    'description' => 'Slackware 64bit Official Distribution - Current Version'
   );
 
 $defrepo[2]=array(
@@ -124,7 +125,8 @@ $defrepo[2]=array(
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'slackware-current',
-    'description' => 'Official'
+    'brief' => 'Official',
+    'description' => 'Slackware 32bit Official Distribution - Current Version'
   );
 
 $defrepo[3]=array(
@@ -137,7 +139,8 @@ $defrepo[3]=array(
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'slackware-12.2',
-    'description' => 'Official'
+    'brief' => 'Official',
+    'description' => 'Slackware 32bit Official Distribution - 12.2 Version'
   );
 
 $defrepo[4]=array(
@@ -150,7 +153,8 @@ $defrepo[4]=array(
     'manifest' => 'slackware64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'slackware64-13.0',
-    'description' => 'Official'
+    'brief' => 'Official',
+    'description' => 'Slackware 64bit Official Distribution - 13.0 Version'
   );
 
 $defrepo[5]=array(
@@ -163,7 +167,8 @@ $defrepo[5]=array(
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'slackware-13.0',
-    'description' => 'Official'
+    'brief' => 'Official',
+    'description' => 'Slackware 32bit Official Distribution - 13.0 Version'
   );
 
 $defrepo[6]=array(
@@ -176,7 +181,8 @@ $defrepo[6]=array(
     'manifest' => 'patches/MANIFEST.bz2',
     'packages' => 'patches/PACKAGES.TXT',
     'name' => 'slackware-13.0-patches',
-    'description' => 'Patches'
+    'brief' => 'Patches',
+    'description' => 'Slackware 32bit Official Patches for 13.0 Version'
   );
 
 $defrepo[7]=array( 
@@ -189,7 +195,8 @@ $defrepo[7]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'slackware64-13.0-patches',
-    'description' => 'Patches'
+    'brief' => 'Patches',
+    'description' => 'Slackware 64bit Official Patches for 13.0 Version'
   );
 
 $defrepo[61]=array( 
@@ -202,7 +209,8 @@ $defrepo[61]=array(
     'manifest' => 'extra/MANIFEST.bz2',
     'packages' => 'extra/PACKAGES.TXT',
     'name' => 'slackware64-13.0-extra',
-    'description' => 'Extra'
+    'brief' => 'Extra',
+    'description' => 'Slackware 64bit Official Extra Packages for 13.0 Version'
   );
 
 $defrepo[62]=array( 
@@ -215,7 +223,8 @@ $defrepo[62]=array(
     'manifest' => 'extra/MANIFEST.bz2',
     'packages' => 'extra/PACKAGES.TXT',
     'name' => 'slackware64-current-extra',
-    'description' => 'Extra'
+    'brief' => 'Extra',
+    'description' => 'Slackware 64bit Official Extra Packages for Current Version'
   );
 
 $defrepo[63]=array( 
@@ -228,7 +237,8 @@ $defrepo[63]=array(
     'manifest' => 'extra/MANIFEST.bz2',
     'packages' => 'extra/PACKAGES.TXT',
     'name' => 'slackware-13.0-extra',
-    'description' => 'Extra'
+    'brief' => 'Extra',
+    'description' => 'Slackware 32bit Official Extra Packages for 13.0 Version'
   );
 
 $defrepo[64]=array( 
@@ -241,7 +251,8 @@ $defrepo[64]=array(
     'manifest' => 'extra/MANIFEST.bz2',
     'packages' => 'extra/PACKAGES.TXT',
     'name' => 'slackware-current-extra',
-    'description' => 'Extra'
+    'brief' => 'Extra',
+    'description' => 'Slackware 32bit Official Extra Packages for Current Version'
   );
 
 
@@ -266,7 +277,8 @@ $defrepo[11]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'slacky-13.0',
-    'description' => 'Slacky'
+    'brief' => 'Slacky',
+    'description' => 'Slacky.eu Community\'s Repository for Slackware 13.0'
   );
 
 $defrepo[12]=array(
@@ -280,7 +292,8 @@ $defrepo[12]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'slacky-12.2',
-    'description' => 'Slacky'
+    'brief' => 'Slacky',
+    'description' => 'Slacky.eu Community\'s Repository for Slackware 12.2'
   );
 
 $defrepo[13]=array(
@@ -294,7 +307,8 @@ $defrepo[13]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'gnome-slacky-12.2',
-    'description' => 'Gnome Slacky'
+    'brief' => 'Gnome Slacky',
+    'description' => 'Slacky.eu Community\'s Repository of a Gnome 2.28.0 for Slackware 12.2'
   );
 
 
@@ -334,7 +348,8 @@ $defrepo[21]=array(
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'salix-13.0',
-    'description' => 'Salix'
+    'brief' => 'Salix',
+    'description' => 'Salix 32bit Distribution perfectly compatible with Slackware 13.0'
   );
 
 $defrepo[22]=array(
@@ -348,7 +363,8 @@ $defrepo[22]=array(
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'salix-current',
-    'description' => 'Salix'
+    'brief' => 'Salix',
+    'description' => 'Salix 32bit Distribution perfectly compatible with Slackware Current'
   );
 
 $defrepo[23]=array(
@@ -362,7 +378,8 @@ $defrepo[23]=array(
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'salix64-13.0',
-    'description' => 'Salix64'
+    'brief' => 'Salix64',
+    'description' => 'Salix 64bit Distribution perfectly compatible with Slackware64 13.0'
   );
 
 $defrepo[24]=array(
@@ -376,7 +393,8 @@ $defrepo[24]=array(
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'salix64-current',
-    'description' => 'Salix64'
+    'brief' => 'Salix64',
+    'description' => 'Salix 64bit Distribution perfectly compatible with Slackware64 Current'
   );
 
 
@@ -394,7 +412,8 @@ $defrepo[25]=array(
     'manifest' => 'gsb64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'gsb64-gnome2.26',
-    'description' => 'gnome-2.26'
+    'brief' => 'gnome-2.26',
+    'description' => 'GSB Gnome 2.26.0 64bit for Slackware64 13.0'
   );
 
 $defrepo[26]=array(
@@ -408,7 +427,8 @@ $defrepo[26]=array(
     'manifest' => 'gsb64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'gsb64-gnome-current',
-    'description' => 'gsb-gnome2.28'
+    'brief' => 'gsb-gnome2.28',
+    'description' => 'GSB Gnome 2.28.0 64bit for Slackware64 Current'
   );
 
 $defrepo[27]=array(
@@ -422,7 +442,8 @@ $defrepo[27]=array(
     'manifest' => 'gsb/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'gsb-gnome2.26',
-    'description' => 'gnome-2.26'
+    'brief' => 'gnome-2.26',
+    'description' => 'GSB Gnome 2.26.0 32bit for Slackware 13.0'
   );
 
 $defrepo[28]=array(
@@ -436,7 +457,8 @@ $defrepo[28]=array(
     'manifest' => 'gsb/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'gsb-gnome-current',
-    'description' => 'gsb-gnome2.28'
+    'brief' => 'gsb-gnome2.28',
+    'description' => 'GSB Gnome 2.28.0 32bit for Slackware Current'
   );
 
 
@@ -460,7 +482,8 @@ $defrepo[31]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'slackers.it',
-    'description' => 'Slackers'
+    'brief' => 'Slackers',
+    'description' => 'Repository from www.slackers.it; contains mixed 32 and 64 bit packages for Slackware Current'
   );
 
 $defrepo[32]=array(
@@ -474,7 +497,8 @@ $defrepo[32]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'alien',
-    'description' => 'Alien Bob'
+    'brief' => 'Alien Bob',
+    'description' => 'Repository from Alien Bob (connie.slackware.com/~alien) containing mixed 32 and 64 bit packages for mixed Slackware versions'
   );
 
 $defrepo[33]=array(
@@ -488,7 +512,8 @@ $defrepo[33]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'linuxpackages-12.2-i386',
-    'description' => 'LinuxPackages'
+    'brief' => 'LinuxPackages',
+    'description' => 'Repository from LinuxPackages.net containing 32bit packages for Slackware 12.2'
   );
 
 $defrepo[34]=array(
@@ -502,7 +527,8 @@ $defrepo[34]=array(
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'linuxpackages-13.0-i386-sotirov',
-    'description' => 'LP Sotirov'
+    'brief' => 'LP Sotirov',
+    'description' => 'Repository from LinuxPackages.net containing 32bit packages for Slackware 13.0'
   );
 
 $defrepo[35]=array(
@@ -516,7 +542,8 @@ $defrepo[35]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'stabellini',
-    'description' => 'Stabellini'
+    'brief' => 'Stabellini',
+    'description' => 'Repository from www.stabellini.net packages for Slackware 12.1'
   );
 
 $defrepo[36]=array(
@@ -529,7 +556,7 @@ $defrepo[36]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'c4dwbspace-jimmy_page_89-x86_64',
-    'description' => 'Jimmy_page_89'
+    'brief' => 'Jimmy_page_89'
   );
 
 $defrepo[37]=array(
@@ -542,7 +569,7 @@ $defrepo[37]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'alien-restricted',
-    'description' => 'Alien Restricted'
+    'brief' => 'Alien Restricted'
   );
 
 
@@ -566,7 +593,8 @@ $defrepo[41]=array(
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'rlworkman-for-12.2',
-    'description' => 'Robby Workman'
+    'brief' => 'Robby Workman',
+    'description' => 'Robby Workman\'s Packages for Slackware 12.2'
   );
 
 $defrepo[42]=array(
@@ -579,7 +607,8 @@ $defrepo[42]=array(
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'rlworkman-for-current',
-    'description' => 'Robby Workman'
+    'brief' => 'Robby Workman',
+    'description' => 'Robby Workman\'s Packages for Slackware Current'
   );
 
 $defrepo[43]=array(
@@ -592,7 +621,8 @@ $defrepo[43]=array(
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'rlworkman-for-13.0',
-    'description' => 'Robby Workman'
+    'brief' => 'Robby Workman',
+    'description' => 'Robby Workman\'s Packages for Slackware 13.0 32&64 bit'
   );
 
 
@@ -610,7 +640,8 @@ $defrepo[45]=array(
     'manifest' => 'slackware64/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'schoepfer.info-x86_64-13.0',
-    'description' => 'Johannes Sch&#246;pfer'
+    'brief' => 'Johannes Sch&#246;pfer',
+    'description' => 'Packages from Johannes Sch&#246;pfer (schoepfer.info) for Slackware64 13.0'
   );
 
 $defrepo[46]=array(
@@ -623,7 +654,8 @@ $defrepo[46]=array(
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'schoepfer.info-i386-13.0',
-    'description' => 'Johannes Sch&#246;pfer'
+    'brief' => 'Johannes Sch&#246;pfer',
+    'description' => 'Packages from Johannes Sch&#246;pfer (schoepfer.info) for Slackware 13.0 32bit'
   );
 
 $defrepo[47]=array(
@@ -636,7 +668,8 @@ $defrepo[47]=array(
     'manifest' => 'slackware/MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT',
     'name' => 'schoepfer.info-i386-12.2',
-    'description' => 'Johannes Sch&#246;pfer'
+    'brief' => 'Johannes Sch&#246;pfer',
+    'description' => 'Packages from Johannes Sch&#246;pfer (schoepfer.info) for Slackware 12.2'
   );
 
 # Dia Tech Repository
@@ -652,7 +685,8 @@ $defrepo[51]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'dia-tech-slack-13.0',
-    'description' => 'Aszabo'
+    'brief' => 'Aszabo',
+    'description' => 'Packages from Aszabo (www.dia-tech.net) for Slackware 13.0 32bit'
   );
 
 $defrepo[52]=array(
@@ -665,7 +699,8 @@ $defrepo[52]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'dia-tech-slack-12.2',
-    'description' => 'Aszabo'
+    'brief' => 'Aszabo',
+    'description' => 'Packages from Aszabo (www.dia-tech.net) for Slackware 12.2'
   );
 
 $defrepo[53]=array(
@@ -678,7 +713,8 @@ $defrepo[53]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'dia-tech-curr-kde4.4',
-    'description' => 'Aszabo for kde 4.4'
+    'brief' => 'Aszabo for kde 4.4',
+    'description' => 'Kde 4.4 from Aszabo (www.dia-tech.net) for Slackware Current'
   );
 
 $defrepo[54]=array(
@@ -691,7 +727,8 @@ $defrepo[54]=array(
     'manifest' => '',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'danix-current64',
-    'description' => 'Danix'
+    'brief' => 'Danix',
+    'description' => 'Repository from Danix (danixland.net) for Slackware64 Current'
   );
 
 $defrepo[55]=array(
@@ -705,7 +742,7 @@ $defrepo[55]=array(
     #'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'scxd-current',
-    'description' => 'Scxd'
+    'brief' => 'Scxd'
   );
 
 $defrepo[56]=array(
@@ -718,7 +755,7 @@ $defrepo[56]=array(
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'elettrolinux-for-13.0',
-    'description' => 'Michele.P'
+    'brief' => 'Michele.P'
   );
 
 

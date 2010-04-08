@@ -66,7 +66,8 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
   $rep=new repository($id);
   if($rep->exists()){
     if(isset($_SERVER['REDEFINE'])or isset($_GET['REDEFINE'])){
-      $rep->redefine($repo);
+      echo (isset($_SERVER['REDEFINE'])?$_SERVER['REDEFINE']:0)+(isset($_GET['REDEFINE'])?$_GET['REDEFINE']:0);
+      $rep->redefine($repo,(isset($_SERVER['REDEFINE'])?$_SERVER['REDEFINE']:0)+(isset($_GET['REDEFINE'])?$_GET['REDEFINE']:0));
       $db->db->commit();
       echo "aggiornato\n";
       continue;

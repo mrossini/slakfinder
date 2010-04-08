@@ -28,13 +28,15 @@ class repository {
     if(!$this->db->query("update #__repository set mtime='".$this->mtime."' where id=".$this->id))return false;
     return true;
   }
-  public function redefine($repo){
+  public function redefine($repo,$nf=''){
     $this->db->query("select count(*) as npkgs from #__packages where repository='{$repo['id']}'");
     $this->db->fetch();
     $repo['npkgs']=$this->db->datas[0]['npkgs'];
-    $this->db->query("select count(*) as nfiles from #__filelist where repository='{$repo['id']}'");
-    $this->db->fetch();
-    $repo['nfiles']=$this->db->datas[0]['nfiles'];
+    if($nf){
+      $this->db->query("select count(*) as nfiles from #__filelist where repository='{$repo['id']}'");
+      $this->db->fetch();
+      $repo['nfiles']=$this->db->datas[0]['nfiles'];
+    }
     $out=$this->db->update("#__repository",$repo,array("id" => "{$repo['id']}"));
     return ! ! $out;
   }
@@ -126,6 +128,7 @@ class repository {
 	nfiles INT DEFAULT '0' ,
 	deps INT DEFAULT '0' ,
 	description VARCHAR( 255 ) ,
+	brief VARCHAR( 50 ) ,
 	PRIMARY KEY ( id ) ,
 	UNIQUE ( name )
       ) ENGINE = INNODB ;

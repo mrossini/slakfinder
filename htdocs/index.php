@@ -119,7 +119,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	    $pkg->version,
 	    $pkg->arch,
 	    $pkg->repover,
-	    "<a title='{$pkg->url}' href='{$pkg->url}'>{$pkg->repodesc}</a>",
+	    "<a title='{$pkg->url}' href='{$pkg->url}'>{$pkg->repobrief}</a>",
 	    "<a href='{$pkg->url}{$pkg->location}/'>{$pkg->location}/</a>",
 	    "<a href='{$pkg->url}{$pkg->location}/{$pkg->filename}'>download</a>"));
 	}
@@ -155,8 +155,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	case "filed": $ord='filename desc';break;
 	case "pathu": $ord='fullpath';break;
 	case "pathd": $ord='fullpath desc';break;
-	case "repou": $ord='repodesc';break;
-	case "repod": $ord='repodesc desc';break;
+	case "repou": $ord='repobrief';break;
+	case "repod": $ord='repobrief desc';break;
 	case "locu": $ord='pkgloc';break;
 	case "locd": $ord='pkgloc desc';break;
       }
@@ -204,13 +204,15 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	  $fl->find();
 	  echo tables(array(
 	    $fl->rank,
-	    "<a href='show.php?pkg={$fl->pkgid}'>{$fl->pkgname}</a>",
+#	    "<a href='show.php?pkg={$fl->pkgid}'>{$fl->pkgname}</a>",
+	    "<a title='".(str_replace(array("'","\n"),array(" "," "),$fl->pkgdesc))."' href='show.php?pkg={$fl->pkgid}'>{$fl->pkgname}</a>",
+
 	    $fl->version,
 	    $fl->arch,
 	    $fl->distro,
 	    str_ireplace("$file","<b style='color:red;'>$file</b>",$fl->filename),
 	    $fl->fullpath,
-	    "<a title='{$fl->url}' href='{$fl->url}'>{$fl->repodesc}</a>",
+	    "<a title='{$fl->repodesc}' href='{$fl->url}'>{$fl->repobrief}</a>",
 	    "<a href='{$fl->url}{$fl->pkgloc}/'>{$fl->pkgloc}/</a>",
 	    "<a href='{$fl->url}{$fl->pkgloc}/{$fl->pkgfile}'>download</a>"));
 	}
