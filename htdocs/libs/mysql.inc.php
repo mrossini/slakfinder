@@ -63,6 +63,12 @@ class mysql {
 	  if($time)$this->msec=$time;
 	  return $q;
 	}
+	public function dropcache(){
+	  global $dbdata;
+	  $ldb=new self();
+	  $istab=$this->query("SHOW TABLES WHERE Tables_in_$dbdata like '#__cache_%'");
+	  while($x=$this->get())$ldb->query("DROP TABLE {$x['Tables_in_slak']}");
+	}
 
 	public function fetchtable(){
 	  while($this->fetch());

@@ -1,9 +1,19 @@
 <?php
-/*function shutterm(){ 
-  echo "\n\n\npippo\n\n\n";
-  die("\n\nreceived SIGTERM\n\n"); 
-}*/
-//pcntl_signal(SIGINT,"shutterm");
+
+
+
+/*
+ * Parametri:
+ *
+ * DROPDB: Elimina e ricostruisce il Database ad eccezione dei contatori che vengono preservati
+ * REPO=id: Analizza esclusivamente il repository specificato
+ * REDEFINE: Ridefinisce e fixa nel database le intestazioni del repository, senza riscaricare tutto
+ * SHOWQ: Mostra le query che vengono eseguite
+ * DEBUG: Abilita modalità di debugging
+ *
+ */
+
+
 function shutdown() { 
   global $transact,$db;
   if($transact){
@@ -23,6 +33,9 @@ include 'inc/defrepo.inc.php';
 
 
 $db=new database();
+
+echo "svuotamento cache";
+$db->db->dropcache();
 
 if(isset($_SERVER['DROPDB'])or isset($_GET['DROPDB'])){
   echo "eliminazione database... ";
