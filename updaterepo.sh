@@ -5,7 +5,8 @@ echo "==============="
 date
 git pull
 cd $CWD/htdocs/
-time php update.php
+REDEFINE= php update.php
+php update.php
 date
 echo
 echo "aggiornamento terminato"

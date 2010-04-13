@@ -278,7 +278,7 @@ $defrepo[11]=array(
     'packages' => 'PACKAGES.TXT',
     'name' => 'slacky-13.0',
     'brief' => 'Slacky',
-    'description' => 'Slacky.eu Community\'s Repository for Slackware 13.0'
+    'description' => 'Slacky.eu Community s Repository for Slackware 13.0'
   );
 
 $defrepo[12]=array(
@@ -293,7 +293,7 @@ $defrepo[12]=array(
     'packages' => 'PACKAGES.TXT',
     'name' => 'slacky-12.2',
     'brief' => 'Slacky',
-    'description' => 'Slacky.eu Community\'s Repository for Slackware 12.2'
+    'description' => 'Slacky.eu Community s Repository for Slackware 12.2'
   );
 
 $defrepo[13]=array(
@@ -308,7 +308,7 @@ $defrepo[13]=array(
     'packages' => 'PACKAGES.TXT',
     'name' => 'gnome-slacky-12.2',
     'brief' => 'Gnome Slacky',
-    'description' => 'Slacky.eu Community\'s Repository of a Gnome 2.28.0 for Slackware 12.2'
+    'description' => 'Slacky.eu Community s Repository of a Gnome 2.28.0 for Slackware 12.2'
   );
 
 
@@ -594,7 +594,7 @@ $defrepo[41]=array(
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'rlworkman-for-12.2',
     'brief' => 'Robby Workman',
-    'description' => 'Robby Workman\'s Packages for Slackware 12.2'
+    'description' => 'Robby Workman s Packages for Slackware 12.2'
   );
 
 $defrepo[42]=array(
@@ -608,7 +608,7 @@ $defrepo[42]=array(
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'rlworkman-for-current',
     'brief' => 'Robby Workman',
-    'description' => 'Robby Workman\'s Packages for Slackware Current'
+    'description' => 'Robby Workman s Packages for Slackware Current'
   );
 
 $defrepo[43]=array(
@@ -622,7 +622,7 @@ $defrepo[43]=array(
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'rlworkman-for-13.0',
     'brief' => 'Robby Workman',
-    'description' => 'Robby Workman\'s Packages for Slackware 13.0 32&64 bit'
+    'description' => 'Robby Workman s Packages for Slackware 13.0 32&64 bit'
   );
 
 
