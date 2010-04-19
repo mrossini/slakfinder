@@ -548,19 +548,21 @@ $defrepo[35]=array(
 
 $defrepo[36]=array(
     'info' => array('create' => 1),
-    'url' => 'http://c4dwbspace.altervista.org/',
+    'url' => 'http://danixland.net/packages/slackware64-13.0/',
+    #'url' => 'http://c4dwbspace.altervista.org/',
     'rank' => 99,
     'version' => '13.0', #OK
     'arch' => 'x86_64',
     'class' => '64130',
     'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
+    'description' => 'Jimmy_page_89 (c4dwbspace.altervista.org) packages for Slackware64-13.0; thanx to Danix for webspace',
     'name' => 'c4dwbspace-jimmy_page_89-x86_64',
     'brief' => 'Jimmy_page_89'
   );
 
 $defrepo[37]=array(
-    'info' => array('create' => 0),
+    'info' => array('create' => 1),
     'url' => 'ftp://ftp.slackware.org.uk/people/alien/restricted_slackbuilds/',
     'rank' => 99,
     'version' => 'mixed', # MIXED
@@ -719,12 +721,12 @@ $defrepo[53]=array(
 
 $defrepo[54]=array(
     'info' => array('create' => 1),
-    'url' => 'http://danixland.net/packages/',
+    'url' => 'http://danixland.net/packages/slackware64-current/',
     'rank' => 99,
     'version' => 'current', # OK
     'arch' => 'x86_64',
     'class' => '64cur',
-    'manifest' => '',
+    'manifest' => 'MANIFEST.bz2',
     'packages' => 'PACKAGES.TXT.gz',
     'name' => 'danix-current64',
     'brief' => 'Danix',
@@ -746,7 +748,7 @@ $defrepo[55]=array(
   );
 
 $defrepo[56]=array(
-    'info' => array('create' => 1),
+    'info' => array('create' => 0),
     'url' => 'http://repository.elettrolinux.com/Slackware-13.0/',
     'rank' => 99,
     'version' => '13.0', # OK
@@ -757,8 +759,6 @@ $defrepo[56]=array(
     'name' => 'elettrolinux-for-13.0',
     'brief' => 'Michele.P'
   );
-
-
 
 
 
