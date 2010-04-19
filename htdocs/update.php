@@ -77,9 +77,21 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
   echo "REPOSITORY: $id => {$repo['name']}... ";
   flush();
   $rep=new repository($id);
+  if($create==3){
+    echo "rimozione...";
+    if(!$out=$rep->drop()){
+      echo "ERRORE NELLA DISTRUZIONE!!! ";
+      echo "annullamento in corso... ";
+      $db->db->rollback();
+      echo "annullamento effettuato.. salto al prossimo repository.\n";
+      continue;
+    };
+    $db->db->commit();
+    echo "rimozione effettuata.\n";
+    continue;
+  }
   if($rep->exists()){
     if(isset($_SERVER['REDEFINE'])or isset($_GET['REDEFINE'])){
-      echo (isset($_SERVER['REDEFINE'])?$_SERVER['REDEFINE']:0)+(isset($_GET['REDEFINE'])?$_GET['REDEFINE']:0);
       $rep->redefine($repo,(isset($_SERVER['REDEFINE'])?$_SERVER['REDEFINE']:0)+(isset($_GET['REDEFINE'])?$_GET['REDEFINE']:0));
       $db->db->commit();
       echo "aggiornato\n";
@@ -96,6 +108,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
 	continue;
       };
     }
+
     if($rep->exists()){
       if($rep->needupdate()){
 	echo "richiede aggiornamento... ";
