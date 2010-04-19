@@ -17,6 +17,7 @@
 
   $db=new database();
   echo "<pre>";
+  echo "<a href='javascript:history.go(-1)'>Return to back</a> | <a href='index.php'>Go to home</a><br><br>";
   $pkg=null;
   foreach($_GET as $key => $value)$$key=$value;
 
@@ -30,7 +31,7 @@
     }else{
       $repo=new repository($pk->repository);
       echo tables(array('',''),1,"class='tab'");
-      echo tables(array("Repository:", "{$repo->name}"));
+      echo tables(array("Repository:", "<a href='showrepo.php?repo={$repo->id}'>{$repo->name}</a>"));
       echo tables(array("Repository brief:", "{$repo->brief}"));
       echo tables(array("Repository description:", "{$repo->description}"));
       echo tables(array("Repository url:", "<a href={$repo->url}>{$repo->url}</a>"));

@@ -22,6 +22,7 @@
   $id=$repo;
   unset($repo);
 
+  echo "<a href='javascript:history.go(-1)'>Return to back</a> | <a href='index.php'>Go to home</a><br><br>";
 
   if($id){
     $repo=new repository($id);

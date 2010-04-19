@@ -138,7 +138,7 @@ class package {
 	if($repo){$where.=$next." (R.id='$repo' OR R.class='$repo') ";}
       }
 
-      $sql="SELECT P.*, R.name AS reponame, R.description AS repodesc, R.version AS repover, R.brief AS repobrief, R.url AS url  $rank   FROM #__packages as P       LEFT JOIN #__repository as R       ON (P.repository=R.id) $where ";
+      $sql="SELECT P.*, R.name AS reponame, R.description AS repodesc, R.version AS repover, R.brief AS repobrief, R.url AS url, R.id AS repoid  $rank   FROM #__packages as P       LEFT JOIN #__repository as R       ON (P.repository=R.id) $where ";
       if($rank){
 	if($order)$order.=" , ";$order.=" rank desc ";
       }

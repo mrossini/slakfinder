@@ -119,7 +119,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	    $pkg->version,
 	    $pkg->arch,
 	    $pkg->repover,
-	    "<a title='{$pkg->url}' href='{$pkg->url}'>{$pkg->repobrief}</a>",
+	    "<a title='{$pkg->url}' href='showrepo.php?repo={$pkg->repoid}'>{$pkg->repobrief}</a>",
 	    "<a href='{$pkg->url}{$pkg->location}/'>{$pkg->location}/</a>",
 	    "<a href='{$pkg->url}{$pkg->location}/{$pkg->filename}'>download</a>"));
 	}
