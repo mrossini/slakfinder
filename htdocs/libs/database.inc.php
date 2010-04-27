@@ -35,6 +35,7 @@ class database {
 		"))return false;
 		$this->db->query("INSERT INTO #__mixed (field,value) value ('count_visits','1');");
 		$this->db->query("INSERT INTO #__mixed (field,value) value ('count_searches','1');");
+		$this->db->query("INSERT INTO #__mixed (field,value) value ('count_srctxt','1');");
 		return true;
 	}
 	public function counter_get($counter){
