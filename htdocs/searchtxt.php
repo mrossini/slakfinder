@@ -59,7 +59,8 @@ lynx -source "lynx -source "http://localhost/slak/htdocs/searchtxt.php?file=libr
 
   $ord="";
 
-
+  $db=new database();
+  $db->counter_inc('srctxt');
 
   if ($name or $desc or $file){
     if(!$file){ ///////////////////////////////////// PACKAGES.TXT RESULTS ////////////////////////////////////////////////
