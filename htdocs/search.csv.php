@@ -8,7 +8,7 @@ header("Content-type: text/plain");
 
   function usage($param=''){
 ?>
-Usage: http://slak.homelinux.org/searchtxt.php?parameter1=value1&parameter2=value2&parameter3=value3&...
+Usage: http://slak.homelinux.org/search.csv.php?parameter1=value1&parameter2=value2&parameter3=value3&...
 parameters:
     repo=value        <repository id> or <repository class>
     
@@ -39,9 +39,9 @@ you must specify at least one of 'name' or 'desc' or 'file'
 
 you may use easely lynx, wget, curl or personal applications:
 
-wget -q -O - "http://slak.homelinux.org/searchtxt.php?name=aaa_base"
-curl "http://slak.homelinux.org/searchtxt.php?file=ntfs-3g&order=veru&head=1&fs=;"
-lynx -source "http://slak.homelinux.org/searchtxt.php?file=libraw1394.so&repo=1&fs=|"
+wget -q -O - "http://slak.homelinux.org/search.csv.php?name=aaa_base"
+curl "http://slak.homelinux.org/search.csv.php?file=ntfs-3g&order=veru&head=1&fs=;"
+lynx -source "http://slak.homelinux.org/search.csv.php?file=libraw1394.so&repo=1&fs=|"
 
 
 
