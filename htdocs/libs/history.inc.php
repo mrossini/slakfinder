@@ -14,16 +14,9 @@ class history {
   }
 
   var $db;
-  var $access_log;
 
   public function __construct(){
     $this->db=new mysql();
-  }
-  public function getlog(){
-    global $access_log;
-    if(!$this->access_log=fopen($access_log,'r'))return false;
-
-    
   }
 
 
