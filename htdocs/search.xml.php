@@ -6,8 +6,9 @@
 
 
   function usage($param=''){
+    header('content-type: text/plain');
 ?>
-Usage: http://slak.homelinux.org/searchtxt.php?parameter1=value1&parameter2=value2&parameter3=value3&...
+Usage: http://slak.homelinux.org/search.xml.php?parameter1=value1&parameter2=value2&parameter3=value3&...
 parameters:
     repo=value        <repository id> or <repository class>
     
@@ -29,8 +30,6 @@ parameters:
 			       fileu|filed : sort by file name (alfabetically)
 			       pathu|pathd : sort by file path (alfabetically)
 
-    fs=fieldseparator      field separator (default tabulation)
-    head=0|1               0=hide|1=show header (default hide)
     
 you must specify at least one of 'name' or 'desc' or 'file'
 
@@ -38,9 +37,9 @@ you must specify at least one of 'name' or 'desc' or 'file'
 
 you may use easely lynx, wget, curl or personal applications:
 
-wget -q -O - "http://slak.homelinux.org/searchtxt.php?name=aaa_base"
-curl "http://slak.homelinux.org/searchtxt.php?file=ntfs-3g&order=veru&head=1&fs=;"
-lynx -source "http://slak.homelinux.org/searchtxt.php?file=libraw1394.so&repo=1&fs=|"
+wget -q -O - "http://slak.homelinux.org/search.xml.php?name=aaa_base"
+curl "http://slak.homelinux.org/search.xml.php?file=ntfs-3g&order=veru&head=1&fs=;"
+lynx -source "http://slak.homelinux.org/search.xml.php?file=libraw1394.so&repo=1&fs=|"
 
 
 
@@ -59,7 +58,7 @@ lynx -source "http://slak.homelinux.org/searchtxt.php?file=libraw1394.so&repo=1&
   $ord="";
 
   $db=new database();
-  $db->counter_inc('srctxt');
+  $db->counter_inc('srcxml');
 
   if ($name or $desc or $file){
     if(!$file){ ///////////////////////////////////// PACKAGES.TXT RESULTS ////////////////////////////////////////////////

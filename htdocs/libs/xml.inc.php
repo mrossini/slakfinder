@@ -72,7 +72,7 @@ class xml extends XMLWriter
     }
 
     public function output(){
-        header('Content-type: text/plain');
+        header('Content-type: text/xml');
         echo $this->getDocument();
     }
   
