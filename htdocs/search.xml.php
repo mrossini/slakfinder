@@ -38,8 +38,8 @@ you must specify at least one of 'name' or 'desc' or 'file'
 you may use easely lynx, wget, curl or personal applications:
 
 wget -q -O - "http://slak.homelinux.org/search.xml.php?name=aaa_base"
-curl "http://slak.homelinux.org/search.xml.php?file=ntfs-3g&order=veru&head=1&fs=;"
-lynx -source "http://slak.homelinux.org/search.xml.php?file=libraw1394.so&repo=1&fs=|"
+curl "http://slak.homelinux.org/search.xml.php?file=ntfs-3g&order=veru"
+lynx -source "http://slak.homelinux.org/search.xml.php?file=libraw1394.so"
 
 
 
