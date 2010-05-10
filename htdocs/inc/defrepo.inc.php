@@ -748,7 +748,7 @@ $defrepo[55]=array(
   );
 
 $defrepo[56]=array(
-    'info' => array('create' => 0),
+    'info' => array('create' => 1),
     'url' => 'http://repository.elettrolinux.com/Slackware-13.0/',
     'rank' => 99,
     'version' => '13.0', # OK
