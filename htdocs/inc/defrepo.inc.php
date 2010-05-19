@@ -760,6 +760,26 @@ $defrepo[56]=array(
     'brief' => 'Michele.P'
   );
 
+$defrepo[57]=array(
+    'info' => array('create' => 1),
+    'url' => 'http://www.nielshorn.net/_download/slackware/packages/',
+    'rank' => 99,
+    'version' => '13.0', # OK
+    'arch' => 'mixed',
+    'class' => 'mi130',
+    'manifest' => 'MANIFEST.bz2',
+    'packages' => 'PACKAGES.TXT',
+    'name' => 'nielshor-for-13.0',
+    'brief' => 'Niels Horn'
+  );
+
+
+
+
+
+
+
+
 
 
 
