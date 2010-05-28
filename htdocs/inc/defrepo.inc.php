@@ -471,7 +471,7 @@ $defrepo[48]=array( 'info' => array('create' => 1), 'name' => 'schoepfer.info-i3
 # id 51-53
 
 $defrepo[50]=array( 'info' => array('create' => 1), 'name' => 'dia-tech-slack-13.1',
-    'url' => 'http://www.dia-tech.net/linux/Slackware-13.0/',
+    'url' => 'http://www.dia-tech.net/linux/Slackware-13.1/',
     'rank' => 99, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131',
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT.gz',
     'brief' => 'Aszabo', 'description' => 'Packages from Aszabo (www.dia-tech.net) for Slackware 13.1 32bit'
