@@ -513,7 +513,7 @@ $defrepo[55]=array( 'info' => array('create' => 1), 'name' => 'scxd-current',
 
 $defrepo[56]=array( 'info' => array('create' => 1), 'name' => 'elettrolinux-for-13.0',
     'url' => 'http://repository.elettrolinux.com/Slackware-13.0/',
-    'rank' => 99, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130',
+    'rank' => 99, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130', 'deps' => 1,
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT.gz',
     'brief' => 'Michele.P');
 
