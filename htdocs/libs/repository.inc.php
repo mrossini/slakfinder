@@ -50,7 +50,6 @@ class repository {
       case '12.2': $p4=$top*4/100;break;
       case '12.1': $p4=$top*0/100;break;
     }
-    echo "-".round($p1)."({$repo['npkgs']})-".round($p2)."-$p3-".round($p4)."-";
     $repo['rank']=round($top-($p1+$p2+$p3+$p4));
     $out=$this->db->update("#__repository",$repo,array("id" => "{$repo['id']}"));
     return ! ! $out;
