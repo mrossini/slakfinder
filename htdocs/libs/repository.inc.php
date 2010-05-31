@@ -37,6 +37,21 @@ class repository {
       $this->db->fetch();
       $repo['nfiles']=$this->db->datas[0]['nfiles'];
     }
+    $top=$repo['rank'];
+    $p1=$top* (pow($repo['npkgs'],1/4)/pow(2356,1/4)) *30/100;
+    $p2=0; $p3=0; $p4=0;
+    if ( isset($repo['deps']) )if($repo['deps']==1)$p2=$top*2/100;
+    if ( $nf )$p3=$top*4/100;
+    switch ($repo['version']){
+      case '13.1': $p4=$top*15/100;break;
+      case 'current': $p4=$top*12/100;break;
+      case '13.0': $p4=$top*10/100;break;
+      case 'mixed': $p4=$top*7/100;break;
+      case '12.2': $p4=$top*4/100;break;
+      case '12.1': $p4=$top*0/100;break;
+    }
+    echo "-".round($p1)."({$repo['npkgs']})-".round($p2)."-$p3-".round($p4)."-";
+    $repo['rank']=round($top-($p1+$p2+$p3+$p4));
     $out=$this->db->update("#__repository",$repo,array("id" => "{$repo['id']}"));
     return ! ! $out;
   }

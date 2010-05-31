@@ -127,6 +127,7 @@ class package {
 	    (P.name like '%-$pkg%' and P.name not like '%-$pkg-%')*2+
 	    (P.name like '%-$pkg')*1+
 	    (P.name like '%$pkg%$pkg%')*1+
+	    ((100 - R.rank)*5)/100+
 	    (LENGTH('$pkg')/LENGTH(P.name))
 	  ) ";
 	}else{$rank.=" ( 0 ) ";}

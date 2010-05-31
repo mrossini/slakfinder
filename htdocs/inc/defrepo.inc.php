@@ -66,85 +66,85 @@ function writerepos($reposelected){
 
 $defrepo[1]=array( 'info' => array('create' => 1), 'name' => 'slackware64-current',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-current/',
-    'rank' => 1, 'version' => 'current', 'arch' => 'x86_64', 'class' => '64cur',
+    'rank' => 30, 'version' => 'current', 'arch' => 'x86_64', 'class' => '64cur',
     'manifest' => 'slackware64/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Official', 'description' => 'Slackware 64bit Official Distribution - Current Version');
 
 $defrepo[2]=array( 'info' => array('create' => 1), 'name' => 'slackware-current',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-current/',
-    'rank' => 1, 'version' => 'current', 'arch' => 'i386', 'class' => '32cur',
+    'rank' => 30, 'version' => 'current', 'arch' => 'i386', 'class' => '32cur',
     'manifest' => 'slackware/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Official', 'description' => 'Slackware 32bit Official Distribution - Current Version');
 
 $defrepo[3]=array( 'info' => array('create' => 1), 'name' => 'slackware-12.2',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-12.2/',
-    'rank' => 1, 'version' => '12.2', 'arch' => 'i386', 'class' => '32122',
+    'rank' => 30, 'version' => '12.2', 'arch' => 'i386', 'class' => '32122',
     'manifest' => 'slackware/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Official', 'description' => 'Slackware 32bit Official Distribution - 12.2 Version');
 
 $defrepo[4]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.0',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/',
-    'rank' => 1, 'version' => '13.0', 'arch' => 'x86_64', 'class' => '64130',
+    'rank' => 30, 'version' => '13.0', 'arch' => 'x86_64', 'class' => '64130',
     'manifest' => 'slackware64/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Official', 'description' => 'Slackware 64bit Official Distribution - 13.0 Version');
 
 $defrepo[5]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.0',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/',
-    'rank' => 1, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130',
+    'rank' => 30, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130',
     'manifest' => 'slackware/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Official', 'description' => 'Slackware 32bit Official Distribution - 13.0 Version');
 
 $defrepo[6]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.0-patches',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/',
-    'rank' => 2, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130',
+    'rank' => 30, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130',
     'manifest' => 'patches/MANIFEST.bz2', 'packages' => 'patches/PACKAGES.TXT',
     'brief' => 'Patches', 'description' => 'Slackware 32bit Official Patches for 13.0 Version');
 
 $defrepo[7]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.0-patches',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/patches/',
-    'rank' => 2, 'version' => '13.0', 'arch' => 'x86_64', 'class' => '64130',
+    'rank' => 30, 'version' => '13.0', 'arch' => 'x86_64', 'class' => '64130',
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Patches', 'description' => 'Slackware 64bit Official Patches for 13.0 Version');
 
 $defrepo[11]=array( 'info' => array('create' => 1), 'name' => 'slacky-13.0',
     'url' => 'http://repository.slacky.eu/slackware-13.0/',
-    'rank' => 10, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130', 'deps' => 1,
+    'rank' => 99, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130', 'deps' => 1,
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Slacky', 'description' => 'Slacky.eu Community s Repository for Slackware 13.0');
 
 $defrepo[12]=array( 'info' => array('create' => 1), 'name' => 'slacky-12.2',
     'url' => 'http://repository.slacky.eu/slackware-12.2/',
-    'rank' => 10, 'version' => '12.2', 'arch' => 'i386', 'class' => '32122', 'deps' => 1,
+    'rank' => 99, 'version' => '12.2', 'arch' => 'i386', 'class' => '32122', 'deps' => 1,
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Slacky', 'description' => 'Slacky.eu Community s Repository for Slackware 12.2');
 
 $defrepo[13]=array( 'info' => array('create' => 1), 'name' => 'gnome-slacky-12.2',
     'url' => 'http://repository.slacky.eu/gnome-slacky-12.2/',
-    'rank' => 11, 'version' => '12.2', 'arch' => 'i386', 'class' => '32122', 'deps' => 1,
+    'rank' => 99, 'version' => '12.2', 'arch' => 'i386', 'class' => '32122', 'deps' => 1,
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Gnome Slacky', 'description' => 'Slacky.eu Community s Repository of a Gnome 2.28.0 for Slackware 12.2');
 
 $defrepo[21]=array( 'info' => array('create' => 1), 'name' => 'salix-13.0',
     'url' => 'http://download.salixos.org/i486/13.0/',
-    'rank' => 20, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130', 'deps' => 1,
+    'rank' => 99, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130', 'deps' => 1,
     'manifest' => '', 'packages' => 'PACKAGES.TXT.gz',
     'brief' => 'Salix', 'description' => 'Salix 32bit Distribution perfectly compatible with Slackware 13.0');
 
 $defrepo[22]=array( 'info' => array('create' => 1), 'name' => 'salix-current',
     'url' => 'http://download.salixos.org/i486/current/',
-    'rank' => 20, 'version' => 'current', 'arch' => 'i386', 'class' => '32cur', 'deps' => 1,
+    'rank' => 99, 'version' => 'current', 'arch' => 'i386', 'class' => '32cur', 'deps' => 1,
     'manifest' => '', 'packages' => 'PACKAGES.TXT.gz',
     'brief' => 'Salix', 'description' => 'Salix 32bit Distribution perfectly compatible with Slackware Current');
 
 $defrepo[23]=array( 'info' => array('create' => 1), 'name' => 'salix64-13.0',
     'url' => 'http://download.salixos.org/x86_64/13.0/',
-    'rank' => 20, 'version' => '13.0', 'arch' => 'x86_64', 'class' => '64130', 'deps' => 1,
+    'rank' => 99, 'version' => '13.0', 'arch' => 'x86_64', 'class' => '64130', 'deps' => 1,
     'manifest' => '', 'packages' => 'PACKAGES.TXT.gz',
     'brief' => 'Salix64', 'description' => 'Salix 64bit Distribution perfectly compatible with Slackware64 13.0');
 
 $defrepo[24]=array( 'info' => array('create' => 1), 'name' => 'salix64-current',
     'url' => 'http://download.salixos.org/x86_64/current/',
-    'rank' => 20, 'version' => 'current', 'arch' => 'x86_64', 'class' => '64cur', 'deps' => 1,
+    'rank' => 99, 'version' => 'current', 'arch' => 'x86_64', 'class' => '64cur', 'deps' => 1,
     'manifest' => '', 'packages' => 'PACKAGES.TXT.gz',
     'brief' => 'Salix64', 'description' => 'Salix 64bit Distribution perfectly compatible with Slackware64 Current');
 
@@ -174,13 +174,13 @@ $defrepo[28]=array( 'info' => array('create' => 0), 'name' => 'gsb-gnome-current
 
 $defrepo[29]=array( 'info' => array('create' => 1), 'name' => 'salix-13.1',
     'url' => 'http://download.salixos.org/i486/13.1/',
-    'rank' => 20, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131', 'deps' => 1,
+    'rank' => 99, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131', 'deps' => 1,
     'manifest' => '', 'packages' => 'PACKAGES.TXT.gz',
     'brief' => 'Salix', 'description' => 'Salix 32bit Distribution perfectly compatible with Slackware 13.1');
 
 $defrepo[30]=array( 'info' => array('create' => 1), 'name' => 'salix64-13.1',
     'url' => 'http://download.salixos.org/x86_64/13.1/',
-    'rank' => 20, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131', 'deps' => 1,
+    'rank' => 99, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131', 'deps' => 1,
     'manifest' => '', 'packages' => 'PACKAGES.TXT.gz',
     'brief' => 'Salix64', 'description' => 'Salix 64bit Distribution perfectly compatible with Slackware64 13.1');
 
@@ -354,60 +354,60 @@ $defrepo[60]=array( 'info' => array('create' => 1), 'name' => 'gsb64-gnome2.30-1
 
 $defrepo[61]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.0-extra',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/',
-    'rank' => 3, 'version' => '13.0', 'arch' => 'x86_64', 'class' => '64130',
+    'rank' => 30, 'version' => '13.0', 'arch' => 'x86_64', 'class' => '64130',
     'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'extra/PACKAGES.TXT',
     'brief' => 'Extra', 'description' => 'Slackware 64bit Official Extra Packages for 13.0 Version');
 
 $defrepo[62]=array( 'info' => array('create' => 1), 'name' => 'slackware64-current-extra',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-current/',
-    'rank' => 3, 'version' => 'current', 'arch' => 'x86_64', 'class' => '64cur',
+    'rank' => 30, 'version' => 'current', 'arch' => 'x86_64', 'class' => '64cur',
     'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'extra/PACKAGES.TXT',
     'brief' => 'Extra', 'description' => 'Slackware 64bit Official Extra Packages for Current Version');
 
 $defrepo[63]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.0-extra',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/',
-    'rank' => 3, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130',
+    'rank' => 30, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130',
     'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'extra/PACKAGES.TXT',
     'brief' => 'Extra', 'description' => 'Slackware 32bit Official Extra Packages for 13.0 Version');
 $defrepo[64]=array( 'info' => array('create' => 1), 'name' => 'slackware-current-extra',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-current/',
-    'rank' => 3, 'version' => 'current', 'arch' => 'i386', 'class' => '32cur',
+    'rank' => 30, 'version' => 'current', 'arch' => 'i386', 'class' => '32cur',
     'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'extra/PACKAGES.TXT',
     'brief' => 'Extra', 'description' => 'Slackware 32bit Official Extra Packages for Current Version');
 
 $defrepo[71]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.1',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.1/',
-    'rank' => 1, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131',
+    'rank' => 30, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131',
     'manifest' => 'slackware64/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Official', 'description' => 'Slackware 64bit Official Distribution - 13.1 Version');
 
 $defrepo[72]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.1',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.1/',
-    'rank' => 1, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131',
+    'rank' => 30, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131',
     'manifest' => 'slackware/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Official', 'description' => 'Slackware 32bit Official Distribution - 13.1 Version');
 
 $defrepo[73]=array( 'info' => array('create' => 0), 'name' => 'slackware-13.1-patches',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.1/',
-    'rank' => 2, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131',
+    'rank' => 30, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131',
     'manifest' => 'patches/MANIFEST.bz2', 'packages' => 'patches/PACKAGES.TXT',
     'brief' => 'Patches', 'description' => 'Slackware 32bit Official Patches for 13.1 Version');
 
 $defrepo[74]=array( 'info' => array('create' => 0), 'name' => 'slackware64-13.1-patches',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.1/patches/',
-    'rank' => 2, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131',
+    'rank' => 30, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131',
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Patches', 'description' => 'Slackware 64bit Official Patches for 13.1 Version');
 
 $defrepo[75]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.1-extra',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.1/',
-    'rank' => 3, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131',
+    'rank' => 30, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131',
     'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'extra/PACKAGES.TXT',
     'brief' => 'Extra', 'description' => 'Slackware 64bit Official Extra Packages for 13.1 Version');
 
 $defrepo[76]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.1-extra',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.1/',
-    'rank' => 3, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131',
+    'rank' => 30, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131',
     'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'extra/PACKAGES.TXT',
     'brief' => 'Extra', 'description' => 'Slackware 32bit Official Extra Packages for 13.1 Version');
 

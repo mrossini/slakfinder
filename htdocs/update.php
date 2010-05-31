@@ -34,7 +34,7 @@ include 'inc/defrepo.inc.php';
 
 $db=new database();
 
-echo "svuotamento cache";
+echo "svuotamento cache\n";
 $db->db->dropcache();
 
 if(isset($_SERVER['DROPDB'])or isset($_GET['DROPDB'])){
