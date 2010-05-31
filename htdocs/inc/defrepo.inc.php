@@ -106,6 +106,18 @@ $defrepo[7]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.0-p
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Patches', 'description' => 'Slackware 64bit Official Patches for 13.0 Version');
 
+$defrepo[9]=array( 'info' => array('create' => 1), 'name' => 'slacky-13.1',
+    'url' => 'http://repository.slacky.eu/slackware-13.1/',
+    'rank' => 99, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131', 'deps' => 1,
+    'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
+    'brief' => 'Slacky', 'description' => 'Slacky.eu Community s Repository for Slackware 13.1');
+
+$defrepo[10]=array( 'info' => array('create' => 1), 'name' => 'slacky64-13.1',
+    'url' => 'http://repository.slacky.eu/slackware64-13.1/',
+    'rank' => 99, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131', 'deps' => 1,
+    'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
+    'brief' => 'Slacky', 'description' => 'Slacky.eu Community s Repository for Slackware64 13.1');
+
 $defrepo[11]=array( 'info' => array('create' => 1), 'name' => 'slacky-13.0',
     'url' => 'http://repository.slacky.eu/slackware-13.0/',
     'rank' => 99, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130', 'deps' => 1,
