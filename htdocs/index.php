@@ -32,7 +32,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     $db->counter_inc('visits');
     $_SESSION['searcher_visitor']=$db->counter_get('visits');
   }
-  echo "You are the ".$_SESSION['searcher_visitor']."st visitor<br />";
+  #echo "You are the ".$_SESSION['searcher_visitor']."st visitor<br />";
   $name=$desc=$file=$repo=$order=null;
   foreach($_GET as $key => $value)$$key=$value;
   if ($name or $desc or $file) {
@@ -41,10 +41,11 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
       $db->counter_inc('searches');
     }
   }
-  echo "Searched ".$db->counter_get('searches')." packages from 6 March 2010<br /><br />";
+  #echo "Searched ".$db->counter_get('searches')." packages from 6 March 2010<br /><br />";
 ?>
 
 <form action='index.php?#results'>
+  <input type='hidden' name='act' value='search'>
   <input type='hidden' name='start' value='0'>
   <input type='hidden' name='order' value=''>
   <input type='hidden' name='maxresult' value='<?php echo $maxresult; ?>'>

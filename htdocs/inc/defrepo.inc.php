@@ -26,7 +26,78 @@ function redefrepo($reposelected=0){
     $classes[$repo->class]['repo'][]=$repo->id;
     $npackages+=$repo->npkgs;
   }
+
+
+  echo "<table border='0' width='100%'>";
+  echo "<tr>";
+  echo "<td>";
+  echo "You are the ".$_SESSION['searcher_visitor']."st visitor<br />";
+  echo "Searched ".$GLOBALS['db']->counter_get('searches')." packages from 6 March 2010<br /><br />";
   echo "<code>$nrepos repositories ($npackages packages)</code><br><br>\n";
+  echo "</td>";
+
+  $al=new access_log();
+  $al->open();
+
+  $pkgs=array();
+  $al->setsearch('_act','=','search');
+  while($res=$al->find()) {
+    if($res['url']['get']['name']){
+      if(!$pkgs){
+        $pkgs[]=$res;
+      }else{
+        $last=end($pkgs);
+        if(($last['url']['get']['name']!=$res['url']['get']['name'])or
+           ($last['url']['get']['name']==$res['url']['get']['name'] and $last['ip']!=$res['ip']))$pkgs[]=$res;
+      }
+    }
+  }
+  $names=array();
+  $ord=array();
+  foreach($pkgs as $pkg){ 
+    $name=$pkg['url']['get']['name'];
+    $names[]=$name;
+    if(isset($ord[$name])){$ord[$name]++;}else{$ord[$name]=1;}
+  }
+  arsort($ord,SORT_NUMERIC);
+  if(isset($_GET['name']))if($_GET['name'])if($_GET['name']!=end($names))$names[]=$_GET['name'];
+  $names=array_reverse($names);
+
+
+
+  echo "<td>";
+    echo "<table border=1 cellspacing=0>";
+      echo "<tr><td colspan=3 align=center><code><b>Recents</b></code></td></tr>";
+      echo "<tr><td><code>",$names[0]."<br />".$names[1]."<br />".$names[2]."<br />".$names[3]."<br />".$names[4]."</code></td>";
+      echo "<td><code>",$names[5]."<br />".$names[6]."<br />".$names[7]."<br />".$names[8]."<br />".$names[9]."</code></td>";
+      echo "<td><code>",$names[10]."<br />".$names[11]."<br />".$names[12]."<br />".$names[13]."<br />".$names[14]."</code></td></tr>";
+    echo "</table>";
+  echo "</td>";
+
+  echo "<td>";
+    echo "<table border=1 cellspacing=0>";
+      echo "<tr><td colspan=2 align=center><code><b>Top</b></code></td></tr>";
+      echo "<tr>";
+      echo "<td><code>";
+      $keys=array_keys($ord);
+      reset($keys);
+      for($i=0;$i<5;$i++){
+	echo current($keys)."<br />";
+	next($keys);
+      }
+      echo "</code></td>";
+      echo "<td><code>";
+      reset($ord);
+      for($i=0;$i<5;$i++){
+	echo current($ord)."<br />";
+	next($ord);
+      }
+      echo "</code></td>";
+      echo "</tr>";
+    echo "</table>";
+  echo "</td>";
+
+  echo "</tr></table>";
 
 }
 

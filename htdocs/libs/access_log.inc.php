@@ -20,21 +20,19 @@ class access_log {
       return true;
     }
   }
-  public function fetch(){
-    if(feof($this->access_log))return null;
-    $regex=
-      "^([^ ]+) - *" // IP 1
-      ."([^ ]*) *- " // USERNAME 2
-      ."\[([^\]]+)\] " // TIME (20/Jun/2009:18:25:22 +0200) 3
-      ."\"([A-Za-z]*) *" // METHOD 4
-      ."([^ ]+) *" // URL (whithout domain) 5
-      ."([^\"]*)\" " // PROTO VERSION 6
-      ."(\d+) " // EXIT CODE 7
-      ."(.+)$" // OUT SIZE 8 
-      ;
-    $line=trim(fgets($this->access_log));
-    $this->row++;
+  public function split($line=null){
+    if (!$line)$line=$this->line;
     if($line){
+      $regex=
+	"^([^ ]+) - *" // IP 1
+	."([^ ]*) * " // USERNAME 2
+	."\[([^\]]+)\] " // TIME (20/Jun/2009:18:25:22 +0200) 3
+	."\"([A-Za-z]*) *" // METHOD 4
+	."([^ ]+) *" // URL (without domain) 5
+	."([^\"]*)\" " // PROTO VERSION 6
+	."(\d+) " // EXIT CODE 7
+	."(.+)$" // OUT SIZE 8 
+	;
       $tmp=preg_split("|$regex|",$line,-1,PREG_SPLIT_DELIM_CAPTURE);
       $log=array();
       $log['line']=$line;
@@ -48,12 +46,19 @@ class access_log {
       $log['protover']=$tmp[6];
       $log['status']=(int)$tmp[7];
       $log['size']=($tmp[8]=="-")?0:(int)$tmp[8];
-      $this->cur=$log;
       return $log;
     }else{
       $this->cur=null;
       return null;
     }
+  }
+  public function fetch(){
+    if(feof($this->access_log))return null;
+    $line=trim(fgets($this->access_log));
+    $this->line=$line;
+    $this->row++;
+    $this->cur=$this->line;
+    return $this->line;
   }
   public function skip($count=1){
     for($count;$count>0;$count--){
@@ -86,7 +91,7 @@ class access_log {
     return $this->skip($where-$this->row);
   }
   var $sdata=null;
-  public function search($what,$where='line',$param="~"){
+  public function setsearch($where='line',$param="~",$what=""){
     if($where=='time' and $param=="~")$param="=";
     $this->sdata=array("what"=>$what,"where"=>$where,"param"=>$param);
   }
@@ -96,17 +101,18 @@ class access_log {
     $param=$this->sdata['param'];
     $found=false;
     while(!$found and !$this->eof()){
-      $line=$this->fetch();
+      $line=$this->split($this->fetch());
       $field=false;
       if(isset($line[$where]))$field=$line[$where];
       if(isset($line['url'][$where]))$field=$line['url'][$where];
       if(substr($where,0,1)=="_"){
-	$where=substr($where,1);
-	if(isset($line['get'][$where]))$field=$line['get'][$where];
+	$wh=substr($where,1);
+	if(isset($line['url']['get'][$wh])) $field=$line['url']['get'][$wh];
       }
-      if($field){
+      if($field!==false){
 	if    ($param=="="){ if($field==$what)$found=$line; }
-	elseif($param=="~"){ if(!stripos($field,$what)===false)$found=$line; }
+	elseif($param=="~"){ if(!$what)$found=$line;
+	                     if(stripos($field,$what)!==false)$found=$line; }
 	elseif($param==">"){ if($field>$what)$found=$line; }
 	elseif($param=="<"){ if($field<$what)$found=$line; }
       }
