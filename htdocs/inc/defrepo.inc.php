@@ -40,7 +40,7 @@ function redefrepo($reposelected=0){
   $al->open();
 
   $pkgs=array();
-  $al->setsearch('_act','=','search');
+  $al->setsearch('_start','=','0');
   while($res=$al->find()) {
     if($res['url']['get']['name']){
       if(!$pkgs){
