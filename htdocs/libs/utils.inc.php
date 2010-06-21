@@ -66,4 +66,22 @@
     }
     return $out;
   }
+  function histogram(&$arr,$large=3,$multi=1){
+    $max=0;
+    foreach($arr as $val)$max=($val>$max)?$val:$max;
+
+    $im=ImageCreate($large*count($date),$max*$multi)or die("failed");
+    $bg=ImageColorAllocate($im,240,255,250);
+    $bar=imagecolorallocate($im, 0, 0, 0);  
+
+    $i=0;
+    foreach($date as $val){
+      imagefilledrectangle($im,$i*$large,$max*$multi-$val*$multi,$i*$large+$large-1,$max*$multi,$bar);
+      $i++;
+    }
+
+    header("Content-type: image/png");
+    imagepng($im);
+    imagedestroy($im);
+  }
 ?>

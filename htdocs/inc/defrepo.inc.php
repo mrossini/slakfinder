@@ -67,7 +67,7 @@ function redefrepo($reposelected=0){
 
   echo "<td>";
     echo "<table border=1 cellspacing=0>";
-      echo "<tr><td colspan=3 align=center><code><b>Recents</b></code></td></tr>";
+      echo "<tr><td colspan=3 align=center><code><b><a href='stats.php'>Recents</a></b></code></td></tr>";
       echo "<tr><td><code>",$names[0]."<br />".$names[1]."<br />".$names[2]."<br />".$names[3]."<br />".$names[4]."</code></td>";
       echo "<td><code>",$names[5]."<br />".$names[6]."<br />".$names[7]."<br />".$names[8]."<br />".$names[9]."</code></td>";
       echo "<td><code>",$names[10]."<br />".$names[11]."<br />".$names[12]."<br />".$names[13]."<br />".$names[14]."</code></td></tr>";
@@ -76,7 +76,7 @@ function redefrepo($reposelected=0){
 
   echo "<td>";
     echo "<table border=1 cellspacing=0>";
-      echo "<tr><td colspan=2 align=center><code><b>Top</b></code></td></tr>";
+      echo "<tr><td colspan=2 align=center><code><b><a href='stats.php'>Top</a></b></code></td></tr>";
       echo "<tr>";
       echo "<td><code>";
       $keys=array_keys($ord);
