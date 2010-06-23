@@ -32,11 +32,12 @@ function redefrepo($reposelected=0){
   echo "<tr>";
   echo "<td>";
   echo "You are the ".$_SESSION['searcher_visitor']."st visitor<br />";
+
   echo "Searched ".$GLOBALS['db']->counter_get('searches')." packages from 6 March 2010<br /><br />";
   echo "<code>$nrepos repositories ($npackages packages)</code><br><br>\n";
   echo "</td>";
 
-  $al=new access_log();
+  $al=new tail_log();
   $al->open();
 
   $pkgs=array();
@@ -74,7 +75,7 @@ function redefrepo($reposelected=0){
     echo "</table>";
   echo "</td>";
 
-  echo "<td>";
+/*  echo "<td>";
     echo "<table border=1 cellspacing=0>";
       echo "<tr><td colspan=2 align=center><code><b><a href='stats.php'>Top</a></b></code></td></tr>";
       echo "<tr>";
@@ -95,7 +96,7 @@ function redefrepo($reposelected=0){
       echo "</code></td>";
       echo "</tr>";
     echo "</table>";
-  echo "</td>";
+  echo "</td>";*/
 
   echo "</tr></table>";
 

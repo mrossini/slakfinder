@@ -13,6 +13,7 @@ include 'libs/repository.inc.php';
 include 'libs/package.inc.php';
 include 'libs/filelist.inc.php';
 include 'libs/access_log.inc.php';
+include 'libs/tail_log.inc.php';
 include 'libs/xml.inc.php';
 include 'libs/history.inc.php';
 
