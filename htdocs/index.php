@@ -51,10 +51,11 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   <input type='hidden' name='maxresult' value='<?php echo $maxresult; ?>'>
   <?php echo writerepos($repo); ?>
   <a name='results'></a>
-  <nobr>Search: <input name='name' value='<?php echo $name; ?>' /> 
+  <nobr>Search<sup>(*)</sup>: <input name='name' value='<?php echo $name; ?>' /> 
         <input type='submit' value='go' /> - 
 	Description: <input name='desc' value='<?php echo $desc; ?>' /> - 
         Filename: <input name='file' value='<?php echo $file; ?>' /> 
+	<br /><sup><i>(*) Enter pkgname ONLY (no version)!!! Jolly character is '%' (substitute of '*', that not exists!!)</i></sup>
   </form>
   <pre>
 <?php
