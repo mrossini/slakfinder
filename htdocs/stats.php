@@ -3,9 +3,9 @@
   include 'inc/includes.inc.php';
   include 'inc/defrepo.inc.php';
 
-  global $date,$pkgs;
+  global $date,$pkgs,$max;
   function initstat(){
-    global $date,$pkgs;
+    global $date,$pkgs,$max;
     $al=new tail_log();
     #$al=new tail_log();
     $al->open();
@@ -78,8 +78,14 @@
 
   if(isset($_GET['gdaily'])){
     initstat();
-    $max=0;
-    foreach($date as $val)$max=($val>$max)?$val:$max;
+    #$max=0;
+    #foreach($date as $val)$max=($val>$max)?$val:$max;
+    $max=max($date);
+/*    echo "<pre>";
+    echo $max;
+    var_dump($date);
+    echo "</pre>";
+    exit;*/
     if(isset($_GET['y'])){
       $multi=$_GET['y']/$max;
     }else{
@@ -93,7 +99,7 @@
       $space=1;
     }
 
-    $im=ImageCreate($large*(count($date)-1),$max*$multi);
+    $im=ImageCreate($large*count($date),$max*$multi);
     $bg=ImageColorAllocate($im,240,255,250);
     #$bar=ImageColorAllocate($im, 0, 0, 0);
     $red=ImageColorAllocate($im, 255, 0, 0);
@@ -120,7 +126,7 @@
     }
     for($i=100;$i<$max;$i+=100){
       ImageRectangle($im,0,$max*$multi-$i*$multi,$large*count($date)+1,$max*$multi-$i*$multi,$blue);
-      ImageString($im,2,1,$max*$multi-$i*$multi-11,$i,$blue);
+      ImageString($im,2,1,$max*$multi-$i*$multi,$i,$blue);
     }
 
     header("Content-type: image/png");
@@ -134,25 +140,31 @@
   initstat();
   $names=array();
   $ord=array();
+  $when=array();
+  $mom=time();
   foreach($pkgs as $pkg){
     $names[]=$pkg['url']['get']['name'];
     $name=$pkg['url']['get']['name'];
+    $when[]=$pkg['time'];#round(($mom-$pkg['time'])/60);
     if(isset($ord[$name])){$ord[$name]++;}else{$ord[$name]=1;}
   }
   arsort($ord,SORT_NUMERIC);
   echo "<pre>";
   echo "<table border=1 cellspacing=0>";
   echo "<tr><td colspan=2>";
-  echo "Daily searches from begin:<br><img src='stats.php?gdaily&y=200'>";
+  echo "Searches from begin.";
+  echo " | Today: ".end($date)." | Top: ".(max($date))." | Daily";
+  echo ":<br><img src='stats.php?gdaily&y=200'>";
   echo "</td></tr>";
   echo "<tr><th>Last 100</th><th>Top 100</th><tr>";
   echo "<td>";
   $names=array_reverse($names);
-  $i=0;
-  foreach($names as $name){
-    if($i++ == 100)break;
+  $when=array_reverse($when);
+  for($i=0;$i<100;$i++){
+    $name=$names[$i];
     if(strlen($name)>25)$name=substr($name,0,25)."...";
-    echo "$name<br>";
+    $min=round(($mom-$when[$i])/60);
+    echo "$min'  $name<br>";
   }
 
 
