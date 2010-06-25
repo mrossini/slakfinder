@@ -57,11 +57,15 @@ function redefrepo($reposelected=0){
   $ord=array();
   foreach($pkgs as $pkg){ 
     $name=$pkg['url']['get']['name'];
+    if(strlen($name)>15)$name=substr($name,0,15)."..";
     $names[]=$name;
     if(isset($ord[$name])){$ord[$name]++;}else{$ord[$name]=1;}
   }
   arsort($ord,SORT_NUMERIC);
-  if(isset($_GET['name']))if($_GET['name'])if($_GET['name']!=end($names))$names[]=$_GET['name'];
+  if(isset($_GET['name']))if($_GET['name']){
+    if(strlen($_GET['name'])>15)$_GET['name']=substr($_GET['name'],0,15)."..";
+    if($_GET['name']!=end($names))$names[]=$_GET['name'];
+  }
   $names=array_reverse($names);
 
 
