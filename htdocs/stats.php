@@ -3,61 +3,170 @@
   include 'inc/includes.inc.php';
   include 'inc/defrepo.inc.php';
 
-  $al=new access_log();
-  $al->open();
+  global $date,$pkgs;
+  function initstat(){
+    global $date,$pkgs;
+    $al=new tail_log();
+    #$al=new tail_log();
+    $al->open();
 
-  $date=array();
-  define ('DAY',3600*24);
-  $days=time()/DAY;
+    $date=array();
+    define ('DAY',3600*24);
+    $now=time()/DAY;
 
 
 
-  $pkgs=array();
-  $al->setsearch('_start','=','0');
-  while($res=$al->find()) {
-    if(@$res['url']['get']['name']){
-      if(!$pkgs){
-        $pkgs[]=$res;
-      }else{
-        $last=end($pkgs);
-        if(($last['url']['get']['name']!=$res['url']['get']['name'])or
-	   ($last['url']['get']['name']==$res['url']['get']['name'] and $last['ip']!=$res['ip'])){
+    /*
+    $pkgs=array();
+    $al->setsearch('_start','=','0');
+    if(isset($_GET['time'])){$time=$_GET['time'];}else{$time=365;}
+      $i=1;
+    while($res=$al->find()) {
+      if(@$res['url']['get']['name']){
+	if(!$pkgs){
 	  $pkgs[]=$res;
-	  $day=round($last['time']/DAY-0.5,0);
-	  if(!isset($date[$day])){
-	    $date[$day]=1;
-	  }else{
-	    $date[$day]++;
+	}else{
+	  $last=end($pkgs);
+	  if(($last['url']['get']['name']!=$res['url']['get']['name'])or
+	     ($last['url']['get']['name']==$res['url']['get']['name'] and $last['ip']!=$res['ip'])){
+	    $pkgs[]=$res;
+	    $day=round($last['time']/DAY-0.5,0);
+	    if($day>=$now-$time){
+	      if(!isset($date[$day])){
+		$date[$day]=1;
+	      }else{
+		$date[$day]++;
+	      }
+	    }
 	  }
 	}
       }
     }
+     */
+    
+    $pkgs=array();
+    $ip=array();
+    $al->setsearch('_start','=','0');
+    if(isset($_GET['time'])){$time=$_GET['time'];}else{$time=365;}
+    $i=1;
+    while($res=$al->find()) {
+      if(@$res['url']['get']['name']){
+	$pres=$res['url']['get']['name'];
+	$pip=$res['ip'];
+	if(@$ip[$pip]!=$pres){
+	  $pkgs[]=$res;
+	  $ip[$pip]=$pres;
+	  $day=round($res['time']/DAY-0.5,0);
+	  if($day>=$now-$time){
+	    if(!isset($date[$day])){
+	      $date[$day]=1;
+	    }else{
+	    $date[$day]++;
+	    }
+	  }
+	}
+      }
+    }
+    
+    $bdate=array_keys($date);
+    $start=reset($bdate);
+    $end=end($bdate);
+    for($d=$end;$d>=$start;$d--){
+      if(!isset($date[$d]))$date[$d]=0;
+    }
   }
-  $bdate=array_keys($date);
-  $start=reset($bdate);
-  $end=end($bdate);
-  for($d=$end;$d>=$start;$d--){
-    if(!isset($date[$d]))$date[$d]=0;
-  }
-    $large=5; $multi=1;
+
+  if(isset($_GET['gdaily'])){
+    initstat();
     $max=0;
     foreach($date as $val)$max=($val>$max)?$val:$max;
+    if(isset($_GET['y'])){
+      $multi=$_GET['y']/$max;
+    }else{
+      $multi=1;
+    }
+    if(isset($_GET['x'])){
+      $large=$_GET['x']/count($date)-1;
+      $space=($large<3)?0:1;
+    }else{
+      $large=5;
+      $space=1;
+    }
 
-    $im=ImageCreate($large*count($date)+1,$max*$multi);
+    $im=ImageCreate($large*(count($date)-1),$max*$multi);
     $bg=ImageColorAllocate($im,240,255,250);
-    $bar=imagecolorallocate($im, 0, 0, 0);
-    $red=imagecolorallocate($im, 255, 0, 0);
+    #$bar=ImageColorAllocate($im, 0, 0, 0);
+    $red=ImageColorAllocate($im, 255, 0, 0);
+    $blue=ImageColorAllocate($im, 0, 0, 255);
+    $green=ImageColorAllocate($im, 0, 255, 0);
+
+    $col=array();
+    $col[0]=ImageColorAllocate($im, 0, 0, 0);
+    $col[1]=ImageColorAllocate($im, 0, 0, 0);
+    $c=0;
 
     $i=0;
+#    ImageString($im,3,1,1,"Mar",$blue);
     foreach($date as $key => $val){
-      imagefilledrectangle($im,$i*$large+1,$max*$multi-$val*$multi,$i*$large+$large-1,$max*$multi,$bar);
-      if(date('j',($key+$start)*DAY)==1) imagerectangle($im,$i*$large,0,$i*$large,$max*$multi,$red);
+      if(!$i) if(date('j',($key)*DAY)<20) ImageString($im,2,$i*$large+2,1,date("M",($key)*DAY),$red);
+      $bar=$col[$c];$c=1-$c;
+      ImageFilledRectangle($im,$i*$large+$space,$max*$multi-$val*$multi,($i+1)*$large-1,$max*$multi,$bar);
+      if(date('j',($key)*DAY)==1) {
+	ImageRectangle($im,$i*$large,0,$i*$large,$max*$multi,$red);
+	ImageString($im,2,$i*$large+2,1,date("M",($key)*DAY),$red);
+      }
+      if($space)if(!date('w',($key)*DAY)==1) ImageRectangle($im,$i*$large,$max*$multi/4,$i*$large,$max*$multi,$green);
       $i++;
+    }
+    for($i=100;$i<$max;$i+=100){
+      ImageRectangle($im,0,$max*$multi-$i*$multi,$large*count($date)+1,$max*$multi-$i*$multi,$blue);
+      ImageString($im,2,1,$max*$multi-$i*$multi-11,$i,$blue);
     }
 
     header("Content-type: image/png");
-    imagepng($im);
-    imagedestroy($im);
+    ImagePNG($im);
+    ImageDestroy($im);
+    exit;
+  }
+  ### ELSE
+  #
+
+  initstat();
+  $names=array();
+  $ord=array();
+  foreach($pkgs as $pkg){
+    $names[]=$pkg['url']['get']['name'];
+    $name=$pkg['url']['get']['name'];
+    if(isset($ord[$name])){$ord[$name]++;}else{$ord[$name]=1;}
+  }
+  arsort($ord,SORT_NUMERIC);
+  echo "<pre>";
+  echo "<table border=1 cellspacing=0>";
+  echo "<tr><td colspan=2>";
+  echo "Daily searches from begin:<br><img src='stats.php?gdaily&y=200'>";
+  echo "</td></tr>";
+  echo "<tr><th>Last 100</th><th>Top 100</th><tr>";
+  echo "<td>";
+  $names=array_reverse($names);
+  $i=0;
+  foreach($names as $name){
+    if($i++ == 100)break;
+    if(strlen($name)>25)$name=substr($name,0,25)."...";
+    echo "$name<br>";
+  }
+
+
+  echo "</td><td>";
+  $i=0;
+  foreach($ord as $key => $val){
+    if($i++ == 100)break;
+    echo "$val $key<br>";
+    
+  }
+  echo "</td></tr></table>";
+
+  echo "</pre>";
+
 
 
 ?>

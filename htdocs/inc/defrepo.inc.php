@@ -38,7 +38,7 @@ function redefrepo($reposelected=0){
   echo "</td>";
 
   $al=new tail_log();
-  $al->open();
+  $al->open(50);
 
   $pkgs=array();
   $al->setsearch('_start','=','0');
@@ -74,6 +74,12 @@ function redefrepo($reposelected=0){
       echo "<td><code>",$names[10]."<br />".$names[11]."<br />".$names[12]."<br />".$names[13]."<br />".$names[14]."</code></td></tr>";
     echo "</table>";
   echo "</td>";
+
+  echo "<td>";
+  echo "<table border=1 cellspacing=0 cellpadding=0>";
+  echo "<tr><td><img src='stats.php?gdaily&y=95&time=60'></td></tr>";
+  echo "</table>";
+
 
 /*  echo "<td>";
     echo "<table border=1 cellspacing=0>";

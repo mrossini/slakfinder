@@ -10,9 +10,11 @@ class tail_log {
   public function __construct(){
     $this->db=new mysql();
   }
-  public function open(){
+  public function open($count=0){
     global $access_log_file;
-    if(!$this->access_log=popen("cat $access_log_file|grep 'start=0'|tail -50",'r')){
+    $cmd="grep 'start=0' $access_log_file";
+    if($count)$cmd.="|tail -$count";
+    if(!$this->access_log=popen($cmd,'r')){
       $this->row=null;
       return false;
     }else{
