@@ -42,26 +42,49 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     }
   }
   #echo "Searched ".$db->counter_get('searches')." packages from 6 March 2010<br /><br />";
-?>
+  $hrepos="";
+  if ($name or $desc or $file){
+    $hrepos.="<div style='color:red' id='wait1'>Wait a moment...";
+    if($file)$hrepos.=" (up 2 minutes)";
+    $hrepos.="</div>";
+  }
+  $hrepos.="
 
 <form action='index.php?#results'>
   <input type='hidden' name='act' value='search'>
   <input type='hidden' name='start' value='0'>
   <input type='hidden' name='order' value=''>
-  <input type='hidden' name='maxresult' value='<?php echo $maxresult; ?>'>
-  <?php echo writerepos($repo); ?>
+  <input type='hidden' name='maxresult' value='$maxresult'>
+  ";
+  $hrepos.=writerepos($repo); 
+  if ($name or $desc or $file){
+    $hrepos.="<div style='color:red' id='wait2'>Wait a moment...";
+    if($file)$hrepos.=" (up 2 minutes)";
+    $hrepos.="</div>";
+  }
+  $hrepos.="
   <a name='results'></a>
-  <nobr>Search<sup>(*)</sup>: <input name='name' value='<?php echo $name; ?>' /> 
+  <nobr>Search<sup>(*)</sup>: <input name='name' value='$name' /> 
         <input type='submit' value='go' /> - 
-	Description: <input name='desc' value='<?php echo $desc; ?>' /> - 
-        Filename: <input name='file' value='<?php echo $file; ?>' /> 
-	<br /><sup><i>(*) Enter pkgname ONLY (no version)!!! Jolly character is '%' (substitute of '*', that not exists!!)</i></sup>
+	Description: <input name='desc' value='$desc' /> - 
+        Filename: <input name='file' value='$file' /> 
+	<br /><sup><i>(*) NEW!!!! Enter one or more words <u>space separated</u>. Do not enter package version (it will be ignored)</i></sup>
   </form>
-  <pre>
-<?php
+  ";
   $ord="";
 
+  echo $hrepos;
   if ($name or $desc or $file){
+    echo "<pre>";
+    $sname=$name; $sdesc=$desc; $sfile=$file;
+    $name=urlencode($name);
+    $desc=urlencode($desc);
+    $file=urlencode($file);
+    $sname=str_replace(' ','%',$sname);
+    $sdesc=str_replace(' ','%',$sdesc);
+    $sfile=str_replace(' ','%',$sfile);
+    $sname=preg_replace('/[%-][0-9].*/','',$sname);
+    if($sfile){ $sfile="%$sfile%";}
     if(!$file){ ///////////////////////////////////// PACKAGES.TXT RESULTS ////////////////////////////////////////////////
       switch($order){
 	case "ranku": $ord='rank desc';break;
@@ -84,7 +107,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	case "locd": $ord='P.location desc';break;
       }
       $pkg=new package();
-      $nres=$pkg->find($name,$desc,$repo,$ord);
+      $nres=$pkg->find($sname,$sdesc,$repo,$ord);
+      
       if(isset($_GET['debug']))var_dump($pkg,$nres);
       $to=$start+$maxresult; if($to > $nres)$to=$nres;
       echo "Time: ".(round($pkg->db->msec/1000,3))." msec<br />";
@@ -163,7 +187,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	case "locd": $ord='pkgloc desc';break;
       }
       $fl=new filelist();
-      $nres=$fl->find($file,$name,$desc,$repo,$ord);
+      $nres=$fl->find($sfile,$sname,$sdesc,$repo,$ord);
       if(isset($_GET['debug']))var_dump($fl,$nres);
       $to=$start+$maxresult; if($to > $nres)$to=$nres;
       echo "Time: ".(round($fl->db->msec/1000,3))." msec<br />";
@@ -237,10 +261,18 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 
 
 
+      echo "</pre>";
       echo "<br /><br /><br />";
     }
+    ?>
+    <script>
+    var wait=document.getElementById('wait1');
+    wait.style.color="white";
+    var wait=document.getElementById('wait2');
+    wait.style.color="white";
+    </script>
+    <?php
   }
 ?>
-</pre>
 <p>To report a bug, mail to <a href='mailto:zerouno@slacky.it'>zerouno@slacky.it</a>. Thanks.</p>
 </body></html>

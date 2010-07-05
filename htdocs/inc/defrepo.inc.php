@@ -81,7 +81,7 @@ function redefrepo($reposelected=0){
 
   echo "<td>";
   echo "<table border=1 cellspacing=0 cellpadding=0>";
-  echo "<tr><td><img src='stats.php?gdaily&y=95&time=60'></td></tr>";
+  echo "<tr><td><a href='stats.php'><img border=0 src='stats.php?gdaily&y=95&time=60'></a></td></tr>";
   echo "</table>";
 
 
@@ -504,5 +504,11 @@ $defrepo[76]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.1-ex
     'rank' => 30, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131',
     'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'extra/PACKAGES.TXT',
     'brief' => 'Extra', 'description' => 'Slackware 32bit Official Extra Packages for 13.1 Version');
+
+$defrepo[77]=array( 'info' => array('create' => 1), 'name' => 'elettrolinux-for-13.1',
+    'url' => 'http://repository.elettrolinux.com/Slackware-13.1/',
+    'rank' => 99, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131', 'deps' => 1,
+    'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT.gz',
+    'brief' => 'Michele.P');
 
 ?>

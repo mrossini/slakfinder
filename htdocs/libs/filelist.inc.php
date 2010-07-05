@@ -95,7 +95,7 @@ class filelist {
 	    $where.="$next ( P.name LIKE '%$pkg%' ) ";$next=" AND ";
 	  }
 	}
-	if($file){$where.="$next F.filename LIKE '%$file%' ";$next=" AND ";}
+	if($file){$where.="$next F.filename LIKE '$file' ";$next=" AND ";}
       }
       if($rank){ if($order)$order.=" , ";$order.=" rank desc "; }
       if($order)$order.=" , ";$order.=" reporank ";

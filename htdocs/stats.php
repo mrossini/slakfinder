@@ -150,6 +150,7 @@
   }
   arsort($ord,SORT_NUMERIC);
   echo "<pre>";
+  echo "<a href='javascript:history.go(-1)'>Return to back</a> | <a href='index.php'>Go to home</a><br>";
   echo "<table border=1 cellspacing=0>";
   echo "<tr><td colspan=2>";
   echo "Searches from begin.";
