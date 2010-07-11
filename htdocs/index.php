@@ -55,21 +55,22 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   <input type='hidden' name='order' value=''>
   <input type='hidden' name='maxresult' value='$maxresult'>
   ";
-  $hrepos.=writerepos($repo); 
+  $form="
+    <table>
+    <tr><td>Search<sup>(*)</sup>:</td><td><input name='name' value='$name' /></tr> 
+    <tr><td>Description:</td><td><input name='desc' value='$desc' /></td></tr>
+    <tr><td>Filename:</td><td><input name='file' value='$file' /></td></tr>
+    </table>
+    <input type='submit' value='go' /><br>
+    <sup><i>(*) NEW!!!! Enter one or more words <u>space separated</u>. Do not enter package version (it will be ignored)</i></sup>
+  ";
+  $hrepos.=writereposcompact($repo,$form); 
   if ($name or $desc or $file){
     $hrepos.="<div style='color:red' id='wait2'>Wait a moment...";
     if($file)$hrepos.=" (up 2 minutes)";
     $hrepos.="</div>";
   }
-  $hrepos.="
-  <a name='results'></a>
-  <nobr>Search<sup>(*)</sup>: <input name='name' value='$name' /> 
-        <input type='submit' value='go' /> - 
-	Description: <input name='desc' value='$desc' /> - 
-        Filename: <input name='file' value='$file' /> 
-	<br /><sup><i>(*) NEW!!!! Enter one or more words <u>space separated</u>. Do not enter package version (it will be ignored)</i></sup>
-  </form>
-  ";
+  $hrepos.="</form> <a name='results'></a> ";
   $ord="";
 
   echo $hrepos;

@@ -46,18 +46,18 @@
     return $parseurl;
   }
 
-  function tables($data=null,$what=2,$extra=""){
+  function tables($data=null,$what=2,$extra="",$etr=""){
     $out='';
     if(!is_null($data)){
       if($what==1){
         $out.= "<table $extra cellspacing='0'>\n";
         if($data){
-          $out.= "  <tr>";
+          $out.= "  <tr $etr>";
           foreach($data as $value) $out.= "<th>$value</th>";
           $out.= "</tr>\n";
         }
       }elseif($what==2){
-        $out.= "  <tr>";
+        $out.= "  <tr $etr>";
         foreach($data as $value) $out.= "<td $extra>$value</td>";
         $out.= "</tr>\n";
       }
