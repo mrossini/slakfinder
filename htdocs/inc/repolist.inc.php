@@ -229,7 +229,7 @@ $defrepo[46]=array( 'info' => array('create' => 1), 'name' => 'schoepfer.info-i3
 
 $defrepo[47]=array( 'info' => array('create' => 1), 'name' => 'schoepfer.info-i386-12.2',
     'url' => 'http://slackware.schoepfer.info/12.2/',
-    'rank' => 99, 'version' => '12.2', 'arch' => 'x86_64', 'class' => '64122',
+    'rank' => 99, 'version' => '12.2', 'arch' => 'i386', 'class' => '32122',
     'manifest' => 'slackware/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Johannes Sch&#246;pfer', 'description' => 'Packages from Johannes Sch&#246;pfer (schoepfer.info) for Slackware 12.2');
 
