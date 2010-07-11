@@ -80,7 +80,7 @@ function redefrepo($reposelected=0){
 
   echo "<td>";
   echo "<table border=1 cellspacing=0 cellpadding=0>";
-  echo "<tr><td><a href='stats.php'><img border=0 src='stats.php?gdaily&y=95&time=60'></a></td></tr>";
+  echo "<tr><td><a href='stats.php'><img border=0 src='stats.php?gdaily&y=95&time=60&mid=0&scale=200'></a></td></tr>";
   echo "</table>";
 
 

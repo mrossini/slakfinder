@@ -49,14 +49,17 @@
 
   if(isset($_GET['gdaily'])){
     initstat();
-    #$max=0;
-    #foreach($date as $val)$max=($val>$max)?$val:$max;
+    $maxmid=0;$gmid=0;
+    if(isset($_GET['mid'])){
+      if(!$_GET['mid']){
+	$gmid=1;
+      }else{
+	$maxmid=$_GET['mid'];
+      }
+    }
+    $scale=100;
+    if(isset($_GET['scale'])) $scale=$_GET['scale'];
     $max=max($date);
-/*    echo "<pre>";
-    echo $max;
-    var_dump($date);
-    echo "</pre>";
-    exit;*/
     if(isset($_GET['y'])){
       $multi=$_GET['y']/$max;
     }else{
@@ -72,10 +75,11 @@
 
     $im=ImageCreate($large*count($date),$max*$multi);
     $bg=ImageColorAllocate($im,240,255,250);
-    #$bar=ImageColorAllocate($im, 0, 0, 0);
     $red=ImageColorAllocate($im, 255, 0, 0);
     $blue=ImageColorAllocate($im, 0, 0, 255);
     $green=ImageColorAllocate($im, 0, 255, 0);
+    $midcol=ImageColorAllocate($im, 255, 128, 200);
+    $black=ImageColorAllocate($im, 0, 0, 0);
 
     $col=array();
     $col[0]=ImageColorAllocate($im, 0, 0, 0);
@@ -83,11 +87,21 @@
     $c=0;
 
     $i=0;
-#    ImageString($im,3,1,1,"Mar",$blue);
+
+    $n=0;
+    $last=array(); 
+    $sum=0;
     foreach($date as $key => $val){
+      $sum+=$val;
+      array_push($last,$val);
+      $mid=array_sum($last)/count($last);
       if(!$i) if(date('j',($key)*DAY)<20) ImageString($im,2,$i*$large+2,1,date("M",($key)*DAY),$red);
       $bar=$col[$c];$c=1-$c;
       ImageFilledRectangle($im,$i*$large+$space,$max*$multi-$val*$multi,($i+1)*$large-1,$max*$multi,$bar);
+      if($maxmid){
+	if(count($last)>$maxmid)array_shift($last);
+	ImageFilledRectangle($im, $i*$large+$space , $max*$multi-$mid*$multi, ($i+1)*$large  , $max*$multi-$mid*$multi, $midcol);
+      }
       if(date('j',($key)*DAY)==1) {
 	ImageRectangle($im,$i*$large,0,$i*$large,$max*$multi,$red);
 	ImageString($im,2,$i*$large+2,1,date("M",($key)*DAY),$red);
@@ -95,10 +109,19 @@
       if($space)if(!date('w',($key)*DAY)==1) ImageRectangle($im,$i*$large,$max*$multi/4,$i*$large,$max*$multi,$green);
       $i++;
     }
-    for($i=100;$i<$max;$i+=100){
+    for($i=$scale;$i<$max;$i+=$scale){
       ImageRectangle($im,0,$max*$multi-$i*$multi,$large*count($date)+1,$max*$multi-$i*$multi,$blue);
       ImageString($im,2,1,$max*$multi-$i*$multi,$i,$blue);
     }
+    if($maxmid){
+      ImageString($im,2,25,20,"Avg. last $maxmid days",$midcol);
+    }
+
+    if($gmid) {
+      ImageFilledRectangle($im, 0, $max*$multi-($sum/count($date))*$multi, $large*count($date)+1 , $max*$multi-($sum/count($date))*$multi, $midcol);
+      ImageString($im,2,30,20,"Avg. ".count($date)."days: ".round($sum/count($date)),$midcol);
+    }
+
 
     header("Content-type: image/png");
     ImagePNG($im);
@@ -125,8 +148,8 @@
   echo "<table border=1 cellspacing=0>";
   echo "<tr><td colspan=2>";
   echo "Searches from begin.";
-  echo " | Today: ".end($date)." | Top: ".(max($date))." | Daily";
-  echo ":<br><img src='stats.php?gdaily&y=200'>";
+  echo " | Today: ".end($date)." | Top: ".(max($date))." | Average: ".(round(array_sum($date)/count($date))). " | ".(count($date))." days";
+  echo "<br><img src='stats.php?gdaily&y=200&mid=30'>";
   echo "</td></tr>";
   echo "<tr><th>Last 100</th><th>Top 100</th><tr>";
   echo "<td>";
