@@ -3,6 +3,7 @@
 
 # configurazione
 include_once 'config.inc.php';
+include_once 'inc/defrepo.inc.php';
 
 # librerie
 include_once 'libs/utils.inc.php';
