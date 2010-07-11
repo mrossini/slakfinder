@@ -3,7 +3,6 @@ header("Content-type: text/plain");
 
 
   include 'inc/includes.inc.php';
-  include 'inc/defrepo.inc.php';
 
 
   function usage($param=''){

@@ -32,7 +32,6 @@ function shutdown() {
 register_shutdown_function('shutdown');
 
 include 'inc/includes.inc.php';
-include 'inc/defrepo.inc.php';
 
 
 

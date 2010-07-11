@@ -2,20 +2,20 @@
 
 
 # configurazione
-include 'config.inc.php';
+include_once 'config.inc.php';
 
 # librerie
-include 'libs/utils.inc.php';
-include 'libs/database.inc.php';
-include 'libs/mysql.inc.php';
-include 'libs/internet.inc.php';
-include 'libs/repository.inc.php';
-include 'libs/package.inc.php';
-include 'libs/filelist.inc.php';
-include 'libs/access_log.inc.php';
-include 'libs/tail_log.inc.php';
-include 'libs/xml.inc.php';
-include 'libs/history.inc.php';
+include_once 'libs/utils.inc.php';
+include_once 'libs/database.inc.php';
+include_once 'libs/mysql.inc.php';
+include_once 'libs/internet.inc.php';
+include_once 'libs/repository.inc.php';
+include_once 'libs/package.inc.php';
+include_once 'libs/filelist.inc.php';
+include_once 'libs/access_log.inc.php';
+include_once 'libs/tail_log.inc.php';
+include_once 'libs/xml.inc.php';
+include_once 'libs/history.inc.php';
 
 
 ?>

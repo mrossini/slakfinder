@@ -1,7 +1,6 @@
 <?php
 
   include 'inc/includes.inc.php';
-  include 'inc/defrepo.inc.php';
 
   global $date,$pkgs,$max;
   function initstat(){
@@ -16,34 +15,6 @@
 
 
 
-    /*
-    $pkgs=array();
-    $al->setsearch('_start','=','0');
-    if(isset($_GET['time'])){$time=$_GET['time'];}else{$time=365;}
-      $i=1;
-    while($res=$al->find()) {
-      if(@$res['url']['get']['name']){
-	if(!$pkgs){
-	  $pkgs[]=$res;
-	}else{
-	  $last=end($pkgs);
-	  if(($last['url']['get']['name']!=$res['url']['get']['name'])or
-	     ($last['url']['get']['name']==$res['url']['get']['name'] and $last['ip']!=$res['ip'])){
-	    $pkgs[]=$res;
-	    $day=round($last['time']/DAY-0.5,0);
-	    if($day>=$now-$time){
-	      if(!isset($date[$day])){
-		$date[$day]=1;
-	      }else{
-		$date[$day]++;
-	      }
-	    }
-	  }
-	}
-      }
-    }
-     */
-    
     $pkgs=array();
     $ip=array();
     $al->setsearch('_start','=','0');

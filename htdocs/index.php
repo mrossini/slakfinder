@@ -22,7 +22,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <body>
 <?php
   include 'inc/includes.inc.php';
-  include 'inc/defrepo.inc.php';
 
   $maxresult=30;
   $start=0;
