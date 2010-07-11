@@ -12,7 +12,7 @@ class tail_log {
   }
   public function open($count=0){
     global $access_log_file;
-    $cmd="grep 'start=0' $access_log_file";
+    $cmd="cat $access_log_file.2 $access_log_file.1 $access_log_file|grep 'start=0'";
     if($count)$cmd.="|tail -$count";
     if(!$this->access_log=popen($cmd,'r')){
       $this->row=null;
