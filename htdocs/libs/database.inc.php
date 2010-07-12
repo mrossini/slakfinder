@@ -26,6 +26,7 @@ class database {
 		if(!$this->db->query(repository::sql()))return false;
 		if(!$this->db->query(package::sql()))return false;
 		if(!$this->db->query(filelist::sql()))return false;
+		if(!$this->db->query(guestbook::sql()))return false;
 		if(!$this->db->query("
 		  CREATE TABLE IF NOT EXISTS #__mixed (
 		    field VARCHAR( 255 ) NOT NULL ,

@@ -18,6 +18,7 @@ include_once 'libs/access_log.inc.php';
 include_once 'libs/tail_log.inc.php';
 include_once 'libs/xml.inc.php';
 include_once 'libs/history.inc.php';
+include_once 'libs/guestbook.inc.php';
 
 
 ?>
