@@ -302,7 +302,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 
 
     echo "</td>";
-    echo "<td style='border-left:1px dotted #000000'>";
+    echo "<td valign=top style='border-left:1px dotted #000000'>";
 
     echo "<b>NEWS:</b><br><br>\n\n";
     include "news.php";
