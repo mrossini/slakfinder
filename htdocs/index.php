@@ -279,7 +279,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   if (!($name or $desc or $file)){
     echo "<br><table width=100% style='border-top:1px dotted #000000;border-bottom:1px dotted #000000;'>";
     echo "<tr>";
-    echo "<td>";
+    echo "<td width='50%'>";
 
     $gb=new guestbook();
     echo "<a href='gb.php'>Guest Book</a>: you can <a href='gb.php'>post comments</a>, suggests, bug/repository reports, or just your signature.<br><br>";
@@ -287,7 +287,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     echo tables(array("","",""),1," class='gb' ");
     echo tables(array("Date","Nick","Message"),1," class='gb' ");
     while($message=$gb->fetch() and ($mm-- > 0)){
-      echo tables(array("<sup>{$message['date']}</sup>"," - <font color='red'>".$message['nick']."</font> ",": ".$message['message']));
+      echo tables(array("<sup>{$message['date']}</sup>","<font color='red'>".$message['nick']."</font> ","".$message['message']));
     }
     echo tables();
     echo "<a href='gb.php'>show all</a>";  
@@ -302,7 +302,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 
 
     echo "</td>";
-    echo "<td valign=top style='border-left:1px dotted #000000'>";
+    echo "<td width='50%' valign=top style='border-left:1px dotted #000000'>";
 
     echo "<b>NEWS:</b><br><br>\n\n";
     include "news.php";
