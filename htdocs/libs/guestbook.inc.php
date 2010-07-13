@@ -58,7 +58,7 @@ class guestbook {
   }
   static public function sql(){
     return "
-      CREATE TABLE #__guestbook (
+      CREATE TABLE IF NOT EXISTS #__guestbook (
 	id INT AUTO_INCREMENT ,
 	itime INT(10),
 	nick VARCHAR(20),
