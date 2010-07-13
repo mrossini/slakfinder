@@ -17,13 +17,9 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   .results {border:1px solid #000000;}
   .results td { border-top:1px solid #000000; border-right:1px dotted; }
   .results th { border-right:1px dotted; }
-  .gb {border:none; border-bottom:1px dotted #000000; }
-  .gb td { border-top:1px dotted #000000; padding:2px; }
-
   -->
   </style>
 <body>
-<a href=old.php>Use oldstyle search page</a><br>
 <?php
   include 'inc/includes.inc.php';
 
@@ -53,28 +49,27 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   }
   $hrepos.="
 
-<form action='index.php?#results'>
+<form action='old.php?#results'>
   <input type='hidden' name='act' value='search'>
   <input type='hidden' name='start' value='0'>
   <input type='hidden' name='order' value=''>
   <input type='hidden' name='maxresult' value='$maxresult'>
   ";
-  $form="
-    <table>
-    <tr><td>Search<sup>(*)</sup>:</td><td><input name='name' value='$name' /></tr> 
-    <tr><td>Description:</td><td><input name='desc' value='$desc' /></td></tr>
-    <tr><td>Filename:</td><td><input name='file' value='$file' /></td></tr>
-    </table>
-    <input type='submit' value='go' /><br>
-    <sup><i>(*) NEW!!!! Enter one or more words <u>space separated</u>. Do not enter package version (it will be ignored)</i></sup>
-  ";
-  $hrepos.=writereposcompact($repo,$form); 
+  $hrepos.=writerepos($repo); 
   if ($name or $desc or $file){
     $hrepos.="<div style='color:red' id='wait2'>Wait a moment...";
     if($file)$hrepos.=" (up 2 minutes)";
     $hrepos.="</div>";
   }
-  $hrepos.="</form> <a name='results'></a> ";
+  $hrepos.="
+  <a name='results'></a>
+  <nobr>Search<sup>(*)</sup>: <input name='name' value='$name' /> 
+        <input type='submit' value='go' /> - 
+	Description: <input name='desc' value='$desc' /> - 
+        Filename: <input name='file' value='$file' /> 
+	<br /><sup><i>(*) NEW!!!! Enter one or more words <u>space separated</u>. Do not enter package version (it will be ignored)</i></sup>
+  </form>
+  ";
   $ord="";
 
   echo $hrepos;
@@ -276,44 +271,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     wait.style.color="white";
     </script>
     <?php
-  }
-  if (!($name or $desc or $file)){
-    echo "<br><table width=100% style='border-top:1px dotted #000000;border-bottom:1px dotted #000000;'>";
-    echo "<tr>";
-    echo "<td width='50%'>";
-
-    $gb=new guestbook();
-    echo "<a href='gb.php'>Guest Book</a>: you can <a href='gb.php'>post comments</a>, suggests, bug/repository reports, or just your signature.<br><br>";
-    $mm=30;
-    echo tables(array("","",""),1," class='gb' ");
-    echo tables(array("Date","Nick","Message"),1," class='gb' ");
-    while($message=$gb->fetch() and ($mm-- > 0)){
-      echo tables(array("<sup>{$message['date']}</sup>","<font color='red'>".$message['nick']."</font> ","".$message['message']));
-    }
-    echo tables();
-    echo "<a href='gb.php'>show all</a>";  
-    echo "<nobr><form action='gb.php' method='post'><br>Nick: ";
-    echo "<input name=nick size=10 maxlenght=15 "; 
-    if(isset($_SESSION['slakhomelinuxguestbooknick']))echo "value='{$_SESSION['slakhomelinuxguestbooknick']}'";
-    echo "> -message: <br>";
-    echo "<textarea name=message cols=30 rows=3></textarea><br>";
-    echo "<input type=submit value='go'><br></form></nobr>";
-
-    echo "<br>";
-
-
-    echo "</td>";
-    echo "<td width='50%' valign=top style='border-left:1px dotted #000000'>";
-
-    echo "<b>NEWS:</b><br><br>\n\n";
-    include "news.php";
-
-    echo "</td>";
-    echo "</tr>";
-    echo "</table>";
-
- 
-
   }
 ?>
 <p>To report a bug, mail to <a href='mailto:zerouno@slacky.it'>zerouno@slacky.it</a>. Thanks.</p>
