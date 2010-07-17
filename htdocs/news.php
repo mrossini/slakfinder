@@ -1,3 +1,6 @@
+<b>17/Jul/2010:</b><br>
+Starting develop <a href='dev/'>SlakFinder second release</a> tree. Help me.<br>
+<br>
 <b>12/Jul/2010:</b><br>
 Thanks all for using SlakFinder!!<br>
 In recent days I have been working to compact the list of repositories (already too long :-)), so it was a little space on the screen to add a board for news and a small <a href=gb.php>guestbook</a> for your feedback.<br>
