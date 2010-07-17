@@ -30,17 +30,16 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   $maxresult=30;
   $start=0;
   $db=new database();
-  if(!isset($_SESSION['last_search']))$_SESSION['last_search']="";
-  if(!isset($_SESSION['searcher_visitor'])){
+  if(!isset($_SESSION['last_search2']))$_SESSION['last_search2']="";
+  if(!isset($_SESSION['searcher2_visitor'])){
     $db->counter_inc('visits');
-    $_SESSION['searcher_visitor']=$db->counter_get('visits');
+    $_SESSION['searcher2_visitor']=$db->counter_get('visits');
   }
-  #echo "You are the ".$_SESSION['searcher_visitor']."st visitor<br />";
   $name=$desc=$file=$repo=$order=null;
   foreach($_GET as $key => $value)$$key=$value;
   if ($name or $desc or $file) {
     if(($start==0)and($_SESSION['last_search']!="name=$name&desc=$desc&file=$file")){
-      $_SESSION['last_search']="name=$name&desc=$desc&file=$file";
+      $_SESSION['last_search2']="name=$name&desc=$desc&file=$file";
       $db->counter_inc('searches');
     }
   }
@@ -294,7 +293,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     echo "<a href='gb.php'>show all</a>";  
     echo "<nobr><form action='gb.php' method='post'><br>Nick: ";
     echo "<input name=nick size=10 maxlenght=15 "; 
-    if(isset($_SESSION['slakhomelinuxguestbooknick']))echo "value='{$_SESSION['slakhomelinuxguestbooknick']}'";
+    if(isset($_SESSION['slakhomelinux2guestbooknick']))echo "value='{$_SESSION['slakhomelinux2guestbooknick']}'";
     echo "> -message: <br>";
     echo "<textarea name=message cols=30 rows=3></textarea><br>";
     echo "<input type=submit value='go'><br></form></nobr>";

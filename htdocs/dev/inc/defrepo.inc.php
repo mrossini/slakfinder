@@ -30,9 +30,9 @@ function redefrepo($reposelected=0){
   echo "<table border='0' width='100%'>";
   echo "<tr>";
   echo "<td>";
-  echo "You are the ".$_SESSION['searcher_visitor']."st visitor<br />";
+  echo "You are the ".$_SESSION['searcher2_visitor']."st visitor<br />";
 
-  echo "Searched ".$GLOBALS['db']->counter_get('searches')." packages from 6 March 2010<br /><br />";
+  echo "Searched ".$GLOBALS['db']->counter_get('searches')." packages from 17 July 2010<br /><br />";
   echo "<code>$nrepos repositories ($npackages packages)</code><br><br>\n";
   echo "</td>";
 
