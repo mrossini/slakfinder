@@ -35,7 +35,9 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     $db->counter_inc('visits');
     $_SESSION['searcher2_visitor']=$db->counter_get('visits');
   }
-  $name=$desc=$file=$repo=$order=null;
+  $name=$desc=$file=$repo=$order=$search=$ver=null;
+  $in='name';
+  $op=0;
   foreach($_GET as $key => $value)$$key=$value;
   if ($name or $desc or $file) {
     if(($start==0)and($_SESSION['last_search']!="name=$name&desc=$desc&file=$file")){
@@ -43,11 +45,16 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
       $db->counter_inc('searches');
     }
   }
-  #echo "Searched ".$db->counter_get('searches')." packages from 6 March 2010<br /><br />";
+
   $hrepos="";
+  redefrepo();
   if ($name or $desc or $file){
     $hrepos.="<div style='color:red' id='wait1'>Wait a moment...";
     if($file)$hrepos.=" (up 2 minutes)";
+    
+    
+    
+    
     $hrepos.="</div>";
   }
   $hrepos.="
@@ -60,20 +67,68 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   ";
   $form="
     <table>
-    <tr><td>Search<sup>(*)</sup>:</td><td><input name='name' value='$name' /></tr> 
-    <tr><td>Description:</td><td><input name='desc' value='$desc' /></td></tr>
-    <tr><td>Filename:</td><td><input name='file' value='$file' /></td></tr>
-    </table>
-    <input type='submit' value='go' /><br>
-    <sup><i>(*) NEW!!!! Enter one or more words <u>space separated</u>. Do not enter package version (it will be ignored)</i></sup>
-  ";
-  $hrepos.=writereposcompact($repo,$form); 
+    <tr><td>Search:</td> <td><input size=30 name='search' value='$search' /> <input type='button' value='go' /></td></tr> 
+    <tr><td>In</td><td>
+	    <input type='radio' name='in' value='name' checked>pkg name - 
+	    <input type='radio' name='in' value='desc'>description -
+	    <input type='radio' name='in' value='file'>filelist
+    </td></tr> 
+    <tr>
+        <td>Version:</td>
+	<td>
+	    <select name='op'>
+	      <option value=1 >&gt;=</option>
+	      <option value=2 selected>==</option>
+	      <option value=3 >&lt;=</option>
+	    </select>
+	    <input name='ver' value='$ver' size=23 />
+	</td>
+    </tr>
+    <tr id='rowslack'><td>Slackware:</td><td>
+	    <select id='seldistro' name='distro' onchange='showrepoopt(this.form.distro.value,this.form.arch.value)'>\n";
+  foreach(array('any version','current','13.1','13.0','12.2','12.1','12.0','11.0') as $key => $sver){
+    if($key==0){
+      $form.="            <option value=''>$sver</option>\n";
+    }else{
+      $form.="            <option value='$sver'>$sver</option>\n";
+    }
+
+  }
+  $form.="    </select>\n";
+  $form.="    
+	    <select id='selarch' name='arch' onchange='showrepoopt(this.form.distro.value,this.form.arch.value)'>\n";
+  foreach(array('any arch','i386','x86_64') as $key => $sarch){
+    if($key==0){
+      $form.="            <option value=''>$sarch</option>\n";
+    }else{
+      $form.="            <option value='$sarch'>$sarch</option>\n";
+    }
+  }
+  $form.="
+    </select>\n   ".(writereposselect())."
+    </td></tr>\n";
+  $form.="
+    </table>";
+  /*<input type='button' value='go' /><br>*/
+  /*<sup><i>(*) NEW!!!! Enter one or more words <u>space separated</u>. Do not enter package version (it will be ignored)</i></sup>*/
+  $hrepos.=$form;
+  //$hrepos.=writereposcompact($repo,$form); 
   if ($name or $desc or $file){
     $hrepos.="<div style='color:red' id='wait2'>Wait a moment...";
     if($file)$hrepos.=" (up 2 minutes)";
     $hrepos.="</div>";
   }
-  $hrepos.="</form> <a name='results'></a> ";
+  $hrepos.="</form>";
+  $hrepos.="<script>showrepoopt(document.getElementById('seldistro').value,document.getElementById('selarch').value);</script>";
+  
+  
+  
+  
+  
+  
+  
+  
+  $hrepos.="<a name='results'></a> ";
   $ord="";
 
   echo $hrepos;

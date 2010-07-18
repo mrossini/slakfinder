@@ -23,7 +23,7 @@ function shutdown() {
   global $transact,$db;
   if($transact){
     echo "operazione annullata... rollback in corso!";
-    $db->db->rollback();
+    $db->rollback();
     echo "fatto.";
   }
   flush();
@@ -40,7 +40,6 @@ $db=new database();
 
 echo "svuotamento cache$NL";
 $db->db->dropcache();
-
 if(isset($_SERVER['DROPDB'])or isset($_GET['DROPDB'])){
   echo "eliminazione database... ";
   $out=$db->dropdb();
@@ -73,7 +72,7 @@ if(isset($_GET['REPO'])){
 }
 foreach($defrepo as $id => $repo)if($repo['info']['create']){
   flush();
-  $db->db->transact();
+  $db->transact();
   $info=$repo['info'];
   $create=$info['create'];
   $repo['id']=$id;
@@ -86,18 +85,18 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
     if(!$out=$rep->drop()){
       echo "ERRORE NELLA DISTRUZIONE!!! ";
       echo "annullamento in corso... ";
-      $db->db->rollback();
+      $db->rollback();
       echo "annullamento effettuato.. salto al prossimo repository.$NL";
       continue;
     };
-    $db->db->commit();
+    $db->commit();
     echo "rimozione effettuata.$NL";
     continue;
   }
   if($rep->exists()){
     if(isset($_SERVER['REDEFINE'])or isset($_GET['REDEFINE'])){
       $rep->redefine($repo,(isset($_SERVER['REDEFINE'])?$_SERVER['REDEFINE']:0)+(isset($_GET['REDEFINE'])?$_GET['REDEFINE']:0));
-      $db->db->commit();
+      $db->commit();
       echo "aggiornato$NL";
       continue;
     }
@@ -107,7 +106,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
       if(!$out=$rep->drop()){
 	echo "ERRORE NELLA DISTRUZIONE!!! ";
 	echo "annullamento in corso... ";
-	$db->db->rollback();
+	$db->rollback();
 	echo "annullamento effettuato.. salto al prossimo repository.$NL";
 	continue;
       };
@@ -121,7 +120,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
 	if(!$rep->drop()){
 	  echo "ERRORE SVUOTANDO IL REPOSITORY!!! ";
 	  echo "annullamento in corso... ";
-	  $db->db->rollback();
+	  $db->rollback();
 	  echo "annullamento effettuato.. salto al prossimo repository.$NL";
 	  continue;
 	}
@@ -137,7 +136,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
     if(!$out=$rep->add($repo)){
       echo "ERRORE!!! ";
       echo "annullamento in corso... ";
-      $db->db->rollback();
+      $db->rollback();
       echo "annullamento effettuato.. salto al prossimo repository.$NL";
       continue;
     }
@@ -147,14 +146,14 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
     if(!$err=$rep->popolate()){
       echo "$NLERRORE!!! ";
       echo "annullamento in corso... ";
-      $db->db->rollback();
+      $db->rollback();
       echo "annullamento effettuato.. salto al prossimo repository.$NL";
       continue;
       die();
     }
     echo "Repository creato$NL";
   }
-  $db->db->commit();
+  $db->commit();
 }
 
 

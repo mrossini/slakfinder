@@ -63,7 +63,7 @@ class repository {
     $i=0;
     while(!is_null($pkg=$pack->fetch($this->pkgsfile))){
       if($pkg){
-	$id=$pack->add($pkg,array('repository'=>$this->id),$more);
+	$id=$pack->add($pkg,$this);
 	if(!$id){ return false; }
 	if(isset($_SERVER['DEBUG']))echo $id." -> ".$pack->filename."               \n";
 	echo ".";
@@ -74,12 +74,13 @@ class repository {
     $this->pkgsfile->close();
     if(!$this->db->query("update #__repository set npkgs='$i' where id='{$this->id}'"))var_dump($this->db);
     echo "\n$i packages\n";
+    /*
     $list=new filelist();
     if($this->manifest){
       $this->manifile=new internet($this->url.$this->manifest);
       if(!$i=$list->addall($allpackage,$this))return false;
       if(!$this->db->query("update #__repository set nfiles='$i' where id='{$this->id}'"))var_dump($this->db);
-    }
+    }*/
     return true;
   }
   public function needupdate(){
@@ -97,11 +98,6 @@ class repository {
     return $this->db->query("delete from #__packages where repository=".$this->id);
   }
 
-  public function download(){
-  //  global $repodir;
-  //  $path=$repodir.$this->path;
-  //  if(!file_exists($path))if(!mkdir($path))return false;
-  }
   public function select($repo){
     $this->id=0;
     if(!$this->db->query("select * from #__repository where id='$repo' or name='$repo'")) return false;

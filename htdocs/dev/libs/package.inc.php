@@ -73,8 +73,32 @@ class package {
     $pack=array_merge($pack,$more);
     return $pack;
   }
-  public function add($pkg,$more=array()){
+  public function add($pkg,$repo,$more=array()){
     $pkg=array_merge($pkg,$more);
+    $pkg['repository']=$repo->id;
+    $pkg['repover']=$repo->version;
+    $pkg['repoarch']=$repo->arch;
+    if($pkg['repover']=="mixed") {
+      if(preg_match('/^.*1[0-9]\.[0-9].*$/',$pkg['location'])){
+	$pkg['repover']=preg_replace('/^.*(1[0-9]\.[0-9]).*$/','$1',$pkg['location']);
+      }else{
+	$pkg['repover']="";
+      }
+    }
+    if($pkg['repoarch']=="mixed") {
+      if($pkg['arch']=="x86_64"){
+	$pkg['repoarch']="x86_64";
+      }elseif(preg_match('/i.86/',$pkg['arch'])){
+	$pkg['repoarch']="i386";
+      }else{ //pkg arch == noarch
+	if(strpos('64',$pkg['location'])){
+	  $pkg['repoarch']="x86_64";
+	}else{
+	  $pkg['repoarch']="i386";
+	}
+      }
+    }
+
     if(!$this->db->insert("packages",$pkg))return false;
     foreach($pkg as $key => $value) $this->$key = $value;
     return $this->db->newid;
@@ -96,14 +120,6 @@ class package {
   }
 
 
-  public function download(){
-    global $repodir;
-    $path=$repodir.$this->path;
-    if(!file_exists($path))if(!mkdir($path))return false;
-  #  if(file_exists($path
-
-
-  }
   public function select($id){
     if(!$this->db->query("select * from #__packages where id=$id")) return false;
     if(!$repo=$this->db->get())return false;
@@ -168,7 +184,7 @@ class package {
     return "
       CREATE TABLE #__packages (
 	  id INT AUTO_INCREMENT NOT NULL ,
-	  repository INT NOT NULL ,
+	  repository INT(3) NOT NULL ,
 	  filename VARCHAR( 64 ) NOT NULL ,
 	  name VARCHAR( 32 ) NOT NULL ,
 	  version VARCHAR( 16 ) NOT NULL ,
@@ -182,6 +198,8 @@ class package {
 	  conflicts TEXT ,
 	  suggests TEXT ,
 	  description TEXT NOT NULL ,
+	  repover VARCHAR( 16 ) NULL ,
+	  repoarch VARCHAR( 16 ) NULL ,
 	PRIMARY KEY ( id ),
         FOREIGN KEY ( repository ) REFERENCES #__repository ( id ) ON DELETE CASCADE
 

@@ -4,6 +4,15 @@ class database {
 
 	public $db;
 	public $ok=false;
+	public function transact(){
+	  $this->db->transact();
+	}
+	public function commit(){
+	  $this->db->commit();
+	}
+	public function rollback(){
+	  $this->db->rollback();
+	}
 	public function __construct(){
 		$this->db=new mysql();
 		if($this->db->query('select * from #__repository')){

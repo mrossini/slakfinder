@@ -27,6 +27,7 @@ function redefrepo($reposelected=0){
   }
 
 
+  /*
   echo "<table border='0' width='100%'>";
   echo "<tr>";
   echo "<td>";
@@ -86,10 +87,11 @@ function redefrepo($reposelected=0){
 
 
   echo "</tr></table>";
+   */
 
 }
 
-function writerepos($reposelected){
+function writerepos($reposelected=""){
   global $classes;
   global $defrepo;
   redefrepo($reposelected);
@@ -120,6 +122,44 @@ function writerepos($reposelected){
   $out.=tables();
   $out.="<code>(F) File search support enabled ; (D) View dependencies enabled</code><br><br>";
   return $out;
+}
+
+function writereposselect($reposelected=""){
+  global $defrepo;
+  $javascript="";
+  $options="  <option id=repo0 value=''>any repository</option>\n";
+  $jsreposarr="";
+  foreach($defrepo as $id => $repo){
+    $options.="  <option id=repo$id value=$id >({$repo['version']} - {$repo['arch']}) {$repo['brief']}</option>\n";
+    $jsreposarr.="    ver[$id]='".$repo['version']."';  arch[$id]='".$repo['arch']."';\n";
+  }
+  
+?>
+  <script>
+  function showrepoopt(v,a){
+    var ver=new Array();
+    var arch=new Array();
+<?php echo $jsreposarr; ?>
+    var show;
+    for ( var repo in ver ){
+      show=1;
+      if(v != ver[repo] && ((v != '') && (ver[repo] != 'mixed'))){ show=0; }
+      if(a != arch[repo] && ((a != '') && (arch[repo] != 'mixed'))) { show=0; }
+
+      document.getElementById("repo"+repo).selected="";
+      if(show==0){
+	document.getElementById("repo"+repo).style.display="none";
+      }else{
+	document.getElementById("repo"+repo).style.display="";
+      }
+    }
+    document.getElementById("repo0").selected="selected";
+  }
+  </script>
+<?php
+  $out="<select name='repo'>\n$options\n</select>\n$javascript\n";
+  return $out;
+
 }
 
 function writereposcompact($reposelected,$righttxt=""){

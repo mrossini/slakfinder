@@ -107,7 +107,7 @@ $defrepo[25]=array( 'info' => array('create' => 1), 'name' => 'gsb64-gnome2.26',
     'manifest' => 'gsb64/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'gnome-2.26', 'description' => 'GSB Gnome 2.26.0 64bit for Slackware64 13.0');
 
-$defrepo[26]=array( 'info' => array('create' => 0), 'name' => 'gsb64-gnome-current',
+$defrepo[26]=array( 'info' => array('create' => 1), 'name' => 'gsb64-gnome-current',
     'url' => 'http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/slackware-unsupported/gsb/gsb64-current/',
     'rank' => 99, 'version' => 'current', 'arch' => 'x86_64', 'class' => '64cur', 'deps' => 1,
     'manifest' => 'gsb64/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
@@ -119,7 +119,7 @@ $defrepo[27]=array( 'info' => array('create' => 1), 'name' => 'gsb-gnome2.26',
     'manifest' => 'gsb/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'gnome-2.26', 'description' => 'GSB Gnome 2.26.0 32bit for Slackware 13.0');
 
-$defrepo[28]=array( 'info' => array('create' => 0), 'name' => 'gsb-gnome-current',
+$defrepo[28]=array( 'info' => array('create' => 1), 'name' => 'gsb-gnome-current',
     'url' => 'http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/slackware-unsupported/gsb/gsb-current/',
     'rank' => 99, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130', 'deps' => 1,
     'manifest' => 'gsb/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
@@ -340,13 +340,13 @@ $defrepo[72]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.1',
     'manifest' => 'slackware/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Official', 'description' => 'Slackware 32bit Official Distribution - 13.1 Version');
 
-$defrepo[73]=array( 'info' => array('create' => 0), 'name' => 'slackware-13.1-patches',
+$defrepo[73]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.1-patches',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.1/',
     'rank' => 30, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131',
     'manifest' => 'patches/MANIFEST.bz2', 'packages' => 'patches/PACKAGES.TXT',
     'brief' => 'Patches', 'description' => 'Slackware 32bit Official Patches for 13.1 Version');
 
-$defrepo[74]=array( 'info' => array('create' => 0), 'name' => 'slackware64-13.1-patches',
+$defrepo[74]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.1-patches',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.1/patches/',
     'rank' => 30, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131',
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
