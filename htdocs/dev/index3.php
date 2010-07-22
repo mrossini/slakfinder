@@ -23,10 +23,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   -->
   </style>
 <body>
-Styles:<br>
-Production: <a href="../index.php">current</a> - <a href="../old.php">old style</a><br>
-Development: <a href="index2.php">first</a> - <a href="index.php">second</a> - <a href="index3.php">third</a><br>
-
 <h1> Developing... </h1>
 <?php
   include 'inc/includes.inc.php';
@@ -87,8 +83,8 @@ Development: <a href="index2.php">first</a> - <a href="index.php">second</a> - <
 	    </select>
 	    <input name='ver' value='$ver' size=23 />
 	</td>
-    </tr>
-    <tr id='rowslack'><td>Slackware:</td><td>
+    </tr>\n";
+/*  $form.="
 	    <select id='seldistro' name='distro' onchange='showrepoopt(this.form.distro.value,this.form.arch.value)'>\n";
   foreach(array('any version','current','13.1','13.0','12.2','12.1','12.0','11.0') as $key => $sver){
     if($key==0){
@@ -99,7 +95,8 @@ Development: <a href="index2.php">first</a> - <a href="index.php">second</a> - <
 
   }
   $form.="    </select>\n";
-  $form.="    
+ */
+/*  $form.="    
 	    <select id='selarch' name='arch' onchange='showrepoopt(this.form.distro.value,this.form.arch.value)'>\n";
   foreach(array('any arch','i386','x86_64') as $key => $sarch){
     if($key==0){
@@ -108,11 +105,64 @@ Development: <a href="index2.php">first</a> - <a href="index.php">second</a> - <
       $form.="            <option value='$sarch'>$sarch</option>\n";
     }
   }
+ */
+  $form.="  <tr id='rowslack'><td>Slackware:</td><td>\n";
+  $form.="  <table class='repository'>\n";
+  $form.="  <tr><th>&nbsp</th><th>Any</th><th>curr</th><th>13.1</th><th>13.0</th><th>12.2</th><th>12.1</th><th>12.0</th><th>11.0</th></tr>\n";
+  $form.="  <tr><td>Any</td>\n";
+  $form.="       <td><input type=radio name=slackware value=any-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=curr-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.1-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.0-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=12.2-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=12.1-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=12.0-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=11.0-any></td>\n";
+  $form.="  </tr><tr><td>i386</td>\n";
+  $form.="       <td><input type=radio name=slackware value=any-i386></td>\n";
+  $form.="       <td><input type=radio name=slackware value=curr-i386></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.1-i386 checked></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.0-i386></td>\n";
+  $form.="       <td><input type=radio name=slackware value=12.2-i386></td>\n";
+  $form.="       <td><input type=radio name=slackware value=12.1-i386></td>\n";
+  $form.="       <td><input type=radio name=slackware value=12.0-i386></td>\n";
+  $form.="       <td><input type=radio name=slackware value=11.0-i386></td>\n";
+  $form.="  </tr><tr><td>x86_64</td>\n";
+  $form.="       <td><input type=radio name=slackware value=any-x86_64></td>\n";
+  $form.="       <td><input type=radio name=slackware value=curr-x86_64></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.1-x86_64></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.0-x86_64></td>\n";
+  $form.="       <td>&nbsp;</td>\n";
+  $form.="       <td>&nbsp;</td>\n";
+  $form.="       <td>&nbsp;</td>\n";
+  $form.="       <td>&nbsp;</td>\n";
+  $form.="  </tr></table>\n";
+  $form.=" 
+    </td></tr>\n";
+  /*
+  $form.="  <tr id='rowslack'><td>Slackware:</td><td>\n";
+  $form.="<input type=radio name=slkver value=any>any - ";
+  $form.="<input type=radio name=slkver value=current>current - ";
+  $form.="<input type=radio name=slkver value=13.1 checked>13.1 - ";
+  $form.="<input type=radio name=slkver value=13.0>13.0 - ";
+  $form.="<input type=radio name=slkver value=12.2>12.2 - ";
+  $form.="<input type=radio name=slkver value=12.2>12.1 - ";
+  $form.="<input type=radio name=slkver value=12.2>12.0 - ";
+  $form.="<input type=radio name=slkver value=12.2>11.0";
+  $form.=" 
+    </td></tr>\n";
+  $form.="  <tr id='arch'><td>Arch:</td><td>\n";
+  $form.="<input type=radio name=arch value=any>any - ";
+  $form.="<input type=radio name=arch value=i386 checked>i386 - ";
+  $form.="<input type=radio name=arch value=x86_64>x86_64";
+  $form.=" 
+    </td></tr>\n";
+   */
   $form.="
-    </select>\n   ".(writereposselect())."
+    <tr><td>Repository:</td><td>\n".(writereposselect())."\n
     </td></tr>\n";
   $form.="
-    </table>";
+    </table>(is not complete! clicking on a checkbox, the list of repository will be filtered to match only version/arch selected. also, repository list style may be change)";
   /*<input type='button' value='go' /><br>*/
   /*<sup><i>(*) NEW!!!! Enter one or more words <u>space separated</u>. Do not enter package version (it will be ignored)</i></sup>*/
   $hrepos.=$form;

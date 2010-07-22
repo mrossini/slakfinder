@@ -23,10 +23,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   -->
   </style>
 <body>
-Styles:<br>
-Production: <a href="../index.php">current</a> - <a href="../old.php">old style</a><br>
-Development: <a href="index2.php">first</a> - <a href="index.php">second</a> - <a href="index3.php">third</a><br>
-
 <h1> Developing... </h1>
 <?php
   include 'inc/includes.inc.php';
@@ -87,8 +83,8 @@ Development: <a href="index2.php">first</a> - <a href="index.php">second</a> - <
 	    </select>
 	    <input name='ver' value='$ver' size=23 />
 	</td>
-    </tr>
-    <tr id='rowslack'><td>Slackware:</td><td>
+    </tr>\n";
+/*  $form.="
 	    <select id='seldistro' name='distro' onchange='showrepoopt(this.form.distro.value,this.form.arch.value)'>\n";
   foreach(array('any version','current','13.1','13.0','12.2','12.1','12.0','11.0') as $key => $sver){
     if($key==0){
@@ -99,7 +95,8 @@ Development: <a href="index2.php">first</a> - <a href="index.php">second</a> - <
 
   }
   $form.="    </select>\n";
-  $form.="    
+ */
+/*  $form.="    
 	    <select id='selarch' name='arch' onchange='showrepoopt(this.form.distro.value,this.form.arch.value)'>\n";
   foreach(array('any arch','i386','x86_64') as $key => $sarch){
     if($key==0){
@@ -108,11 +105,29 @@ Development: <a href="index2.php">first</a> - <a href="index.php">second</a> - <
       $form.="            <option value='$sarch'>$sarch</option>\n";
     }
   }
-  $form.="
-    </select>\n   ".(writereposselect())."
+ */
+  $form.="  <tr id='rowslack'><td>Slackware:</td><td>\n";
+  $form.="<input type=radio name=slkver value=any>any - ";
+  $form.="<input type=radio name=slkver value=current>current - ";
+  $form.="<input type=radio name=slkver value=13.1 checked>13.1 - ";
+  $form.="<input type=radio name=slkver value=13.0>13.0 - ";
+  $form.="<input type=radio name=slkver value=12.2>12.2 - ";
+  $form.="<input type=radio name=slkver value=12.2>12.1 - ";
+  $form.="<input type=radio name=slkver value=12.2>12.0 - ";
+  $form.="<input type=radio name=slkver value=12.2>11.0";
+  $form.=" 
+    </td></tr>\n";
+  $form.="  <tr id='rowslack'><td>Arch:</td><td>\n";
+  $form.="<input type=radio name=arch value=any>any - ";
+  $form.="<input type=radio name=arch value=i386 checked>i386 - ";
+  $form.="<input type=radio name=arch value=x86_64>x86_64";
+  $form.=" 
     </td></tr>\n";
   $form.="
-    </table>";
+    <tr><td>Repository:</td><td>\n".(writereposselect())."\n
+    </td></tr>\n";
+  $form.="
+    </table>(is not complete! clicking on a checkbox, the list of repository will be filtered to match only version/arch selected)";
   /*<input type='button' value='go' /><br>*/
   /*<sup><i>(*) NEW!!!! Enter one or more words <u>space separated</u>. Do not enter package version (it will be ignored)</i></sup>*/
   $hrepos.=$form;
