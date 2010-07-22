@@ -25,7 +25,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <body>
 Styles:<br>
 Production: <a href="../index.php">current</a> - <a href="../old.php">old style</a><br>
-Development: <a href="index2.php">first</a> - <a href="index.php">second</a> - <a href="index3.php">third</a><br>
+Development: <a href="index.php">first</a> - <a href="index2.php">second</a> - <a href="index3.php">third</a><br>
 
 <h1> Developing... </h1>
 <?php
