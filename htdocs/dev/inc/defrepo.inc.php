@@ -124,6 +124,25 @@ function writerepos($reposelected=""){
   return $out;
 }
 
+/*
+function writereposradio($reposelected=""){
+  global $defrepo;
+  $combo="";
+  $combo.="<input type='radio' name='rtype' value='any-any'>any-any";
+  $combo.="<input type='radio' name='rtype' value='any-x86_64'>any-x86_64";
+  $combo.="<input type='radio' name='rtype' value='any-i386'>any-i386";
+  $combo.="<input type='radio' name='rtype' value='13.1-any'>any-any";
+  $combo.="<input type='radio' name='rtype' value='13.1-x86_64'>any-x86_64";
+  $combo.="<input type='radio' name='rtype' value='13.1-i386'>any-i386";
+  $combo.="<input type='radio' name='rtype' value='13.0-any'>any-any";
+  $combo.="<input type='radio' name='rtype' value='13.0-x86_64'>any-x86_64";
+  $combo.="<input type='radio' name='rtype' value='13.0-i386'>any-i386";
+  $combo.="<input type='radio' name='rtype' value='12.2-i386'>any-i386";
+  return $combo;
+}
+ */
+
+
 function writereposselect($reposelected=""){
   global $defrepo;
   $javascript="";

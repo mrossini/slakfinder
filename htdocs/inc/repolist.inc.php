@@ -83,7 +83,7 @@ $defrepo[21]=array( 'info' => array('create' => 1), 'name' => 'salix-13.0',
     'manifest' => '', 'packages' => 'PACKAGES.TXT.gz',
     'brief' => 'Salix', 'description' => 'Salix 32bit Distribution perfectly compatible with Slackware 13.0');
 
-$defrepo[22]=array( 'info' => array('create' => 1), 'name' => 'salix-current',
+$defrepo[22]=array( 'info' => array('create' => 0), 'name' => 'salix-current',
     'url' => 'http://download.salixos.org/i486/current/',
     'rank' => 99, 'version' => 'current', 'arch' => 'i386', 'class' => '32cur', 'deps' => 1,
     'manifest' => '', 'packages' => 'PACKAGES.TXT.gz',
@@ -95,7 +95,7 @@ $defrepo[23]=array( 'info' => array('create' => 1), 'name' => 'salix64-13.0',
     'manifest' => '', 'packages' => 'PACKAGES.TXT.gz',
     'brief' => 'Salix64', 'description' => 'Salix 64bit Distribution perfectly compatible with Slackware64 13.0');
 
-$defrepo[24]=array( 'info' => array('create' => 1), 'name' => 'salix64-current',
+$defrepo[24]=array( 'info' => array('create' => 0), 'name' => 'salix64-current',
     'url' => 'http://download.salixos.org/x86_64/current/',
     'rank' => 99, 'version' => 'current', 'arch' => 'x86_64', 'class' => '64cur', 'deps' => 1,
     'manifest' => '', 'packages' => 'PACKAGES.TXT.gz',
@@ -107,7 +107,7 @@ $defrepo[25]=array( 'info' => array('create' => 1), 'name' => 'gsb64-gnome2.26',
     'manifest' => 'gsb64/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'gnome-2.26', 'description' => 'GSB Gnome 2.26.0 64bit for Slackware64 13.0');
 
-$defrepo[26]=array( 'info' => array('create' => 0), 'name' => 'gsb64-gnome-current',
+$defrepo[26]=array( 'info' => array('create' => 1), 'name' => 'gsb64-gnome-current',
     'url' => 'http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/slackware-unsupported/gsb/gsb64-current/',
     'rank' => 99, 'version' => 'current', 'arch' => 'x86_64', 'class' => '64cur', 'deps' => 1,
     'manifest' => 'gsb64/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
@@ -119,7 +119,7 @@ $defrepo[27]=array( 'info' => array('create' => 1), 'name' => 'gsb-gnome2.26',
     'manifest' => 'gsb/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'gnome-2.26', 'description' => 'GSB Gnome 2.26.0 32bit for Slackware 13.0');
 
-$defrepo[28]=array( 'info' => array('create' => 0), 'name' => 'gsb-gnome-current',
+$defrepo[28]=array( 'info' => array('create' => 1), 'name' => 'gsb-gnome-current',
     'url' => 'http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/slackware-unsupported/gsb/gsb-current/',
     'rank' => 99, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130', 'deps' => 1,
     'manifest' => 'gsb/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
@@ -173,7 +173,7 @@ $defrepo[36]=array( 'info' => array('create' => 1), 'name' => 'c4dwbspace-jimmy_
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT.gz',
     'brief' => 'Jimmy_page_89', 'description' => 'Jimmy_page_89 (c4dwbspace.altervista.org) packages for Slackware64-13.0; thanx to Danix for webspace');
 
-$defrepo[37]=array( 'info' => array('create' => 1), 'name' => 'alien-restricted',
+$defrepo[37]=array( 'info' => array('create' => 0), 'name' => 'alien-restricted',
     'url' => 'ftp://ftp.slackware.org.uk/people/alien/restricted_slackbuilds/',
     'rank' => 99, 'version' => 'mixed', 'arch' => 'mixed', 'class' => 'mimix',
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT.gz',
@@ -287,7 +287,7 @@ $defrepo[57]=array( 'info' => array('create' => 1), 'name' => 'nielshor-for-13.0
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Niels Horn');
 
-$defrepo[58]=array( 'info' => array('create' => 1), 'name' => 'chessgriffin-for-13.1',
+$defrepo[58]=array( 'info' => array('create' => 0), 'name' => 'chessgriffin-for-13.1',
     'url' => 'http://www.chessgriffin.com/pkgs/slackware/',
     'rank' => 99, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131',
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
@@ -340,13 +340,13 @@ $defrepo[72]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.1',
     'manifest' => 'slackware/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
     'brief' => 'Official', 'description' => 'Slackware 32bit Official Distribution - 13.1 Version');
 
-$defrepo[73]=array( 'info' => array('create' => 0), 'name' => 'slackware-13.1-patches',
+$defrepo[73]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.1-patches',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.1/',
     'rank' => 30, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131',
     'manifest' => 'patches/MANIFEST.bz2', 'packages' => 'patches/PACKAGES.TXT',
     'brief' => 'Patches', 'description' => 'Slackware 32bit Official Patches for 13.1 Version');
 
-$defrepo[74]=array( 'info' => array('create' => 0), 'name' => 'slackware64-13.1-patches',
+$defrepo[74]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.1-patches',
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.1/patches/',
     'rank' => 30, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131',
     'manifest' => 'MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
