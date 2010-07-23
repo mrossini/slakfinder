@@ -27,7 +27,7 @@ class guestbook {
     $ip=$_SERVER["REMOTE_ADDR"];
     $date=time();
     $nick=strip_tags($nick);
-    $message=strip_tags($message);
+    $message=htmlentities(strip_tags($message));
     if(!$nick)$nick="anonymous";
 
     return $this->db->insert('guestbook',array(
