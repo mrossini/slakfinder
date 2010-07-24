@@ -342,7 +342,7 @@ Development: <a href="index.php">first</a> - <a href="index2.php">second</a> - <
 
     $gb=new guestbook();
     echo "<a href='gb.php'>Guest Book</a>: you can <a href='gb.php'>post comments</a>, suggests, bug/repository reports, or just your signature.<br><br>";
-    $mm=30;
+    $mm=5;
     echo tables(array("","",""),1," class='gb' ");
     echo tables(array("Date","Nick","Message"),1," class='gb' ");
     while($message=$gb->fetch() and ($mm-- > 0)){
