@@ -13,12 +13,14 @@ class guestbook {
       $this->nmsg=$this->db->nrows;
       $messages=array();
       while($row=$this->db->get()){
-	$msg=array();
-	$msg['ip']=$row['ip'];
-	$msg['nick']=$row['nick'];
-	$msg['date']=date("j/M G:i",$row['itime']);
-	$msg['message']=preg_replace('#((http|https|ftp)://[^ ]*)#i','<a href="$1">$1</a>',$row['message']);
-	$messages[]=$msg;
+	if(!preg_match('/http:\/\/|www|\.com\//i',$row['message'])){
+	  $msg=array();
+	  $msg['ip']=$row['ip'];
+	  $msg['nick']=$row['nick'];
+	  $msg['date']=date("j/M G:i",$row['itime']);
+	  $msg['message']=preg_replace('#((http|https|ftp)://[^ ]*)#i','<a href="$1">$1</a>',$row['message']);
+	  $messages[]=$msg;
+	}
       }
       $this->messages=array_reverse($messages);
     }
