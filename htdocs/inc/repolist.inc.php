@@ -499,7 +499,7 @@ $defrepo[48]=array( 'info' => array('create' => 1), 'name' => 'schoepfer.info-i3
 $defrepo[49]=array( 'info' => array('create' => 1), 'name' => 'schoepfer.info-x86_64-13.1',
     'url' => 'http://slackware.schoepfer.info/13.1_64/',
     'rank' => 99, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '32131',
-    'manifest' => 'slackware/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT', 
+    'manifest' => 'slackware64/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT', 
     'brief' => 'Johannes Sch&#246;pfer', 'description' => 'Packages from Johannes Sch&#246;pfer (schoepfer.info) for Slackware 13.1 32bit');
 /**** END SLACK 13.1 ****/
 #
