@@ -36,6 +36,7 @@ class filelist {
 	if($line!="++========================================")return false;
 	if(($line=$repo->manifile->get())!="||")return false;
 	$line=$repo->manifile->get();
+	if(isset($_SERVER['DEBUG']))echo "$line\n";
 	$tmp=preg_split("/^\|\|.*[\/\s]([^\/]*\.t.z).*$/",$line,0,PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 	if(!$tmp)return false;
 	$pkg=$tmp[0];

@@ -145,7 +145,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
     echo "popolamento in corso...$NL";
     flush();
     if(!$err=$rep->popolate()){
-      echo "$NLERRORE!!! ";
+      echo $NL."ERRORE!!! ";
       echo "annullamento in corso... ";
       $db->db->rollback();
       echo "annullamento effettuato.. salto al prossimo repository.$NL";

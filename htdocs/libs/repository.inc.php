@@ -77,7 +77,7 @@ class repository {
     $list=new filelist();
     if($this->manifest){
       $this->manifile=new internet($this->url.$this->manifest);
-      if(!$i=$list->addall($allpackage,$this))return false;
+      if(!$i=$list->addall($allpackage,$this)){var_dump($i);return false;}
       if(!$this->db->query("update #__repository set nfiles='$i' where id='{$this->id}'"))var_dump($this->db);
     }
     return true;
