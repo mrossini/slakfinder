@@ -36,12 +36,12 @@ $defrepo[5]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.0', /
 $defrepo[6]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.0-patches', // patch
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/',
     'rank' => 30, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130',
-    'manifest' => 'patches/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT', 
+    'manifest' => 'patches/MANIFEST.bz2', 'packages' => 'patches/PACKAGES.TXT', 
     'brief' => 'Patches', 'description' => 'Slackware 32bit Official Patches for 13.0 Version');
 $defrepo[63]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.0-extra', // extra
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.0/',
     'rank' => 30, 'version' => '13.0', 'arch' => 'i386', 'class' => '32130',
-    'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT', 
+    'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'extra/PACKAGES.TXT', 
     'brief' => 'Extra', 'description' => 'Slackware 32bit Official Extra Packages for 13.0 Version');
 // 64bit
 $defrepo[4]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.0', // distro
@@ -52,12 +52,12 @@ $defrepo[4]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.0',
 $defrepo[7]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.0-patches', // patch
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/',
     'rank' => 30, 'version' => '13.0', 'arch' => 'x86_64', 'class' => '64130',
-    'manifest' => 'patches/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT', 
+    'manifest' => 'patches/MANIFEST.bz2', 'packages' => 'patches/PACKAGES.TXT', 
     'brief' => 'Patches', 'description' => 'Slackware 64bit Official Patches for 13.0 Version');
 $defrepo[61]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.0-extra', // extra
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.0/',
     'rank' => 30, 'version' => '13.0', 'arch' => 'x86_64', 'class' => '64130', 
-    'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT', 
+    'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'extra/PACKAGES.TXT', 
     'brief' => 'Extra', 'description' => 'Slackware 64bit Official Extra Packages for 13.0 Version');
 /**** END SLACK 13.0 ****/
 //
@@ -71,12 +71,12 @@ $defrepo[72]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.1', 
 $defrepo[73]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.1-patches', // patch
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.1/',
     'rank' => 30, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131',
-    'manifest' => 'patches/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT', 
+    'manifest' => 'patches/MANIFEST.bz2', 'packages' => 'patches/PACKAGES.TXT', 
     'brief' => 'Patches', 'description' => 'Slackware 32bit Official Patches for 13.1 Version');
 $defrepo[76]=array( 'info' => array('create' => 1), 'name' => 'slackware-13.1-extra', // extra
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-13.1/',
     'rank' => 30, 'version' => '13.1', 'arch' => 'i386', 'class' => '32131',
-    'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT', 
+    'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'extra/PACKAGES.TXT', 
     'brief' => 'Extra', 'description' => 'Slackware 32bit Official Extra Packages for 13.1 Version');
 // 64bit
 $defrepo[71]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.1', // distro
@@ -87,12 +87,12 @@ $defrepo[71]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.1'
 $defrepo[74]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.1-patches', // patch
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.1/',
     'rank' => 30, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131', 
-    'manifest' => 'patches/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT', 
+    'manifest' => 'patches/MANIFEST.bz2', 'packages' => 'patches/PACKAGES.TXT', 
     'brief' => 'Patches', 'description' => 'Slackware 64bit Official Patches for 13.1 Version'); 
 $defrepo[75]=array( 'info' => array('create' => 1), 'name' => 'slackware64-13.1-extra', // extra
     'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-13.1/',
     'rank' => 30, 'version' => '13.1', 'arch' => 'x86_64', 'class' => '64131',
-    'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT', 
+    'manifest' => 'extra/MANIFEST.bz2', 'packages' => 'extra/PACKAGES.TXT', 
     'brief' => 'Extra', 'description' => 'Slackware 64bit Official Extra Packages for 13.1 Version');
 /**** END SLACK 13.1 ****/
 //
