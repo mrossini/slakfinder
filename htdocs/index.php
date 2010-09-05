@@ -18,12 +18,13 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   .results td { border-top:1px solid #000000; border-right:1px dotted; }
   .results th { border-right:1px dotted; }
   .gb {border:none; border-bottom:1px dotted #000000; }
-  .gb td { border-top:1px dotted #000000; padding:2px; }
+  .gb td { border-top:1px dotted #000000; padding:2px; font-family:monospace; }
 
   -->
   </style>
 <body>
-<a href=old.php>Use oldstyle search page</a><br>
+<!--<a href=old.php>Use oldstyle search page</a><br>-->
+<span style='font-family:monospace'>
 <?php
   include 'inc/includes.inc.php';
 
@@ -288,7 +289,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     echo tables(array("","",""),1," class='gb' ");
     echo tables(array("Date","Nick","Message"),1," class='gb' ");
     while($message=$gb->fetch() and ($mm-- > 0)){
-      echo tables(array("<sup>{$message['date']}</sup>","<font color='red'>".$message['nick']."</font> ","".$message['message']));
+      echo tables(array("<sup>{$message['date']}</sup>","<font color='red'>".$message['nick']."</font> ","".substr($message['message'],0,100)."<a href=gb.php>...</a>"));
     }
     echo tables();
     echo "<a href='gb.php'>show all</a>";  
@@ -317,4 +318,5 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   }
 ?>
 <p>To report a bug, mail to <a href='mailto:zerouno@slacky.it'>zerouno@slacky.it</a>. Thanks.</p>
+</span>
 </body></html>

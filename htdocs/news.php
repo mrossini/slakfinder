@@ -1,3 +1,8 @@
+<b>05/Sep/2010:</b><br>
+Site full turned UP.<br>
+Sorry for long downtime.<br>
+Thanks all for re-use SlakFinder!!<br>
+<!--
 <b>26/Jul/2010:</b><br>
 Sorry. Due limit spam I've disabled links in guestbook, so do not enter it.<br>
 I finally chose the style for the new home that is under development.<br>
@@ -18,3 +23,4 @@ Reached about a thousand of searches.<br>
 Thanks all for use SlakFinder!! I hope it was useful to all.<br>
 Thanks to all contributors (for bug and/or repository reportage)<br>
 On behalf of all thank those who build new packages<br>
+-->
