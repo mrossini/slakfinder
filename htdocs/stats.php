@@ -153,12 +153,10 @@
   echo "</td></tr>";
   echo "<tr><th>Last 100</th><th>Top 100</th><tr>";
   echo "<td>";
-  $names=array_reverse($names);
-  $when=array_reverse($when);
-  for($i=0;$i<100;$i++){
-    $name=$names[$i];
+  for($i=0,$t=count($names)-1;$i<100;$i++,$t--){
+    $name=$names[$t];
     if(strlen($name)>25)$name=substr($name,0,25)."...";
-    $min=round(($mom-$when[$i])/60);
+    $min=round(($mom-$when[$t])/60);
     echo "$min'  $name<br>";
   }
 
