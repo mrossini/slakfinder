@@ -18,17 +18,17 @@
     $pkgs=array();
     $ip=array();
     $al->setsearch('_start','=','0');
-    if(isset($_GET['time'])){$time=$_GET['time'];}else{$time=365;}
+    if(isset($_GET['time'])){$time=$_GET['time'];}else{$time=120;}
     $i=1;
     while($res=$al->find()) {
       if(@$res['url']['get']['name']){
 	$pres=$res['url']['get']['name'];
 	$pip=$res['ip'];
 	if(@$ip[$pip]!=$pres){
-	  $pkgs[]=$res;
-	  $ip[$pip]=$pres;
 	  $day=round($res['time']/DAY-0.5,0);
 	  if($day>=$now-$time){
+		  $pkgs[]=$res;
+		  $ip[$pip]=$pres;
 	    if(!isset($date[$day])){
 	      $date[$day]=1;
 	    }else{
@@ -136,6 +136,7 @@
   $ord=array();
   $when=array();
   $mom=time();
+  $i=0;
   foreach($pkgs as $pkg){
     $names[]=$pkg['url']['get']['name'];
     $name=$pkg['url']['get']['name'];
@@ -149,7 +150,9 @@
   echo "<tr><td colspan=2>";
   echo "Searches from begin.";
   echo " | Today: ".end($date)." | Top: ".(max($date))." | Average: ".(round(array_sum($date)/count($date))). " | ".(count($date))." days";
-  echo "<br><img src='stats.php?gdaily&y=200&mid=30'>";
+  if(isset($_GET['time'])){$tm="&time=".$_GET['time'];}else{$tm="";}
+  if(isset($time)){$tm="&time=$time";}
+  echo "<br><img src='stats.php?gdaily&y=200&mid=30$tm'>";
   echo "</td></tr>";
   echo "<tr><th>Last 100</th><th>Top 100</th><tr>";
   echo "<td>";
