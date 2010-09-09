@@ -2,7 +2,7 @@
 
 
 # configurazione
-include_once 'config.inc.php';
+require 'config.inc.php';
 include_once 'inc/defrepo.inc.php';
 include_once 'inc/repolist.inc.php';
 

@@ -71,6 +71,12 @@ if(isset($_SERVER['REPO'])){
 if(isset($_GET['REPO'])){
   $defrepo=array($_GET['REPO'] => $defrepo[$_GET['REPO']]);
 }
+if(isset($_SERVER['SPAM'])or isset($_GET['SPAM'])){
+  $spamfile=new internet("http://www.stopforumspam.com/downloads/listed_ip_90.zip","listed_ip_90.zip");
+  $spamfile->download();
+  `unzip -o listed_ip_90.zip`;
+  exit;
+}
 foreach($defrepo as $id => $repo)if($repo['info']['create']){
   flush();
   $db->db->transact();
