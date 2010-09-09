@@ -1,3 +1,8 @@
+<b>09/Sep/2010:</b><br>
+AntiSpam added on GuestBook!!<br>
+It disable url and block ip listed <br>
+in stopforumspam.com<br>
+<br>
 <b>05/Sep/2010:</b><br>
 Site full turned UP.<br>
 Sorry for long downtime.<br>
