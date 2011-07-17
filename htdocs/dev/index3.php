@@ -3,7 +3,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Package Finder</title>
+    <title>Package Finder - developing</title>
   </head>
   <style type="text/css">
   <!--
@@ -23,32 +23,38 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   -->
   </style>
 <body>
-<!--<a href=old.php>Use oldstyle search page</a><br>-->
+<h1> Developing... </h1>
 <?php
   include 'inc/includes.inc.php';
 
   $maxresult=30;
   $start=0;
   $db=new database();
-  if(!isset($_SESSION['last_search']))$_SESSION['last_search']="";
-  if(!isset($_SESSION['searcher_visitor'])){
+  if(!isset($_SESSION['last_search2']))$_SESSION['last_search2']="";
+  if(!isset($_SESSION['searcher2_visitor'])){
     $db->counter_inc('visits');
-    $_SESSION['searcher_visitor']=$db->counter_get('visits');
+    $_SESSION['searcher2_visitor']=$db->counter_get('visits');
   }
-  #echo "You are the ".$_SESSION['searcher_visitor']."st visitor<br />";
-  $name=$desc=$file=$repo=$order=null;
+  $name=$desc=$file=$repo=$order=$search=$ver=null;
+  $in='name';
+  $op=0;
   foreach($_GET as $key => $value)$$key=$value;
   if ($name or $desc or $file) {
     if(($start==0)and($_SESSION['last_search']!="name=$name&desc=$desc&file=$file")){
-      $_SESSION['last_search']="name=$name&desc=$desc&file=$file";
+      $_SESSION['last_search2']="name=$name&desc=$desc&file=$file";
       $db->counter_inc('searches');
     }
   }
-  #echo "Searched ".$db->counter_get('searches')." packages from 6 March 2010<br /><br />";
+
   $hrepos="";
+  redefrepo();
   if ($name or $desc or $file){
     $hrepos.="<div style='color:red' id='wait1'>Wait a moment...";
     if($file)$hrepos.=" (up 2 minutes)";
+    
+    
+    
+    
     $hrepos.="</div>";
   }
   $hrepos.="
@@ -61,20 +67,122 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   ";
   $form="
     <table>
-    <tr><td>Search<sup>(*)</sup>:</td><td><input name='name' value='$name' /></tr> 
-    <tr><td>Description:</td><td><input name='desc' value='$desc' /></td></tr>
-    <tr><td>Filename:</td><td><input name='file' value='$file' disabled='disbled' /></td></tr>
-    </table>
-    <input type='submit' value='go' /><br>
-    <sup><i>(*) NEW!!!! Enter one or more words <u>space separated</u>. Do not enter package version (it will be ignored)</i></sup>
-  ";
-  $hrepos.=writereposcompact($repo,$form); 
+    <tr><td>Search:</td> <td><input size=30 name='search' value='$search' /> <input type='button' value='go' /></td></tr> 
+    <tr><td>In</td><td>
+	    <input type='radio' name='in' value='name' checked>pkg name - 
+	    <input type='radio' name='in' value='desc'>description -
+	    <input type='radio' name='in' value='file'>filelist
+    </td></tr> 
+    <tr>
+        <td>Version:</td>
+	<td>
+	    <select name='op'>
+	      <option value=1 >&gt;=</option>
+	      <option value=2 selected>==</option>
+	      <option value=3 >&lt;=</option>
+	    </select>
+	    <input name='ver' value='$ver' size=23 />
+	</td>
+    </tr>\n";
+/*  $form.="
+	    <select id='seldistro' name='distro' onchange='showrepoopt(this.form.distro.value,this.form.arch.value)'>\n";
+  foreach(array('any version','current','13.1','13.0','12.2','12.1','12.0','11.0') as $key => $sver){
+    if($key==0){
+      $form.="            <option value=''>$sver</option>\n";
+    }else{
+      $form.="            <option value='$sver'>$sver</option>\n";
+    }
+
+  }
+  $form.="    </select>\n";
+ */
+/*  $form.="    
+	    <select id='selarch' name='arch' onchange='showrepoopt(this.form.distro.value,this.form.arch.value)'>\n";
+  foreach(array('any arch','i386','x86_64') as $key => $sarch){
+    if($key==0){
+      $form.="            <option value=''>$sarch</option>\n";
+    }else{
+      $form.="            <option value='$sarch'>$sarch</option>\n";
+    }
+  }
+ */
+  $form.="  <tr id='rowslack'><td>Slackware:</td><td>\n";
+  $form.="  <table class='repository'>\n";
+  $form.="  <tr><th>&nbsp</th><th>Any</th><th>curr</th><th>13.1</th><th>13.0</th><th>12.2</th><th>12.1</th><th>12.0</th><th>11.0</th></tr>\n";
+  $form.="  <tr><td>Any</td>\n";
+  $form.="       <td><input type=radio name=slackware value=any-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=curr-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.1-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.0-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=12.2-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=12.1-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=12.0-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=11.0-any></td>\n";
+  $form.="  </tr><tr><td>i386</td>\n";
+  $form.="       <td><input type=radio name=slackware value=any-i386></td>\n";
+  $form.="       <td><input type=radio name=slackware value=curr-i386></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.1-i386 checked></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.0-i386></td>\n";
+  $form.="       <td><input type=radio name=slackware value=12.2-i386></td>\n";
+  $form.="       <td><input type=radio name=slackware value=12.1-i386></td>\n";
+  $form.="       <td><input type=radio name=slackware value=12.0-i386></td>\n";
+  $form.="       <td><input type=radio name=slackware value=11.0-i386></td>\n";
+  $form.="  </tr><tr><td>x86_64</td>\n";
+  $form.="       <td><input type=radio name=slackware value=any-x86_64></td>\n";
+  $form.="       <td><input type=radio name=slackware value=curr-x86_64></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.1-x86_64></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.0-x86_64></td>\n";
+  $form.="       <td>&nbsp;</td>\n";
+  $form.="       <td>&nbsp;</td>\n";
+  $form.="       <td>&nbsp;</td>\n";
+  $form.="       <td>&nbsp;</td>\n";
+  $form.="  </tr></table>\n";
+  $form.=" 
+    </td></tr>\n";
+  /*
+  $form.="  <tr id='rowslack'><td>Slackware:</td><td>\n";
+  $form.="<input type=radio name=slkver value=any>any - ";
+  $form.="<input type=radio name=slkver value=current>current - ";
+  $form.="<input type=radio name=slkver value=13.1 checked>13.1 - ";
+  $form.="<input type=radio name=slkver value=13.0>13.0 - ";
+  $form.="<input type=radio name=slkver value=12.2>12.2 - ";
+  $form.="<input type=radio name=slkver value=12.2>12.1 - ";
+  $form.="<input type=radio name=slkver value=12.2>12.0 - ";
+  $form.="<input type=radio name=slkver value=12.2>11.0";
+  $form.=" 
+    </td></tr>\n";
+  $form.="  <tr id='arch'><td>Arch:</td><td>\n";
+  $form.="<input type=radio name=arch value=any>any - ";
+  $form.="<input type=radio name=arch value=i386 checked>i386 - ";
+  $form.="<input type=radio name=arch value=x86_64>x86_64";
+  $form.=" 
+    </td></tr>\n";
+   */
+  $form.="
+    <tr><td>Repository:</td><td>\n".(writereposselect())."\n
+    </td></tr>\n";
+  $form.="
+    </table>(is not complete! clicking on a checkbox, the list of repository will be filtered to match only version/arch selected. also, repository list style may be change)";
+  /*<input type='button' value='go' /><br>*/
+  /*<sup><i>(*) NEW!!!! Enter one or more words <u>space separated</u>. Do not enter package version (it will be ignored)</i></sup>*/
+  $hrepos.=$form;
+  //$hrepos.=writereposcompact($repo,$form); 
   if ($name or $desc or $file){
     $hrepos.="<div style='color:red' id='wait2'>Wait a moment...";
     if($file)$hrepos.=" (up 2 minutes)";
     $hrepos.="</div>";
   }
-  $hrepos.="</form> <a name='results'></a> ";
+  $hrepos.="</form>";
+  $hrepos.="<script>showrepoopt(document.getElementById('seldistro').value,document.getElementById('selarch').value);</script>";
+  
+  
+  
+  
+  
+  
+  
+  
+  $hrepos.="<a name='results'></a> ";
   $ord="";
 
   echo $hrepos;
@@ -284,8 +392,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 
     $gb=new guestbook();
     echo "<a href='gb.php'>Guest Book</a>: you can <a href='gb.php'>post comments</a>, suggests, bug/repository reports, or just your signature.<br><br>";
-    $mm=5;
-/*    echo tables(array("","",""),1," class='gb' ");
+    $mm=30;
+    echo tables(array("","",""),1," class='gb' ");
     echo tables(array("Date","Nick","Message"),1," class='gb' ");
     while($message=$gb->fetch() and ($mm-- > 0)){
       echo tables(array("<sup>{$message['date']}</sup>","<font color='red'>".$message['nick']."</font> ","".$message['message']));
@@ -294,10 +402,10 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     echo "<a href='gb.php'>show all</a>";  
     echo "<nobr><form action='gb.php' method='post'><br>Nick: ";
     echo "<input name=nick size=10 maxlenght=15 "; 
-    if(isset($_SESSION['slakhomelinuxguestbooknick']))echo "value='{$_SESSION['slakhomelinuxguestbooknick']}'";
+    if(isset($_SESSION['slakhomelinux2guestbooknick']))echo "value='{$_SESSION['slakhomelinux2guestbooknick']}'";
     echo "> -message: <br>";
     echo "<textarea name=message cols=30 rows=3></textarea><br>";
-    echo "<input type=submit value='go'><br></form></nobr>"; */
+    echo "<input type=submit value='go'><br></form></nobr>";
 
     echo "<br>";
 

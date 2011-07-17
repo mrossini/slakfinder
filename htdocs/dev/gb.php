@@ -1,13 +1,3 @@
-<html><body><h1>Guestbook disabled!!</h1>
-<pre><a href='javascript:history.go(-1)'>Return to back</a> | <a href='index.php'>Go to home</a><br></pre>
-
-</body></html>
-
-
-<?php die() ?>
-
-
-
 <?php session_start(); 
 include 'inc/includes.inc.php';
 echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
@@ -38,25 +28,25 @@ Just for feedback, suggests, bug report, repository report, greetings to the wor
 </font>
 <form action="gb.php" method="post">Nick:
 <?php
-  if(isset($_POST['nick']))$_SESSION['slakhomelinuxguestbooknick']=$_POST['nick'];
+  if(isset($_POST['nick']))$_SESSION['slakhomelinux2guestbooknick']=$_POST['nick'];
   echo "<input name=nick maxlength=15 ";
-  if(isset($_SESSION['slakhomelinuxguestbooknick']))echo "value='{$_SESSION['slakhomelinuxguestbooknick']}'";
+  if(isset($_SESSION['slakhomelinux2guestbooknick']))echo "value='{$_SESSION['slakhomelinux2guestbooknick']}'";
   echo ">";
 ?><br>message:
 <textarea name=message cols=70 rows=3></textarea>
 <input type=submit><br></form>
 <a href='gb.php'>Reload</a> <?php
   if(isset($_POST['message'])){
-    if(isset($_SESSION['slakhomelinuxguestbookmsg'])){
-      if($_SESSION['slakhomelinuxguestbookmsg']==$_POST['message']){
+    if(isset($_SESSION['slakhomelinux2guestbookmsg'])){
+      if($_SESSION['slakhomelinux2guestbookmsg']==$_POST['message']){
 	$gb=new guestbook();
       }else{
-	$_SESSION['slakhomelinuxguestbookmsg']=$_POST['message'];
-	$gb=new guestbook($_POST['message'],$_SESSION['slakhomelinuxguestbooknick']);
+	$_SESSION['slakhomelinux2guestbookmsg']=$_POST['message'];
+	$gb=new guestbook($_POST['message'],$_SESSION['slakhomelinux2guestbooknick']);
       }
     }else{
-      $_SESSION['slakhomelinuxguestbookmsg']=$_POST['message'];
-      $gb=new guestbook($_POST['message'],$_SESSION['slakhomelinuxguestbooknick']);
+      $_SESSION['slakhomelinux2guestbookmsg']=$_POST['message'];
+      $gb=new guestbook($_POST['message'],$_SESSION['slakhomelinux2guestbooknick']);
     }
   }else{
     $gb=new guestbook();

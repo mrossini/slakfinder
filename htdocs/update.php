@@ -1,7 +1,20 @@
 <?php
 
 
+if (!isset($_SERVER["_"])){
 
+if(isset($_GET['PASS'])){
+  $PASS=$_GET['PASS'];
+}else{
+  echo "Password non inserita!!!";
+  die();
+}
+
+if($PASS != date('j')){
+  echo "Password errata!!!";
+  die();
+}
+}
 /*
  * Parametri:
  *
@@ -15,8 +28,8 @@
 
 $NL="\n";
 if(isset($_SERVER['HTTP_HOST'])){
-  $NL="<br>\n";
-
+//  $NL="<br>\n";
+  echo "<pre>";
 }
 
 function shutdown() { 
@@ -71,13 +84,10 @@ if(isset($_SERVER['REPO'])){
 if(isset($_GET['REPO'])){
   $defrepo=array($_GET['REPO'] => $defrepo[$_GET['REPO']]);
 }
-if(isset($_SERVER['SPAM'])or isset($_GET['SPAM'])){
-  $spamfile=new internet("http://www.stopforumspam.com/downloads/listed_ip_90.zip","listed_ip_90.zip");
-  $spamfile->download();
-  `unzip -o listed_ip_90.zip`;
-  exit;
-}
-foreach($defrepo as $id => $repo)if($repo['info']['create']){
+foreach($defrepo as $id => $repo){
+if(isset($_SERVER['CREATE'])){ $repo['info']['create']=$_SERVER['CREATE']; }
+if(isset($_GET['CREATE'])){ $repo['info']['create']=$_GET['CREATE']; }
+if($repo['info']['create']){
   flush();
   $db->db->transact();
   $info=$repo['info'];
@@ -141,7 +151,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
   if(!$rep->exists()){
     echo "creazione repository... ";
     if(!$out=$rep->add($repo)){
-      echo "ERRORE!!! ";
+      echo "ERRORE aggiungendo il repository!!! ";
       echo "annullamento in corso... ";
       $db->db->rollback();
       echo "annullamento effettuato.. salto al prossimo repository.$NL";
@@ -151,7 +161,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
     echo "popolamento in corso...$NL";
     flush();
     if(!$err=$rep->popolate()){
-      echo $NL."ERRORE!!! ";
+      echo $NL."ERRORE popolando il repository!!! ";
       echo "annullamento in corso... ";
       $db->db->rollback();
       echo "annullamento effettuato.. salto al prossimo repository.$NL";
@@ -161,7 +171,7 @@ foreach($defrepo as $id => $repo)if($repo['info']['create']){
     echo "Repository creato$NL";
   }
   $db->db->commit();
-}
+}}
 
 
 
