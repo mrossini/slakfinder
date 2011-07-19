@@ -40,7 +40,6 @@ class internet {
     $this->http_response_header=$head;
     if(is_array($head)){
       foreach($head as $val){
-	var_dump($val);
 	$tmp=preg_split('/^([^ :]*):? (.*)?$/',$val,0,PREG_SPLIT_DELIM_CAPTURE);
 	if(isset($tmp[2])) $this->head[$tmp[1]]=$tmp[2];
       }
@@ -128,13 +127,12 @@ class internet {
       $src=fopen($url,"r");
       $dst=fopen($dest,'w');
       $size=0;
-      echo "\n(download $url";
+      echo "(download $url";
       while(!feof($src)){
 	$size+=fwrite($dst,fread($src,4096));
-	echo ".";
+	if(isset($_SERVER["_"])){ echo "\r(download $url -> $size\r"; }else{ echo "."; }
       }
-      echo ")\n";
-      echo "$dest($size bytes).\n";
+      if(isset($_SERVER["_"])){ echo "\r(download $url -> $dest($size bytes).\n"; }else{ echo "$dest($size bytes).\n"; }
       fclose($src);
       fclose($dst);
     }
@@ -142,14 +140,44 @@ class internet {
       $src=gzopen($url,"r");
       $dst=fopen($dest,'w');
       $size=0;
-      echo "\n$url";
+      echo "(download $url";
       while(!feof($src)){
 	$size+=fwrite($dst,gzread($src,4096));
-	echo ".";
+	if(isset($_SERVER["_"])){ echo "\r(download $url -> $size\r"; }else{ echo "."; }
       }
       echo "$dest($size bytes).\n";
+      if(isset($_SERVER["_"])){ echo "\r(download $url -> $dest($size bytes).\n"; }else{ echo "$dest($size bytes).\n"; }
       fclose($src);
       fclose($dst);
+    }
+    if($this->mode=="bz"){
+
+      $src=fopen($url,"r");
+      $dst=fopen("$dest.bz2",'w');
+      $size=0;
+      echo "(download $url";
+      while(!feof($src)){
+	$size+=fwrite($dst,fread($src,4096));
+	if(isset($_SERVER["_"])){ echo "\r(download $url -> $size\r"; }else{ echo "."; }
+      }
+      if(isset($_SERVER["_"])){ echo "\r(download $url -> $dest.bz2($size bytes).\n"; }else{ echo "$dest.bz2($size bytes).\n"; }
+      fclose($src);
+      fclose($dst);
+
+
+
+      $src=bzopen("$dest.bz2","r");
+      $dst=fopen($dest,'w');
+      $size=0;
+      echo "(uncompress $dest.bz2";
+      while(!feof($src)){
+	$size+=fwrite($dst,bzread($src,4096));
+	if(isset($_SERVER["_"])){ echo "\r(uncompress $dest.bz2 -> $size\r"; }else{ echo "."; }
+      }
+      if(isset($_SERVER["_"])){ echo "\r(uncompress $dest.bz2 -> $dest($size bytes).\n"; }else{ echo "$dest($size bytes).\n"; }
+      fclose($src);
+      fclose($dst);
+      unlink("$dest.bz2");
     }
     return $size;
   }

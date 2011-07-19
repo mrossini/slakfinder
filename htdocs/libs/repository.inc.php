@@ -66,14 +66,14 @@ class repository {
 	$id=$pack->add($pkg,array('repository'=>$this->id),$more);
 	if(!$id){ return false; }
 	if(isset($_SERVER['DEBUG']))echo $id." -> ".$pack->filename."               \n";
-	echo ".";
+	if(isset($_SERVER["_"])){ echo "\r(packages $i: ".$pkg['name']."               " ; }else{ echo "."; }
 	$allpackage[$pack->filename]=$id;
 	$i++;
       }
     }
     $this->pkgsfile->close();
     if(!$this->db->query("update #__repository set npkgs='$i' where id='{$this->id}'"))var_dump($this->db);
-    echo "\n [$i packages] \n";
+    if(isset($_SERVER["_"])){ echo "\r(packages: $i                                            \n" ; }else{ echo "\n [$i packages] \n";}
     $list=new filelist();
     if($this->manifest){
       $this->manifile=new internet($this->url.$this->manifest);
@@ -91,7 +91,10 @@ class repository {
 
 
   public function drop(){
-    return $this->db->query("delete from #__repository where id=".$this->id);
+
+    $err= $this->db->query("delete from #__repository where id=".$this->id);
+    var_dump($err);
+    return $err;
   }
   public function truncate(){
     return $this->db->query("delete from #__packages where repository=".$this->id);

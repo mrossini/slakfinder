@@ -7,7 +7,7 @@ $defrepo=array();
 
 $defrepo[1]=array( 'info' => array('create' => 1), 'name' => 'slackware64-current',
    'url' => 'http://ftp.osuosl.org/pub/slackware/slackware64-current/', 'version' => 'current', 'arch' => 'x86_64', 'class' => '64cur',
-   'manifest' => false and 'slackware64/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
+   'manifest' => 'slackware64/MANIFEST.bz2', 'packages' => 'PACKAGES.TXT',
    'brief' => 'Official', 'description' => 'Slackware 64bit Official Distribution - Current Version');
 
 $defrepo[2]=array( 'info' => array('create' => 1), 'name' => 'slackware-current',

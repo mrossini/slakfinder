@@ -46,7 +46,7 @@ class filelist {
 	  $pkgid=false;
 	}
 	//echo "      - ".$p++."  - $pkgid - {$tmp[0]}                                    \n";
-	echo ".";
+	if(isset($_SERVER["_"])){ echo "\r(filelist ".$p++."($i): ".$tmp[0]."               \r" ; }else{ echo "."; }
 	if(($line=$repo->manifile->get())!="||")return false;
 	if(($line=$repo->manifile->get())!="++========================================")return false;
 	$step=1;
@@ -54,6 +54,7 @@ class filelist {
       }
     }
     $this->db->insert();
+    if(isset($_SERVER["_"])){ echo "\r(filelist $i files                                         \n" ; }else{ echo "[$i files]\n"; }
 
     return $i;
   }
@@ -185,8 +186,11 @@ class filelist {
 	  fullpath VARCHAR( 511 ) NOT NULL ,
 	  filename VARCHAR( 255 ) NOT NULL ,
 	PRIMARY KEY ( id ) ,
-	INDEX ( filename ),
-	FOREIGN KEY ( package ) REFERENCES #__packages ( id ) ON DELETE CASCADE
+	INDEX ( filename )
+	, INDEX ( repository )
+	, INDEX ( package )
+	 -- , FOREIGN KEY ( repository ) REFERENCES #__repository ( id ) ON DELETE CASCADE
+	 -- , FOREIGN KEY ( package ) REFERENCES #__packages ( id ) ON DELETE CASCADE
       ) ENGINE = INNODB ;
     ";
   }

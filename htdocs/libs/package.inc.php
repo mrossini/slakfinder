@@ -182,9 +182,9 @@ class package {
 	  conflicts TEXT ,
 	  suggests TEXT ,
 	  description TEXT NOT NULL ,
-	PRIMARY KEY ( id ),
-        FOREIGN KEY ( repository ) REFERENCES #__repository ( id ) ON DELETE CASCADE
-
+	PRIMARY KEY ( id )
+	 , INDEX ( repository ) 
+	-- , FOREIGN KEY ( repository ) REFERENCES #__repository ( id ) ON DELETE CASCADE
       ) ENGINE = INNODB ;
     ";
   }
