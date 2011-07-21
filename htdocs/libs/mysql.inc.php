@@ -166,17 +166,17 @@ class mysql {
 	}
 	public function transact(){
 	  global $transact;
-	  #$this->query('START TRANSACTION');
+	  $this->query('START TRANSACTION');
 	  $transact=true;
 	}
 	public function commit(){
 	  global $transact;
-	  #$this->query('COMMIT');
+	  $this->query('COMMIT');
 	  $transact=false;
 	}
 	public function rollback(){
 	  global $transact;
-	  #$this->query('ROLLBACK');
+	  $this->query('ROLLBACK');
 	  $transact=false;
 	}
 	

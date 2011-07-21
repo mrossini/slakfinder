@@ -189,8 +189,8 @@ class filelist {
 	INDEX ( filename )
 	, INDEX ( repository )
 	, INDEX ( package )
-	 -- , FOREIGN KEY ( repository ) REFERENCES #__repository ( id ) ON DELETE CASCADE
-	 -- , FOREIGN KEY ( package ) REFERENCES #__packages ( id ) ON DELETE CASCADE
+	, FOREIGN KEY ( repository ) REFERENCES #__repository ( id ) ON DELETE CASCADE
+	, FOREIGN KEY ( package ) REFERENCES #__packages ( id ) ON DELETE CASCADE
       ) ENGINE = INNODB ;
     ";
   }
