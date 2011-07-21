@@ -3,6 +3,7 @@
 
 class internet {
   public function __construct($url,$tmp=null){
+    global $repodir;
     $this->url=$url;
     $this->parse();
     if($tmp){
@@ -49,7 +50,6 @@ class internet {
 	  $this->head['Last-Modified']="Date Unknown (filesize: ".$this->head[213].")";
 	}
       }
-//    echo "<br><pre>";var_dump($this);echo "</pre></br>";
       if(isset($this->head['HTTP/1.0'])){
 	$this->head['HTTP/1.1']=$this->head['HTTP/1.0'];
       }
@@ -59,7 +59,6 @@ class internet {
     }
     if($code==200)$code=0;
     $this->status=$code;
-    //echo "<br><pre>";var_dump($this);echo "</pre></br>";
     return $this->head;
   }
   public function getheadcurl(){

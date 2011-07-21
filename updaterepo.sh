@@ -7,9 +7,9 @@ git pull
 cd $CWD/htdocs/
 REDEFINE= php update.php
 php update.php
-cd $CWD/htdocs/dev/
-REDEFINE= php update.php
-php update.php
+#cd $CWD/htdocs/dev/
+#REDEFINE= php update.php
+#php update.php
 date
 echo
 echo "aggiornamento terminato"

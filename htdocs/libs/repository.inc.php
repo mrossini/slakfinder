@@ -12,7 +12,7 @@ class repository {
   }
   public function add($repo){
     foreach($repo as $key => $value) $this->$key = $value;
-    if(!$this->pkgsfile)$this->pkgsfile=new internet($this->url.$this->packages);
+    if(!$this->pkgsfile) $this->pkgsfile=new internet(((((substr($this->packages,0,7))=="http://")or((substr($this->packages,0,6))=="ftp://"))?"":$this->url).$this->packages);
     if(!$this->pkgsfile->exists())return false;
     $this->mtime=$this->pkgsfile->head['Last-Modified'];
     $repo['mtime']=$this->mtime;
@@ -20,7 +20,7 @@ class repository {
     return $repo['id'];
   }
   public function update(){	# DA SISTEMARE
-    $this->pkgfile=new internet($this->url.$this->packages);
+    $this->pkgsfile=new internet(((((substr($this->packages,0,7))=="http://")or((substr($this->packages,0,6))=="ftp://"))?"":$this->url).$this->packages);
     $this->hash=$hashfile->download();
     if(!$this->pkgsfile->exists())return false;
     $this->mtime=$this->pkgsfile->head['Last-Modified'];
@@ -58,7 +58,7 @@ class repository {
   public function popolate($more=array()){
     $allpackage=array();
     $pack=new package();
-    if(!$this->pkgsfile)$this->pkgsfile=new internet($this->url.$this->packages);
+    if(!$this->pkgsfile)$this->pkgsfile=new internet(((((substr($this->packages,0,7))=="http://")or((substr($this->packages,0,6))=="ftp://"))?"":$this->url).$this->packages);
     if(!$this->pkgsfile->exists())return false;
     $i=0;
     while(!is_null($pkg=$pack->fetch($this->pkgsfile))){
@@ -83,7 +83,7 @@ class repository {
     return true;
   }
   public function needupdate(){
-    if(!$this->pkgsfile)$this->pkgsfile=new internet($this->url.$this->packages);
+    if(!$this->pkgsfile)$this->pkgsfile=new internet(((((substr($this->packages,0,7))=="http://")or((substr($this->packages,0,6))=="ftp://"))?"":$this->url).$this->packages);
     if(!$this->pkgsfile->exists())return false;
     $mtime=$this->pkgsfile->head['Last-Modified'];
     return $mtime != $this->mtime;

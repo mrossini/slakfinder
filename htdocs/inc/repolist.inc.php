@@ -20,7 +20,7 @@ foreach(_str_getcsv(file_get_contents("inc/repolist.csv"),"\n") as $row){
     $idx=array_combine($csv,array_keys($csv));
   }else{
     $csv=_str_getcsv($row,";","'");
-    $defrepo[(int)$csv[$idx['id']]][0]=              (int)   $csv[$idx[0]];
+//    $defrepo[(int)$csv[$idx['id']]][0]=              (int)   $csv[$idx[0]];
     $defrepo[(int)$csv[$idx['id']]]['id']=           (int)   $csv[$idx['id']];
     $defrepo[(int)$csv[$idx['id']]]['notes']=        (string)$csv[$idx['notes']];
     $defrepo[(int)$csv[$idx['id']]]['macro']=        (string)$csv[$idx['macro']];
@@ -43,6 +43,13 @@ foreach(_str_getcsv(file_get_contents("inc/repolist.csv"),"\n") as $row){
     if( $csv[$idx['remove']] and  $csv[$idx['update']])$defrepo[(int)$csv[$idx['id']]]['info']=array('create' => 2);
     if(!$csv[$idx['remove']] and  $csv[$idx['update']])$defrepo[(int)$csv[$idx['id']]]['info']=array('create' => 1);
     if(!$csv[$idx['enabled']])$defrepo[(int)$csv[$idx['id']]]['info']=array('create' => 0);
+
+    unset($defrepo[(int)$csv[$idx['id']]]['notes']);
+    unset($defrepo[(int)$csv[$idx['id']]]['update']);
+    unset($defrepo[(int)$csv[$idx['id']]]['macro']);
+    unset($defrepo[(int)$csv[$idx['id']]]['enabled']);
+    unset($defrepo[(int)$csv[$idx['id']]]['remove']);
+    
   }
 }
 
