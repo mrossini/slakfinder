@@ -8,8 +8,7 @@ class internet {
     if($tmp){
       $this->tmpfile=$tmp;
     }else{
-      $this->tmpfile="./{$this->file}.".getmypid();
-      #$this->tmpfile="/tmp/{$this->file}.".getmypid();
+      $this->tmpfile="$repodir/{$this->file}.".getmypid();
       if(!$this->mode)$this->tmpfile.=$this->ext;
     }
   }
