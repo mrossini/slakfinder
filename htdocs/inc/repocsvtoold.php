@@ -14,7 +14,7 @@ function _str_getcsv($input,$delimiter=",",$enclosure="'"){
  */
 $defrepo=array();
 $idx=array();
-foreach(_str_getcsv(file_get_contents("inc/repolist.csv"),"\n") as $row){
+foreach(_str_getcsv(file_get_contents("repolist.csv"),"\n") as $row){
   if(!$idx){
     $csv=_str_getcsv($row,";","'");
     $idx=array_combine($csv,array_keys($csv));
@@ -46,5 +46,21 @@ foreach(_str_getcsv(file_get_contents("inc/repolist.csv"),"\n") as $row){
   }
 }
 
+#$defrepo[3]=array( 'info' => array('create' => 1), 'name' => 'slackware-12.2',
+#   'url' => 'http://ftp.osuosl.org/pub/slackware/slackware-12.2/',
+#   'rank' => 30, 'version' => '12.2', 'arch' => 'i386', 'class' => '32122',
+#   'manifest' => '', 'packages' => 'PACKAGES.TXT',
+#   'brief' => 'Official', 'description' => 'Slackware 32bit Official Distribution - 12.2 Version');
 
+foreach($defrepo as $id => $repo){
+    echo "
+\$defrepo[$id]=array( 'info' => array('create' => {$repo['info']['create']}), name => '{$repo['name']}',
+   'url' => '{$repo['url']}', 'version' => '{$repo['version']}', 'arch' => '{$repo['arch']}', 'class' => '{$repo['class']}',
+   'manifest' => false and '{$repo['manifest']}', 'packages' => '{$repo['packages']}',
+   'brief' => '{$repo['brief']}', 'description' => '{$repo['description']}');
+";
+
+
+
+}
 ?>
