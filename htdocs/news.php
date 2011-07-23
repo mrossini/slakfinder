@@ -1,4 +1,6 @@
-<b>26/Apr/2011</b><br>
+<b>24/Jul/2011</b>
+File searcher turned up. I'm not sure that it remaining up, but now is UP ;-)
+<!--<b>26/Apr/2011</b><br>
 You can found <a href="http://http://01.webuda.com/">here</a> a _VERY_VERY_OLD_ release of this file searcher (the first, I think),
 but the file searching works ;-)
 <br>
@@ -9,7 +11,7 @@ Please wait a while.
 <b>09/Dec/2010</b><br>
 Sorry, File searcher will be down forever :-(<br>
 Remain up the packages searcher :-)
-
+-->
 <!--<b>28/Aug/2010</b><br>
 Sorry for down site.<br>
 I'd some problem with my server (during my vacation :-( ), so I migrated on an other provider.<br>
