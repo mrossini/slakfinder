@@ -87,11 +87,11 @@ class internet {
   public function close(){
     if($this->fd)fclose($this->fd);
     $this->fd=null;
-    if(file_exists($this->tmpfile)and !isset($_SYSTEM['DEBUG'])and !isset($_GET['DEBUG']))unlink($this->tmpfile);
+    if(file_exists($this->tmpfile)and !isset($_SERVER['DEBUG'])and !isset($_GET['DEBUG']))unlink($this->tmpfile);
   }
   public function __destruct(){
     $this->close();
-    if(file_exists($this->tmpfile)and !isset($_SYSTEM['DEBUG'])and !isset($_GET['DEBUG']))unlink($this->tmpfile);
+    if(file_exists($this->tmpfile)and !isset($_SERVER['DEBUG'])and !isset($_GET['DEBUG']))unlink($this->tmpfile);
   }
 
   public function open(){
@@ -105,7 +105,7 @@ class internet {
   public function download($lines=0){
     /*
     $cmd="wget ";
-    if(isset($__SYSTEM['WGET'])){$cmd.=$__SYSTEM['WGET']." ";}
+    if(isset($_SERVER['WGET'])){$cmd.=$_SERVER['WGET']." ";}
     $cmd.="-O - ";
     $cmd.=$this->url;
     $cmd.="|{$this->mode}cat";
@@ -115,7 +115,7 @@ class internet {
     $this->down=!$err;
     return $err;
      */
-    if(isset($__SYSTEM['WGET'])){ $opt=$__SYSTEM['WGET']; }else{ $opt=""; }
+    if(isset($_SERVER['WGET'])){ $opt=$_SERVER['WGET']; }else{ $opt=""; }
     $sz=$this->wget($this->url,$this->tmpfile,$opt);
     $this->down=$sz;
     return !$sz;
@@ -175,7 +175,7 @@ class internet {
       if(isset($_SERVER["_"])){ echo "\r(uncompress $dest.bz2 -> $dest($size bytes).\n"; }else{ echo "$dest($size bytes).\n"; }
       fclose($src);
       fclose($dst);
-      unlink("$dest.bz2");
+      if(!isset($_SERVER['DEBUG']) and !isset($_GET['DEBUG'])) unlink("$dest.bz2");
     }
     return $size;
   }
