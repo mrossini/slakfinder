@@ -23,6 +23,7 @@ if($PASS != date('j')){
  * REDEFINE: Ridefinisce e fixa nel database le intestazioni del repository, senza riscaricare tutto
  * SHOWQ: Mostra le query che vengono eseguite
  * DEBUG: Abilita modalità di debugging
+ * DIE: Su fallimento non continuare l'esecuzione
  *
  */
 
@@ -104,7 +105,7 @@ if($repo['info']['create']){
       echo "annullamento in corso... ";
       $db->db->rollback();
       echo "annullamento effettuato.. salto al prossimo repository.$NL";
-      continue;
+      if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
     };
     $db->db->commit();
     echo "rimozione effettuata.$NL";
@@ -125,7 +126,7 @@ if($repo['info']['create']){
 	echo "annullamento in corso... ";
 	$db->db->rollback();
 	echo "annullamento effettuato.. salto al prossimo repository.$NL";
-	continue;
+	if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
       };
     }
 
@@ -139,7 +140,7 @@ if($repo['info']['create']){
 	  echo "annullamento in corso... ";
 	  $db->db->rollback();
 	  echo "annullamento effettuato.. salto al prossimo repository.$NL";
-	  continue;
+	  if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
 	}
       }else{
 	echo "già aggiornato!$NL";
@@ -155,7 +156,7 @@ if($repo['info']['create']){
       echo "annullamento in corso... ";
       $db->db->rollback();
       echo "annullamento effettuato.. salto al prossimo repository.$NL";
-      continue;
+      if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
     }
     echo "Creazione effettuata... ";
     echo "popolamento in corso...$NL";
@@ -165,8 +166,7 @@ if($repo['info']['create']){
       echo "annullamento in corso... ";
       $db->db->rollback();
       echo "annullamento effettuato.. salto al prossimo repository.$NL";
-      continue;
-      die();
+      if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
     }
     echo "Repository creato$NL";
   }
