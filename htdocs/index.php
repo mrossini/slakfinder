@@ -63,7 +63,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     <table>
     <tr><td>Search<sup>(*)</sup>:</td><td><input name='name' value='$name' /></tr> 
     <tr><td>Description:</td><td><input name='desc' value='$desc' /></td></tr>
-    <tr><td>Filename:</td><td><input name='file' value='$file' disabled='disbled' /></td></tr>
+    <tr><td>Filename:</td><td><input name='file' value='$file' /></td></tr>
     </table>
     <input type='submit' value='go' /><br>
     <sup><i>(*) NEW!!!! Enter one or more words <u>space separated</u>. Do not enter package version (it will be ignored)</i></sup>
