@@ -34,6 +34,7 @@ foreach(_str_getcsv(file_get_contents("inc/repolist.csv"),"\n") as $row){
     $defrepo[(int)$csv[$idx['id']]]['rank']=         (int)   $csv[$idx['rank']];
     $defrepo[(int)$csv[$idx['id']]]['class']=        (string)$csv[$idx['class']];
     $defrepo[(int)$csv[$idx['id']]]['packages']=     (string)$csv[$idx['packages']];
+    $defrepo[(int)$csv[$idx['id']]]['deps']=         (string)$csv[$idx['deps']];
     $defrepo[(int)$csv[$idx['id']]]['manifest']=     
       (((string)$csv[$idx['manifest']])=="0")?false:((string)$csv[$idx['manifest']]);
     $defrepo[(int)$csv[$idx['id']]]['brief']=        (string)$csv[$idx['brief']];
