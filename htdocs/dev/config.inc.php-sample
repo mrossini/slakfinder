@@ -7,6 +7,8 @@ $dbpass='slakpass';
 $dbdata='slakdb';
 $dbpref='dev_';
 
+$repodir="/tmp";
+
 
 $access_log_file="/var/log/httpd/access_log";
 

@@ -3,12 +3,13 @@
 
 class internet {
   public function __construct($url,$tmp=null){
+    global $repodir;
     $this->url=$url;
     $this->parse();
     if($tmp){
       $this->tmpfile=$tmp;
     }else{
-      $this->tmpfile="/tmp/{$this->file}.".getmypid();
+      $this->tmpfile="$repodir/{$this->file}.".getmypid();
       if(!$this->mode)$this->tmpfile.=$this->ext;
     }
   }
@@ -29,6 +30,38 @@ class internet {
   }
   var $head=null;
   public function gethead(){
+    $this->getheadfopen();
+  }
+  public function getheadfopen(){
+    $head=array();$code=200;
+    echo '{gethead '.$this->url.'}';
+    $page=file_get_contents( $this->url,false,null, -1,100);
+    $head=$http_response_header;
+    $this->http_response_header=$head;
+    if(is_array($head)){
+      foreach($head as $val){
+	$tmp=preg_split('/^([^ :]*):? (.*)?$/',$val,0,PREG_SPLIT_DELIM_CAPTURE);
+	if(isset($tmp[2])) $this->head[$tmp[1]]=$tmp[2];
+      }
+      if(!isset($this->head['Last-Modified'])){
+	if(isset($this->head['Content-Length'])){
+	  $this->head['Last-Modified']="Date Unknown (filesize: ".$this->head['Content-Length'].")";
+	}elseif(isset($this->head[213])){
+	  $this->head['Last-Modified']="Date Unknown (filesize: ".$this->head[213].")";
+	}
+      }
+      if(isset($this->head['HTTP/1.0'])){
+	$this->head['HTTP/1.1']=$this->head['HTTP/1.0'];
+      }
+      if(isset($this->head['HTTP/1.1'])){
+	$code=substr($this->head['HTTP/1.1'],0,3);
+      }
+    }
+    if($code==200)$code=0;
+    $this->status=$code;
+    return $this->head;
+  }
+  public function getheadcurl(){
     $head=array();$code=0;
     exec("curl -I {$this->url} 2>/dev/null",$head,$code);
     foreach($head as $val){
@@ -46,7 +79,6 @@ class internet {
   var $status=null;
   public function exists(){
     if (!$this->head) $this->gethead();
-    
     return !$this->status;
   }
   
@@ -55,11 +87,11 @@ class internet {
   public function close(){
     if($this->fd)fclose($this->fd);
     $this->fd=null;
-    if(file_exists($this->tmpfile)and !isset($_SERVER['DEBUG']))unlink($this->tmpfile);
+    if(file_exists($this->tmpfile)and !isset($_SERVER['DEBUG'])and !isset($_GET['DEBUG']))unlink($this->tmpfile);
   }
   public function __destruct(){
     $this->close();
-    if(file_exists($this->tmpfile)and !isset($_SERVER['DEBUG']))unlink($this->tmpfile);
+    if(file_exists($this->tmpfile)and !isset($_SERVER['DEBUG'])and !isset($_GET['DEBUG']))unlink($this->tmpfile);
   }
 
   public function open(){
@@ -69,7 +101,9 @@ class internet {
     $this->fd=fopen($this->tmpfile,'r'); 
     return $this->fd;
   }
+
   public function download($lines=0){
+    /*
     $cmd="wget ";
     if(isset($_SERVER['WGET'])){$cmd.=$_SERVER['WGET']." ";}
     $cmd.="-O - ";
@@ -80,6 +114,70 @@ class internet {
     system($cmd,$err);
     $this->down=!$err;
     return $err;
+     */
+    if(isset($_SERVER['WGET'])){ $opt=$_SERVER['WGET']; }else{ $opt=""; }
+    $sz=$this->wget($this->url,$this->tmpfile,$opt);
+    $this->down=$sz;
+    return !$sz;
+  }
+  public function wget($url,$dest,$opt=""){
+    if(!$this->mode){
+      $src=fopen($url,"r");
+      $dst=fopen($dest,'w');
+      $size=0;
+      echo "(download $url";
+      while(!feof($src)){
+	$size+=fwrite($dst,fread($src,4096));
+	if(isset($_SERVER["_"])){ echo "\r(download $url -> $size\r"; }else{ echo "."; }
+      }
+      if(isset($_SERVER["_"])){ echo "\r(download $url -> $dest($size bytes).\n"; }else{ echo "$dest($size bytes).\n"; }
+      fclose($src);
+      fclose($dst);
+    }
+    if($this->mode=="z"){
+      $src=gzopen($url,"r");
+      $dst=fopen($dest,'w');
+      $size=0;
+      echo "(download $url";
+      while(!feof($src)){
+	$size+=fwrite($dst,gzread($src,4096));
+	if(isset($_SERVER["_"])){ echo "\r(download $url -> $size\r"; }else{ echo "."; }
+      }
+      echo "$dest($size bytes).\n";
+      if(isset($_SERVER["_"])){ echo "\r(download $url -> $dest($size bytes).\n"; }else{ echo "$dest($size bytes).\n"; }
+      fclose($src);
+      fclose($dst);
+    }
+    if($this->mode=="bz"){
+
+      $src=fopen($url,"r");
+      $dst=fopen("$dest.bz2",'w');
+      $size=0;
+      echo "(download $url";
+      while(!feof($src)){
+	$size+=fwrite($dst,fread($src,4096));
+	if(isset($_SERVER["_"])){ echo "\r(download $url -> $size\r"; }else{ echo "."; }
+      }
+      if(isset($_SERVER["_"])){ echo "\r(download $url -> $dest.bz2($size bytes).\n"; }else{ echo "$dest.bz2($size bytes).\n"; }
+      fclose($src);
+      fclose($dst);
+
+
+
+      $src=bzopen("$dest.bz2","r");
+      $dst=fopen($dest,'w');
+      $size=0;
+      echo "(uncompress $dest.bz2";
+      while(!feof($src)){
+	$size+=fwrite($dst,bzread($src,4096));
+	if(isset($_SERVER["_"])){ echo "\r(uncompress $dest.bz2 -> $size\r"; }else{ echo "."; }
+      }
+      if(isset($_SERVER["_"])){ echo "\r(uncompress $dest.bz2 -> $dest($size bytes).\n"; }else{ echo "$dest($size bytes).\n"; }
+      fclose($src);
+      fclose($dst);
+      if(!isset($_SERVER['DEBUG']) and !isset($_GET['DEBUG'])) unlink("$dest.bz2");
+    }
+    return $size;
   }
 
   public function get(){
