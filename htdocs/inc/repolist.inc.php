@@ -36,7 +36,7 @@ foreach(_str_getcsv(file_get_contents("inc/repolist.csv"),"\n") as $row){
     $defrepo[(int)$csv[$idx['id']]]['packages']=     (string)$csv[$idx['packages']];
     $defrepo[(int)$csv[$idx['id']]]['deps']=         (string)$csv[$idx['deps']];
     $defrepo[(int)$csv[$idx['id']]]['manifest']=     
-      (((string)$csv[$idx['manifest']])=="0")?false:((string)$csv[$idx['manifest']]);
+      (!$enablefilelist or ((string)$csv[$idx['manifest']])=="0")?false:((string)$csv[$idx['manifest']]);
     $defrepo[(int)$csv[$idx['id']]]['brief']=        (string)$csv[$idx['brief']];
     $defrepo[(int)$csv[$idx['id']]]['description']=  (string)$csv[$idx['description']];
     if(!$csv[$idx['remove']] and !$csv[$idx['update']])$defrepo[(int)$csv[$idx['id']]]['info']=array('create' => 4);
