@@ -36,12 +36,13 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     $_SESSION['searcher_visitor']=$db->counter_get('visits');
   }
   #echo "You are the ".$_SESSION['searcher_visitor']."st visitor<br />";
-  $name=$desc=$file=$repo=$order=null;
+  $newsearch=$name=$desc=$file=$repo=$order=null;
   foreach($_GET as $key => $value)$$key=$value;
   if ($name or $desc or $file) {
     if(($start==0)and($_SESSION['last_search']!="name=$name&desc=$desc&file=$file")){
       $_SESSION['last_search']="name=$name&desc=$desc&file=$file";
       $db->counter_inc('searches');
+      $newsearch=true;
     }
   }
   #echo "Searched ".$db->counter_get('searches')." packages from 6 March 2010<br /><br />";
@@ -115,7 +116,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
       
       if(isset($_GET['debug']))var_dump($pkg,$nres);
       $to=$start+$maxresult; if($to > $nres)$to=$nres;
-      echo "Time: ".(round($pkg->db->msec/1000,3))." msec<br />";
+      $duration=round($pkg->db->msec/1000,3);
+      echo "Time: $duration msec<br />";
       echo "Results ".($start+1)."-$to of $nres:                    ";
 	if($start > 0){
 	  echo "<a href='index.php?start=0&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&lt;&lt;</a>  ";
@@ -194,7 +196,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
       $nres=$fl->find($sfile,$sname,$sdesc,$repo,$ord);
       if(isset($_GET['debug']))var_dump($fl,$nres);
       $to=$start+$maxresult; if($to > $nres)$to=$nres;
-      echo "Time: ".(round($fl->db->msec/1000,3))." msec<br />";
+      $duration=round($pkg->db->msec/1000,3);
+      echo "Time: $duration msec<br />";
 
       echo "Results ".($start+1)."-$to of $nres:                    ";
 
@@ -276,6 +279,9 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     wait.style.color="white";
     </script>
     <?php
+  }
+  if ($newsearch){
+    $db->addsearch($_SERVER["REMOTE_ADDR"],$name,$desc,$file,$repo,time(),$nres,$duration);
   }
   if (!($name or $desc or $file)){
     echo "<br><table width=100% style='border-top:1px dotted #000000;border-bottom:1px dotted #000000;'>";
