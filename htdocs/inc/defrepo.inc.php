@@ -32,44 +32,12 @@ function redefrepo($reposelected=0){
   echo "<td>";
   echo "You are the ".$_SESSION['searcher_visitor']."st visitor<br />";
 
-  echo "Searched ".$GLOBALS['db']->counter_get('searches')." packages from 22 Apr 2012<br /><br />";
+  echo "Searched ".$GLOBALS['db']->counter_get('searches')." packages from 24 Apr 2012<br /><br />";
   echo "<code>$nrepos repositories ($npackages packages)</code><br><br>\n";
   echo "</td>";
 
-  /*
-  $al=new tail_log();
-  $al->open(50);
-
-  $pkgs=array();
-  $al->setsearch('_start','=','0');
-  while($res=$al->find()) {
-    if($res['url']['get']['name']){
-      if(!$pkgs){
-        $pkgs[]=$res;
-      }else{
-        $last=end($pkgs);
-        if(($last['url']['get']['name']!=$res['url']['get']['name'])or
-           ($last['url']['get']['name']==$res['url']['get']['name'] and $last['ip']!=$res['ip']))$pkgs[]=$res;
-      }
-    }
-  }
-  $names=array();
-  $ord=array();
-  foreach($pkgs as $pkg){ 
-    $name=$pkg['url']['get']['name'];
-    if(strlen($name)>15)$name=substr($name,0,15)."..";
-    $names[]=$name;
-    if(isset($ord[$name])){$ord[$name]++;}else{$ord[$name]=1;}
-  }
-  arsort($ord,SORT_NUMERIC);
-  if(isset($_GET['name']))if($_GET['name']){
-    if(strlen($_GET['name'])>15)$_GET['name']=substr($_GET['name'],0,15)."..";
-    if($_GET['name']!=end($names))$names[]=$_GET['name'];
-  }
-  $names=array_reverse($names);
-
-
-
+    $stats=new stats();
+    $names=$stats->lastsearch(15);
   echo "<td>";
     echo "<table border=1 cellspacing=0>";
       echo "<tr><td colspan=3 align=center><code><b><a href='stats.php'>Recents</a></b></code></td></tr>";
@@ -79,11 +47,11 @@ function redefrepo($reposelected=0){
     echo "</table>";
   echo "</td>";
 
+
   echo "<td>";
   echo "<table border=1 cellspacing=0 cellpadding=0>";
-  echo "<tr><td><a href='stats.php'><img border=0 src='stats.php?gdaily&y=95&time=60&mid=0&scale=200'></a></td></tr>";
+  echo "<tr><td><a href='stats.php'><img border=0 src='stats.php?gdaily&y=95&time=60&mid=0'></a></td></tr>";
   echo "</table>";
-   */
 
 
 

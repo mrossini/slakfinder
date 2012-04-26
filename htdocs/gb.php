@@ -1,12 +1,12 @@
-<html><body><h1>Guestbook disabled!!</h1>
+<!--<html><body><h1>Guestbook disabled!!</h1>
 <pre><a href='javascript:history.go(-1)'>Return to back</a> | <a href='index.php'>Go to home</a><br></pre>
 
 </body></html>
 
 
-<?php die() ?>
+< ?php die() ?>
 
-
+-->
 
 <?php session_start(); 
 include 'inc/includes.inc.php';
