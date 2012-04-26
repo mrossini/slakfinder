@@ -1,3 +1,5 @@
+<?php session_start(); 
+/*
 <!--<html><body><h1>Guestbook disabled!!</h1>
 <pre><a href='javascript:history.go(-1)'>Return to back</a> | <a href='index.php'>Go to home</a><br></pre>
 
@@ -7,8 +9,7 @@
 < ?php die() ?>
 
 -->
-
-<?php session_start(); 
+ */
 include 'inc/includes.inc.php';
 echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
