@@ -6,19 +6,19 @@ class stats {
     $this->db=new mysql();
   }
   public function lastsearch($count){
-    $this->db->query("SELECT sname FROM #__searches WHERE sname is not null ORDER BY dt DESC LIMIT 0,$count");
+    $this->db->query("SELECT sname FROM #__searches WHERE sname <> '' ORDER BY dt DESC LIMIT 0,$count");
     $out=array();
     while($res=$this->db->get())$out[]=$res['sname'];
     return $out;
   }
   public function lastminsearch($count){
-    $this->db->query("SELECT sname,TIMESTAMPDIFF(SECOND,dt,now()) AS sec FROM #__searches WHERE sname is not null ORDER BY sec ASC LIMIT 0,$count");
+    $this->db->query("SELECT sname,TIMESTAMPDIFF(SECOND,dt,now()) AS sec FROM #__searches WHERE sname <> '' ORDER BY sec ASC LIMIT 0,$count");
     $out=array();
     while($res=$this->db->get())$out[]=array("min" => round($res['sec']/60),"sname"=>$res['sname']);
     return $out;
   }
   public function groupbypkg($count){
-    $this->db->query("SELECT sname,COUNT(sname) as ns FROM #__searches WHERE sname is not null GROUP BY sname ORDER BY ns DESC LIMIT 0,$count");
+    $this->db->query("SELECT sname,COUNT(sname) as ns FROM #__searches WHERE sname <> '' GROUP BY sname ORDER BY ns DESC LIMIT 0,$count");
     $out=array();
     while($res=$this->db->get())$out[]=array("ns" => $res['ns'],"sname"=>$res['sname']);
     return $out;
