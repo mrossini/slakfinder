@@ -24,17 +24,17 @@ class stats {
     return $out;
   }
   public function maxbyday(){
-    $this->db->query("SELECT COUNT(dt) AS ct, TIMESTAMPDIFF(DAY,dt,now()) AS d FROM #__searches GROUP BY d ORDER BY ct DESC LIMIT 0,1");
+    $this->db->query("SELECT COUNT(dt) AS ct, DATEDIFF(now(),dt) AS d FROM #__searches GROUP BY d ORDER BY ct DESC LIMIT 0,1");
     $out=$this->db->get();
     return $out['ct'];
   }
   public function numdays(){
-    $this->db->query("SELECT TIMESTAMPDIFF(DAY,dt,now()) AS d FROM #__searches LIMIT 0,1");
+    $this->db->query("SELECT DATEDIFF(now(),dt) AS d FROM #__searches LIMIT 0,1");
     $out=$this->db->get();
     return $out['d']+1;
   }
   public function countbyday($count){
-    $this->db->query("SELECT COUNT(dt) AS ct, TIMESTAMPDIFF(DAY,dt,now()) AS d FROM #__searches GROUP BY d ORDER BY d ASC LIMIT 0,$count");
+    $this->db->query("SELECT COUNT(dt) AS ct, DATEDIFF(now(),dt) AS d FROM #__searches GROUP BY d ORDER BY d ASC LIMIT 0,$count");
     $out=array();
     $tmp=array();
     while($res=$this->db->get())$tmp[$res['d']]=$res['ct'];
