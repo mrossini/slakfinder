@@ -1,5 +1,4 @@
 <?php
-$transact=false;
 function quote_data(&$v,$k) { $v=addcslashes($v,"'\\"); }
 class mysql {
 	private $db;
@@ -67,7 +66,7 @@ class mysql {
 	  global $dbdata;
 	  $ldb=new self();
 	  $istab=$this->query("SHOW TABLES WHERE Tables_in_$dbdata like '#__cache_%'");
-	  while($x=$this->get())$ldb->query("DROP TABLE {$x['Tables_in_slak']}");
+	  while($x=$this->get())$ldb->query("DROP TABLE {$x['Tables_in_'.$dbdata]}");
 	}
 
 	public function fetchtable(){
@@ -164,25 +163,7 @@ class mysql {
 	    return;
 	  }
 	}
-	public function transact(){
-	  global $transact;
-	  $this->query('START TRANSACTION');
-	  $transact=true;
-	}
-	public function commit(){
-	  global $transact;
-	  $this->query('COMMIT');
-	  $transact=false;
-	}
-	public function rollback(){
-	  global $transact;
-	  $this->query('ROLLBACK');
-	  $transact=false;
-	}
-	
 	public function close(){
-	  global $transact;
-	  if($transact)$this->rollback();
 	  return mysql_close($this->db);
 	}
 }

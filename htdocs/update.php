@@ -33,15 +33,18 @@ if(isset($_SERVER['HTTP_HOST'])){
   echo "<pre>";
 }
 
+$repoinprogress=0;
 function shutdown() { 
-  global $transact,$db;
-  if($transact){
-    echo "operazione annullata... rollback in corso!";
-    $db->db->rollback();
-    echo "fatto.";
+  global $db,$repoinprogress;
+  if($repoinprogress){
+    echo "DISTRUZIONE REPOSITORY ($repoinprogress) in corso...";
+    $rep=new repository($repoinprogress);
+    $repoinprogress=0;
+    $rep->drop();
+    echo "REPOSITORY DISTRUTTO.";
   }
+  echo "Chiusura applicazione";
   flush();
-
 }
 register_shutdown_function('shutdown');
 
@@ -90,7 +93,6 @@ if(isset($_SERVER['CREATE'])){ $repo['info']['create']=$_SERVER['CREATE']; }
 if(isset($_GET['CREATE'])){ $repo['info']['create']=$_GET['CREATE']; }
 if($repo['info']['create']){
   flush();
-  $db->db->transact();
   $info=$repo['info'];
   $create=$info['create'];
   $repo['id']=$id;
@@ -102,19 +104,14 @@ if($repo['info']['create']){
     echo "rimozione...";
     if(!$out=$rep->drop()){
       echo "ERRORE NELLA DISTRUZIONE!!! ";
-      echo "annullamento in corso... ";
-      $db->db->rollback();
-      echo "annullamento effettuato.. salto al prossimo repository.$NL";
       if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
     };
-    $db->db->commit();
     echo "rimozione effettuata.$NL";
     continue;
   }
   if($rep->exists()){
     if(isset($_SERVER['REDEFINE'])or isset($_GET['REDEFINE'])){
       $rep->redefine($repo,(isset($_SERVER['REDEFINE'])?$_SERVER['REDEFINE']:0)+(isset($_GET['REDEFINE'])?$_GET['REDEFINE']:0));
-      $db->db->commit();
       echo "aggiornato$NL";
       continue;
     }
@@ -123,9 +120,6 @@ if($repo['info']['create']){
       echo "distruzione forzata... ";
       if(!$out=$rep->drop()){
 	echo "ERRORE NELLA DISTRUZIONE!!! ";
-	echo "annullamento in corso... ";
-	$db->db->rollback();
-	echo "annullamento effettuato.. salto al prossimo repository.$NL";
 	if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
       };
     }
@@ -137,9 +131,6 @@ if($repo['info']['create']){
 	flush();
 	if(!$rep->drop()){
 	  echo "ERRORE SVUOTANDO IL REPOSITORY!!! ";
-	  echo "annullamento in corso... ";
-	  $db->db->rollback();
-	  echo "annullamento effettuato.. salto al prossimo repository.$NL";
 	  if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
 	}
       }else{
@@ -151,26 +142,37 @@ if($repo['info']['create']){
   $rep=new repository($id);
   if(!$rep->exists()){
     echo "creazione repository... ";
+    $repoinprogress=$id;
     if(!$out=$rep->add($repo)){
       echo "ERRORE aggiungendo il repository!!! ";
-      echo "annullamento in corso... ";
-      $db->db->rollback();
-      echo "annullamento effettuato.. salto al prossimo repository.$NL";
+      echo "DISTRUZIONE in corso... ";
+      if(!$out=$rep->drop()){
+	$repoinprogress=0;
+	echo "ERRORE NELLA DISTRUZIONE!!! ";
+	if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
+      };
+      $repoinprogress=0;
+      echo "DISTRUZIONE effettuata.. salto al prossimo repository.$NL";
       if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
     }
     echo "Creazione effettuata... ";
     echo "popolamento in corso...$NL";
     flush();
+    $repoinprogress=$id;
     if(!$err=$rep->popolate()){
       echo $NL."ERRORE popolando il repository!!! ";
-      echo "annullamento in corso... ";
-      $db->db->rollback();
-      echo "annullamento effettuato.. salto al prossimo repository.$NL";
+      echo "DISTRUZIONE in corso... ";
+      if(!$out=$rep->drop()){
+	$repoinprogress=0;
+	echo "ERRORE NELLA DISTRUZIONE!!! ";
+	if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
+      };
+      $repoinprogress=0;
+      echo "DISTRUZIONE effettuato.. salto al prossimo repository.$NL";
       if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
     }
     echo "Repository creato$NL";
   }
-  $db->db->commit();
 }}
 
 

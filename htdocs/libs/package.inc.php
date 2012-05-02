@@ -184,7 +184,6 @@ class package {
 	  description TEXT NOT NULL ,
 	PRIMARY KEY ( id )
 	, INDEX ( repository ) 
-	, FOREIGN KEY ( repository ) REFERENCES #__repository ( id ) ON DELETE CASCADE
       ) ENGINE = INNODB ;
     ";
   }

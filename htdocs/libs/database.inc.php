@@ -32,9 +32,9 @@ class database {
 		    field VARCHAR( 255 ) NOT NULL ,
                     value VARCHAR( 255 ) NULL ,
                     PRIMARY KEY ( field )
-		  ) ENGINE = InnoDB;
+		  ) ENGINE = MyISAM;
 		"))return false;
-		if(!$thie->db->query("
+		if(!$this->db->query("
 		  CREATE TABLE IF NOT EXISTS #__searches (
 		    dt    DATETIME,
 		    sname VARCHAR(50),
@@ -44,7 +44,7 @@ class database {
 		    srepo INT,
 		    results INT,
 		    duration INT
-		  ) ENGINE = InnoDB;
+		  ) ENGINE = MyISAM;
 	        "))return false;	
 		$this->db->query("INSERT INTO #__mixed (field,value) value ('count_visits','1');");
 		$this->db->query("INSERT INTO #__mixed (field,value) value ('count_searches','1');");

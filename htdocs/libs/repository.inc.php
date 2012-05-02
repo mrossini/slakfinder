@@ -12,10 +12,9 @@ class repository {
   }
   public function add($repo){
     foreach($repo as $key => $value) $this->$key = $value;
-    if(!$this->pkgsfile) $this->pkgsfile=new internet(((((substr($this->packages,0,7))=="http://")or((substr($this->packages,0,6))=="ftp://"))?"":$this->url).$this->packages);
-    if(!$this->pkgsfile->exists())return false;
-    $this->mtime=$this->pkgsfile->head['Last-Modified'];
-    $repo['mtime']=$this->mtime;
+    //if(!$this->pkgsfile) $this->pkgsfile=new internet(((((substr($this->packages,0,7))=="http://")or((substr($this->packages,0,6))=="ftp://"))?"":$this->url).$this->packages);
+    //if(!$this->pkgsfile->exists())return false;
+    $repo['mtime']="n/a";
     if(!$this->db->insert('repository',$repo))return false;
     return $repo['id'];
   }
@@ -43,10 +42,11 @@ class repository {
     if ( isset($repo['deps']) )if($repo['deps']==1)$p2=$top*2/100;
     if ( $nf )$p3=$top*4/100;
     switch ($repo['version']){
+      case '13.37': $p4=$top*20/100;break;
       case '13.1': $p4=$top*15/100;break;
-      case 'current': $p4=$top*12/100;break;
+      case 'current': $p4=$top*17/100;break;
       case '13.0': $p4=$top*10/100;break;
-      case 'mixed': $p4=$top*7/100;break;
+      case 'mixed': $p4=$top*12/100;break;
       case '12.2': $p4=$top*4/100;break;
       case '12.1': $p4=$top*0/100;break;
     }
@@ -80,6 +80,10 @@ class repository {
       if(!$i=$list->addall($allpackage,$this)){var_dump($i);return false;}
       if(!$this->db->query("update #__repository set nfiles='$i' where id='{$this->id}'"))var_dump($this->db);
     }
+    if(!$this->pkgsfile->exists())return false;
+    $this->mtime=$this->pkgsfile->head['Last-Modified'];
+    $repo['mtime']=$this->mtime;
+    if(!$this->db->query("update #__repository set mtime='".$this->mtime."' where id=".$this->id))return false;
     return true;
   }
   public function needupdate(){
@@ -91,13 +95,10 @@ class repository {
 
 
   public function drop(){
-
+    $this->db->query("delete from #__filelist where repository=".$this->id);
+    $this->db->query("delete from #__packages where repository=".$this->id);
     $err= $this->db->query("delete from #__repository where id=".$this->id);
-    var_dump($err);
     return $err;
-  }
-  public function truncate(){
-    return $this->db->query("delete from #__packages where repository=".$this->id);
   }
 
   public function download(){
@@ -148,7 +149,7 @@ class repository {
 	brief VARCHAR( 50 ) ,
 	PRIMARY KEY ( id ) ,
 	UNIQUE ( name )
-      ) ENGINE = INNODB ;
+      ) ENGINE = MyISAM ;
     ";
   }
 
