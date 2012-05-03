@@ -155,6 +155,7 @@ if($repo['info']['create']){
       echo "DISTRUZIONE effettuata.. salto al prossimo repository.$NL";
       if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
     }
+    $repoinprogress=0;
     echo "Creazione effettuata... ";
     echo "popolamento in corso...$NL";
     flush();
@@ -171,6 +172,7 @@ if($repo['info']['create']){
       echo "DISTRUZIONE effettuato.. salto al prossimo repository.$NL";
       if(isset($_SERVER['DIE'])or isset($GET['DIE'])){die();}else {continue;}
     }
+    $repoinprogress=0;
     echo "Repository creato$NL";
   }
 }}
