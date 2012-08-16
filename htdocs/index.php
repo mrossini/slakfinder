@@ -1,10 +1,9 @@
-<?php session_start(); 
+<?php session_start();
 echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>Package Finder</title>
-  </head>
   <style type="text/css">
   <!--
     a:link    {text-decoration: none; color: blue;}
@@ -19,9 +18,9 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   .results th { border-right:1px dotted; }
   .gb {border:none; border-bottom:1px dotted #000000; }
   .gb td { border-top:1px dotted #000000; padding:2px; }
-
   -->
   </style>
+  </head>
 <body>
 <!--<a href=old.php>Use oldstyle search page</a><br>-->
 <?php
@@ -213,10 +212,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	  $from=$maxresult*$pg;
 	  echo "<a href='index.php?start=$from&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&gt;&gt;</a>  ";
 	}
-
-
-
-
 //      echo tables(array('rank','package','version','arch','distro','file','path','repository','location','&nbsp'),1,"class='results' width='100%'");
       echo tables(array(
 	"<a href='index.php?start=$start&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=".(($order=='ranku')?'rankd':'ranku')."#results'>rank</a>",
@@ -263,11 +258,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 	  $from=$maxresult*$pg;
 	  echo "<a href='index.php?start=$from&maxresult=$maxresult&repo=$repo&name=$name&desc=$desc&file=$file&order=$order#results'>&gt;&gt;</a>  ";
 	}
-
-
-
-
-
       echo "</pre>";
       echo "<br /><br /><br />";
     }
@@ -304,22 +294,14 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     echo "> -message: <br>";
     echo "<textarea name=message cols=30 rows=3></textarea><br>";
     echo "<input type=submit value='go'><br></form></nobr>"; 
-
     echo "<br>";
-
-
     echo "</td>";
     echo "<td width='50%' valign=top style='border-left:1px dotted #000000'>";
-
     echo "<b>NEWS:</b><br><br>\n\n";
     include "news.php";
-
     echo "</td>";
     echo "</tr>";
     echo "</table>";
-
- 
-
   }
 ?>
 <p>To report a bug, mail to <a href='mailto:zerouno@slacky.it'>zerouno@slacky.it</a>. Thanks.</p>
