@@ -5,7 +5,6 @@
 
 </body></html>
 
-
 < ?php die() ?>
 
 -->
@@ -64,14 +63,14 @@ Just for feedback, suggests, bug report, repository report, greetings to the wor
   }
 
   echo "<br><br>";
-
   echo tables(array("","",""),1," class='gb' ");
   //echo tables(array("Date","Nick","Message"),1," class='gb' ");
+
   while($message=$gb->fetch()){
     echo tables(array("<sup>{$message['date']}</sup>","<font color='red'>".$message['nick']."</font>",$message['message']));
   }
-  echo tables();
 
+  echo tables();
   echo "</pre>";
 
 ?>

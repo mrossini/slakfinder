@@ -1,9 +1,13 @@
 <?php
-function quote_data(&$v,$k) { $v=addcslashes($v,"'\\"); }
+
+function quote_data(&$v, $k) { $v = addcslashes($v, "'\\"); }
+
 class mysql {
+
 	private $db;
 	public $started=false;
 	public $connected=false;
+
 	public function __construct() {
 		global $dbhost,$dbuser,$dbpass,$dbdata;
 		$this->db=mysql_connect($dbhost,$dbuser,$dbpass);
@@ -15,6 +19,7 @@ class mysql {
 	}
 
 	public $lastquery, $results, $errno, $error, $datas, $nrows;
+
 	public function query($sql){
 		global $dbpref;
 		$this->datas=null;
@@ -43,6 +48,7 @@ class mysql {
 		if(isset($_SERVER['SHOWQ'])or isset($_GET['debug']))var_dump($this);
 		return true;
 	}
+
 	public function search($fields,$from,$where="",$order="",$limit=""){
 	  global $dbdata;
 	  $time=0;
@@ -62,6 +68,7 @@ class mysql {
 	  if($time)$this->msec=$time;
 	  return $q;
 	}
+
 	public function dropcache(){
 	  global $dbdata;
 	  $ldb=new self();
@@ -72,9 +79,11 @@ class mysql {
 	public function fetchtable(){
 	  while($this->fetch());
 	}
+
 	public function seek($seek){
 	  return mysql_data_seek($this->results,$seek);
 	}
+
 	public function fetch(){
 	  if($tmp=mysql_fetch_assoc($this->results)){
 	    $this->datas[]=$tmp;
@@ -82,28 +91,32 @@ class mysql {
 	  }
 	  return false;
 	}
+
 	public function get(){
 	  $tmp=$this->fetch();
 	  if($tmp===false)return false;
 	  return $this->datas[$tmp];
 	}
+
 	public function update($table,$data,$cond){
-	  $sql="UPDATE $table ";
+	  $sql="UPDATE {$table} ";
 	  $sep="SET ";
 	  foreach($data as $key => $value){
-	    $sql.=$sep."$key = '$value' ";
+	    $sql.=$sep."{$key} = '{$value}' ";
 	    $sep=", ";
 	  }
 	  $sep="WHERE ";
 	  foreach($cond as $key => $value){
-	    $sql.=$sep."$key = '$value' ";
+	    $sql.=$sep."{$key} = '{$value}' ";
 	    $sep.="AND ";
 	  }
 	  return $this->query($sql);
 	}
+
 	private $insertdata=false;
 	private $insertstart=false;
-	public $maxdata=50000;
+	public $maxdata=100000;
+
 	public function insert($first=false,$second=false,$large=false){
 	  /*
 	   * se large=false, $first la tabella e $second sono i dati (in array
@@ -163,10 +176,8 @@ class mysql {
 	    return;
 	  }
 	}
+
 	public function close(){
 	  return mysql_close($this->db);
 	}
 }
-
-
-?>

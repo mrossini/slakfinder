@@ -1,6 +1,5 @@
 <?php
 
-
 class internet {
   public function __construct($url,$tmp=null){
     global $repodir;
@@ -13,6 +12,7 @@ class internet {
       if(!$this->mode)$this->tmpfile.=$this->ext;
     }
   }
+ 
   public function parse(){
     $tmp=preg_split('#^(([^:]*)://)?([^/]*)($|/((.*)/)?(((([^/]*)(\.[^\.]*))|([^/]*)))?)$#i', $this->url,0,PREG_SPLIT_DELIM_CAPTURE);
     $this->proto=($tmp[2])?($tmp[2]):'file';
@@ -28,10 +28,13 @@ class internet {
       default: $this->mode=''; break;
     }
   }
+
   var $head=null;
+
   public function gethead(){
     $this->getheadfopen();
   }
+
   public function getheadfopen(){
     $head=array();$code=200;
     echo '{gethead '.$this->url.'}';
@@ -61,6 +64,7 @@ class internet {
     $this->status=$code;
     return $this->head;
   }
+
   public function getheadcurl(){
     $head=array();$code=0;
     exec("curl -I {$this->url} 2>/dev/null",$head,$code);
@@ -76,12 +80,14 @@ class internet {
     $this->status=$code;
     return $this->head;
   }
+
   var $status=null;
+
   public function exists(){
     if (!$this->head) $this->gethead();
     return !$this->status;
   }
-  
+
   var $fd;
   var $down;
   public function close(){
@@ -161,9 +167,6 @@ class internet {
       if(isset($_SERVER["_"])){ echo "\r(download $url -> $dest.bz2($size bytes).\n"; }else{ echo "$dest.bz2($size bytes).\n"; }
       fclose($src);
       fclose($dst);
-
-
-
       $src=bzopen("$dest.bz2","r");
       $dst=fopen($dest,'w');
       $size=0;
@@ -198,11 +201,3 @@ class internet {
     return feof($this->fd);
   }
 }
-
-
-
-
-
-
-
-?>

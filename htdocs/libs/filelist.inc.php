@@ -1,6 +1,5 @@
 <?php
 
-
 class filelist {
 
   public $db;
@@ -8,6 +7,7 @@ class filelist {
   public function __construct(){
     $this->db=new mysql();
   }
+
   public function addall(&$allpackages,$repo){
     $i=0;
     $this->db->insert('filelist',array('package','repository','fullpath','filename'),true);
@@ -58,6 +58,7 @@ class filelist {
 
     return $i;
   }
+
   public function get(){
     if(($line=$this->db->get())==false)return false;
     return $line;
@@ -192,13 +193,4 @@ class filelist {
       ) ENGINE = MyISAM ;
     ";
   }
-
-
-
-
 }
-
-
-
-
-?>

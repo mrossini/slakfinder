@@ -1,8 +1,9 @@
 <?php
+
 class xml extends XMLWriter
 {
-  var $indstr='    ';
-  var $level=0;
+  var $indstr = '    ';
+  var $level = 0;
 
     public function __construct($prm_rootElementName, $prm_Attributes=null){
       $this->openMemory();
@@ -75,8 +76,4 @@ class xml extends XMLWriter
         header('Content-type: text/xml');
         echo $this->getDocument();
     }
-  
-
 }
-
-?>

@@ -3,7 +3,7 @@
 class package {
 
   public $db;
-  
+
   public function __construct($id=0){
     $this->db=new mysql();
     if($id)$this->select($id);
@@ -22,6 +22,7 @@ class package {
       comprsize INT NOT NULL ,
       uncomprsize INT NOT NULL ,
    */
+
   public function parse($pkg,$more=array()){
     $pkg=explode("\n",$pkg);
     $pkexp=explode(':',$pkg[0],2);
@@ -73,6 +74,7 @@ class package {
     $pack=array_merge($pack,$more);
     return $pack;
   }
+
   public function add($pkg,$more=array()){
     $pkg=array_merge($pkg,$more);
     if(!$this->db->insert("packages",$pkg))return false;
@@ -95,15 +97,13 @@ class package {
     return null;
   }
 
-
   public function download(){
     global $repodir;
     $path=$repodir.$this->path;
     if(!file_exists($path))if(!mkdir($path))return false;
   #  if(file_exists($path
-
-
   }
+
   public function select($id){
     if(!$this->db->query("select * from #__packages where id=$id")) return false;
     if(!$repo=$this->db->get())return false;
@@ -187,8 +187,4 @@ class package {
       ) ENGINE = INNODB ;
     ";
   }
-
 }
-
-
-?>

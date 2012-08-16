@@ -25,6 +25,7 @@ class history {
   public function __construct(){
     $this->db=new mysql();
   }
+ 
   public function search($data=array()){
     $sql="select * from #__history ";
     $where="where";
@@ -33,23 +34,5 @@ class history {
       $where="and";
     }
     $this->db->query($sql);
-
   }
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-?>

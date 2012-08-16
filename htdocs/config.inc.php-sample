@@ -1,10 +1,10 @@
 <?php
 
-$dbhost='127.0.0.1';
-//$dbhost=':/var/run/mysql/mysql.sock';
-$dbuser='slakuser';
-$dbpass='slakpass';
-$dbdata='slakdb';
-$dbpref='slak_';
-$repodir="/var/www/data";
-$enablefilelist=true;
+$dbhost = '127.0.0.1';
+//$dbhost = ':/var/run/mysql/mysql.sock';
+$dbuser = 'slakuser';
+$dbpass = 'slakpass';
+$dbdata = 'slakdb';
+$dbpref = 'spf_';
+$repodir = '/var/www/data';
+$enablefilelist = true;

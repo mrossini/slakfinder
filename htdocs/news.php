@@ -1,15 +1,12 @@
-<b>06/Jul/2012</b><br>
-Now you can see the <a href="logupdate.txt">log of last update</a>.
-<br><br>
 <b>24/Apr/2012</b><br>
-After a very long downtime, file searcher turned up.<br>
-Well, now I've a lot of space on my hosting, so it works!<br>
-I've re-enabled guestbook and <a href="stats.php">statistics functions</a>.<br>
+After a very long downtime, file searcher turned up.<br/>
+Well, now I've a lot of space on my hosting, so it works!<br/>
+I've re-enabled guestbook and <a href="stats.php">statistics functions</a>.<br/>
 Good search!!
-<br><br>
+<br/><br/>
 <!--<b>24/Jul/2011</b>-->
 <!--File searcher turned up. I'm not sure that it remaining up, but now is UP ;-)-->
-<b>26/Apr/2011</b><br>
+<b>26/Apr/2011</b><br/>
 You can found <a href="http://01.webuda.com/">here</a> a _VERY_VERY_OLD_ release of this file searcher (the first, I think).
 <!--but the file searching works ;-)
 <br>
