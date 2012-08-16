@@ -1,6 +1,5 @@
 <?php
 
-
 if (!isset($_SERVER["_"])){
 
 if(isset($_GET['PASS'])){
@@ -46,15 +45,12 @@ function shutdown() {
   echo "Chiusura applicazione";
   flush();
 }
+
 register_shutdown_function('shutdown');
 
 include 'inc/includes.inc.php';
 
-
-
-
 $db=new database();
-
 echo "svuotamento cache$NL";
 $db->db->dropcache();
 
@@ -177,10 +173,4 @@ if($repo['info']['create']){
   }
 }}
 
-
-
-
-echo "$NL";
-
-
-?>
+echo "{$NL}";

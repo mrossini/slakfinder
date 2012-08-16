@@ -1,18 +1,15 @@
 <?php
 
-
-
 $classes=array();
 $npackages=0;
-
 
 function redefrepo($reposelected=0){
   global $defrepo,$classes,$npackages;
   $defrepo=array();
   $classes=array();
-
   $repo=new repository();
   $nrepos=$repo->find();
+
   while ($repo->fetch()){
     $id=$repo->id;
     $defrepo[$id]=(array)$repo;
@@ -26,16 +23,13 @@ function redefrepo($reposelected=0){
     $npackages+=$repo->npkgs;
   }
 
-
   echo "<table border='0' width='100%'>";
   echo "<tr>";
   echo "<td>";
   echo "You are the ".$_SESSION['searcher_visitor']."st visitor<br />";
-
   echo "Searched ".$GLOBALS['db']->counter_get('searches')." packages from 24 Apr 2012<br /><br />";
   echo "<code>$nrepos repositories ($npackages packages)</code><br><br>\n";
   echo "</td>";
-
     $stats=new stats();
     $names=$stats->lastsearch(15);
   echo "<td>";
@@ -46,17 +40,11 @@ function redefrepo($reposelected=0){
       echo "<td><code>",$names[10]."<br />".$names[11]."<br />".$names[12]."<br />".$names[13]."<br />".$names[14]."</code></td></tr>";
     echo "</table>";
   echo "</td>";
-
-
   echo "<td>";
   echo "<table border=1 cellspacing=0 cellpadding=0>";
   echo "<tr><td><a href='stats.php'><img border=0 src='stats.php?gdaily&y=95&time=60&mid=0'></a></td></tr>";
   echo "</table>";
-
-
-
   echo "</tr></table>";
-
 }
 
 function writerepos($reposelected){
@@ -98,11 +86,10 @@ function writereposcompact($reposelected,$righttxt=""){
   redefrepo($reposelected);
   $cells=array();
   $tab=array();
-
   $versions=array();
-
   $show=false;
   $jsarrclass="'".implode("','",array_keys($classes))."'";
+ 
   foreach($classes as $class){
     $hide=true;
     $versions[$class['version']]="";
@@ -145,10 +132,6 @@ function writereposcompact($reposelected,$righttxt=""){
     $repo1.=tables($tmparr);
   }
   $repo1.=tables();
-
-
-
-
   $link="<a href='javascript:void(0)' onclick='javascript:showclass(\"0\");' id='showlink'>show all repositories</a>";
   $repo2="<div id='reposlist' ".((!$show)?"style='display:none'":""). ">";
   $repo2.=tables(array("arch","distro","Repository"),1," class='repository'  ");
@@ -178,5 +161,3 @@ function writereposcompact($reposelected,$righttxt=""){
   $out.="<table width=100%><tr><td colspan=2>$repo2</td></tr><tr><td>$repo1</td><td valign=top width=100%>$link<br>$righttxt</td></tr></table>";
   return $out;
 }
-
-?>

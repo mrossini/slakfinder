@@ -1,12 +1,10 @@
 <?php
 
-
 function _str_getcsv($input,$delimiter=",",$enclosure="'"){
   $out=array();
   foreach (explode($delimiter,trim($input,"\n")) as $field)$out[]=trim($field,$enclosure);
   return $out;
 }
-
 
 /*
  * 0 id notes macro version arch enabled update remove name 
@@ -14,6 +12,7 @@ function _str_getcsv($input,$delimiter=",",$enclosure="'"){
  */
 $defrepo=array();
 $idx=array();
+
 foreach(_str_getcsv(file_get_contents("repolist.csv"),"\n") as $row){
   if(!$idx){
     $csv=_str_getcsv($row,";","'");
@@ -59,8 +58,4 @@ foreach($defrepo as $id => $repo){
    'manifest' => false and '{$repo['manifest']}', 'packages' => '{$repo['packages']}',
    'brief' => '{$repo['brief']}', 'description' => '{$repo['description']}');
 ";
-
-
-
 }
-?>
