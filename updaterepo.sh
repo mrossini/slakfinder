@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 CWD=$(pwd)
+exec > $CWD/htdocs/logupdate.txt 2>&1
 echo "==============="
 date
 git pull

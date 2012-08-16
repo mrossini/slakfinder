@@ -1,3 +1,6 @@
+<b>06/Jul/2012</b><br>
+Now you can see the <a href="logupdate.txt">log of last update</a>.
+<br><br>
 <b>24/Apr/2012</b><br>
 After a very long downtime, file searcher turned up.<br>
 Well, now I've a lot of space on my hosting, so it works!<br>

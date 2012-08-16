@@ -103,7 +103,7 @@ class mysql {
 	}
 	private $insertdata=false;
 	private $insertstart=false;
-	public $maxdata=100000;
+	public $maxdata=50000;
 	public function insert($first=false,$second=false,$large=false){
 	  /*
 	   * se large=false, $first la tabella e $second sono i dati (in array
