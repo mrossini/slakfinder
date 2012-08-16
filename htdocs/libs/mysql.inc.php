@@ -115,7 +115,7 @@ class mysql {
 
 	private $insertdata=false;
 	private $insertstart=false;
-	public $maxdata=100000;
+	public $maxdata=50000;
 
 	public function insert($first=false,$second=false,$large=false){
 	  /*

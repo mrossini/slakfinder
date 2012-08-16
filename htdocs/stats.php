@@ -110,7 +110,7 @@ echo "    <td colspan=2>\n";
   $all=$stats->countall();
   $days=$stats->numdays();
   echo "      Searches from begin: $all | Today: $today | Top: ".($stats->maxbyday())." | Average: ".(round($all/$days)). " | $days days<br>\n";
-  echo "      <img src='stats.php?gdaily&y=200&mid=30&time=60'>\n";
+  echo "      <img src='stats.php?gdaily&y=200&mid=30&time=120'>\n";
 echo "    </td>\n";
 	echo "  </tr>\n";
 	echo "  <tr>\n";
