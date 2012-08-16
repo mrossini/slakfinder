@@ -4,12 +4,13 @@ class repository {
 
   public $db;
   public $pkgsfile=null;
-  
+
   public function __construct($repo=0){
     $this->id=0;
     $this->db=new mysql();
     if($repo)$this->select($repo);
   }
+
   public function add($repo){
     foreach($repo as $key => $value) $this->$key = $value;
     //if(!$this->pkgsfile) $this->pkgsfile=new internet(((((substr($this->packages,0,7))=="http://")or((substr($this->packages,0,6))=="ftp://"))?"":$this->url).$this->packages);
@@ -18,6 +19,7 @@ class repository {
     if(!$this->db->insert('repository',$repo))return false;
     return $repo['id'];
   }
+
   public function update(){	# DA SISTEMARE
     $this->pkgsfile=new internet(((((substr($this->packages,0,7))=="http://")or((substr($this->packages,0,6))=="ftp://"))?"":$this->url).$this->packages);
     $this->hash=$hashfile->download();
@@ -27,6 +29,7 @@ class repository {
     if(!$this->db->query("update #__repository set mtime='".$this->mtime."' where id=".$this->id))return false;
     return true;
   }
+
   public function redefine($repo,$nf=''){
     $this->db->query("select count(*) as npkgs from #__packages where repository='{$repo['id']}'");
     $this->db->fetch();
@@ -86,13 +89,13 @@ class repository {
     if(!$this->db->query("update #__repository set mtime='".$this->mtime."' where id=".$this->id))return false;
     return true;
   }
+
   public function needupdate(){
     if(!$this->pkgsfile)$this->pkgsfile=new internet(((((substr($this->packages,0,7))=="http://")or((substr($this->packages,0,6))=="ftp://"))?"":$this->url).$this->packages);
     if(!$this->pkgsfile->exists())return false;
     $mtime=$this->pkgsfile->head['Last-Modified'];
     return $mtime != $this->mtime;
   }
-
 
   public function drop(){
     $this->db->query("delete from #__filelist where repository=".$this->id);
@@ -106,18 +109,21 @@ class repository {
   //  $path=$repodir.$this->path;
   //  if(!file_exists($path))if(!mkdir($path))return false;
   }
+
   public function select($repo){
     $this->id=0;
     if(!$this->db->query("select * from #__repository where id='$repo' or name='$repo'")) return false;
     if(!$repo=$this->db->get())return false;
     foreach($repo as $key => $value) $this->$key = $value;
   }
+
   public function find($repo=null){
     $sql="select * from #__repository ";
     if($repo)$sql.="where id='$repo' or name='$repo'";
     $this->db->query("$sql order by name");
     return $this->db->nrows;
   }
+
   public function fetch(){
     $this->id=0;
     if(!$out=$this->db->get())return false;
@@ -127,7 +133,6 @@ class repository {
   public function exists(){
     return $this->id != 0;
   }
-
 
   static public function sql(){
     return "
@@ -152,9 +157,4 @@ class repository {
       ) ENGINE = MyISAM ;
     ";
   }
-
-
 }
-
-
-?>

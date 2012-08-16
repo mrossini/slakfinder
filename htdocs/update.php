@@ -1,16 +1,16 @@
 <?php
 
-if (!isset($_SERVER["_"])){
+if (!isset($_SERVER['_'])){
 
 if(isset($_GET['PASS'])){
   $PASS=$_GET['PASS'];
 }else{
-  echo "Password non inserita!!!";
+  echo 'Password non inserita!';
   die();
 }
 
 if($PASS != date('j')){
-  echo "Password errata!!!";
+  echo 'Password errata!';
   die();
 }
 }
@@ -29,14 +29,14 @@ if($PASS != date('j')){
 $NL="\n";
 if(isset($_SERVER['HTTP_HOST'])){
 //  $NL="<br>\n";
-  echo "<pre>";
+  echo '<pre>';
 }
 
 $repoinprogress=0;
 function shutdown() { 
   global $db,$repoinprogress;
   if($repoinprogress){
-    echo "DISTRUZIONE REPOSITORY ($repoinprogress) in corso...";
+    echo "DISTRUZIONE REPOSITORY ({$repoinprogress}) in corso...";
     $rep=new repository($repoinprogress);
     $repoinprogress=0;
     $rep->drop();

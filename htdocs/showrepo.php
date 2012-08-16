@@ -64,13 +64,7 @@
 	  ));
       }
       echo tables();
-
   }
   echo "</pre>";
   echo "To report a bug, send a mail to <a href='mailto:zerouno@slacky.it'>zerouno@slacky.it</a>. Thanks.";
   echo "</body></html>";
-
-
-
-
-?>

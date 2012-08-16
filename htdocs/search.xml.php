@@ -1,8 +1,6 @@
 <?php
 
-
-  include 'inc/includes.inc.php';
-
+include 'inc/includes.inc.php';
 
   function usage($param=''){
     header('content-type: text/plain');
@@ -39,8 +37,6 @@ you may use easely lynx, wget, curl or personal applications:
 wget -q -O - "http://slak.homelinux.org/search.xml.php?name=aaa_base"
 curl "http://slak.homelinux.org/search.xml.php?file=ntfs-3g&order=veru"
 lynx -source "http://slak.homelinux.org/search.xml.php?file=libraw1394.so"
-
-
 
 <?php
   }
@@ -82,9 +78,6 @@ lynx -source "http://slak.homelinux.org/search.xml.php?file=libraw1394.so"
       $xml->setElement('field',$desc,array('name' => 'file','descriprion' => 'file name'));
       $xml->endSection();
       $xml->endSection();
-
-
-
       $nres=$pkg->find($name,$desc,$repo,$ord);
       $xml->startSection('results',array('count' => $nres));
       $to=$start+$maxresult; if($to > $nres)$to=$nres;
@@ -171,4 +164,3 @@ lynx -source "http://slak.homelinux.org/search.xml.php?file=libraw1394.so"
       if($to < $nres){ $pg=round($nres/$maxresult-0.5,0); $from=$start+$maxresult; $from=$maxresult*$pg; }
     }
   }
-?>

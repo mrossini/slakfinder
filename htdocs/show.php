@@ -13,6 +13,7 @@
   </style>    
 </head><body>
 <?php
+
   include 'inc/includes.inc.php';
 
   $db=new database();
@@ -20,7 +21,6 @@
   echo "<a href='javascript:history.go(-1)'>Return to back</a> | <a href='index.php'>Go to home</a><br><br>";
   $pkg=null;
   foreach($_GET as $key => $value)$$key=$value;
-
 
   if(!$pkg){
     echo "<b>No package selected</b>\n";
@@ -69,15 +69,9 @@
 	while($line=$list->get()){
 	  echo $line['fullpath'].$line['filename']."\n";
 	}
-
       }
     }
   }
   echo "</pre>";
   echo "To report a bug, send a mail to <a href='mailto:zerouno@slacky.it'>zerouno@slacky.it</a>. Thanks.";
   echo "</body></html>";
-
-
-
-
-?>
