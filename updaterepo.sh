@@ -4,7 +4,7 @@ CWD=$(pwd)
 exec > $CWD/htdocs/logupdate.txt 2>&1
 echo "==============="
 date
-git pull
+#git pull
 cd $CWD/htdocs/
 DIE= REDEFINE= php update.php
 unset REDEFINE

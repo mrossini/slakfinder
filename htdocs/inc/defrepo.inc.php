@@ -8,6 +8,7 @@ function redefrepo($reposelected = 0) {
   $defrepo = array();
   $classes = array();
   $repo = new repository();
+  $nrepos = $repo->find();
 
   while ($repo->fetch()) {
     $id = $repo->id;
