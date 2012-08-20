@@ -1,5 +1,3 @@
 <?php
 
-	echo "public slackware tools";
-
-?>
+echo 'public slackware tools';

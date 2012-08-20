@@ -6,11 +6,5 @@ $dbuser='slakuser';
 $dbpass='slakpass';
 $dbdata='slakdb';
 $dbpref='slak_';
-
 $repodir="/var/www/data";
-
-
 $enablefilelist=true;
-
-
-?>
