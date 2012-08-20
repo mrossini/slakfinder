@@ -1,0 +1,36 @@
+slakfinder v0.1
+==========
+
+Contents/Menu
+----------
+* About
+* Requirements
+* Download
+* Issues/Feedbacks
+* Contribution
+
+About
+----------
+slakfinder is a PHP-based Slackware package finder.
+
+Requirements
+----------
+* PHP +5
+
+Download
+----------
+* https://github.com/mrossini/slakfinder/downloads
+* Zip: https://github.com/mrossini/slakfinder/zipball/master
+* tAr.GZ: https://github.com/mrossini/slakfinder/tarball/master
+* git http: git clone https://github.com/mrossini/slakfinder.git
+* git: git://github.com/mrossini/slakfinder.git
+
+Issues/Feedbacks
+----------
+* https://github.com/mrossini/slakfinder/issues
+* http://slak.homelinux.org/
+
+Contribution
+----------
+* Send feedbacks
+* Fix bugs or add features
