@@ -21,6 +21,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   </style>
 <body>
 <?php
+
   include 'inc/includes.inc.php';
 
   $maxresult=30;
