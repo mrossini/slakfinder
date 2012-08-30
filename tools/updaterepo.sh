@@ -1,10 +1,8 @@
 #!/bin/bash
 set -e
-CWD=$(pwd)
 echo "==============="
 date
-git pull
-cd $CWD/htdocs/
+#git pull
 DIE= REDEFINE= php update.php
 unset REDEFINE
 unset DROPDB

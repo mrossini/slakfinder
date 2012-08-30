@@ -322,5 +322,5 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 
   }
 ?>
-<p>To report a bug, mail to <a href='mailto:zerouno@slacky.it'>zerouno@slacky.it</a>. Thanks.</p>
+<p>To report a bug, mail to <a href='mailto:info@slakfinder.org'>info@slakfinder.org</a>. Thanks.</p>
 </body></html>

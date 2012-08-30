@@ -1,19 +1,13 @@
 <?php
 
+chdir('..');
+include 'inc/includes.inc.php';
 
-if (!isset($_SERVER["_"])){
+$PASS=isset($_GET['PASS'])?$_GET['PASS']:isset($_SERVER['PASS'])?$_SERVER['PASS']:null;
 
-if(isset($_GET['PASS'])){
-  $PASS=$_GET['PASS'];
-}else{
-  echo "Password non inserita!!!";
+if($updatepassword != $PASS){
+  echo "Bad password for update!";
   die();
-}
-
-if($PASS != date('j')){
-  echo "Password errata!!!";
-  die();
-}
 }
 /*
  * Parametri:
@@ -48,7 +42,6 @@ function shutdown() {
 }
 register_shutdown_function('shutdown');
 
-include 'inc/includes.inc.php';
 
 
 
