@@ -108,10 +108,11 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
  */
   $form.="  <tr id='rowslack'><td>Slackware:</td><td>\n";
   $form.="  <table class='repository'>\n";
-  $form.="  <tr><th>&nbsp</th><th>Any</th><th>curr</th><th>13.1</th><th>13.0</th><th>12.2</th><th>12.1</th><th>12.0</th><th>11.0</th></tr>\n";
+  $form.="  <tr><th>&nbsp</th><th>Any</th><th>curr</th><th>13.37</th><th>13.1</th><th>13.0</th><th>12.2</th><th>12.1</th><th>12.0</th><th>11.0</th></tr>\n";
   $form.="  <tr><td>Any</td>\n";
   $form.="       <td><input type=radio name=slackware value=any-any></td>\n";
   $form.="       <td><input type=radio name=slackware value=curr-any></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.37-any></td>\n";
   $form.="       <td><input type=radio name=slackware value=13.1-any></td>\n";
   $form.="       <td><input type=radio name=slackware value=13.0-any></td>\n";
   $form.="       <td><input type=radio name=slackware value=12.2-any></td>\n";
@@ -121,7 +122,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   $form.="  </tr><tr><td>i386</td>\n";
   $form.="       <td><input type=radio name=slackware value=any-i386></td>\n";
   $form.="       <td><input type=radio name=slackware value=curr-i386></td>\n";
-  $form.="       <td><input type=radio name=slackware value=13.1-i386 checked></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.37-i386 checked></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.1-i386></td>\n";
   $form.="       <td><input type=radio name=slackware value=13.0-i386></td>\n";
   $form.="       <td><input type=radio name=slackware value=12.2-i386></td>\n";
   $form.="       <td><input type=radio name=slackware value=12.1-i386></td>\n";
@@ -130,6 +132,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   $form.="  </tr><tr><td>x86_64</td>\n";
   $form.="       <td><input type=radio name=slackware value=any-x86_64></td>\n";
   $form.="       <td><input type=radio name=slackware value=curr-x86_64></td>\n";
+  $form.="       <td><input type=radio name=slackware value=13.37-x86_64></td>\n";
   $form.="       <td><input type=radio name=slackware value=13.1-x86_64></td>\n";
   $form.="       <td><input type=radio name=slackware value=13.0-x86_64></td>\n";
   $form.="       <td>&nbsp;</td>\n";

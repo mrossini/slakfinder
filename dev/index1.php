@@ -25,7 +25,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <body>
 Styles:<br>
 Production: <a href="../index.php">current</a> - <a href="../old.php">old style</a><br>
-Development: <a href="index.php">first</a> - <a href="index2.php">second</a> - <a href="index3.php">third</a> - <a href="index4.php">fourth</a><br>
+Development: <a href="index.php">first</a> - <a href="index2.php">second</a> - <a href="index3.php">third</a><br>
 
 <h1> Developing... </h1>
 <?php
@@ -90,7 +90,7 @@ Development: <a href="index.php">first</a> - <a href="index2.php">second</a> - <
     </tr>
     <tr id='rowslack'><td>Slackware:</td><td>
 	    <select id='seldistro' name='distro' onchange='showrepoopt(this.form.distro.value,this.form.arch.value)'>\n";
-  foreach(array('any version','current','13.1','13.0','12.2','12.1','12.0','11.0') as $key => $sver){
+  foreach(array('any version','current','13.37','13.1','13.0','12.2','12.1','12.0','11.0') as $key => $sver){
     if($key==0){
       $form.="            <option value=''>$sver</option>\n";
     }else{

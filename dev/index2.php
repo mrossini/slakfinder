@@ -109,6 +109,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   $form.="  <tr id='rowslack'><td>Slackware:</td><td>\n";
   $form.="<input type=radio name=slkver value=any>any - ";
   $form.="<input type=radio name=slkver value=current>current - ";
+  $form.="<input type=radio name=slkver value=13.37 checked>13.37 - ";
   $form.="<input type=radio name=slkver value=13.1 checked>13.1 - ";
   $form.="<input type=radio name=slkver value=13.0>13.0 - ";
   $form.="<input type=radio name=slkver value=12.2>12.2 - ";
