@@ -79,8 +79,8 @@ class package {
     $pkg['repover']=$repo->version;
     $pkg['repoarch']=$repo->arch;
     if($pkg['repover']=="mixed") {
-      if(preg_match('/^.*1[0-9]\.[0-9].*$/',$pkg['location'])){
-	$pkg['repover']=preg_replace('/^.*(1[0-9]\.[0-9]).*$/','$1',$pkg['location']);
+      if(preg_match('/^.*1[0-9]\.[0-9]+.*$/',$pkg['location'])){
+	$pkg['repover']=preg_replace('/^.*(1[0-9]\.[0-9]+).*$/','$1',$pkg['location']);
       }else{
 	$pkg['repover']="";
       }
@@ -98,6 +98,7 @@ class package {
 	}
       }
     }
+    if(preg_match('/i.86/',$pkg['repoarch']))$pkg['repoarch']="i386";
 
     if(!$this->db->insert("packages",$pkg))return false;
     foreach($pkg as $key => $value) $this->$key = $value;
@@ -202,9 +203,9 @@ class package {
 	  repover VARCHAR( 16 ) NULL ,
 	  repoarch VARCHAR( 16 ) NULL ,
 	PRIMARY KEY ( id ),
-        FOREIGN KEY ( repository ) REFERENCES #__repository ( id ) ON DELETE CASCADE
+        INDEX ( repository )
 
-      ) ENGINE = INNODB ;
+      ) ENGINE = MyISAM ;
     ";
   }
 

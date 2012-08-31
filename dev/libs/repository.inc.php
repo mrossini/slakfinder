@@ -176,6 +176,8 @@ class repository {
 
 
   public function drop(){
+    $this->db->query("delete from #__filelist where repository=".$this->id);
+    $this->db->query("delete from #__packages where repository=".$this->id);
     return $this->db->query("delete from #__repository where id=".$this->id);
   }
   public function truncate(){
@@ -226,7 +228,7 @@ class repository {
 	brief VARCHAR( 50 ) ,
 	PRIMARY KEY ( id ) ,
 	UNIQUE ( name )
-      ) ENGINE = INNODB ;
+      ) ENGINE = MyISAM ;
     ";
   }
 

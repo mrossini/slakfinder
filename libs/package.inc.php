@@ -184,7 +184,7 @@ class package {
 	  description TEXT NOT NULL ,
 	PRIMARY KEY ( id )
 	, INDEX ( repository ) 
-      ) ENGINE = INNODB ;
+      ) ENGINE = MyISAM ;
     ";
   }
 

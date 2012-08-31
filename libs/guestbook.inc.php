@@ -67,7 +67,7 @@ class guestbook {
 	ip VARCHAR(15),
 	message TEXT,
 	PRIMARY KEY ( id ) 
-      ) ENGINE = INNODB ;
+      ) ENGINE = MyISAM ;
     ";
   }
 

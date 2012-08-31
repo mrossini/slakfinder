@@ -185,9 +185,10 @@ class filelist {
 	  fullpath VARCHAR( 511 ) NOT NULL ,
 	  filename VARCHAR( 255 ) NOT NULL ,
 	PRIMARY KEY ( id ) ,
-	INDEX ( filename ),
-	FOREIGN KEY ( package ) REFERENCES #__packages ( id ) ON DELETE CASCADE
-      ) ENGINE = INNODB ;
+	INDEX ( filename )
+	, INDEX ( repository )
+	, INDEX ( package )
+      ) ENGINE = MyISAM ;
     ";
   }
 

@@ -16,7 +16,7 @@ class history {
 	results		INT(5),
 	cache		VARCHAR(50),
 	PRIMARY KEY ( id ) 
-      ) ENGINE = INNODB ;
+      ) ENGINE = MyISAM ;
     ";
   }
 
