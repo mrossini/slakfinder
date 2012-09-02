@@ -34,18 +34,18 @@ class database {
                     PRIMARY KEY ( field )
 		  ) ENGINE = MyISAM;
 		"))return false;
-                if(!$this->db->query("
-                  CREATE TABLE IF NOT EXISTS #__searches (
-                    dt    DATETIME,
-                    sname VARCHAR(50),
-                    sdesc VARCHAR(50),
-                    sfile VARCHAR(50),
-                    ip    VARCHAR(15),
-                    srepo INT,
-                    results INT,
-                    duration INT
-                  ) ENGINE = MyISAM;
-                "))return false;
+		if(!$this->db->query("
+		  CREATE TABLE IF NOT EXISTS #__searches (
+		    dt    DATETIME,
+		    sname VARCHAR(50),
+		    sdesc VARCHAR(50),
+		    sfile VARCHAR(50),
+		    ip    VARCHAR(15),
+		    srepo INT,
+		    results INT,
+		    duration INT
+		  ) ENGINE = MyISAM;
+	        "))return false;	
 		$this->db->query("INSERT INTO #__mixed (field,value) value ('count_visits','1');");
 		$this->db->query("INSERT INTO #__mixed (field,value) value ('count_searches','1');");
 		return true;
@@ -59,10 +59,10 @@ class database {
 	public function counter_inc($counter){
 	  $this->db->query("update #__mixed set value = (value +1)  where field='count_$counter';");
 	}
-        public function addsearch($ip,$name,$desc,$file,$repo,$date,$results,$duration){
-          $this->db->insert("searches",array("ip" => $ip, "sname" => $name, "sdesc" => $desc, "sfile" => $file, "srepo" => $repo,
-                                             "dt" => date("Y-m-d H:i:s",$date), "results" => $results, "duration" => $duration*1000));
-        }
+	public function addsearch($ip,$name,$desc,$file,$repo,$date,$results,$duration){
+	  $this->db->insert("searches",array("ip" => $ip, "sname" => $name, "sdesc" => $desc, "sfile" => $file, "srepo" => $repo,
+					     "dt" => date("Y-m-d H:i:s",$date), "results" => $results, "duration" => $duration*1000));
+	}
 }
 
 
