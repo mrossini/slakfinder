@@ -23,7 +23,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   -->
   </style>
 <body>
-<h1> Developing... </h1>
 <?php
   include 'inc/includes.inc.php';
 
@@ -60,33 +59,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
   <input type='hidden' name='maxresult' value='$maxresult'>
   ";
 
-
-
-
-
-  $form="
-    <table>
-    <tr><td>Search:</td> <td><input size=30 name='search' value='$search' /> <input type='submit' value='go' /></td></tr> 
-    <tr><td>In</td><td>
-           <input type='radio' name='in' value='name' checked>pkg name - 
-           <input type='radio' name='in' value='desc'>description -
-           <input type='radio' name='in' value='file'>filelist
-    </td></tr> 
-    <tr>
-        <td>Version:</td>
-        <td>
-            <select name='op'>
-              <option value=1 >&gt;=</option>
-              <option value=2 selected>==</option>
-              <option value=3 >&lt;=</option>
-            </select>
-            <input name='ver' value='$ver' size=23 />
-        </td>
-    </tr></table>\n";
-
-
-
-  //$hrepos.=writereposnew($repo,$form); 
   $frm=new form();
 
   $hrepos.=$frm->show();
@@ -100,8 +72,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 
   echo $hrepos;
   if ($search){
-    echo search();
+    echo "Search Engine is in Re-Developing status";
+    //echo search();
   }
 ?>
-<p>To report a bug, mail to <a href='mailto:zerouno@slacky.it'>zerouno@slacky.it</a>. Thanks.</p>
 </body></html>

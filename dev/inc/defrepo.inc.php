@@ -94,62 +94,6 @@ function writerepos($reposelected=""){
   return $out;
 }
 
-/*
-function writereposradio($reposelected=""){
-  global $defrepo;
-  $combo="";
-  $combo.="<input type='radio' name='rtype' value='any-any'>any-any";
-  $combo.="<input type='radio' name='rtype' value='any-x86_64'>any-x86_64";
-  $combo.="<input type='radio' name='rtype' value='any-i386'>any-i386";
-  $combo.="<input type='radio' name='rtype' value='13.1-any'>any-any";
-  $combo.="<input type='radio' name='rtype' value='13.1-x86_64'>any-x86_64";
-  $combo.="<input type='radio' name='rtype' value='13.1-i386'>any-i386";
-  $combo.="<input type='radio' name='rtype' value='13.0-any'>any-any";
-  $combo.="<input type='radio' name='rtype' value='13.0-x86_64'>any-x86_64";
-  $combo.="<input type='radio' name='rtype' value='13.0-i386'>any-i386";
-  $combo.="<input type='radio' name='rtype' value='12.2-i386'>any-i386";
-  return $combo;
-}
- */
-
-
-function writereposselect($reposelected=""){
-  global $defrepo;
-  $javascript="";
-  $options="  <option id=repo0 value=''>any repository</option>\n";
-  $jsreposarr="";
-  foreach($defrepo as $id => $repo){
-    $options.="  <option id=repo$id value=$id >({$repo['version']} - {$repo['arch']}) {$repo['brief']}</option>\n";
-    $jsreposarr.="    ver[$id]='".$repo['version']."';  arch[$id]='".$repo['arch']."';\n";
-  }
-  
-?>
-  <script>
-  function showrepoopt(v,a){
-    var ver=new Array();
-    var arch=new Array();
-<?php echo $jsreposarr; ?>
-    var show;
-    for ( var repo in ver ){
-      show=1;
-      if(v != ver[repo] && ((v != '') && (ver[repo] != 'mixed'))){ show=0; }
-      if(a != arch[repo] && ((a != '') && (arch[repo] != 'mixed'))) { show=0; }
-
-      document.getElementById("repo"+repo).selected="";
-      if(show==0){
-	document.getElementById("repo"+repo).style.display="none";
-      }else{
-	document.getElementById("repo"+repo).style.display="";
-      }
-    }
-    document.getElementById("repo0").selected="selected";
-  }
-  </script>
-<?php
-  $out="<select name='repo'>\n$options\n</select>\n$javascript\n";
-  return $out;
-
-}
 
 function writereposcompact($reposelected,$righttxt=""){
   global $classes;
