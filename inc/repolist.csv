@@ -1,62 +1,66 @@
 0;id;notes;macro;version;arch;enabled;update;remove;name;url;manifest;deps;rank;class;packages;brief;description
-1;1;ok;OFFICIAL;current;x86_64;1;1;0;slackware64-current;http://ftp.osuosl.org/pub/slackware/slackware64-current/;slackware64/MANIFEST.bz2;0;30;64cur;PACKAGES.TXT;Official;Slackware 64bit Official Distribution - Current Version
-2;2;ok;OFFICIAL;current;i386;1;1;0;slackware-current;http://ftp.osuosl.org/pub/slackware/slackware-current/;slackware/MANIFEST.bz2;0;30;32cur;PACKAGES.TXT;Official;Slackware 32bit Official Distribution - Current Version
-3;3;ok;OFFICIAL;12.2;i386;1;0;0;slackware-12.2;http://ftp.osuosl.org/pub/slackware/slackware-12.2/;;1;30;32122;PACKAGES.TXT;Official;Slackware 32bit Official Distribution - 12.2 Version
-4;4;ok;OFFICIAL;13.0;x86_64;1;0;0;slackware64-13.0;http://ftp.osuosl.org/pub/slackware/slackware64-13.0/;;0;30;64130;PACKAGES.TXT;Official;Slackware 64bit Official Distribution - 13.0 Version
-5;5;ok;OFFICIAL;13.0;i386;1;0;0;slackware-13.0;http://ftp.osuosl.org/pub/slackware/slackware-13.0/;;1;30;32130;PACKAGES.TXT;Official;Slackware 32bit Official Distribution - 13.0 Version
-6;6;ok;OFFICIAL;13.0;i386;1;1;0;slackware-13.0-patches;http://ftp.osuosl.org/pub/slackware/slackware-13.0/;;0;30;32130;patches/PACKAGES.TXT;Patches;Slackware 32bit Official Patches for 13.0 Version
-7;7;ok;OFFICIAL;13.0;x86_64;1;1;0;slackware64-13.0-patches;http://ftp.osuosl.org/pub/slackware/slackware64-13.0/;;0;30;64130;patches/PACKAGES.TXT;Patches;Slackware 64bit Official Patches for 13.0 Version
-8;61;ok;OFFICIAL;13.0;x86_64;1;0;0;slackware64-13.0-extra;http://ftp.osuosl.org/pub/slackware/slackware64-13.0/;;0;30;64130;extra/PACKAGES.TXT;Extra;Slackware 64bit Official Extra Packages for 13.0 Version
-9;62;ok;OFFICIAL;current;x86_64;1;1;0;slackware64-current-extra;http://ftp.osuosl.org/pub/slackware/slackware64-current/;extra/MANIFEST.bz2;0;30;64cur;extra/PACKAGES.TXT;Extra;Slackware 64bit Official Extra Packages for Current Version
-10;63;ok;OFFICIAL;13.0;i386;1;0;0;slackware-13.0-extra;http://ftp.osuosl.org/pub/slackware/slackware-13.0/;;0;30;32130;extra/PACKAGES.TXT;Extra;Slackware 32bit Official Extra Packages for 13.0 Version
-11;64;ok;OFFICIAL;current;i386;1;1;0;slackware-current-extra;http://ftp.osuosl.org/pub/slackware/slackware-current/;extra/MANIFEST.bz2;0;30;32cur;extra/PACKAGES.TXT;Extra;Slackware 32bit Official Extra Packages for Current Version
-12;65;ok;OFFICIAL;13.37;i386;1;0;0;Slackware-13.37;http://ftp.osuosl.org/pub/slackware/slackware-13.37/;slackware/MANIFEST.bz2;0;30;32137;PACKAGES.TXT;Official;Slackware 32bit Official Distribution - 13.37 Version
-13;66;ok;OFFICIAL;13.37;i386;1;1;0;Slackware-13.37-patches;http://ftp.osuosl.org/pub/slackware/slackware-13.37/;patches/MANIFEST.bz2;0;30;32137;patches/PACKAGES.TXT;Patches;Slackware 32bit Official Patches for 13.37 Version
-14;67;ok;OFFICIAL;13.37;i386;1;0;0;Slackware-13.37-extra;http://ftp.osuosl.org/pub/slackware/slackware-13.37/;extra/MANIFEST.bz2;0;30;32137;extra/PACKAGES.TXT;Extra;Slackware 32bit Official Extra Packages for 13.37 Version
-15;68;ok;OFFICIAL;13.37;x86_64;1;0;0;Slackware64-13.37;http://ftp.osuosl.org/pub/slackware/slackware64-13.37/;slackware64/MANIFEST.bz2;0;30;64137;PACKAGES.TXT;Official;Slackware 64bit Official Distribution - 13.37 Version
-16;69;ok;OFFICIAL;13.37;x86_64;1;1;0;Slackware64-13.37-patches;http://ftp.osuosl.org/pub/slackware/slackware64-13.37/;patches/MANIFEST.bz2;0;30;64137;patches/PACKAGES.TXT;Patches;Slackware 64bit Official Patches for 13.37 Version
-17;70;ok;OFFICIAL;13.37;x86_64;1;0;0;Slackware64-13.37-extra;http://ftp.osuosl.org/pub/slackware/slackware64-13.37/;extra/MANIFEST.bz2;0;30;64137;extra/PACKAGES.TXT;Extra;Slackware 64bit Official Extra Packages for 13.37 Version
-18;71;ok;OFFICIAL;13.1;x86_64;1;0;0;slackware64-13.1;http://ftp.osuosl.org/pub/slackware/slackware64-13.1/;;0;30;64131;PACKAGES.TXT;Official;Slackware 64bit Official Distribution - 13.1 Version
-19;72;ok;OFFICIAL;13.1;i386;1;0;0;slackware-13.1;http://ftp.osuosl.org/pub/slackware/slackware-13.1/;;1;30;32131;PACKAGES.TXT;Official;Slackware 32bit Official Distribution - 13.1 Version
-20;73;ok;OFFICIAL;13.1;i386;1;1;0;slackware-13.1-patches;http://ftp.osuosl.org/pub/slackware/slackware-13.1/;;0;30;32131;patches/PACKAGES.TXT;Patches;Slackware 32bit Official Patches for 13.1 Version
-21;74;ok;OFFICIAL;13.1;x86_64;1;1;0;slackware64-13.1-patches;http://ftp.osuosl.org/pub/slackware/slackware64-13.1/;;0;30;64131;patches/PACKAGES.TXT;Patches;Slackware 64bit Official Patches for 13.1 Version
-22;75;ok;OFFICIAL;13.1;x86_64;1;0;0;slackware64-13.1-extra;http://ftp.osuosl.org/pub/slackware/slackware64-13.1/;;0;30;64131;extra/PACKAGES.TXT;Extra;Slackware 64bit Official Extra Packages for 13.1 Version
-23;76;ok;OFFICIAL;13.1;i386;1;0;0;slackware-13.1-extra;http://ftp.osuosl.org/pub/slackware/slackware-13.1/;;0;30;32131;extra/PACKAGES.TXT;Extra;Slackware 32bit Official Extra Packages for 13.1 Version
-24;20;wait;OFFICIAL;14.0;i386;0;0;0;Slackware-14.0-extra;http://ftp.osuosl.org/pub/slackware/slackware-14.0/;extra/MANIFEST.bz2;0;30;32140;extra/PACKAGES.TXT;Extra;Slackware 32bit Official Extra Packages for 14.0 Version
-25;94;wait;OFFICIAL;14.0;x86_64;0;0;0;Slackware64-14.0-extra;http://ftp.osuosl.org/pub/slackware/slackware64-14.0/;extra/MANIFEST.bz2;0;30;64140;extra/PACKAGES.TXT;Extra;Slackware 64bit Official Extra Packages for 14.0 Version
-26;99;wait;OFFICIAL;14.0;i386;0;0;0;Slackware-14.0;http://ftp.osuosl.org/pub/slackware/slackware-14.0/;slackware/MANIFEST.bz2;0;30;32140;PACKAGES.TXT;Official;Slackware 32bit Official Distribution - 14.0 Version
-27;100;wait;OFFICIAL;14.0;x86_64;0;0;0;Slackware64-14.0;http://ftp.osuosl.org/pub/slackware/slackware64-14.0/;slackware64/MANIFEST.bz2;0;30;64140;PACKAGES.TXT;Official;Slackware 64bit Official Distribution - 14.0 Version
-28;101;wait;OFFICIAL;14.0;i386;0;1;0;Slackware-14.0-patches;http://ftp.osuosl.org/pub/slackware/slackware-14.0/;patches/MANIFEST.bz2;0;30;32140;patches/PACKAGES.TXT;Patches;Slackware 32bit Official Patches for 14.0 Version
-29;102;wait;OFFICIAL;14.0;x86_64;0;1;0;Slackware64-14.0-patches;http://ftp.osuosl.org/pub/slackware/slackware64-14.0/;patches/MANIFEST.bz2;0;30;64140;patches/PACKAGES.TXT;Patches;Slackware 64bit Official Patches for 14.0 Version
-51;9;ok;SLACKY;13.1;i386;1;0;0;Slacky-13.1;http://repository.slacky.eu/slackware-13.1/;;1;99;32131;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware 13.1
-52;10;ok;SLACKY;13.1;x86_64;1;0;0;slacky64-13.1;http://repository.slacky.eu/slackware64-13.1/;;1;99;64131;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware64 13.1
-53;11;ok;SLACKY;13.0;i386;1;0;0;slacky-13.0;http://repository.slacky.eu/slackware-13.0/;;1;99;32130;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware 13.0
-54;12;ok;SLACKY;12.2;i386;1;0;0;slacky-12.2;http://repository.slacky.eu/slackware-12.2/;;1;99;32122;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware 12.2
-55;13;obsolete;SLACKY;12.2;i386;0;0;1;gnome-slacky-12.2;http://repository.slacky.eu/gnome-slacky-12.2/;;1;99;32122;PACKAGES.TXT.gz;Gnome Slacky;Slacky.eu Community s Repository of a Gnome 2.28.0 for Slackware 12.2
-56;14;ok;SLACKY;13.37;i386;1;1;0;Slacky-13.37;http://repository.slacky.eu/slackware-13.37/;MANIFEST.bz2;1;99;32137;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware 13.37
-57;15;ok;SLACKY;13.37;x86_64;1;1;0;Slacky64-13.37;http://repository.slacky.eu/slackware64-13.37/;MANIFEST.bz2;1;99;64137;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware64 13.37
-58;105;wait;SLACKY;14.0;i386;0;1;0;Slacky-14.0;http://repository.slacky.eu/slackware-14.0/;MANIFEST.bz2;1;99;32140;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware 14.0
-59;106;wait;SLACKY;14.0;x86_64;0;1;0;Slacky64-14.0;http://repository.slacky.eu/slackware64-14.0/;MANIFEST.bz2;1;99;64140;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware64 14.0
-73;21;ok;SALIX;13.0;i386;1;1;0;salix-13.0;http://download.salixos.org/i486/13.0/;;1;99;32130;PACKAGES.TXT.gz;Salix;Salix 32bit Distribution perfectly compatible with Slackware 13.0
-74;22;ok;SALIX;current;i386;1;1;0;salix-current;http://download.salixos.org/i486/current/;;1;99;32cur;PACKAGES.TXT.gz;Salix;Salix 32bit Distribution perfectly compatible with Slackware Current
-75;23;ok;SALIX;13.0;x86_64;1;1;0;salix64-13.0;http://download.salixos.org/x86_64/13.0/;;1;99;64130;PACKAGES.TXT.gz;Salix64;Salix 64bit Distribution perfectly compatible with Slackware64 13.0
-76;24;ok;SALIX;current;x86_64;1;1;0;salix64-current;http://download.salixos.org/x86_64/current/;;1;99;64cur;PACKAGES.TXT.gz;Salix64;Salix 64bit Distribution perfectly compatible with Slackware64 Current
+1;2;ok;OFFICIAL;current;i386;1;1;0;slackware-current;http://ftp.osuosl.org/pub/slackware/slackware-current/;slackware/MANIFEST.bz2;0;30;32cur;PACKAGES.TXT;Official;Slackware 32bit Official Distribution - Current Version
+2;1;ok;OFFICIAL;current;x86_64;1;1;0;slackware64-current;http://ftp.osuosl.org/pub/slackware/slackware64-current/;slackware64/MANIFEST.bz2;0;30;64cur;PACKAGES.TXT;Official;Slackware 64bit Official Distribution - Current Version
+3;62;ok;OFFICIAL;current;x86_64;1;1;0;slackware64-current-extra;http://ftp.osuosl.org/pub/slackware/slackware64-current/;extra/MANIFEST.bz2;0;30;64cur;extra/PACKAGES.TXT;Extra;Slackware 64bit Official Extra Packages for Current Version
+4;64;ok;OFFICIAL;current;i386;1;1;0;slackware-current-extra;http://ftp.osuosl.org/pub/slackware/slackware-current/;extra/MANIFEST.bz2;0;30;32cur;extra/PACKAGES.TXT;Extra;Slackware 32bit Official Extra Packages for Current Version
+5;3;ok;OFFICIAL;12.2;i386;1;0;0;slackware-12.2;http://ftp.osuosl.org/pub/slackware/slackware-12.2/;;1;30;32122;PACKAGES.TXT;Official;Slackware 32bit Official Distribution - 12.2 Version
+6;5;ok;OFFICIAL;13.0;i386;1;0;0;slackware-13.0;http://ftp.osuosl.org/pub/slackware/slackware-13.0/;;1;30;32130;PACKAGES.TXT;Official;Slackware 32bit Official Distribution - 13.0 Version
+7;6;ok;OFFICIAL;13.0;i386;1;1;0;slackware-13.0-patches;http://ftp.osuosl.org/pub/slackware/slackware-13.0/;;0;30;32130;patches/PACKAGES.TXT;Patches;Slackware 32bit Official Patches for 13.0 Version
+8;63;ok;OFFICIAL;13.0;i386;1;0;0;slackware-13.0-extra;http://ftp.osuosl.org/pub/slackware/slackware-13.0/;;0;30;32130;extra/PACKAGES.TXT;Extra;Slackware 32bit Official Extra Packages for 13.0 Version
+9;4;ok;OFFICIAL;13.0;x86_64;1;0;0;slackware64-13.0;http://ftp.osuosl.org/pub/slackware/slackware64-13.0/;;0;30;64130;PACKAGES.TXT;Official;Slackware 64bit Official Distribution - 13.0 Version
+10;7;ok;OFFICIAL;13.0;x86_64;1;1;0;slackware64-13.0-patches;http://ftp.osuosl.org/pub/slackware/slackware64-13.0/;;0;30;64130;patches/PACKAGES.TXT;Patches;Slackware 64bit Official Patches for 13.0 Version
+11;61;ok;OFFICIAL;13.0;x86_64;1;0;0;slackware64-13.0-extra;http://ftp.osuosl.org/pub/slackware/slackware64-13.0/;;0;30;64130;extra/PACKAGES.TXT;Extra;Slackware 64bit Official Extra Packages for 13.0 Version
+12;72;ok;OFFICIAL;13.1;i386;1;0;0;slackware-13.1;http://ftp.osuosl.org/pub/slackware/slackware-13.1/;;1;30;32131;PACKAGES.TXT;Official;Slackware 32bit Official Distribution - 13.1 Version
+13;73;ok;OFFICIAL;13.1;i386;1;1;0;slackware-13.1-patches;http://ftp.osuosl.org/pub/slackware/slackware-13.1/;;0;30;32131;patches/PACKAGES.TXT;Patches;Slackware 32bit Official Patches for 13.1 Version
+14;76;ok;OFFICIAL;13.1;i386;1;0;0;slackware-13.1-extra;http://ftp.osuosl.org/pub/slackware/slackware-13.1/;;0;30;32131;extra/PACKAGES.TXT;Extra;Slackware 32bit Official Extra Packages for 13.1 Version
+15;71;ok;OFFICIAL;13.1;x86_64;1;0;0;slackware64-13.1;http://ftp.osuosl.org/pub/slackware/slackware64-13.1/;;0;30;64131;PACKAGES.TXT;Official;Slackware 64bit Official Distribution - 13.1 Version
+16;74;ok;OFFICIAL;13.1;x86_64;1;1;0;slackware64-13.1-patches;http://ftp.osuosl.org/pub/slackware/slackware64-13.1/;;0;30;64131;patches/PACKAGES.TXT;Patches;Slackware 64bit Official Patches for 13.1 Version
+17;75;ok;OFFICIAL;13.1;x86_64;1;0;0;slackware64-13.1-extra;http://ftp.osuosl.org/pub/slackware/slackware64-13.1/;;0;30;64131;extra/PACKAGES.TXT;Extra;Slackware 64bit Official Extra Packages for 13.1 Version
+18;65;ok;OFFICIAL;13.37;i386;1;0;0;Slackware-13.37;http://ftp.osuosl.org/pub/slackware/slackware-13.37/;slackware/MANIFEST.bz2;0;30;32137;PACKAGES.TXT;Official;Slackware 32bit Official Distribution - 13.37 Version
+19;66;ok;OFFICIAL;13.37;i386;1;1;0;Slackware-13.37-patches;http://ftp.osuosl.org/pub/slackware/slackware-13.37/;patches/MANIFEST.bz2;0;30;32137;patches/PACKAGES.TXT;Patches;Slackware 32bit Official Patches for 13.37 Version
+20;67;ok;OFFICIAL;13.37;i386;1;0;0;Slackware-13.37-extra;http://ftp.osuosl.org/pub/slackware/slackware-13.37/;extra/MANIFEST.bz2;0;30;32137;extra/PACKAGES.TXT;Extra;Slackware 32bit Official Extra Packages for 13.37 Version
+21;68;ok;OFFICIAL;13.37;x86_64;1;0;0;Slackware64-13.37;http://ftp.osuosl.org/pub/slackware/slackware64-13.37/;slackware64/MANIFEST.bz2;0;30;64137;PACKAGES.TXT;Official;Slackware 64bit Official Distribution - 13.37 Version
+22;69;ok;OFFICIAL;13.37;x86_64;1;1;0;Slackware64-13.37-patches;http://ftp.osuosl.org/pub/slackware/slackware64-13.37/;patches/MANIFEST.bz2;0;30;64137;patches/PACKAGES.TXT;Patches;Slackware 64bit Official Patches for 13.37 Version
+23;70;ok;OFFICIAL;13.37;x86_64;1;0;0;Slackware64-13.37-extra;http://ftp.osuosl.org/pub/slackware/slackware64-13.37/;extra/MANIFEST.bz2;0;30;64137;extra/PACKAGES.TXT;Extra;Slackware 64bit Official Extra Packages for 13.37 Version
+24;20;ok;OFFICIAL;14.0;i386;1;0;0;Slackware-14.0-extra;http://ftp.osuosl.org/pub/slackware/slackware-14.0/;extra/MANIFEST.bz2;0;30;32140;extra/PACKAGES.TXT;Extra;Slackware 32bit Official Extra Packages for 14.0 Version
+25;99;ok;OFFICIAL;14.0;i386;1;0;0;Slackware-14.0;http://ftp.osuosl.org/pub/slackware/slackware-14.0/;slackware/MANIFEST.bz2;0;30;32140;PACKAGES.TXT;Official;Slackware 32bit Official Distribution - 14.0 Version
+26;101;ok;OFFICIAL;14.0;i386;1;1;0;Slackware-14.0-patches;http://ftp.osuosl.org/pub/slackware/slackware-14.0/;patches/MANIFEST.bz2;0;30;32140;patches/PACKAGES.TXT;Patches;Slackware 32bit Official Patches for 14.0 Version
+27;94;ok;OFFICIAL;14.0;x86_64;1;0;0;Slackware64-14.0-extra;http://ftp.osuosl.org/pub/slackware/slackware64-14.0/;extra/MANIFEST.bz2;0;30;64140;extra/PACKAGES.TXT;Extra;Slackware 64bit Official Extra Packages for 14.0 Version
+28;100;ok;OFFICIAL;14.0;x86_64;1;0;0;Slackware64-14.0;http://ftp.osuosl.org/pub/slackware/slackware64-14.0/;slackware64/MANIFEST.bz2;0;30;64140;PACKAGES.TXT;Official;Slackware 64bit Official Distribution - 14.0 Version
+29;102;ok;OFFICIAL;14.0;x86_64;1;1;0;Slackware64-14.0-patches;http://ftp.osuosl.org/pub/slackware/slackware64-14.0/;patches/MANIFEST.bz2;0;30;64140;patches/PACKAGES.TXT;Patches;Slackware 64bit Official Patches for 14.0 Version
+50;13;obsolete;SLACKY;12.2;i386;0;0;1;gnome-slacky-12.2;http://repository.slacky.eu/gnome-slacky-12.2/;;1;99;32122;PACKAGES.TXT.gz;Gnome Slacky;Slacky.eu Community s Repository of a Gnome 2.28.0 for Slackware 12.2
+51;12;ok;SLACKY;12.2;i386;1;0;0;slacky-12.2;http://repository.slacky.eu/slackware-12.2/;;1;99;32122;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware 12.2
+52;11;ok;SLACKY;13.0;i386;1;0;0;slacky-13.0;http://repository.slacky.eu/slackware-13.0/;;1;99;32130;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware 13.0
+53;9;ok;SLACKY;13.1;i386;1;0;0;Slacky-13.1;http://repository.slacky.eu/slackware-13.1/;;1;99;32131;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware 13.1
+54;10;ok;SLACKY;13.1;x86_64;1;0;0;slacky64-13.1;http://repository.slacky.eu/slackware64-13.1/;;1;99;64131;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware64 13.1
+55;14;ok;SLACKY;13.37;i386;1;0;0;Slacky-13.37;http://repository.slacky.eu/slackware-13.37/;MANIFEST.bz2;1;99;32137;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware 13.37
+56;15;ok;SLACKY;13.37;x86_64;1;0;0;Slacky64-13.37;http://repository.slacky.eu/slackware64-13.37/;MANIFEST.bz2;1;99;64137;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware64 13.37
+57;105;wait;SLACKY;14.0;i386;1;1;0;Slacky-14.0;http://repository.slacky.eu/slackware-14.0/;MANIFEST.bz2;1;99;32140;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware 14.0
+58;106;wait;SLACKY;14.0;x86_64;1;1;0;Slacky64-14.0;http://repository.slacky.eu/slackware64-14.0/;MANIFEST.bz2;1;99;64140;PACKAGES.TXT.gz;Slacky;Slacky.eu Community s Repository for Slackware64 14.0
+70;22;ok;SALIX;current;i386;1;1;0;salix-current;http://download.salixos.org/i486/current/;;1;99;32cur;PACKAGES.TXT.gz;Salix;Salix 32bit Distribution perfectly compatible with Slackware Current
+71;24;ok;SALIX;current;x86_64;1;1;0;salix64-current;http://download.salixos.org/x86_64/current/;;1;99;64cur;PACKAGES.TXT.gz;Salix64;Salix 64bit Distribution perfectly compatible with Slackware64 Current
+72;21;ok;SALIX;13.0;i386;1;1;0;salix-13.0;http://download.salixos.org/i486/13.0/;;1;99;32130;PACKAGES.TXT.gz;Salix;Salix 32bit Distribution perfectly compatible with Slackware 13.0
+73;23;ok;SALIX;13.0;x86_64;1;1;0;salix64-13.0;http://download.salixos.org/x86_64/13.0/;;1;99;64130;PACKAGES.TXT.gz;Salix64;Salix 64bit Distribution perfectly compatible with Slackware64 13.0
 77;29;ok;SALIX;13.1;i386;1;1;0;salix-13.1;http://download.salixos.org/i486/13.1/;;1;99;32131;PACKAGES.TXT.gz;Salix;Salix 32bit Distribution perfectly compatible with Slackware 13.1
 78;30;ok;SALIX;13.1;x86_64;1;1;0;salix64-13.1;http://download.salixos.org/x86_64/13.1/;;1;99;64131;PACKAGES.TXT.gz;Salix64;Salix 64bit Distribution perfectly compatible with Slackware64 13.1
 79;90;ok;SALIX;13.37;i386;1;1;0;salix-13.37;http://download.salixos.org/i486/13.37/;;1;99;32137;PACKAGES.TXT.gz;Salix;Salix 32bit Distribution perfectly compatible with Slackware 13.37
 80;91;ok;SALIX;13.37;x86_64;1;1;0;Salix64-13.37;http://download.salixos.org/x86_64/13.37/;;1;99;64137;PACKAGES.TXT.gz;Salix64;Salix 64bit Distribution perfectly compatible with Slackware64 13.37
-81;103;wait;SALIX;14.0;i386;0;1;0;salix-14.0;http://download.salixos.org/i486/14.0/;;1;99;32140;PACKAGES.TXT.gz;Salix;Salix 32bit Distribution perfectly compatible with Slackware 14.0
-82;104;wait;SALIX;14.0;x86_64;0;1;0;salix64-14.0;http://download.salixos.org/x86_64/14.0/;;1;99;64140;PACKAGES.TXT.gz;Salix64;Salix 64bit Distribution perfectly compatible with Slackware64 14.0
-101;27;ok;GSB_GNOME;13.0;i386;1;0;0;gsb-gnome2.26;http://ftp.osuosl.org/pub/gsb/gsb-2.26_slackware-13.0/;;1;99;32130;PACKAGES.TXT;gsb-gnome-2.26;GSB Gnome 2.26.0 32bit for Slackware 13.0
-102;38;ok;GSB_GNOME;13.1;i486;1;0;0;gsb-gnome2.28-13.1;http://ftp.osuosl.org/pub/gsb/gsb-2.28_slackware-13.1/;;1;99;32131;PACKAGES.TXT;gsb-gnome-2.28;GSB Gnome 2.28.0 bit for Slackware 13.1
-103;39;ok;GSB_GNOME;13.1;i486;1;1;0;gsb-gnome2.30-13.1;http://ftp.osuosl.org/pub/gsb/gsb-2.30_slackware-13.1/;;1;99;32131;PACKAGES.TXT;gsb-gnome-2.30;GSB Gnome 2.30.0 bit for Slackware Current
-104;28;removed;GSB_GNOME;13.0;i386;0;0;1;gsb-gnome-current;http://ftp.osuosl.org/pub/gsb/gsb-current/;gsb/MANIFEST.bz2;1;99;32130;PACKAGES.TXT;gsb-gnome-current;GSB Gnome 2.28.0 32bit for Slackware Current
-105;25;ok;GSB_GNOME;13.0;x86_64;1;1;0;gsb64-gnome2.26;http://ftp.osuosl.org/pub/gsb/gsb64-2.26_slackware64-13.0/;;1;99;64130;PACKAGES.TXT;gsb-gnome-2.26;GSB Gnome 2.26.0 64bit for Slackware64 13.0
-106;59;ok;GSB_GNOME;13.1;x86_64;1;1;0;gsb64-gnome2.28-13.1;http://ftp.osuosl.org/pub/gsb/gsb64-2.28_slackware64-13.1/;;1;99;64131;PACKAGES.TXT;gsb-gnome-2.28;GSB Gnome 2.28.0 64bit for Slackware64 13.1
-107;60;ok;GSB_GNOME;13.1;x86_64;1;1;0;gsb64-gnome2.30-13.1;http://ftp.osuosl.org/pub/gsb/gsb64-2.30_slackware64-13.1/;;1;99;64131;PACKAGES.TXT;gsb-gnome-2.30;GSB Gnome 2.30.0 64bit for Slackware64 Current
-108;26;removed;GSB_GNOME;current;x86_64;0;0;1;gsb64-gnome-current;http://ftp.osuosl.org/pub/gsb/gsb64-current/;gsb64/MANIFEST.bz2;1;99;64cur;PACKAGES.TXT;gsb-gnome-current;GSB Gnome 2.28.0 64bit for Slackware64 Current
-109;78;removed;GSB_GNOME;current;i386;0;0;1;gsb-gnome3.0-current;http://ftp.osuosl.org/pub/gsb/gsb-3.0_slackware-current/;gsb/MANIFEST.bz2;1;99;32cur;PACKAGES.TXT;gsb-gnome-3.0;z
-110;92;todo;GSB_GNOME;13.37;i386;1;1;0;gsb-gnome3.2-13.37;http://ftp.osuosl.org/pub/gsb/gsb-3.2_slackware-13.37/;gsb/MANIFEST.bz2;1;99;32137;PACKAGES.TXT;gsb-gnome-3.2;z
+81;103;wait;SALIX;14.0;i386;1;1;0;salix-14.0;http://download.salixos.org/i486/14.0/;;1;99;32140;PACKAGES.TXT.gz;Salix;Salix 32bit Distribution perfectly compatible with Slackware 14.0
+82;104;wait;SALIX;14.0;x86_64;1;1;0;salix64-14.0;http://download.salixos.org/x86_64/14.0/;;1;99;64140;PACKAGES.TXT.gz;Salix64;Salix 64bit Distribution perfectly compatible with Slackware64 14.0
+91;109;ok;SALIX_EXTRA;13.37;i386;1;1;0;Salixext-13.37;http://downloads.tuxfamily.org/salixbang/depot/i486/13.37/;;1;99;32137;PACKAGES.TXT.gz;SalixExt;Salix 32bit Extra perfectly compatible with Slackware 13.37
+92;110;ok;SALIX_EXTRA;13.37;x86_64;1;1;0;Salix64ext-13.37;http://downloads.tuxfamily.org/salixbang/depot/x86_64/13.37/;;1;99;64137;PACKAGES.TXT.gz;Salix64Ext;Salix 64bit Extra perfectly compatible with Slackware64 13.37
+93;111;wait;SALIX_EXTRA;14.0;i386;0;1;0;Salixext-14.0;http://downloads.tuxfamily.org/salixbang/depot/i486/14.0/;;1;99;32140;PACKAGES.TXT.gz;SalixExt;Salix 32bit Extra perfectly compatible with Slackware 14.0
+94;112;wait;SALIX_EXTRA;14.0;x86_64;0;1;0;Salix64ext-14.0;http://downloads.tuxfamily.org/salixbang/depot/x86_64/14.0/;;1;99;64140;PACKAGES.TXT.gz;Salix64Ext;Salix 64bit Extra perfectly compatible with Slackware64 14.0
+101;27;ok;GSB_GNOME;13.0;i386;1;0;0;gsb-gnome2.26;http://ftp.osuosl.org/pub/gsb/gsb-2.26_slackware-13.0/;;1;99;32130;PACKAGES.TXT;gsb-gnome-2.26;GSB Gnome 2.26 32bit for Slackware 13.0
+102;38;ok;GSB_GNOME;13.1;i486;1;0;0;gsb-gnome2.28-13.1;http://ftp.osuosl.org/pub/gsb/gsb-2.28_slackware-13.1/;;1;99;32131;PACKAGES.TXT;gsb-gnome-2.28;GSB Gnome 2.28 bit for Slackware 13.1
+103;39;ok;GSB_GNOME;13.1;i486;1;1;0;gsb-gnome2.30-13.1;http://ftp.osuosl.org/pub/gsb/gsb-2.30_slackware-13.1/;;1;99;32131;PACKAGES.TXT;gsb-gnome-2.30;GSB Gnome 2.30 bit for Slackware Current
+104;28;removed;GSB_GNOME;13.0;i386;0;0;1;gsb-gnome-current;http://ftp.osuosl.org/pub/gsb/gsb-current/;gsb/MANIFEST.bz2;1;99;32130;PACKAGES.TXT;gsb-gnome-current;GSB Gnome 2.28 32bit for Slackware Current
+105;25;ok;GSB_GNOME;13.0;x86_64;1;1;0;gsb64-gnome2.26;http://ftp.osuosl.org/pub/gsb/gsb64-2.26_slackware64-13.0/;;1;99;64130;PACKAGES.TXT;gsb-gnome-2.26;GSB Gnome 2.26 64bit for Slackware64 13.0
+106;59;ok;GSB_GNOME;13.1;x86_64;1;1;0;gsb64-gnome2.28-13.1;http://ftp.osuosl.org/pub/gsb/gsb64-2.28_slackware64-13.1/;;1;99;64131;PACKAGES.TXT;gsb-gnome-2.28;GSB Gnome 2.28 64bit for Slackware64 13.1
+107;60;ok;GSB_GNOME;13.1;x86_64;1;1;0;gsb64-gnome2.30-13.1;http://ftp.osuosl.org/pub/gsb/gsb64-2.30_slackware64-13.1/;;1;99;64131;PACKAGES.TXT;gsb-gnome-2.30;GSB Gnome 2.30 64bit for Slackware64 Current
+108;26;removed;GSB_GNOME;current;x86_64;0;0;1;gsb64-gnome-current;http://ftp.osuosl.org/pub/gsb/gsb64-current/;gsb64/MANIFEST.bz2;1;99;64cur;PACKAGES.TXT;gsb-gnome-current;GSB Gnome 2.28 64bit for Slackware64 Current
+109;78;removed;GSB_GNOME;current;i386;0;0;1;gsb-gnome3.0-current;http://ftp.osuosl.org/pub/gsb/gsb-3.0_slackware-current/;gsb/MANIFEST.bz2;1;99;32cur;PACKAGES.TXT;gsb-gnome-3.0;GSB Gnome 3.0 32bit for Slackware Current
+110;92;todo;GSB_GNOME;13.37;i386;1;1;0;gsb-gnome3.2-13.37;http://ftp.osuosl.org/pub/gsb/gsb-3.2_slackware-13.37/;gsb/MANIFEST.bz2;1;99;32137;PACKAGES.TXT;gsb-gnome-3.2;GSB Gnome 3.2 32bit for Slackware 13.37
 111;79;removed;GSB_GNOME;13.1;i386;0;0;1;gsb-gnome-current-13.1;http://ftp.osuosl.org/pub/gsb/gsb-current_slackware-13.1/;;1;99;32131;PACKAGES.TXT;gsb-gnome-current;z
 112;80;removed;GSB_GNOME;current;x86_64;0;0;1;gsb64-gnome3.0-current;http://ftp.osuosl.org/pub/gsb/gsb64-3.0_slackware64-current/;gsb64/MANIFEST.bz2;1;99;64cur;PACKAGES.TXT;gsb-gnome-3.0;z
 113;93;todo;GSB_GNOME;13.37;x86_64;1;1;0;gsb64-gnome3.2-13.37;http://ftp.osuosl.org/pub/gsb/gsb64-3.2_slackware64-13.37/;gsb64/MANIFEST.bz2;1;99;64137;PACKAGES.TXT;gsb-gnome-3.2;z
@@ -84,12 +88,10 @@
 173;41;ok;ROBBY_WORKMAN;12.2;i386;1;1;0;rlworkman-for-12.2;http://rlworkman.net/pkgs/12.2/;;0;99;32122;PACKAGES.TXT.gz;Robby Workman;Robby Workman s Packages for Slackware 12.2
 174;42;removed;ROBBY_WORKMAN;current;mixed;0;0;1;rlworkman-for-current;http://rlworkman.net/pkgs/current/;;0;99;micur;PACKAGES.TXT.gz;Robby Workman;Robby Workman s Packages for Slackware Current
 175;43;ok;ROBBY_WORKMAN;13.0;mixed;1;1;0;rlworkman-for-13.0;http://rlworkman.net/pkgs/13.0/;;0;99;mi130;PACKAGES.TXT.gz;Robby Workman;Robby Workman s Packages for Slackware 13.0 32&64 bit
+176;108;ok;ROBBY_WORKMAN;14.0;mixed;1;1;0;rlworkman-for-14.0;http://rlworkman.net/pkgs/14.0/;;0;99;mi140;PACKAGES.TXT.gz;Robby Workman;Robby Workman s Packages for Slackware 14.0 32&64 bit
 191;18;removed;LINUXPACKAGES;13.1;i386;0;0;1;linuxpackages-13.1-i386;http://linuxpackages.inode.at/Slackware/Slackware-13.1-i386/;;1;99;32131;PACKAGES.TXT.gz;LinuxPackages;Repository from LinuxPackages.net containing 32bit packages for Slackware 13.1
 192;33;ok;LINUXPACKAGES;12.2;i386;1;1;0;linuxpackages-12.2-i386;http://linuxpackages.inode.at/Slackware/Slackware-12.2-i386/;;1;99;32122;PACKAGES.TXT.gz;LinuxPackages;Repository from LinuxPackages.net containing 32bit packages for Slackware 12.2
 193;34;ok;LINUXPACKAGES;13.0;i386;1;1;0;linuxpackages-13.0-i386-sotirov;http://linuxpackages.inode.at/Slackware/Slackware-13.0-i386/sotirov/;;1;99;32130;PACKAGES.TXT.gz;LP Sotirov;Repository from LinuxPackages.net containing 32bit packages for Slackware 13.0
-201;32;ok;MIXED;mixed;mixed;1;1;0;alien;http://connie.slackware.com/~alien/slackbuilds/;MANIFEST.bz2;0;99;mimix;PACKAGES.TXT.gz;Alien Bob;Repository from Alien Bob (connie.slackware.com/~alien) containing mixed 32 and 64 bit packages for mixed Slackware versions
-202;37;ok;MIXED;mixed;mixed;1;1;0;alien-restricted;http://ftp.slackware.org.uk/people/alien/restricted_slackbuilds/;MANIFEST.bz2;0;99;mimix;PACKAGES.TXT.gz;Alien Restricted;Alien Alternative Repository for non U.S.A. people
-203;107;ok;MIXED;mixed;x86_64;1;1;0;alien-multilib;http://ftp.slackware.org.uk/people/alien/multilib/;;0;99;64mix;PACKAGES.TXT.gz;Alien Bob Multilib;Alien Bob Multilib compat32 packages
 204;31;;MIXED;current;mixed;1;1;0;slackers.it;http://www.slackers.it/repository/;MANIFEST.bz2;0;99;micur;PACKAGES.TXT.gz;Slackers;Repository from www.slackers.it. contains mixed 32 and 64 bit packages for Slackware Current
 205;57;;MIXED;mixed;mixed;1;1;0;nielshor-for-13.0;http://www.nielshorn.net/_download/slackware/packages/;;0;99;mimix;PACKAGES.TXT.gz;Niels Horn;x
 206;35;obsolete;MIXED;12.1;i386;0;0;1;stabellini;http://www.stabellini.net/filesystem/repository/Stefano_Stabellini/;;1;99;32121;PACKAGES.TXT.gz;Stabellini;Repository from www.stabellini.net packages for Slackware 12.1
@@ -102,7 +104,29 @@
 232;51;removed;DIA-TECH_ASZABO;13.0;i386;0;0;1;dia-tech-slack-13.0;http://www.dia-tech.net/linux/Slackware-13.0/;;0;99;32130;PACKAGES.TXT.gz;Aszabo;Packages from Aszabo (www.dia-tech.net) for Slackware 13.0 32bit
 233;52;removed;DIA-TECH_ASZABO;12.2;i386;0;0;1;dia-tech-slack-12.2;http://www.dia-tech.net/linux/Slackware-12.2/;;0;99;32122;PACKAGES.TXT.gz;Aszabo;Packages from Aszabo (www.dia-tech.net) for Slackware 12.2
 234;53;removed;DIA-TECH_ASZABO;current;i386;0;0;1;dia-tech-curr-kde4.4;http://www.dia-tech.net/linux/Slackware-current-kde4.4/;;0;99;32cur;PACKAGES.TXT.gz;Aszabo for kde 4.4;Kde 4.4 from Aszabo (www.dia-tech.net) for Slackware Current
-241;82;todo;ELETTROLINUX;13.37;i386;1;1;0;elettrolinux-for-13.37;http://repository.elettrolinux.com/Slackware-13.37/;MANIFEST.bz2;1;99;32137;PACKAGES.TXT.gz;Michele.P;x
-242;56;;ELETTROLINUX;13.0;i386;1;1;0;elettrolinux-for-13.0;http://repository.elettrolinux.com/Slackware-13.0/;;1;99;32130;PACKAGES.TXT.gz;Michele.P;x
-243;77;;ELETTROLINUX;13.1;i386;1;1;0;elettrolinux-for-13.1;http://repository.elettrolinux.com/Slackware-13.1/;;1;99;32131;PACKAGES.TXT.gz;Michele.P;x
+241;82;todo;ELETTROLINUX;13.37;i386;1;;0;elettrolinux-for-13.37;http://repository.elettrolinux.com/Slackware-13.37/;MANIFEST.bz2;1;99;32137;PACKAGES.TXT.gz;Michele.P;x
+242;56;;ELETTROLINUX;13.0;i386;1;0;0;elettrolinux-for-13.0;http://repository.elettrolinux.com/Slackware-13.0/;;1;99;32130;PACKAGES.TXT.gz;Michele.P;x
+243;77;;ELETTROLINUX;13.1;i386;1;0;0;elettrolinux-for-13.1;http://repository.elettrolinux.com/Slackware-13.1/;;1;99;32131;PACKAGES.TXT.gz;Michele.P;x
 244;98;wait;ELETTROLINUX;14.0;i386;0;1;0;elettrolinux-for-14.0;http://repository.elettrolinux.com/Slackware-14.0/;MANIFEST.bz2;1;99;32140;PACKAGES.TXT.gz;Michele.P;x
+260;113;;SLACKEL;13.37;i386;0;0;0;slackel-13.37;http://www.slackel.gr/repo/i486/13.37/;;1;99;32137;PACKAGES.TXT.gz;Slackel;Live distribution based on Slackware and Salix 13.37 32bit
+261;114;;SLACKEL;13.37;x86_64;;0;0;slackel64-13.37;http://www.slackel.gr/repo/x86_64/13.37/;;1;99;64137;PACKAGES.TXT.gz;Slackel;Live distribution based on Slackware and Salix 13.37 64bit
+262;115;;SLACKEL;current;i386;1;1;0;slackel-current;http://www.slackel.gr/repo/i486/current/;;1;99;32cur;PACKAGES.TXT.gz;Slackel;Live distribution based on Slackware and Salix current 32bit
+263;116;;SLACKEL;current;x86_64;1;1;0;slackel64-current;http://www.slackel.gr/repo/x86_64/current/;;1;99;64cur;PACKAGES.TXT.gz;Slackel;Live distribution based on Slackware and Salix current 64bit
+264;117;;SLACKEL;14.0;i386;0;1;0;slackel-14.0;http://www.slackel.gr/repo/i486/14.0/;;1;99;32140;PACKAGES.TXT.gz;Slackel;Live distribution based on Slackware and Salix 14.0 32bit
+265;118;;SLACKEL;14.0;x86_64;0;1;0;slackel64-14.0;http://www.slackel.gr/repo/x86_64/14.0/;;1;99;64140;PACKAGES.TXT.gz;Slackel;Live distribution based on Slackware and Salix 14.0 64bit
+280;32;obsolete;ALIEN;mixed;mixed;0;0;1;alien;http://connie.slackware.com/~alien/slackbuilds/;MANIFEST.bz2;0;99;mimix;PACKAGES.TXT.gz;Alien Bob;Repository from Alien Bob (connie.slackware.com/~alien) containing mixed 32 and 64 bit packages for mixed Slackware versions
+281;37;obsolete;ALIEN;mixed;mixed;1;1;;alien-restricted;http://ftp.slackware.org.uk/people/alien/restricted_slackbuilds/;MANIFEST.bz2;0;99;mimix;PACKAGES.TXT.gz;Alien Restricted;Alien Alternative Repository for non U.S.A. people
+282;107;obsolete;ALIEN;mixed;x86_64;0;0;1;alien-multilib;http://ftp.slackware.org.uk/people/alien/multilib/;;0;99;64mix;PACKAGES.TXT.gz;Alien Bob Multilib;Alien Bob Multilib compat32 packages
+283;119;;ALIEN;14.0;x86_64;1;1;;alien64-14.0;http://taper.alienbase.nl/mirrors/people/alien/sbrepos/14.0/x86_64/;MANIFEST.bz2;;50;64140;PACKAGES.TXT.gz;Alien Bob;Repository from Alien Bob (connie.slackware.com/~alien)
+284;120;;ALIEN;14.0;i386;1;1;;alien-14.0;http://taper.alienbase.nl/mirrors/people/alien/sbrepos/14.0/x86/;MANIFEST.bz2;;50;32140;PACKAGES.TXT.gz;Alien Bob;Repository from Alien Bob (connie.slackware.com/~alien)
+285;121;;ALIEN;13.37;x86_64;1;1;;alien64-13.37;http://taper.alienbase.nl/mirrors/people/alien/sbrepos/13.37/x86_64/;MANIFEST.bz2;;50;64137;PACKAGES.TXT.gz;Alien Bob;Repository from Alien Bob (connie.slackware.com/~alien)
+286;122;;ALIEN;13.37;i386;1;1;;alien-13.37;http://taper.alienbase.nl/mirrors/people/alien/sbrepos/13.37/x86/;MANIFEST.bz2;;50;32137;PACKAGES.TXT.gz;Alien Bob;Repository from Alien Bob (connie.slackware.com/~alien)
+287;123;;ALIEN;13.1;x86_64;1;1;;alien64-13.1;http://taper.alienbase.nl/mirrors/people/alien/sbrepos/13.1/x86_64/;MANIFEST.bz2;;50;64131;PACKAGES.TXT.gz;Alien Bob;Repository from Alien Bob (connie.slackware.com/~alien)
+288;124;;ALIEN;13.1;i386;1;1;;alien-13.1;http://taper.alienbase.nl/mirrors/people/alien/sbrepos/13.1/x86/;MANIFEST.bz2;;50;32131;PACKAGES.TXT.gz;Alien Bob;Repository from Alien Bob (connie.slackware.com/~alien)
+289;125;;ALIEN;13.0;x86_64;1;1;;alien64-13.0;http://taper.alienbase.nl/mirrors/people/alien/sbrepos/13.0/x86_64/;MANIFEST.bz2;;50;64130;PACKAGES.TXT.gz;Alien Bob;Repository from Alien Bob (connie.slackware.com/~alien)
+290;126;;ALIEN;13.0;i386;1;1;;alien-13.0;http://taper.alienbase.nl/mirrors/people/alien/sbrepos/13.0/x86/;MANIFEST.bz2;;50;32130;PACKAGES.TXT.gz;Alien Bob;Repository from Alien Bob (connie.slackware.com/~alien)
+291;127;;ALIEN;current;x86_64;1;1;;alien-multilib-current;http://taper.alienbase.nl/mirrors/people/alien/multilib/current/;MANIFEST.bz2;;99;64cur;PACKAGES.TXT.gz;Alien Bob;Alien Bob Multilib compat32 packages
+292;128;;ALIEN;13.0;x86_64;1;1;;alien-multilib-13.0;http://taper.alienbase.nl/mirrors/people/alien/multilib/13.0/;MANIFEST.bz2;;99;64130;PACKAGES.TXT.gz;Alien Bob;Alien Bob Multilib compat32 packages
+293;129;;ALIEN;13.1;x86_64;1;1;;alien-multilib-13.1;http://taper.alienbase.nl/mirrors/people/alien/multilib/13.1/;MANIFEST.bz2;;99;64131;PACKAGES.TXT.gz;Alien Bob;Alien Bob Multilib compat32 packages
+294;130;;ALIEN;13.37;x86_64;1;1;;alien-multilib-13.37;http://taper.alienbase.nl/mirrors/people/alien/multilib/13.37/;MANIFEST.bz2;;99;64137;PACKAGES.TXT.gz;Alien Bob;Alien Bob Multilib compat32 packages
+295;131;;ALIEN;14.0;x86_64;1;1;;alien-multilib-14.0;http://taper.alienbase.nl/mirrors/people/alien/multilib/14.0/;MANIFEST.bz2;;99;64140;PACKAGES.TXT.gz;Alien Bob;Alien Bob Multilib compat32 packages
